@@ -13,6 +13,9 @@
 		79700AA31B0F03A50060E81D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79700AA21B0F03A50060E81D /* Images.xcassets */; };
 		79700AA61B0F03A50060E81D /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79700AA41B0F03A50060E81D /* LaunchScreen.xib */; };
 		79700AB21B0F03A50060E81D /* whoscheeringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79700AB11B0F03A50060E81D /* whoscheeringTests.swift */; };
+		79700AC21B0F0AEF0060E81D /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79700AC11B0F0AEF0060E81D /* ShopViewController.swift */; };
+		79700AC41B0F0BCD0060E81D /* OwnedCheersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79700AC31B0F0BCD0060E81D /* OwnedCheersViewController.swift */; };
+		7972FB421B0F0EB30046B1B7 /* CheerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7972FB411B0F0EB30046B1B7 /* CheerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +39,9 @@
 		79700AAB1B0F03A50060E81D /* whoscheeringTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = whoscheeringTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		79700AB01B0F03A50060E81D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		79700AB11B0F03A50060E81D /* whoscheeringTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = whoscheeringTests.swift; sourceTree = "<group>"; };
+		79700AC11B0F0AEF0060E81D /* ShopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
+		79700AC31B0F0BCD0060E81D /* OwnedCheersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OwnedCheersViewController.swift; sourceTree = "<group>"; };
+		7972FB411B0F0EB30046B1B7 /* CheerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +85,9 @@
 			children = (
 				79700A9B1B0F03A50060E81D /* AppDelegate.swift */,
 				79700A9D1B0F03A50060E81D /* ViewController.swift */,
+				7972FB411B0F0EB30046B1B7 /* CheerViewController.swift */,
+				79700AC11B0F0AEF0060E81D /* ShopViewController.swift */,
+				79700AC31B0F0BCD0060E81D /* OwnedCheersViewController.swift */,
 				79700A9F1B0F03A50060E81D /* Main.storyboard */,
 				79700AA21B0F03A50060E81D /* Images.xcassets */,
 				79700AA41B0F03A50060E81D /* LaunchScreen.xib */,
@@ -212,8 +221,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				79700AC41B0F0BCD0060E81D /* OwnedCheersViewController.swift in Sources */,
 				79700A9E1B0F03A50060E81D /* ViewController.swift in Sources */,
 				79700A9C1B0F03A50060E81D /* AppDelegate.swift in Sources */,
+				79700AC21B0F0AEF0060E81D /* ShopViewController.swift in Sources */,
+				7972FB421B0F0EB30046B1B7 /* CheerViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -411,6 +423,7 @@
 				79700AB71B0F03A50060E81D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		79700AB81B0F03A50060E81D /* Build configuration list for PBXNativeTarget "whoscheeringTests" */ = {
 			isa = XCConfigurationList;
@@ -419,6 +432,7 @@
 				79700ABA1B0F03A50060E81D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

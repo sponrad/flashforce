@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Home-->
@@ -16,42 +17,53 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Hc-Ao-fcP">
-                                <rect key="frame" x="279" y="171" width="42" height="30"/>
-                                <state key="normal" title="Cheer">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z39-rz-1uV">
+                                <rect key="frame" x="276" y="20" width="49" height="30"/>
+                                <state key="normal" title="Cheers">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="cheerTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="e1j-xZ-6Lo"/>
+                                    <segue destination="QaK-Ce-eMP" kind="show" id="IC0-5P-QOl"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NcE-Bg-YlW">
-                                <rect key="frame" x="282" y="290" width="37" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RyF-4m-Ac3">
+                                <rect key="frame" x="282" y="58" width="37" height="30"/>
                                 <state key="normal" title="Shop">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="shopTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HRf-in-8Wh"/>
+                                    <segue destination="o8J-2j-940" kind="show" id="Bk1-L6-ocJ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="99C-zS-bbP">
+                                <rect key="frame" x="266" y="96" width="69" height="30"/>
+                                <state key="normal" title="TestCheer">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="YJg-Mg-Wnw" kind="show" id="GRu-mb-esV"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="NcE-Bg-YlW" firstAttribute="centerX" secondItem="8Hc-Ao-fcP" secondAttribute="centerX" id="Adb-VF-9pJ"/>
-                            <constraint firstItem="8Hc-Ao-fcP" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="151" id="GXh-88-hE6"/>
-                            <constraint firstItem="NcE-Bg-YlW" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Hcf-3o-AGH"/>
-                            <constraint firstItem="NcE-Bg-YlW" firstAttribute="top" secondItem="8Hc-Ao-fcP" secondAttribute="bottom" constant="89" id="w8F-66-pnP"/>
+                            <constraint firstItem="RyF-4m-Ac3" firstAttribute="top" secondItem="Z39-rz-1uV" secondAttribute="bottom" constant="8" symbolic="YES" id="Bfo-ND-zto"/>
+                            <constraint firstItem="RyF-4m-Ac3" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Dnl-hT-1bN"/>
+                            <constraint firstItem="99C-zS-bbP" firstAttribute="top" secondItem="RyF-4m-Ac3" secondAttribute="bottom" constant="8" symbolic="YES" id="FTc-rJ-vTg"/>
+                            <constraint firstItem="RyF-4m-Ac3" firstAttribute="centerX" secondItem="99C-zS-bbP" secondAttribute="centerX" id="Rqb-tR-hRf"/>
+                            <constraint firstItem="Z39-rz-1uV" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="oMA-Kb-Ytt"/>
+                            <constraint firstItem="RyF-4m-Ac3" firstAttribute="centerX" secondItem="Z39-rz-1uV" secondAttribute="centerX" id="zW0-j6-Ebg"/>
                         </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="183" y="1091"/>
+            <point key="canvasLocation" x="-699" y="680"/>
         </scene>
         <!--Shop-->
         <scene sceneID="AOE-im-Amp">
             <objects>
-                <viewController id="o8J-2j-940" userLabel="Shop" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="shop" id="o8J-2j-940" userLabel="Shop" customClass="ShopViewController" customModule="whoscheering" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="anJ-f7-tcr"/>
                         <viewControllerLayoutGuide type="bottom" id="gXK-tJ-zQX"/>
@@ -59,17 +71,34 @@
                     <view key="view" contentMode="scaleToFill" id="D7N-4V-DxZ">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6lk-9A-Dqe">
+                                <rect key="frame" x="16" y="20" width="46" height="30"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="BYZ-38-t0r" kind="show" id="YLV-d2-HQp"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="6lk-9A-Dqe" firstAttribute="top" secondItem="anJ-f7-tcr" secondAttribute="bottom" id="3Nm-Mn-c4t"/>
+                            <constraint firstItem="6lk-9A-Dqe" firstAttribute="leading" secondItem="D7N-4V-DxZ" secondAttribute="leadingMargin" id="lPi-20-vuJ"/>
+                        </constraints>
                     </view>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jWu-WE-utl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="899" y="366"/>
+            <point key="canvasLocation" x="249" y="1230"/>
         </scene>
         <!--Owned Cheers-->
         <scene sceneID="kkz-Tx-yG0">
             <objects>
-                <viewController id="QaK-Ce-eMP" userLabel="Owned Cheers" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="owned" id="QaK-Ce-eMP" userLabel="Owned Cheers" customClass="OwnedCheersViewController" customModule="whoscheering" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="8Hb-dt-D1N"/>
                         <viewControllerLayoutGuide type="bottom" id="EYC-c0-HHI"/>
@@ -77,17 +106,32 @@
                     <view key="view" contentMode="scaleToFill" id="pJO-S2-442">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hwp-XI-LYt">
+                                <rect key="frame" x="8" y="20" width="46" height="30"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="BYZ-38-t0r" kind="show" id="H89-3Q-lSk"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Hwp-XI-LYt" firstAttribute="leading" secondItem="pJO-S2-442" secondAttribute="leadingMargin" constant="-8" id="bOZ-eD-MLR"/>
+                            <constraint firstItem="Hwp-XI-LYt" firstAttribute="top" secondItem="8Hb-dt-D1N" secondAttribute="bottom" id="lE9-28-uMt"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3yM-BS-0Rj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="189" y="366"/>
+            <point key="canvasLocation" x="249" y="242"/>
         </scene>
         <!--Cheer-->
         <scene sceneID="Hee-9z-8eU">
             <objects>
-                <viewController id="YJg-Mg-Wnw" userLabel="Cheer" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="cheer" id="YJg-Mg-Wnw" userLabel="Cheer" customClass="CheerViewController" customModule="whoscheering" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Z6X-de-Ovi"/>
                         <viewControllerLayoutGuide type="bottom" id="Fxy-co-wRb"/>
@@ -95,12 +139,30 @@
                     <view key="view" contentMode="scaleToFill" id="eld-kE-Br7">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eju-6V-04n">
+                                <rect key="frame" x="16" y="20" width="46" height="30"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="BYZ-38-t0r" kind="show" id="Nqi-5D-PG4"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Eju-6V-04n" firstAttribute="top" secondItem="Z6X-de-Ovi" secondAttribute="bottom" id="4Ft-6S-coV"/>
+                            <constraint firstItem="Eju-6V-04n" firstAttribute="leading" secondItem="eld-kE-Br7" secondAttribute="leadingMargin" id="7fW-8q-xtx"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xXO-1V-d7a" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="877" y="1080"/>
+            <point key="canvasLocation" x="1015" y="752"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="Nqi-5D-PG4"/>
+    </inferredMetricsTieBreakers>
 </document>
