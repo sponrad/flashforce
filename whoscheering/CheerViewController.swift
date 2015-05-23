@@ -20,8 +20,8 @@ class CheerViewController: UIViewController {
         self.view.backgroundColor = colorWithHexString(colors[0])
 
         UIApplication.sharedApplication().idleTimerDisabled = true   //screen will not dim
-        let modnumber = Double(colors.count) * interval  //TODO get interval to work here instead of 2
-
+        let modnumber = Double(colors.count) * interval
+        
         let ct = NSDate().timeIntervalSince1970
         
         //grab the server time
@@ -35,7 +35,7 @@ class CheerViewController: UIViewController {
         
         println("ping: \(ping)")
         
-        var offset = serverEpoch - nct - ping
+        var offset = serverEpoch - nct + (ping / 2.0)
         
         println("offset: \(offset)")
         
