@@ -13,7 +13,8 @@ class CheerViewController: UIViewController {
     var color = 0
     var colors = ["D4001F", "000000"]
     var interval = 2.0 //interval in s
-
+    var timer : NSTimer!
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -43,7 +44,8 @@ class CheerViewController: UIViewController {
         var modDelay = (interval * Double(colors.count)) - modOffset
         
         delay(modDelay){
-            NSTimer.scheduledTimerWithTimeInterval(interval , target: self, selector: Selector("update"), userInfo: nil, repeats: true)
+            self.timer = NSTimer.scheduledTimerWithTimeInterval(self.interval , target: self, selector: Selector("update"), userInfo: nil, repeats: true)
+            //self.timer.tolerance = 0.1
         }
 
     }

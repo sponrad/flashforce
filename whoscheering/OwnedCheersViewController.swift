@@ -9,6 +9,9 @@
 import UIKit
 
 class OwnedCheersViewController: UIViewController {
+    
+    @IBOutlet var tableView: UITableView!
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
