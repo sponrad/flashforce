@@ -11,18 +11,40 @@ import UIKit
 class CheerViewController: UIViewController {
     
     var color = 0
-    var colors = ["4A4A4A", "9966FF"]
+    var colors = ["D4001F", "000000"]
     var interval = 2.0 //interval in s
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        UIApplication.sharedApplication().idleTimerDisabled = true   //screen will not dim
-        let modnumber = colors.count * 2
-        
-
         self.view.backgroundColor = colorWithHexString(colors[0])
-        var timer = NSTimer.scheduledTimerWithTimeInterval(interval , target: self, selector: Selector("update"), userInfo: nil, repeats: true)
+
+        UIApplication.sharedApplication().idleTimerDisabled = true   //screen will not dim
+        let modnumber = Double(colors.count * 2)  //TODO get interval to work here instead of 2
+
+        let ct = NSDate().timeIntervalSince1970
+        
+        //grab the server time
+        let serverEpochStr: String = parseJSON( getJSON("http://alignthebeat.appspot.com") )["epoch"] as! String
+        let serverEpoch = (serverEpochStr as NSString).doubleValue
+        
+        let nct = NSDate().timeIntervalSince1970
+        println("nct: \(nct)")
+        println("server: \(serverEpoch)")
+        let ping = nct - ct
+        
+        println("ping: \(ping)")
+        
+        var offset = serverEpoch - nct - ping
+        
+        println("offset: \(offset)")
+        
+        var modOffset = (NSDate().timeIntervalSince1970 + offset) % modnumber
+        var modDelay = (interval * Double(colors.count)) - modOffset
+        
+        delay(modDelay){
+            NSTimer.scheduledTimerWithTimeInterval(interval , target: self, selector: Selector("update"), userInfo: nil, repeats: true)
+        }
 
     }
     
@@ -62,15 +84,25 @@ class CheerViewController: UIViewController {
         
         return UIColor(red: CGFloat(r) / 255.0, green: CGFloat(g) / 255.0, blue: CGFloat(b) / 255.0, alpha: CGFloat(1))
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    func delay(delay:Double, closure:()->()) {
+        dispatch_after(
+            dispatch_time(
+                DISPATCH_TIME_NOW,
+                Int64(delay * Double(NSEC_PER_SEC))
+            ),
+            dispatch_get_main_queue(), closure)
     }
-    */
+    
+    func getJSON(urlToRequest: String) -> NSData{
+        return NSData(contentsOfURL: NSURL(string: urlToRequest)!)!
+    }
+    
+    func parseJSON(inputData: NSData) -> NSDictionary{
+        var error: NSError?
+        var boardsDictionary: NSDictionary = NSJSONSerialization.JSONObjectWithData(inputData, options: NSJSONReadingOptions.MutableContainers, error: &error) as! NSDictionary
+        
+        return boardsDictionary
+    }
 
 }
