@@ -17,8 +17,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="11297314_10155562204365029_604520921_o.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="WuN-gv-mRf">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z39-rz-1uV">
-                                <rect key="frame" x="276" y="20" width="49" height="30"/>
+                                <rect key="frame" x="276" y="508" width="49" height="30"/>
                                 <state key="normal" title="Cheers">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -27,7 +30,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RyF-4m-Ac3">
-                                <rect key="frame" x="282" y="58" width="37" height="30"/>
+                                <rect key="frame" x="417" y="170" width="37" height="30"/>
                                 <state key="normal" title="Shop">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -36,7 +39,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="99C-zS-bbP">
-                                <rect key="frame" x="266" y="96" width="69" height="30"/>
+                                <rect key="frame" x="175" y="122" width="69" height="30"/>
                                 <state key="normal" title="TestCheer">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -45,20 +48,24 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="RyF-4m-Ac3" firstAttribute="top" secondItem="Z39-rz-1uV" secondAttribute="bottom" constant="8" symbolic="YES" id="Bfo-ND-zto"/>
-                            <constraint firstItem="RyF-4m-Ac3" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Dnl-hT-1bN"/>
-                            <constraint firstItem="99C-zS-bbP" firstAttribute="top" secondItem="RyF-4m-Ac3" secondAttribute="bottom" constant="8" symbolic="YES" id="FTc-rJ-vTg"/>
-                            <constraint firstItem="RyF-4m-Ac3" firstAttribute="centerX" secondItem="99C-zS-bbP" secondAttribute="centerX" id="Rqb-tR-hRf"/>
-                            <constraint firstItem="Z39-rz-1uV" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="oMA-Kb-Ytt"/>
-                            <constraint firstItem="RyF-4m-Ac3" firstAttribute="centerX" secondItem="Z39-rz-1uV" secondAttribute="centerX" id="zW0-j6-Ebg"/>
+                            <constraint firstItem="WuN-gv-mRf" firstAttribute="centerX" secondItem="Z39-rz-1uV" secondAttribute="centerX" id="0GW-nS-sBn"/>
+                            <constraint firstItem="WuN-gv-mRf" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="402-DS-uBh"/>
+                            <constraint firstItem="RyF-4m-Ac3" firstAttribute="top" secondItem="Z39-rz-1uV" secondAttribute="bottom" constant="-368" id="Bfo-ND-zto"/>
+                            <constraint firstItem="99C-zS-bbP" firstAttribute="top" secondItem="RyF-4m-Ac3" secondAttribute="bottom" constant="-78" id="FTc-rJ-vTg"/>
+                            <constraint firstAttribute="trailing" secondItem="WuN-gv-mRf" secondAttribute="trailing" id="QPi-do-UgH"/>
+                            <constraint firstItem="RyF-4m-Ac3" firstAttribute="centerX" secondItem="99C-zS-bbP" secondAttribute="centerX" constant="226" id="Rqb-tR-hRf"/>
+                            <constraint firstItem="WuN-gv-mRf" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="czQ-5m-Uas"/>
+                            <constraint firstItem="WuN-gv-mRf" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="keK-G7-WRc"/>
+                            <constraint firstItem="Z39-rz-1uV" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="488" id="oMA-Kb-Ytt"/>
+                            <constraint firstItem="RyF-4m-Ac3" firstAttribute="centerX" secondItem="Z39-rz-1uV" secondAttribute="centerX" constant="135" id="zW0-j6-Ebg"/>
                         </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-699" y="680"/>
+            <point key="canvasLocation" x="-731" y="912"/>
         </scene>
         <!--Shop-->
         <scene sceneID="AOE-im-Amp">
@@ -82,7 +89,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.40000000596046448" green="1" blue="0.80000001192092896" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="6lk-9A-Dqe" firstAttribute="top" secondItem="anJ-f7-tcr" secondAttribute="bottom" id="3Nm-Mn-c4t"/>
                             <constraint firstItem="6lk-9A-Dqe" firstAttribute="leading" secondItem="D7N-4V-DxZ" secondAttribute="leadingMargin" id="lPi-20-vuJ"/>
@@ -93,7 +100,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jWu-WE-utl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="249" y="1230"/>
+            <point key="canvasLocation" x="141" y="82"/>
         </scene>
         <!--Owned Cheers-->
         <scene sceneID="kkz-Tx-yG0">
@@ -117,7 +124,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Hwp-XI-LYt" firstAttribute="leading" secondItem="pJO-S2-442" secondAttribute="leadingMargin" constant="-8" id="bOZ-eD-MLR"/>
                             <constraint firstItem="Hwp-XI-LYt" firstAttribute="top" secondItem="8Hb-dt-D1N" secondAttribute="bottom" id="lE9-28-uMt"/>
@@ -126,7 +133,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3yM-BS-0Rj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="249" y="242"/>
+            <point key="canvasLocation" x="-719" y="114"/>
         </scene>
         <!--Cheer-->
         <scene sceneID="Hee-9z-8eU">
@@ -159,9 +166,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xXO-1V-d7a" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1015" y="752"/>
+            <point key="canvasLocation" x="183" y="956"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="11297314_10155562204365029_604520921_o.jpg" width="640" height="1136"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Nqi-5D-PG4"/>
     </inferredMetricsTieBreakers>

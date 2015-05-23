@@ -12,15 +12,17 @@ class CheerViewController: UIViewController {
     
     var color = 0
     var colors = ["4A4A4A", "9966FF"]
-    var interval = 2000 //interval in ms
+    var interval = 2.0 //interval in s
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        UIApplication.sharedApplication().idleTimerDisabled = true   //screen will not dim
         let modnumber = colors.count * 2
+        
 
         self.view.backgroundColor = colorWithHexString(colors[0])
-        var timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
+        var timer = NSTimer.scheduledTimerWithTimeInterval(interval , target: self, selector: Selector("update"), userInfo: nil, repeats: true)
 
     }
     
