@@ -15,6 +15,8 @@ class CheerViewController: UIViewController {
     var interval = 2.0 //interval in s
     var timer : NSTimer!
    
+    @IBOutlet weak var shakeLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -105,6 +107,17 @@ class CheerViewController: UIViewController {
         var boardsDictionary: NSDictionary = NSJSONSerialization.JSONObjectWithData(inputData, options: NSJSONReadingOptions.MutableContainers, error: &error) as! NSDictionary
         
         return boardsDictionary
+    }
+    
+    override func canBecomeFirstResponder() -> Bool {
+        return true
+    }
+    
+    override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent) {
+        if motion == .MotionShake {
+            self.shakeLabel.text = "D!"
+            
+        }
     }
 
 }

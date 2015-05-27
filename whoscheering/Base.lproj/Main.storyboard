@@ -130,6 +130,11 @@
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="MbV-DC-qNN" kind="popoverPresentation" popoverAnchorView="Z39-rz-1uV" id="ZTl-55-8v5">
+                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                    </segue>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="99C-zS-bbP">
                                 <rect key="frame" x="266" y="351" width="69" height="30"/>
@@ -176,8 +181,25 @@
                     <view key="view" contentMode="scaleToFill" id="eld-kE-Br7">
                         <rect key="frame" x="0.0" y="64" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pji-IL-V4t">
+                                <rect key="frame" x="0.0" y="72" width="600" height="528"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="300"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="pji-IL-V4t" firstAttribute="top" secondItem="Z6X-de-Ovi" secondAttribute="bottom" constant="8" symbolic="YES" id="1Gb-cf-Gvy"/>
+                            <constraint firstItem="pji-IL-V4t" firstAttribute="leading" secondItem="eld-kE-Br7" secondAttribute="leading" id="1Hr-30-ZpI"/>
+                            <constraint firstAttribute="trailing" secondItem="pji-IL-V4t" secondAttribute="trailing" id="Hx7-5w-xJ2"/>
+                            <constraint firstItem="pji-IL-V4t" firstAttribute="bottom" secondItem="Fxy-co-wRb" secondAttribute="top" id="p6h-IW-4p2"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="shakeLabel" destination="pji-IL-V4t" id="2n8-CK-Yx4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xXO-1V-d7a" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -203,6 +225,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="KjN-Wc-EvX"/>
+        <segue reference="ZTl-55-8v5"/>
+        <segue reference="GRu-mb-esV"/>
     </inferredMetricsTieBreakers>
 </document>
