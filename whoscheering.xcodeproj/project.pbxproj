@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		796C356E1B1427E500ABE2FE /* BrowseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796C356D1B1427E500ABE2FE /* BrowseViewController.swift */; };
 		796C35701B142CB200ABE2FE /* SecondBrowseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796C356F1B142CB200ABE2FE /* SecondBrowseViewController.swift */; };
+		796C35721B14328000ABE2FE /* StoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796C35711B14327F00ABE2FE /* StoreData.swift */; };
 		79700A9C1B0F03A50060E81D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79700A9B1B0F03A50060E81D /* AppDelegate.swift */; };
 		79700A9E1B0F03A50060E81D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79700A9D1B0F03A50060E81D /* ViewController.swift */; };
 		79700AA11B0F03A50060E81D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79700A9F1B0F03A50060E81D /* Main.storyboard */; };
@@ -33,6 +34,7 @@
 /* Begin PBXFileReference section */
 		796C356D1B1427E500ABE2FE /* BrowseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseViewController.swift; sourceTree = "<group>"; };
 		796C356F1B142CB200ABE2FE /* SecondBrowseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondBrowseViewController.swift; sourceTree = "<group>"; };
+		796C35711B14327F00ABE2FE /* StoreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreData.swift; sourceTree = "<group>"; };
 		79700A961B0F03A50060E81D /* whoscheering.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = whoscheering.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79700A9A1B0F03A50060E81D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		79700A9B1B0F03A50060E81D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 				79700AC11B0F0AEF0060E81D /* ShopViewController.swift */,
 				796C356D1B1427E500ABE2FE /* BrowseViewController.swift */,
 				796C356F1B142CB200ABE2FE /* SecondBrowseViewController.swift */,
+				796C35711B14327F00ABE2FE /* StoreData.swift */,
 				79700A9F1B0F03A50060E81D /* Main.storyboard */,
 				7972FB431B10395A0046B1B7 /* 11297314_10155562204365029_604520921_o.jpg */,
 				79700AA21B0F03A50060E81D /* Images.xcassets */,
@@ -229,6 +232,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				796C35701B142CB200ABE2FE /* SecondBrowseViewController.swift in Sources */,
+				796C35721B14328000ABE2FE /* StoreData.swift in Sources */,
 				79700A9E1B0F03A50060E81D /* ViewController.swift in Sources */,
 				79700A9C1B0F03A50060E81D /* AppDelegate.swift in Sources */,
 				79700AC21B0F0AEF0060E81D /* ShopViewController.swift in Sources */,

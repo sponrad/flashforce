@@ -7,7 +7,6 @@
         <!--Browsing Cheers-->
         <scene sceneID="uey-le-Tbs">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="qxV-KN-T1K" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="MbV-DC-qNN" customClass="BrowseViewController" customModule="whoscheering" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="xSd-EB-ww6">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
@@ -42,13 +41,13 @@
                         <outlet property="browseTable" destination="xSd-EB-ww6" id="xOf-ug-wpB"/>
                     </connections>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qxV-KN-T1K" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-350" y="-458"/>
         </scene>
         <!--Browsing Teams-->
         <scene sceneID="zeU-4t-1bh">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="h0X-6T-JvZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="2Hr-wa-PFf" customClass="SecondBrowseViewController" customModule="whoscheering" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="hDQ-X4-sQA">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
@@ -68,6 +67,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="YJg-Mg-Wnw" kind="show" id="KjN-Wc-EvX"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -77,6 +79,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Browsing Teams" id="4IY-f3-IsY"/>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="h0X-6T-JvZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="360" y="-458"/>
         </scene>
@@ -199,4 +202,7 @@
             <point key="canvasLocation" x="-1464" y="679"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="KjN-Wc-EvX"/>
+    </inferredMetricsTieBreakers>
 </document>

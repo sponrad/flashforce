@@ -12,7 +12,7 @@ class ShopViewController: UIViewController {
 
     @IBOutlet weak var shopCategory: UITableView!
     
-    let tableData = ["NFL","NBA","MLB","NHL","MLS","EPL"]
+    let tableData = StoreData.categories
     
     override func viewDidLoad() {
         super.viewDidLoad()

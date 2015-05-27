@@ -12,8 +12,8 @@ class BrowseViewController: UITableViewController {
     
     @IBOutlet var browseTable: UITableView!
     
-    var categories = ["NFL","NBA","MLB","NHL","MLS","EPL"]
-
+    var categories = StoreData.categories
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -101,7 +101,6 @@ class BrowseViewController: UITableViewController {
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
         var i = self.browseTable.indexPathForSelectedRow()?.row
-        println( self.categories[i!] )
         
         if let destinationVC = segue.destinationViewController as? SecondBrowseViewController{
             destinationVC.title = self.categories[i!]
