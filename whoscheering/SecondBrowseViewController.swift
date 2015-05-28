@@ -101,12 +101,9 @@ class SecondBrowseViewController: UITableViewController {
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view
         var selectedCheer = self.drillTable.indexPathForSelectedRow()?.row
-        println(selectedCheer)
         
         if let homeVC = segue.destinationViewController as? ViewController{
-            //homeVC.team = StoreData.details[self.category]![selectedCheer!]
-            //println(StoreData.details[self.category]![selectedCheer!])
-            //homeVC.teamLabel.text = StoreData.details[self.category]![selectedCheer!]
+            homeVC.team = StoreData.details[self.category]![selectedCheer!]
         }
     }
 

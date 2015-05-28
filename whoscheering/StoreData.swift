@@ -12,6 +12,13 @@ import Foundation
 struct StoreData{
     static let categories = ["NFL","NBA","MLB","NHL","MLS","EPL"]
     
+    //add IAP id for each team
+    //add COLORS for each team
+    //details.category.team.colors
+    //details.category.team.name
+    //details.category.team.appid
+    //simplify categories to be a function return, gather from the details array
+    
     static let details = [
         "NFL" : ["Chargers","Broncos","Rams","Patriots", "ETC"],
         "NBA" : ["Bulls","Wizards","Raptors","Lakers", "ETC"],
@@ -20,4 +27,5 @@ struct StoreData{
         "MLS" : ["Galaxy","ETC"],
         "EPL" : ["Etc"]
     ]
+    
 }

@@ -15,13 +15,14 @@ class CheerViewController: UIViewController {
     var interval = 2.0 //interval in s
     var timer : NSTimer!
    
+    @IBOutlet weak var syncingLabel: UILabel!
     @IBOutlet weak var shakeLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.view.backgroundColor = colorWithHexString(colors[0])
-
+        self.syncingLabel.text = "syncing..."
         UIApplication.sharedApplication().idleTimerDisabled = true   //screen will not dim
         let modnumber = Double(colors.count) * interval
         
@@ -48,6 +49,7 @@ class CheerViewController: UIViewController {
         delay(modDelay){
             self.timer = NSTimer.scheduledTimerWithTimeInterval(self.interval , target: self, selector: Selector("update"), userInfo: nil, repeats: true)
             //self.timer.tolerance = 0.1
+            self.syncingLabel.text = ""
         }
 
     }

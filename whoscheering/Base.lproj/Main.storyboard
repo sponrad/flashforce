@@ -122,7 +122,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="YJg-Mg-Wnw" kind="show" id="whO-Va-6KS"/>
+                                    <action selector="actionButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Q52-kq-FG9"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="99C-zS-bbP">
@@ -134,12 +134,6 @@
                                     <segue destination="YJg-Mg-Wnw" kind="show" id="GRu-mb-esV"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Outfit" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="30l-NR-NQx">
-                                <rect key="frame" x="0.0" y="287" width="600" height="60"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pf1-0y-sbG">
                                 <rect key="frame" x="0.0" y="219" width="600" height="60"/>
                                 <constraints>
@@ -149,16 +143,41 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Outfit" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="30l-NR-NQx">
+                                <rect key="frame" x="0.0" y="287" width="600" height="60"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Who's Cheering" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6UD-Od-3PL">
+                                <rect key="frame" x="237" y="579" width="126" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="126" id="Z6w-gP-c1J"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="List most recently used?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FVv-rL-KjE">
+                                <rect key="frame" x="206" y="472" width="188" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="Z39-rz-1uV" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="1uc-DL-6DE"/>
+                            <constraint firstItem="6UD-Od-3PL" firstAttribute="centerX" secondItem="Z39-rz-1uV" secondAttribute="centerX" id="3Dn-BM-EFt"/>
                             <constraint firstItem="Z39-rz-1uV" firstAttribute="top" secondItem="RyF-4m-Ac3" secondAttribute="bottom" constant="182" id="5xA-7E-22a"/>
+                            <constraint firstItem="FVv-rL-KjE" firstAttribute="top" secondItem="Z39-rz-1uV" secondAttribute="bottom" constant="8" symbolic="YES" id="6ge-j2-MeS"/>
                             <constraint firstItem="RyF-4m-Ac3" firstAttribute="top" secondItem="Z39-rz-1uV" secondAttribute="bottom" constant="-328" id="Bfo-ND-zto"/>
+                            <constraint firstItem="6UD-Od-3PL" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="EsA-3a-jCK"/>
                             <constraint firstItem="99C-zS-bbP" firstAttribute="top" secondItem="RyF-4m-Ac3" secondAttribute="bottom" constant="144" id="FTc-rJ-vTg"/>
                             <constraint firstItem="Pf1-0y-sbG" firstAttribute="centerX" secondItem="RyF-4m-Ac3" secondAttribute="centerX" id="GgD-XZ-E55"/>
                             <constraint firstItem="99C-zS-bbP" firstAttribute="top" secondItem="30l-NR-NQx" secondAttribute="bottom" constant="8" id="K1Y-WS-0OH"/>
                             <constraint firstItem="RyF-4m-Ac3" firstAttribute="centerX" secondItem="99C-zS-bbP" secondAttribute="centerX" id="Rqb-tR-hRf"/>
+                            <constraint firstItem="FVv-rL-KjE" firstAttribute="centerX" secondItem="Z39-rz-1uV" secondAttribute="centerX" id="UNk-Iq-aPH"/>
                             <constraint firstItem="Pf1-0y-sbG" firstAttribute="top" secondItem="RyF-4m-Ac3" secondAttribute="bottom" constant="8" id="b9C-0C-qlD"/>
                             <constraint firstItem="Pf1-0y-sbG" firstAttribute="leading" secondItem="30l-NR-NQx" secondAttribute="leading" id="cec-qn-HQJ"/>
                             <constraint firstItem="30l-NR-NQx" firstAttribute="top" secondItem="RyF-4m-Ac3" secondAttribute="bottom" constant="76" id="lbE-xd-Ufu"/>
@@ -173,6 +192,7 @@
                     <navigationItem key="navigationItem" title="Who's Cheering?" id="c7R-9K-f7h"/>
                     <connections>
                         <outlet property="outfitLabel" destination="30l-NR-NQx" id="gc2-LA-7Cr"/>
+                        <outlet property="startCheeringButton" destination="Z39-rz-1uV" id="Rrg-WY-1yB"/>
                         <outlet property="teamLabel" destination="Pf1-0y-sbG" id="aJG-Ja-PSl"/>
                     </connections>
                 </viewController>
@@ -192,6 +212,15 @@
                         <rect key="frame" x="0.0" y="64" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="syncing..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cGw-zc-5Wk">
+                                <rect key="frame" x="257" y="64" width="86" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="86" id="yCb-Ej-Psw"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pji-IL-V4t">
                                 <rect key="frame" x="0.0" y="72" width="600" height="528"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="300"/>
@@ -203,12 +232,15 @@
                         <constraints>
                             <constraint firstItem="pji-IL-V4t" firstAttribute="top" secondItem="Z6X-de-Ovi" secondAttribute="bottom" constant="8" symbolic="YES" id="1Gb-cf-Gvy"/>
                             <constraint firstItem="pji-IL-V4t" firstAttribute="leading" secondItem="eld-kE-Br7" secondAttribute="leading" id="1Hr-30-ZpI"/>
+                            <constraint firstItem="cGw-zc-5Wk" firstAttribute="top" secondItem="Z6X-de-Ovi" secondAttribute="bottom" id="81v-JX-0f4"/>
                             <constraint firstAttribute="trailing" secondItem="pji-IL-V4t" secondAttribute="trailing" id="Hx7-5w-xJ2"/>
+                            <constraint firstItem="cGw-zc-5Wk" firstAttribute="centerX" secondItem="pji-IL-V4t" secondAttribute="centerX" id="ZAa-cJ-XaQ"/>
                             <constraint firstItem="pji-IL-V4t" firstAttribute="bottom" secondItem="Fxy-co-wRb" secondAttribute="top" id="p6h-IW-4p2"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="shakeLabel" destination="pji-IL-V4t" id="2n8-CK-Yx4"/>
+                        <outlet property="syncingLabel" destination="cGw-zc-5Wk" id="Bkl-Mo-ZoW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xXO-1V-d7a" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -236,6 +268,5 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="f2C-1Z-ZTV"/>
-        <segue reference="GRu-mb-esV"/>
     </inferredMetricsTieBreakers>
 </document>
