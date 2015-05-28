@@ -10,13 +10,15 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    @IBOutlet weak var categoryPicker: UIPickerView!
-    @IBOutlet weak var specificPicker: UIPickerView!
-
+    @IBOutlet weak var teamLabel: UILabel!
+    @IBOutlet weak var outfitLabel: UILabel!
     
+    var team = String()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        self.teamLabel.text = "Hi there"
     }
 
     override func didReceiveMemoryWarning() {
@@ -24,17 +26,17 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    var teams = ["NFL","NBA","MLB","NHL","MLS","EPL"]
-    
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
-        return 1
+    override func viewWillAppear(animated: Bool) {
+        navigationController?.navigationBarHidden = true
+        super.viewWillAppear(animated)
     }
     
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return teams.count
+    
+    override func viewWillDisappear(animated: Bool) {
+        if (navigationController?.topViewController != self) {
+            navigationController?.navigationBarHidden = false
+        }
+        super.viewWillDisappear(animated)
     }
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
-        return teams[row]
-    }
-}
 
+}

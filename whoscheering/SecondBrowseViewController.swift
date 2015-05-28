@@ -10,13 +10,15 @@ import UIKit
 
 class SecondBrowseViewController: UITableViewController {
     
+
+    @IBOutlet var drillTable: UITableView!
+    
     var category = String()
     var details = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        println(self.category)
         //self.details = StoreData.details[self.category]!
         
         // Uncomment the following line to preserve selection between presentations
@@ -97,8 +99,15 @@ class SecondBrowseViewController: UITableViewController {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-        println( segue.identifier )
+        // Pass the selected object to the new view
+        var selectedCheer = self.drillTable.indexPathForSelectedRow()?.row
+        println(selectedCheer)
+        
+        if let homeVC = segue.destinationViewController as? ViewController{
+            //homeVC.team = StoreData.details[self.category]![selectedCheer!]
+            //println(StoreData.details[self.category]![selectedCheer!])
+            //homeVC.teamLabel.text = StoreData.details[self.category]![selectedCheer!]
+        }
     }
 
 
