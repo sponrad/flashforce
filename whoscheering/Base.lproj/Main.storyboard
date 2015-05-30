@@ -110,10 +110,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z39-rz-1uV">
-                                <rect key="frame" x="189" y="393" width="223" height="71"/>
+                                <rect key="frame" x="106" y="393" width="388" height="71"/>
                                 <color key="backgroundColor" red="0.074509803921568626" green="0.5725490196078431" blue="0.86274509803921573" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="223" id="dCN-qb-jEa"/>
+                                    <constraint firstAttribute="width" constant="388" id="dCN-qb-jEa"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="30"/>
                                 <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
@@ -126,7 +126,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="99C-zS-bbP">
-                                <rect key="frame" x="266" y="355" width="69" height="30"/>
+                                <rect key="frame" x="266" y="550" width="69" height="30"/>
                                 <state key="normal" title="TestCheer">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -158,8 +158,8 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="List most recently used?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FVv-rL-KjE">
-                                <rect key="frame" x="206" y="472" width="188" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="List most recently used" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FVv-rL-KjE">
+                                <rect key="frame" x="211" y="504" width="178" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -170,27 +170,28 @@
                             <constraint firstItem="Z39-rz-1uV" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="1uc-DL-6DE"/>
                             <constraint firstItem="6UD-Od-3PL" firstAttribute="centerX" secondItem="Z39-rz-1uV" secondAttribute="centerX" id="3Dn-BM-EFt"/>
                             <constraint firstItem="Z39-rz-1uV" firstAttribute="top" secondItem="RyF-4m-Ac3" secondAttribute="bottom" constant="182" id="5xA-7E-22a"/>
-                            <constraint firstItem="FVv-rL-KjE" firstAttribute="top" secondItem="Z39-rz-1uV" secondAttribute="bottom" constant="8" symbolic="YES" id="6ge-j2-MeS"/>
                             <constraint firstItem="RyF-4m-Ac3" firstAttribute="top" secondItem="Z39-rz-1uV" secondAttribute="bottom" constant="-328" id="Bfo-ND-zto"/>
+                            <constraint firstAttribute="bottom" secondItem="99C-zS-bbP" secondAttribute="bottom" constant="20" symbolic="YES" id="DT2-IG-lyK"/>
                             <constraint firstItem="6UD-Od-3PL" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="EsA-3a-jCK"/>
-                            <constraint firstItem="99C-zS-bbP" firstAttribute="top" secondItem="RyF-4m-Ac3" secondAttribute="bottom" constant="144" id="FTc-rJ-vTg"/>
                             <constraint firstItem="Pf1-0y-sbG" firstAttribute="centerX" secondItem="RyF-4m-Ac3" secondAttribute="centerX" id="GgD-XZ-E55"/>
-                            <constraint firstItem="99C-zS-bbP" firstAttribute="top" secondItem="30l-NR-NQx" secondAttribute="bottom" constant="8" id="K1Y-WS-0OH"/>
-                            <constraint firstItem="RyF-4m-Ac3" firstAttribute="centerX" secondItem="99C-zS-bbP" secondAttribute="centerX" id="Rqb-tR-hRf"/>
-                            <constraint firstItem="FVv-rL-KjE" firstAttribute="centerX" secondItem="Z39-rz-1uV" secondAttribute="centerX" id="UNk-Iq-aPH"/>
+                            <constraint firstItem="FVv-rL-KjE" firstAttribute="top" secondItem="Z39-rz-1uV" secondAttribute="bottom" constant="40" id="Mky-c5-ztp"/>
+                            <constraint firstItem="FVv-rL-KjE" firstAttribute="centerX" secondItem="99C-zS-bbP" secondAttribute="centerX" id="PiC-tD-vMy"/>
                             <constraint firstItem="Pf1-0y-sbG" firstAttribute="top" secondItem="RyF-4m-Ac3" secondAttribute="bottom" constant="8" id="b9C-0C-qlD"/>
                             <constraint firstItem="Pf1-0y-sbG" firstAttribute="leading" secondItem="30l-NR-NQx" secondAttribute="leading" id="cec-qn-HQJ"/>
+                            <constraint firstItem="99C-zS-bbP" firstAttribute="centerX" secondItem="6UD-Od-3PL" secondAttribute="centerX" id="ggi-Gb-gH2"/>
                             <constraint firstItem="30l-NR-NQx" firstAttribute="top" secondItem="RyF-4m-Ac3" secondAttribute="bottom" constant="76" id="lbE-xd-Ufu"/>
                             <constraint firstItem="30l-NR-NQx" firstAttribute="trailing" secondItem="Pf1-0y-sbG" secondAttribute="trailing" id="o0a-4e-WEP"/>
                             <constraint firstItem="Z39-rz-1uV" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="329" id="oMA-Kb-Ytt"/>
-                            <constraint firstItem="RyF-4m-Ac3" firstAttribute="top" secondItem="99C-zS-bbP" secondAttribute="bottom" constant="-249" id="p7n-OR-zf3"/>
+                            <constraint firstItem="Z39-rz-1uV" firstAttribute="top" secondItem="30l-NR-NQx" secondAttribute="bottom" constant="46" id="pze-Iz-G08"/>
                             <constraint firstItem="RyF-4m-Ac3" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-16" id="qqI-jU-ddW"/>
                             <constraint firstItem="30l-NR-NQx" firstAttribute="top" secondItem="Pf1-0y-sbG" secondAttribute="bottom" constant="8" symbolic="YES" id="s2l-wp-2rB"/>
+                            <constraint firstItem="99C-zS-bbP" firstAttribute="top" secondItem="FVv-rL-KjE" secondAttribute="bottom" constant="25" id="t6w-NC-T6m"/>
                             <constraint firstItem="RyF-4m-Ac3" firstAttribute="centerX" secondItem="Z39-rz-1uV" secondAttribute="centerX" constant="-0.5" id="zW0-j6-Ebg"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Who's Cheering?" id="c7R-9K-f7h"/>
                     <connections>
+                        <outlet property="actionButton" destination="Z39-rz-1uV" id="D4e-qj-Zwa"/>
                         <outlet property="outfitLabel" destination="30l-NR-NQx" id="gc2-LA-7Cr"/>
                         <outlet property="startCheeringButton" destination="Z39-rz-1uV" id="Rrg-WY-1yB"/>
                         <outlet property="teamLabel" destination="Pf1-0y-sbG" id="aJG-Ja-PSl"/>

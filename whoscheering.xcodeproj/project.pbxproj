@@ -19,6 +19,8 @@
 		79700AC21B0F0AEF0060E81D /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79700AC11B0F0AEF0060E81D /* ShopViewController.swift */; };
 		7972FB421B0F0EB30046B1B7 /* CheerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7972FB411B0F0EB30046B1B7 /* CheerViewController.swift */; };
 		7972FB441B10395A0046B1B7 /* 11297314_10155562204365029_604520921_o.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7972FB431B10395A0046B1B7 /* 11297314_10155562204365029_604520921_o.jpg */; };
+		79E5BAC71B182AA800870AA6 /* TegKeychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E5BAC61B182AA800870AA6 /* TegKeychain.swift */; };
+		79E5BAC91B195DC800870AA6 /* TegKeychainConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E5BAC81B195DC800870AA6 /* TegKeychainConstants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +50,8 @@
 		79700AC11B0F0AEF0060E81D /* ShopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
 		7972FB411B0F0EB30046B1B7 /* CheerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheerViewController.swift; sourceTree = "<group>"; };
 		7972FB431B10395A0046B1B7 /* 11297314_10155562204365029_604520921_o.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 11297314_10155562204365029_604520921_o.jpg; path = ../../../Downloads/11297314_10155562204365029_604520921_o.jpg; sourceTree = "<group>"; };
+		79E5BAC61B182AA800870AA6 /* TegKeychain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TegKeychain.swift; sourceTree = "<group>"; };
+		79E5BAC81B195DC800870AA6 /* TegKeychainConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TegKeychainConstants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +103,8 @@
 				79700A9F1B0F03A50060E81D /* Main.storyboard */,
 				7972FB431B10395A0046B1B7 /* 11297314_10155562204365029_604520921_o.jpg */,
 				79700AA21B0F03A50060E81D /* Images.xcassets */,
+				79E5BAC61B182AA800870AA6 /* TegKeychain.swift */,
+				79E5BAC81B195DC800870AA6 /* TegKeychainConstants.swift */,
 				79700AA41B0F03A50060E81D /* LaunchScreen.xib */,
 				79700A991B0F03A50060E81D /* Supporting Files */,
 			);
@@ -231,6 +237,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				79E5BAC71B182AA800870AA6 /* TegKeychain.swift in Sources */,
 				796C35701B142CB200ABE2FE /* SecondBrowseViewController.swift in Sources */,
 				796C35721B14328000ABE2FE /* StoreData.swift in Sources */,
 				79700A9E1B0F03A50060E81D /* ViewController.swift in Sources */,
@@ -238,6 +245,7 @@
 				79700AC21B0F0AEF0060E81D /* ShopViewController.swift in Sources */,
 				7972FB421B0F0EB30046B1B7 /* CheerViewController.swift in Sources */,
 				796C356E1B1427E500ABE2FE /* BrowseViewController.swift in Sources */,
+				79E5BAC91B195DC800870AA6 /* TegKeychainConstants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

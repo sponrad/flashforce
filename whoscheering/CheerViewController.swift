@@ -20,6 +20,7 @@ class CheerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        TegKeychain.set("visitedcheer", value: "yes!")               //only for testing
         
         self.view.backgroundColor = colorWithHexString(colors[0])
         self.syncingLabel.text = "syncing..."
