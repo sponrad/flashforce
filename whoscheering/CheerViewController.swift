@@ -17,7 +17,13 @@ class CheerViewController: UIViewController {
    
     @IBOutlet weak var syncingLabel: UILabel!
     @IBOutlet weak var shakeLabel: UILabel!
+    @IBOutlet weak var stopCheeringButton: UIButton!
     
+    @IBAction func clickStopCheeringButton(sender: AnyObject) {
+        let mainStoryboard = UIStoryboard(name: "Storyboard", bundle: NSBundle.mainBundle())
+        let vc : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("ViewController") as! UIViewController
+        self.presentViewController(vc, animated: true, completion: nil)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         TegKeychain.set("visitedcheer", value: "yes!")               //only for testing

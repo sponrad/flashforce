@@ -23,6 +23,9 @@ class ViewController: UIViewController {
         self.teamLabel.text = self.team
         self.outfitLabel.text = ""
         
+        self.startCheeringButton.layer.borderColor = UIColor.blackColor().CGColor
+        self.startCheeringButton.layer.borderWidth = 5
+        
         if (self.team == ""){
             self.startCheeringButton.enabled = false
             self.startCheeringButton.alpha = 0.3
@@ -65,7 +68,7 @@ class ViewController: UIViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
-        navigationController?.navigationBarHidden = true
+        navigationController?.navigationBarHidden = false
         super.viewWillAppear(animated)
     }
     
