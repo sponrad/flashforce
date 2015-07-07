@@ -23,8 +23,6 @@ class ViewController: UIViewController {
         self.teamLabel.text = self.team
         self.outfitLabel.text = ""
         
-        self.startCheeringButton.layer.borderColor = UIColor.blackColor().CGColor
-        self.startCheeringButton.layer.borderWidth = 5
         
         if (self.team == ""){
             self.startCheeringButton.enabled = false
