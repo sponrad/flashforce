@@ -141,7 +141,7 @@
                                     <constraint firstAttribute="width" constant="600" id="aoU-ls-wft"/>
                                     <constraint firstAttribute="width" constant="600" id="h6l-Kh-j82"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="40"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="default">
@@ -301,11 +301,6 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="0PY-ST-8X9"/>
-                                <exclude reference="oHT-yW-NzO"/>
-                                <exclude reference="7EH-Ki-CpZ"/>
-                                <exclude reference="r4z-0r-mWH"/>
-                                <exclude reference="xpC-7H-8WF"/>
                                 <exclude reference="IWc-X0-QpH"/>
                                 <exclude reference="RFo-m7-DNl"/>
                                 <exclude reference="q5f-N9-Mc3"/>
@@ -318,22 +313,15 @@
                                 <exclude reference="cXG-pP-x8b"/>
                                 <exclude reference="gSl-LZ-KtF"/>
                                 <exclude reference="sdA-x3-tcV"/>
+                                <exclude reference="0PY-ST-8X9"/>
+                                <exclude reference="oHT-yW-NzO"/>
+                                <exclude reference="r4z-0r-mWH"/>
+                                <exclude reference="xpC-7H-8WF"/>
+                                <exclude reference="7EH-Ki-CpZ"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="constraints">
-                                <include reference="0PY-ST-8X9"/>
-                                <exclude reference="Mky-c5-ztp"/>
-                                <exclude reference="PiC-tD-vMy"/>
-                                <include reference="oHT-yW-NzO"/>
-                                <exclude reference="3Dn-BM-EFt"/>
-                                <include reference="7EH-Ki-CpZ"/>
-                                <exclude reference="EsA-3a-jCK"/>
-                                <exclude reference="DT2-IG-lyK"/>
-                                <exclude reference="ggi-Gb-gH2"/>
-                                <include reference="r4z-0r-mWH"/>
-                                <exclude reference="t6w-NC-T6m"/>
-                                <include reference="xpC-7H-8WF"/>
                                 <exclude reference="Bfo-ND-zto"/>
                                 <include reference="IWc-X0-QpH"/>
                                 <include reference="RFo-m7-DNl"/>
@@ -359,6 +347,18 @@
                                 <exclude reference="oMA-Kb-Ytt"/>
                                 <exclude reference="pze-Iz-G08"/>
                                 <include reference="sdA-x3-tcV"/>
+                                <include reference="0PY-ST-8X9"/>
+                                <exclude reference="Mky-c5-ztp"/>
+                                <exclude reference="PiC-tD-vMy"/>
+                                <include reference="oHT-yW-NzO"/>
+                                <exclude reference="DT2-IG-lyK"/>
+                                <exclude reference="ggi-Gb-gH2"/>
+                                <include reference="r4z-0r-mWH"/>
+                                <exclude reference="t6w-NC-T6m"/>
+                                <include reference="xpC-7H-8WF"/>
+                                <exclude reference="3Dn-BM-EFt"/>
+                                <include reference="7EH-Ki-CpZ"/>
+                                <exclude reference="EsA-3a-jCK"/>
                             </mask>
                         </variation>
                     </view>

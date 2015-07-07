@@ -18,6 +18,12 @@
 		79700AB21B0F03A50060E81D /* whoscheeringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79700AB11B0F03A50060E81D /* whoscheeringTests.swift */; };
 		79700AC21B0F0AEF0060E81D /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79700AC11B0F0AEF0060E81D /* ShopViewController.swift */; };
 		7972FB421B0F0EB30046B1B7 /* CheerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7972FB411B0F0EB30046B1B7 /* CheerViewController.swift */; };
+		7999354E1B4B757800575085 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 799935441B4B757800575085 /* FMDatabase.m */; };
+		7999354F1B4B757800575085 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 799935461B4B757800575085 /* FMDatabaseAdditions.m */; };
+		799935501B4B757800575085 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 799935481B4B757800575085 /* FMDatabasePool.m */; };
+		799935511B4B757800575085 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 7999354A1B4B757800575085 /* FMDatabaseQueue.m */; };
+		799935521B4B757800575085 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 7999354D1B4B757800575085 /* FMResultSet.m */; };
+		799935541B4B83F500575085 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 799935531B4B83F500575085 /* libsqlite3.dylib */; };
 		79E5BAC71B182AA800870AA6 /* TegKeychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E5BAC61B182AA800870AA6 /* TegKeychain.swift */; };
 		79E5BAC91B195DC800870AA6 /* TegKeychainConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E5BAC81B195DC800870AA6 /* TegKeychainConstants.swift */; };
 /* End PBXBuildFile section */
@@ -48,6 +54,20 @@
 		79700AB11B0F03A50060E81D /* whoscheeringTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = whoscheeringTests.swift; sourceTree = "<group>"; };
 		79700AC11B0F0AEF0060E81D /* ShopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
 		7972FB411B0F0EB30046B1B7 /* CheerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheerViewController.swift; sourceTree = "<group>"; };
+		799935421B4B757700575085 /* whoscheering-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "whoscheering-Bridging-Header.h"; sourceTree = "<group>"; };
+		799935431B4B757800575085 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
+		799935441B4B757800575085 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
+		799935451B4B757800575085 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
+		799935461B4B757800575085 /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
+		799935471B4B757800575085 /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePool.h; sourceTree = "<group>"; };
+		799935481B4B757800575085 /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
+		799935491B4B757800575085 /* FMDatabaseQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseQueue.h; sourceTree = "<group>"; };
+		7999354A1B4B757800575085 /* FMDatabaseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseQueue.m; sourceTree = "<group>"; };
+		7999354B1B4B757800575085 /* FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
+		7999354C1B4B757800575085 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
+		7999354D1B4B757800575085 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
+		799935531B4B83F500575085 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		799935551B4B8C6900575085 /* ff.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = ff.db; sourceTree = "<group>"; };
 		79E5BAC61B182AA800870AA6 /* TegKeychain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TegKeychain.swift; sourceTree = "<group>"; };
 		79E5BAC81B195DC800870AA6 /* TegKeychainConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TegKeychainConstants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -57,6 +77,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				799935541B4B83F500575085 /* libsqlite3.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -73,6 +94,7 @@
 		79700A8D1B0F03A50060E81D = {
 			isa = PBXGroup;
 			children = (
+				799935531B4B83F500575085 /* libsqlite3.dylib */,
 				79700A981B0F03A50060E81D /* whoscheering */,
 				79700AAE1B0F03A50060E81D /* whoscheeringTests */,
 				79700A971B0F03A50060E81D /* Products */,
@@ -91,6 +113,18 @@
 		79700A981B0F03A50060E81D /* whoscheering */ = {
 			isa = PBXGroup;
 			children = (
+				799935431B4B757800575085 /* FMDatabase.h */,
+				799935441B4B757800575085 /* FMDatabase.m */,
+				799935451B4B757800575085 /* FMDatabaseAdditions.h */,
+				799935461B4B757800575085 /* FMDatabaseAdditions.m */,
+				799935471B4B757800575085 /* FMDatabasePool.h */,
+				799935481B4B757800575085 /* FMDatabasePool.m */,
+				799935491B4B757800575085 /* FMDatabaseQueue.h */,
+				7999354A1B4B757800575085 /* FMDatabaseQueue.m */,
+				7999354B1B4B757800575085 /* FMDB.h */,
+				7999354C1B4B757800575085 /* FMResultSet.h */,
+				7999354D1B4B757800575085 /* FMResultSet.m */,
+				799935421B4B757700575085 /* whoscheering-Bridging-Header.h */,
 				79700A9B1B0F03A50060E81D /* AppDelegate.swift */,
 				79700A9D1B0F03A50060E81D /* ViewController.swift */,
 				7972FB411B0F0EB30046B1B7 /* CheerViewController.swift */,
@@ -103,6 +137,7 @@
 				79E5BAC61B182AA800870AA6 /* TegKeychain.swift */,
 				79E5BAC81B195DC800870AA6 /* TegKeychainConstants.swift */,
 				79700AA41B0F03A50060E81D /* LaunchScreen.xib */,
+				799935551B4B8C6900575085 /* ff.db */,
 				79700A991B0F03A50060E81D /* Supporting Files */,
 			);
 			path = whoscheering;
@@ -234,11 +269,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				79E5BAC71B182AA800870AA6 /* TegKeychain.swift in Sources */,
+				799935501B4B757800575085 /* FMDatabasePool.m in Sources */,
+				799935521B4B757800575085 /* FMResultSet.m in Sources */,
 				796C35701B142CB200ABE2FE /* SecondBrowseViewController.swift in Sources */,
 				796C35721B14328000ABE2FE /* StoreData.swift in Sources */,
+				799935511B4B757800575085 /* FMDatabaseQueue.m in Sources */,
+				7999354E1B4B757800575085 /* FMDatabase.m in Sources */,
 				79700A9E1B0F03A50060E81D /* ViewController.swift in Sources */,
 				79700A9C1B0F03A50060E81D /* AppDelegate.swift in Sources */,
 				79700AC21B0F0AEF0060E81D /* ShopViewController.swift in Sources */,
+				7999354F1B4B757800575085 /* FMDatabaseAdditions.m in Sources */,
 				7972FB421B0F0EB30046B1B7 /* CheerViewController.swift in Sources */,
 				796C356E1B1427E500ABE2FE /* BrowseViewController.swift in Sources */,
 				79E5BAC91B195DC800870AA6 /* TegKeychainConstants.swift in Sources */,
@@ -370,9 +410,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = whoscheering/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "whoscheering/whoscheering-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -380,9 +423,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = whoscheering/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "whoscheering/whoscheering-Bridging-Header.h";
 			};
 			name = Release;
 		};

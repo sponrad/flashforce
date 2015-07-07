@@ -59,6 +59,36 @@ class ViewController: UIViewController {
             }
         }
         
+        let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
+        let path = documentsFolder.stringByAppendingPathComponent("ff.db")
+        
+        let database = FMDatabase(path: path)
+        
+        if !database.open() {
+            println("Unable to open database")
+            return
+        }
+        
+        if !database.executeUpdate("create table cheers(storecode text, name text, category text, pattern text, timing real, price real)", withArgumentsInArray: nil) {
+            println("create table failed: \(database.lastErrorMessage())")
+        }
+        
+        if !database.executeUpdate("insert into cheers values ('asdfasdf', 'Bulls', 'NBA', '[blue, red]', 2.0, 3.99)", withArgumentsInArray: ["a", "b", "c"]) {
+            println("insert 1 table failed: \(database.lastErrorMessage())")
+        }
+        
+        if let rs = database.executeQuery("SELECT * FROM cheers", withArgumentsInArray: nil) {
+            while rs.next() {
+                let x = rs.stringForColumn("storecode")
+                let y = rs.stringForColumn("name")
+                let z = rs.stringForColumn("category")
+                let j = rs.stringForColumn("pattern")
+                let k = rs.stringForColumn("price")
+                println("storecode = \(x); name = \(y); category = \(z); pattern = \(j); price = \(k)")
+            }
+        } else {
+            println("select failed: \(database.lastErrorMessage())")
+        }
         
     }
 
@@ -88,4 +118,5 @@ class ViewController: UIViewController {
         //Buy the cheer
         //OR Start cheering
     }
+    
 }
