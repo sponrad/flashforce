@@ -18,6 +18,7 @@
 		79700AB21B0F03A50060E81D /* whoscheeringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79700AB11B0F03A50060E81D /* whoscheeringTests.swift */; };
 		79700AC21B0F0AEF0060E81D /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79700AC11B0F0AEF0060E81D /* ShopViewController.swift */; };
 		7972FB421B0F0EB30046B1B7 /* CheerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7972FB411B0F0EB30046B1B7 /* CheerViewController.swift */; };
+		7990D35C1B520D0D00936D5F /* flash-forward-three-boxes.png in Resources */ = {isa = PBXBuildFile; fileRef = 7990D35B1B520D0D00936D5F /* flash-forward-three-boxes.png */; };
 		7999354E1B4B757800575085 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 799935441B4B757800575085 /* FMDatabase.m */; };
 		7999354F1B4B757800575085 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 799935461B4B757800575085 /* FMDatabaseAdditions.m */; };
 		799935501B4B757800575085 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 799935481B4B757800575085 /* FMDatabasePool.m */; };
@@ -42,18 +43,19 @@
 		796C356D1B1427E500ABE2FE /* BrowseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseViewController.swift; sourceTree = "<group>"; };
 		796C356F1B142CB200ABE2FE /* SecondBrowseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondBrowseViewController.swift; sourceTree = "<group>"; };
 		796C35711B14327F00ABE2FE /* StoreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreData.swift; sourceTree = "<group>"; };
-		79700A961B0F03A50060E81D /* whoscheering.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = whoscheering.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		79700A961B0F03A50060E81D /* Flash Force.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Flash Force.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		79700A9A1B0F03A50060E81D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		79700A9B1B0F03A50060E81D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		79700A9D1B0F03A50060E81D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		79700AA01B0F03A50060E81D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		79700AA21B0F03A50060E81D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		79700AA51B0F03A50060E81D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		79700AAB1B0F03A50060E81D /* whoscheeringTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = whoscheeringTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		79700AAB1B0F03A50060E81D /* Flash ForceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Flash ForceTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		79700AB01B0F03A50060E81D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		79700AB11B0F03A50060E81D /* whoscheeringTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = whoscheeringTests.swift; sourceTree = "<group>"; };
 		79700AC11B0F0AEF0060E81D /* ShopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
 		7972FB411B0F0EB30046B1B7 /* CheerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheerViewController.swift; sourceTree = "<group>"; };
+		7990D35B1B520D0D00936D5F /* flash-forward-three-boxes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flash-forward-three-boxes.png"; sourceTree = "<group>"; };
 		799935421B4B757700575085 /* whoscheering-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "whoscheering-Bridging-Header.h"; sourceTree = "<group>"; };
 		799935431B4B757800575085 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
 		799935441B4B757800575085 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
@@ -104,8 +106,8 @@
 		79700A971B0F03A50060E81D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				79700A961B0F03A50060E81D /* whoscheering.app */,
-				79700AAB1B0F03A50060E81D /* whoscheeringTests.xctest */,
+				79700A961B0F03A50060E81D /* Flash Force.app */,
+				79700AAB1B0F03A50060E81D /* Flash ForceTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -146,6 +148,7 @@
 		79700A991B0F03A50060E81D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				7990D35B1B520D0D00936D5F /* flash-forward-three-boxes.png */,
 				79700A9A1B0F03A50060E81D /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -171,9 +174,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		79700A951B0F03A50060E81D /* whoscheering */ = {
+		79700A951B0F03A50060E81D /* Flash Force */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 79700AB51B0F03A50060E81D /* Build configuration list for PBXNativeTarget "whoscheering" */;
+			buildConfigurationList = 79700AB51B0F03A50060E81D /* Build configuration list for PBXNativeTarget "Flash Force" */;
 			buildPhases = (
 				79700A921B0F03A50060E81D /* Sources */,
 				79700A931B0F03A50060E81D /* Frameworks */,
@@ -183,14 +186,14 @@
 			);
 			dependencies = (
 			);
-			name = whoscheering;
+			name = "Flash Force";
 			productName = whoscheering;
-			productReference = 79700A961B0F03A50060E81D /* whoscheering.app */;
+			productReference = 79700A961B0F03A50060E81D /* Flash Force.app */;
 			productType = "com.apple.product-type.application";
 		};
-		79700AAA1B0F03A50060E81D /* whoscheeringTests */ = {
+		79700AAA1B0F03A50060E81D /* Flash ForceTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 79700AB81B0F03A50060E81D /* Build configuration list for PBXNativeTarget "whoscheeringTests" */;
+			buildConfigurationList = 79700AB81B0F03A50060E81D /* Build configuration list for PBXNativeTarget "Flash ForceTests" */;
 			buildPhases = (
 				79700AA71B0F03A50060E81D /* Sources */,
 				79700AA81B0F03A50060E81D /* Frameworks */,
@@ -201,9 +204,9 @@
 			dependencies = (
 				79700AAD1B0F03A50060E81D /* PBXTargetDependency */,
 			);
-			name = whoscheeringTests;
+			name = "Flash ForceTests";
 			productName = whoscheeringTests;
-			productReference = 79700AAB1B0F03A50060E81D /* whoscheeringTests.xctest */;
+			productReference = 79700AAB1B0F03A50060E81D /* Flash ForceTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -217,6 +220,7 @@
 				TargetAttributes = {
 					79700A951B0F03A50060E81D = {
 						CreatedOnToolsVersion = 6.3.2;
+						DevelopmentTeam = 436GFV8Y5W;
 					};
 					79700AAA1B0F03A50060E81D = {
 						CreatedOnToolsVersion = 6.3.2;
@@ -224,7 +228,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 79700A911B0F03A50060E81D /* Build configuration list for PBXProject "whoscheering" */;
+			buildConfigurationList = 79700A911B0F03A50060E81D /* Build configuration list for PBXProject "Flash Force" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -237,8 +241,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				79700A951B0F03A50060E81D /* whoscheering */,
-				79700AAA1B0F03A50060E81D /* whoscheeringTests */,
+				79700A951B0F03A50060E81D /* Flash Force */,
+				79700AAA1B0F03A50060E81D /* Flash ForceTests */,
 			);
 		};
 /* End PBXProject section */
@@ -251,6 +255,7 @@
 				79700AA11B0F03A50060E81D /* Main.storyboard in Resources */,
 				79700AA61B0F03A50060E81D /* LaunchScreen.xib in Resources */,
 				79700AA31B0F03A50060E81D /* Images.xcassets in Resources */,
+				7990D35C1B520D0D00936D5F /* flash-forward-three-boxes.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,7 +303,7 @@
 /* Begin PBXTargetDependency section */
 		79700AAD1B0F03A50060E81D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 79700A951B0F03A50060E81D /* whoscheering */;
+			target = 79700A951B0F03A50060E81D /* Flash Force */;
 			targetProxy = 79700AAC1B0F03A50060E81D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -411,9 +416,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = whoscheering/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Flash Force";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "whoscheering/whoscheering-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -424,9 +432,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = whoscheering/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Flash Force";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "whoscheering/whoscheering-Bridging-Header.h";
 			};
 			name = Release;
@@ -445,7 +456,7 @@
 				);
 				INFOPLIST_FILE = whoscheeringTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Flash ForceTests";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/whoscheering.app/whoscheering";
 			};
 			name = Debug;
@@ -460,7 +471,7 @@
 				);
 				INFOPLIST_FILE = whoscheeringTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Flash ForceTests";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/whoscheering.app/whoscheering";
 			};
 			name = Release;
@@ -468,7 +479,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		79700A911B0F03A50060E81D /* Build configuration list for PBXProject "whoscheering" */ = {
+		79700A911B0F03A50060E81D /* Build configuration list for PBXProject "Flash Force" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				79700AB31B0F03A50060E81D /* Debug */,
@@ -477,7 +488,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		79700AB51B0F03A50060E81D /* Build configuration list for PBXNativeTarget "whoscheering" */ = {
+		79700AB51B0F03A50060E81D /* Build configuration list for PBXNativeTarget "Flash Force" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				79700AB61B0F03A50060E81D /* Debug */,
@@ -486,7 +497,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		79700AB81B0F03A50060E81D /* Build configuration list for PBXNativeTarget "whoscheeringTests" */ = {
+		79700AB81B0F03A50060E81D /* Build configuration list for PBXNativeTarget "Flash ForceTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				79700AB91B0F03A50060E81D /* Debug */,

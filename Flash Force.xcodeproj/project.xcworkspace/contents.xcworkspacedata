@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:whoscheering.xcodeproj">
+      location = "self:/Users/conrad/Desktop/whoscheering/Flash Force.xcodeproj">
    </FileRef>
 </Workspace>
