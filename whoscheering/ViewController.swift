@@ -23,6 +23,8 @@ class ViewController: UIViewController {
         self.teamLabel.text = self.team
         self.outfitLabel.text = ""
         
+        self.navigationItem.hidesBackButton = true;
+        
         
         if (self.team == ""){
             self.startCheeringButton.enabled = false
