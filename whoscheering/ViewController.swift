@@ -71,7 +71,9 @@ class ViewController: UIViewController {
             println("create table failed: \(database.lastErrorMessage())")
         }
         
-        if !database.executeUpdate("insert into cheers values ('asdfasdf', 'Bulls', 'NBA', '[blue, red]', 2.0, 3.99)", withArgumentsInArray: ["a", "b", "c"]) {
+        database.executeUpdate("DELETE FROM cheers", withArgumentsInArray: nil)
+        
+        if !database.executeUpdate("insert into cheers values ('dardardar', 'Bulls', 'NBA', '[blue, red]', 2.0, 3.99)", withArgumentsInArray: ["a", "b", "c"]) {
             println("insert 1 table failed: \(database.lastErrorMessage())")
         }
         
