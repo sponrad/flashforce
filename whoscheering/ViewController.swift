@@ -73,8 +73,17 @@ class ViewController: UIViewController {
         
         database.executeUpdate("DELETE FROM cheers", withArgumentsInArray: nil)
         
-        if !database.executeUpdate("insert into cheers values ('dardardar', 'Bulls', 'NBA', '[blue, red]', 2.0, 3.99)", withArgumentsInArray: ["a", "b", "c"]) {
-            println("insert 1 table failed: \(database.lastErrorMessage())")
+        //loop through initialData to build the database
+        for record in StoreData.initialData {
+            var pattern = record[5]  //stored in [5] through [9]...but may be empty
+            var pattern5 = record[5]
+            var pattern6 = record[6]
+            var pattern7 = record[7]
+            var pattern8 = record[8]
+            var pattern9 = record[9]
+            let timing = 2.0
+            let price = 3.99
+            database.executeUpdate("insert into cheers values ('\(record[0])', '\(record[2])', '\(record[1])', '\(pattern)', \(timing), \(price))", withArgumentsInArray: nil)
         }
         
         if let rs = database.executeQuery("SELECT * FROM cheers", withArgumentsInArray: nil) {
