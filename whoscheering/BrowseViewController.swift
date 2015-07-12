@@ -12,10 +12,27 @@ class BrowseViewController: UITableViewController {
     
     @IBOutlet var browseTable: UITableView!
     
-    var categories = StoreData.categories
+    var categories: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
+        let path = documentsFolder.stringByAppendingPathComponent("ff.db")
+        let database = FMDatabase(path: path)
+        if !database.open() {
+            println("Unable to open database")
+            return
+        }
+        
+        if let rs = database.executeQuery("SELECT DISTINCT category FROM cheers", withArgumentsInArray: nil) {
+            while rs.next() {
+                self.categories.append(rs.stringForColumn("category"))
+                println(rs.stringForColumn("category"))
+            }
+        } else {
+            println("select failed: \(database.lastErrorMessage())")
+        }
         
         browseTable.delegate = self
         browseTable.dataSource = self
