@@ -16,7 +16,6 @@
 		79700AA31B0F03A50060E81D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79700AA21B0F03A50060E81D /* Images.xcassets */; };
 		79700AA61B0F03A50060E81D /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79700AA41B0F03A50060E81D /* LaunchScreen.xib */; };
 		79700AB21B0F03A50060E81D /* whoscheeringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79700AB11B0F03A50060E81D /* whoscheeringTests.swift */; };
-		79700AC21B0F0AEF0060E81D /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79700AC11B0F0AEF0060E81D /* ShopViewController.swift */; };
 		7972FB421B0F0EB30046B1B7 /* CheerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7972FB411B0F0EB30046B1B7 /* CheerViewController.swift */; };
 		7990D35C1B520D0D00936D5F /* flash-forward-three-boxes.png in Resources */ = {isa = PBXBuildFile; fileRef = 7990D35B1B520D0D00936D5F /* flash-forward-three-boxes.png */; };
 		7999354E1B4B757800575085 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 799935441B4B757800575085 /* FMDatabase.m */; };
@@ -53,7 +52,6 @@
 		79700AAB1B0F03A50060E81D /* Flash ForceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Flash ForceTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		79700AB01B0F03A50060E81D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		79700AB11B0F03A50060E81D /* whoscheeringTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = whoscheeringTests.swift; sourceTree = "<group>"; };
-		79700AC11B0F0AEF0060E81D /* ShopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
 		7972FB411B0F0EB30046B1B7 /* CheerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheerViewController.swift; sourceTree = "<group>"; };
 		7990D35B1B520D0D00936D5F /* flash-forward-three-boxes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flash-forward-three-boxes.png"; sourceTree = "<group>"; };
 		799935421B4B757700575085 /* whoscheering-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "whoscheering-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -115,6 +113,25 @@
 		79700A981B0F03A50060E81D /* whoscheering */ = {
 			isa = PBXGroup;
 			children = (
+				79700A9B1B0F03A50060E81D /* AppDelegate.swift */,
+				79700A9D1B0F03A50060E81D /* ViewController.swift */,
+				7972FB411B0F0EB30046B1B7 /* CheerViewController.swift */,
+				796C356D1B1427E500ABE2FE /* BrowseViewController.swift */,
+				796C356F1B142CB200ABE2FE /* SecondBrowseViewController.swift */,
+				796C35711B14327F00ABE2FE /* StoreData.swift */,
+				79700A9F1B0F03A50060E81D /* Main.storyboard */,
+				79700AA21B0F03A50060E81D /* Images.xcassets */,
+				79700AA41B0F03A50060E81D /* LaunchScreen.xib */,
+				799935551B4B8C6900575085 /* ff.db */,
+				79700A991B0F03A50060E81D /* Supporting Files */,
+			);
+			path = whoscheering;
+			sourceTree = "<group>";
+		};
+		79700A991B0F03A50060E81D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				799935421B4B757700575085 /* whoscheering-Bridging-Header.h */,
 				799935431B4B757800575085 /* FMDatabase.h */,
 				799935441B4B757800575085 /* FMDatabase.m */,
 				799935451B4B757800575085 /* FMDatabaseAdditions.h */,
@@ -126,28 +143,8 @@
 				7999354B1B4B757800575085 /* FMDB.h */,
 				7999354C1B4B757800575085 /* FMResultSet.h */,
 				7999354D1B4B757800575085 /* FMResultSet.m */,
-				799935421B4B757700575085 /* whoscheering-Bridging-Header.h */,
-				79700A9B1B0F03A50060E81D /* AppDelegate.swift */,
-				79700A9D1B0F03A50060E81D /* ViewController.swift */,
-				7972FB411B0F0EB30046B1B7 /* CheerViewController.swift */,
-				796C356D1B1427E500ABE2FE /* BrowseViewController.swift */,
-				796C356F1B142CB200ABE2FE /* SecondBrowseViewController.swift */,
-				796C35711B14327F00ABE2FE /* StoreData.swift */,
-				79700AC11B0F0AEF0060E81D /* ShopViewController.swift */,
-				79700A9F1B0F03A50060E81D /* Main.storyboard */,
-				79700AA21B0F03A50060E81D /* Images.xcassets */,
 				79E5BAC61B182AA800870AA6 /* TegKeychain.swift */,
 				79E5BAC81B195DC800870AA6 /* TegKeychainConstants.swift */,
-				79700AA41B0F03A50060E81D /* LaunchScreen.xib */,
-				799935551B4B8C6900575085 /* ff.db */,
-				79700A991B0F03A50060E81D /* Supporting Files */,
-			);
-			path = whoscheering;
-			sourceTree = "<group>";
-		};
-		79700A991B0F03A50060E81D /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
 				7990D35B1B520D0D00936D5F /* flash-forward-three-boxes.png */,
 				79700A9A1B0F03A50060E81D /* Info.plist */,
 			);
@@ -282,7 +279,6 @@
 				7999354E1B4B757800575085 /* FMDatabase.m in Sources */,
 				79700A9E1B0F03A50060E81D /* ViewController.swift in Sources */,
 				79700A9C1B0F03A50060E81D /* AppDelegate.swift in Sources */,
-				79700AC21B0F0AEF0060E81D /* ShopViewController.swift in Sources */,
 				7999354F1B4B757800575085 /* FMDatabaseAdditions.m in Sources */,
 				7972FB421B0F0EB30046B1B7 /* CheerViewController.swift in Sources */,
 				796C356E1B1427E500ABE2FE /* BrowseViewController.swift in Sources */,
