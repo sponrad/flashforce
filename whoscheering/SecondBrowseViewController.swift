@@ -13,19 +13,33 @@ class SecondBrowseViewController: UITableViewController {
 
     @IBOutlet var drillTable: UITableView!
     
-    var category = String()
+    var category = String()  //set by previous view
     var details = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //self.details = StoreData.details[self.category]!
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
+        let path = documentsFolder.stringByAppendingPathComponent("ff.db")
+        let database = FMDatabase(path: path)
+        if !database.open() {
+            println("Unable to open database")
+            return
+        }
+        
+        if let rs = database.executeQuery("SELECT * FROM cheers WHERE category='\(self.category)'", withArgumentsInArray: nil) {
+            while rs.next() {
+                self.details.append(rs.stringForColumn("name"))
+            }
+        } else {
+            println("select failed: \(database.lastErrorMessage())")
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -44,7 +58,7 @@ class SecondBrowseViewController: UITableViewController {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return StoreData.details[self.category]!.count
+        return self.details.count
     }
 
     
@@ -52,7 +66,7 @@ class SecondBrowseViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("drillCell", forIndexPath: indexPath) as! UITableViewCell
 
         // Configure the cell...
-        cell.textLabel!.text = StoreData.details[self.category]![indexPath.row]
+        cell.textLabel!.text = self.details[indexPath.row]
 
         return cell
     }
@@ -103,7 +117,7 @@ class SecondBrowseViewController: UITableViewController {
         var selectedCheer = self.drillTable.indexPathForSelectedRow()?.row
         
         if let homeVC = segue.destinationViewController as? ViewController{
-            homeVC.team = StoreData.details[self.category]![selectedCheer!]
+            homeVC.team = self.details[selectedCheer!]
         }
     }
 

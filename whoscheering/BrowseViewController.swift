@@ -28,7 +28,6 @@ class BrowseViewController: UITableViewController {
         if let rs = database.executeQuery("SELECT DISTINCT category FROM cheers", withArgumentsInArray: nil) {
             while rs.next() {
                 self.categories.append(rs.stringForColumn("category"))
-                println(rs.stringForColumn("category"))
             }
         } else {
             println("select failed: \(database.lastErrorMessage())")
