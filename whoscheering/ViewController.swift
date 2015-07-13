@@ -8,6 +8,8 @@
 
 import UIKit
 
+var ffdbLoaded = false
+
 class ViewController: UIViewController {
 
     @IBOutlet weak var teamLabel: UILabel!
@@ -69,41 +71,28 @@ class ViewController: UIViewController {
             return
         }
         
-        database.executeUpdate("DROP TABLE cheers", withArgumentsInArray: nil)
-        
-        if !database.executeUpdate("create table cheers(id integer primary key autoincrement, storecode text, name text, category text, pattern text, timing real, price real)", withArgumentsInArray: nil) {
-            println("create table failed: \(database.lastErrorMessage())")
-        }
-        
-        database.executeUpdate("DELETE FROM cheers", withArgumentsInArray: nil)
-        
-        
-        //loop through initialData to build the database
-        for record in StoreData.initialData {
-            var pattern = record[5]  //stored in [5] through [9]...but may be empty
-            var pattern5 = record[5]
-            var pattern6 = record[6]
-            var pattern7 = record[7]
-            var pattern8 = record[8]
-            var pattern9 = record[9]
-            let timing = 2.0
-            let price = 3.99
-            database.executeUpdate("insert into cheers values (NULL, '\(record[0])', '\(record[2])', '\(record[1])', '\(pattern)', \(timing), \(price))", withArgumentsInArray: nil)
-        }
-        
-        if let rs = database.executeQuery("SELECT * FROM cheers", withArgumentsInArray: nil) {
-            while rs.next() {
-                let x = rs.stringForColumn("storecode")
-                let y = rs.stringForColumn("name")
-                let z = rs.stringForColumn("category")
-                let j = rs.stringForColumn("pattern")
-                let k = rs.stringForColumn("price")
-                println("storecode = \(x); name = \(y); category = \(z); pattern = \(j); price = \(k)")
+       
+        if (ffdbLoaded==false){
+            database.executeUpdate("DROP TABLE cheers", withArgumentsInArray: nil)
+            
+            if !database.executeUpdate("create table cheers(id integer primary key autoincrement, storecode text, name text, category text, pattern text, timing real, price real)", withArgumentsInArray: nil) {
+                println("create table failed: \(database.lastErrorMessage())")
             }
-        } else {
-            println("select failed: \(database.lastErrorMessage())")
+            database.executeUpdate("DELETE FROM cheers", withArgumentsInArray: nil)
+            //loop through initialData to build the database
+            for record in StoreData.initialData {
+                var pattern = record[5]  //stored in [5] through [9]...but may be empty
+                var pattern5 = record[5]
+                var pattern6 = record[6]
+                var pattern7 = record[7]
+                var pattern8 = record[8]
+                var pattern9 = record[9]
+                let timing = 2.0
+                let price = 3.99
+                database.executeUpdate("insert into cheers values (NULL, '\(record[0])', '\(record[2])', '\(record[1])', '\(pattern)', \(timing), \(price))", withArgumentsInArray: nil)
+            }
+            ffdbLoaded = true
         }
-        
     }
 
     override func didReceiveMemoryWarning() {
