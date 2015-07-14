@@ -14,7 +14,7 @@ class SecondBrowseViewController: UITableViewController {
     @IBOutlet var drillTable: UITableView!
     
     var category = String()  //set by previous view
-    var details = [String]()
+    var details = [[Any]]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +35,7 @@ class SecondBrowseViewController: UITableViewController {
         
         if let rs = database.executeQuery("SELECT * FROM cheers WHERE category='\(self.category)' ORDER BY name", withArgumentsInArray: nil) {
             while rs.next() {
-                self.details.append(rs.stringForColumn("name"))
+                self.details.append([rs.stringForColumn("name"), rs.intForColumn("id")])
             }
         } else {
             println("select failed: \(database.lastErrorMessage())")
@@ -66,7 +66,7 @@ class SecondBrowseViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("drillCell", forIndexPath: indexPath) as! UITableViewCell
 
         // Configure the cell...
-        cell.textLabel!.text = self.details[indexPath.row]
+        cell.textLabel!.text = String(stringInterpolationSegment: self.details[indexPath.row][0])
 
         return cell
     }
@@ -117,7 +117,8 @@ class SecondBrowseViewController: UITableViewController {
         var selectedCheer = self.drillTable.indexPathForSelectedRow()?.row
         
         if let homeVC = segue.destinationViewController as? ViewController{
-            homeVC.team = self.details[selectedCheer!]
+            homeVC.team = String(stringInterpolationSegment: self.details[selectedCheer!][0])
+            selectedId = (self.details[selectedCheer!][1] as? Int32)!
         }
     }
 

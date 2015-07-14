@@ -9,6 +9,7 @@
 import UIKit
 
 var ffdbLoaded = false
+var selectedId: Int32 = 0
 
 class ViewController: UIViewController {
 
@@ -24,7 +25,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.teamLabel.text = self.team
-        self.outfitLabel.text = ""
+        self.outfitLabel.text = String(selectedId)
         
         self.navigationItem.hidesBackButton = true;
         
@@ -43,7 +44,7 @@ class ViewController: UIViewController {
             //TegKeychain.clear()
             if var result = TegKeychain.get("visitedcheer") {   //this is currently set in CheerViewController
                 println("In Keychain: \(result)")
-           ; } else {
+            } else {
                 println("no value in keychain")
             }
             //if yes then display the normal IAP button
@@ -60,7 +61,7 @@ class ViewController: UIViewController {
                 self.startCheeringButton.enabled = true
                 self.actionButton.hidden = false
                 self.actionButton.setTitle("Start Cheering", forState: .Normal)
-                self.outfitLabel.text = "Outfits"
+                self.outfitLabel.text = String(selectedId)
             }
         }
         
