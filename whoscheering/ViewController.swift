@@ -16,6 +16,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var outfitLabel: UILabel!
     @IBOutlet weak var startCheeringButton: UIButton!
     @IBOutlet weak var actionButton: UIButton!
+    @IBOutlet weak var testCheerButton: UIBarButtonItem!
     
     var team = String()
 
@@ -32,6 +33,7 @@ class ViewController: UIViewController {
             self.startCheeringButton.enabled = false
             self.startCheeringButton.alpha = 0.3
             self.actionButton.hidden = true
+            self.testCheerButton.enabled = false
         }
         else {
             //check if they own the theme or not
@@ -50,6 +52,7 @@ class ViewController: UIViewController {
             if contains(["Duke", "Fireworks", "Kings"], self.team){
                 //example not owned
                 self.startCheeringButton.enabled = true
+                self.testCheerButton.enabled = true
                 self.actionButton.hidden = false
                 self.actionButton.setTitle("Buy Cheer $x.xx", forState: .Normal)
             }

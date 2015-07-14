@@ -153,6 +153,9 @@
                                     <action selector="actionButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Q52-kq-FG9"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="flash-forward-three-boxes.png" translatesAutoresizingMaskIntoConstraints="NO" id="v2D-Mr-0u7">
+                                <rect key="frame" x="0.0" y="72" width="600" height="230"/>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RyF-4m-Ac3">
                                 <rect key="frame" x="0.0" y="310" width="600" height="75"/>
                                 <constraints>
@@ -186,6 +189,7 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="v2D-Mr-0u7" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" symbolic="YES" id="2Dd-Rp-txw"/>
                             <constraint firstAttribute="trailing" secondItem="RyF-4m-Ac3" secondAttribute="trailing" id="4pI-ag-6zQ"/>
                             <constraint firstItem="RyF-4m-Ac3" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="246" id="Cxt-HT-2vg"/>
                             <constraint firstItem="RyF-4m-Ac3" firstAttribute="leading" secondItem="Pf1-0y-sbG" secondAttribute="leading" id="JTY-vq-85j"/>
@@ -193,10 +197,13 @@
                             <constraint firstItem="30l-NR-NQx" firstAttribute="trailing" secondItem="Pf1-0y-sbG" secondAttribute="trailing" id="O0R-xs-8pS"/>
                             <constraint firstItem="30l-NR-NQx" firstAttribute="leading" secondItem="Z39-rz-1uV" secondAttribute="leading" id="Pic-f9-y1e"/>
                             <constraint firstItem="30l-NR-NQx" firstAttribute="leading" secondItem="Pf1-0y-sbG" secondAttribute="leading" id="Wf9-aq-C3C"/>
+                            <constraint firstItem="v2D-Mr-0u7" firstAttribute="leading" secondItem="RyF-4m-Ac3" secondAttribute="leading" id="cDn-cr-VXK"/>
                             <constraint firstItem="Pf1-0y-sbG" firstAttribute="trailing" secondItem="RyF-4m-Ac3" secondAttribute="trailing" id="fti-oC-xHj"/>
                             <constraint firstItem="30l-NR-NQx" firstAttribute="trailing" secondItem="Z39-rz-1uV" secondAttribute="trailing" id="gCJ-Kz-rr3"/>
+                            <constraint firstItem="RyF-4m-Ac3" firstAttribute="top" secondItem="v2D-Mr-0u7" secondAttribute="bottom" constant="8" symbolic="YES" id="gzo-9o-ydh"/>
                             <constraint firstItem="Z39-rz-1uV" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="j9p-7a-SxP"/>
                             <constraint firstItem="30l-NR-NQx" firstAttribute="top" secondItem="Pf1-0y-sbG" secondAttribute="bottom" constant="8" symbolic="YES" id="oc5-QY-jke"/>
+                            <constraint firstItem="v2D-Mr-0u7" firstAttribute="trailing" secondItem="RyF-4m-Ac3" secondAttribute="trailing" id="p1d-91-aRL"/>
                             <constraint firstItem="Z39-rz-1uV" firstAttribute="top" secondItem="30l-NR-NQx" secondAttribute="bottom" constant="8" symbolic="YES" id="yz4-R3-zRE"/>
                         </constraints>
                     </view>
@@ -226,6 +233,7 @@
                         <outlet property="outfitLabel" destination="30l-NR-NQx" id="gc2-LA-7Cr"/>
                         <outlet property="startCheeringButton" destination="Z39-rz-1uV" id="Rrg-WY-1yB"/>
                         <outlet property="teamLabel" destination="Pf1-0y-sbG" id="aJG-Ja-PSl"/>
+                        <outlet property="testCheerButton" destination="lwr-gf-ptC" id="Egj-Mx-Ln1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -348,6 +356,9 @@
             <point key="canvasLocation" x="-1464" y="679"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="flash-forward-three-boxes.png" width="1024" height="1024"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="f2C-1Z-ZTV"/>
     </inferredMetricsTieBreakers>
