@@ -10,10 +10,13 @@ import UIKit
 
 class CheerViewController: UIViewController {
     
+
+    
     var color = 0
     var colors = ["D4001F", "000000"]
     var interval = 2.0 //interval in s
     var timer : NSTimer!
+    
    
     @IBOutlet weak var syncingLabel: UILabel!
     @IBOutlet weak var shakeLabel: UILabel!
@@ -26,6 +29,28 @@ class CheerViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // // // GET INFO FROM DATABASE // // //
+        let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
+        let path = documentsFolder.stringByAppendingPathComponent("ff.db")
+        let database = FMDatabase(path: path)
+        if !database.open() {
+            println("Unable to open database")
+            return
+        }
+        
+        if let rs = database.executeQuery("SELECT * FROM cheers WHERE id=\(String(selectedId))", withArgumentsInArray: nil) {
+            while rs.next() {
+                //colors =
+                //interval =
+                //timer =
+            }
+        } else {
+            println("select failed: \(database.lastErrorMessage())")
+        }
+        // // // END GET INFO FROM DATABASE // // //
+
+        
         TegKeychain.set("visitedcheer", value: "yes!")               //only for testing
         
         self.view.backgroundColor = colorWithHexString(colors[0])
