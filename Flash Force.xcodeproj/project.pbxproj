@@ -26,6 +26,7 @@
 		799935541B4B83F500575085 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 799935531B4B83F500575085 /* libsqlite3.dylib */; };
 		79E5BAC71B182AA800870AA6 /* TegKeychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E5BAC61B182AA800870AA6 /* TegKeychain.swift */; };
 		79E5BAC91B195DC800870AA6 /* TegKeychainConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E5BAC81B195DC800870AA6 /* TegKeychainConstants.swift */; };
+		79F8CCD71B54C9EE009BF242 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F8CCD61B54C9EE009BF242 /* Reachability.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +71,7 @@
 		799935551B4B8C6900575085 /* ff.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = ff.db; sourceTree = "<group>"; };
 		79E5BAC61B182AA800870AA6 /* TegKeychain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TegKeychain.swift; sourceTree = "<group>"; };
 		79E5BAC81B195DC800870AA6 /* TegKeychainConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TegKeychainConstants.swift; sourceTree = "<group>"; };
+		79F8CCD61B54C9EE009BF242 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +133,7 @@
 		79700A991B0F03A50060E81D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				79F8CCD61B54C9EE009BF242 /* Reachability.swift */,
 				799935421B4B757700575085 /* whoscheering-Bridging-Header.h */,
 				799935431B4B757800575085 /* FMDatabase.h */,
 				799935441B4B757800575085 /* FMDatabase.m */,
@@ -270,6 +273,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				79F8CCD71B54C9EE009BF242 /* Reachability.swift in Sources */,
 				79E5BAC71B182AA800870AA6 /* TegKeychain.swift in Sources */,
 				799935501B4B757800575085 /* FMDatabasePool.m in Sources */,
 				799935521B4B757800575085 /* FMResultSet.m in Sources */,

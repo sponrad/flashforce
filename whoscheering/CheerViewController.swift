@@ -72,25 +72,32 @@ class CheerViewController: UIViewController {
         UIApplication.sharedApplication().idleTimerDisabled = true   //screen will not dim
         let modnumber = Double(colors.count) * interval
         
-        let ct = NSDate().timeIntervalSince1970
+
         
-        //grab the server time
-        let serverEpochStr: String = parseJSON( getJSON("http://alignthebeat.appspot.com") )["epoch"] as! String
-        let serverEpoch = (serverEpochStr as NSString).doubleValue
+        var modOffset: Double = 1
+        var modDelay: Double = 1
         
-        let nct = NSDate().timeIntervalSince1970
-        println("nct: \(nct)")
-        println("server: \(serverEpoch)")
-        let ping = nct - ct
-        
-        println("ping: \(ping)")
-        
-        var offset = serverEpoch - nct + (ping / 2.0)
-        
-        println("offset: \(offset)")
-        
-        var modOffset = (NSDate().timeIntervalSince1970 + offset) % modnumber
-        var modDelay = (interval * Double(colors.count)) - modOffset
+        if Reachability.isConnectedToNetwork() == true {
+            
+            let ct = NSDate().timeIntervalSince1970
+            //grab the server time
+            let serverEpochStr: String = parseJSON( getJSON("http://alignthebeat.appspot.com") )["epoch"] as! String
+            let serverEpoch = (serverEpochStr as NSString).doubleValue
+            
+            let nct = NSDate().timeIntervalSince1970
+            println("nct: \(nct)")
+            println("server: \(serverEpoch)")
+            let ping = nct - ct
+            
+            println("ping: \(ping)")
+            
+            var offset = serverEpoch - nct + (ping / 2.0)
+            
+            println("offset: \(offset)")
+            
+            modOffset = (NSDate().timeIntervalSince1970 + offset) % modnumber
+            modDelay = (interval * Double(colors.count)) - modOffset
+        }
         
         delay(modDelay){
             self.timer = NSTimer.scheduledTimerWithTimeInterval(self.interval , target: self, selector: Selector("update"), userInfo: nil, repeats: true)
