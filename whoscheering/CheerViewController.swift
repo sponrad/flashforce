@@ -41,9 +41,23 @@ class CheerViewController: UIViewController {
         
         if let rs = database.executeQuery("SELECT * FROM cheers WHERE id=\(String(selectedId))", withArgumentsInArray: nil) {
             while rs.next() {
-                //colors =
+                colors = [String]()
+                if (rs.stringForColumn("pattern1") != ""){
+                    colors.append(rs.stringForColumn("pattern1"))
+                }
+                if (rs.stringForColumn("pattern2") != ""){
+                    colors.append(rs.stringForColumn("pattern2"))
+                }
+                if (rs.stringForColumn("pattern3") != ""){
+                    colors.append(rs.stringForColumn("pattern3"))
+                }
+                if (rs.stringForColumn("pattern4") != ""){
+                    colors.append(rs.stringForColumn("pattern4"))
+                }
+                if (rs.stringForColumn("pattern5") != ""){
+                    colors.append(rs.stringForColumn("pattern5"))
+                }
                 //interval =
-                //timer =
             }
         } else {
             println("select failed: \(database.lastErrorMessage())")
