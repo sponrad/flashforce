@@ -25,7 +25,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.teamLabel.text = self.team
-        self.outfitLabel.text = String(selectedId)
+        self.outfitLabel.text = ""
         
         self.navigationItem.hidesBackButton = true;
         
@@ -61,7 +61,7 @@ class ViewController: UIViewController {
                 self.startCheeringButton.enabled = true
                 self.actionButton.hidden = false
                 self.actionButton.setTitle("Start Cheering", forState: .Normal)
-                self.outfitLabel.text = String(selectedId)
+                self.outfitLabel.text = "id: " + String(selectedId)
             }
         }
         
