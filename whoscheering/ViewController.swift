@@ -61,7 +61,7 @@ class ViewController: UIViewController {
                 self.startCheeringButton.enabled = true
                 self.actionButton.hidden = false
                 self.actionButton.setTitle("Start Cheering", forState: .Normal)
-                self.outfitLabel.text = "id: " + String(selectedId)
+                self.outfitLabel.text = ""
             }
         }
         
