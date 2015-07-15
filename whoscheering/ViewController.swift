@@ -7,11 +7,12 @@
 //
 
 import UIKit
+import StoreKit
 
 var ffdbLoaded = false
 var selectedId: Int32 = 0
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
 
     @IBOutlet weak var teamLabel: UILabel!
     @IBOutlet weak var outfitLabel: UILabel!
@@ -29,7 +30,16 @@ class ViewController: UIViewController {
         
         self.navigationItem.hidesBackButton = true;
         
+        if (SKPaymentQueue.canMakePayments()){
+            println("can make payments")
+        }
+        else {
+            println("no payment support")
+        }
         
+        
+        
+        ///////////////////////////   flash button logic
         if (self.team == ""){
             self.startCheeringButton.enabled = false
             self.startCheeringButton.alpha = 0.3
@@ -65,17 +75,20 @@ class ViewController: UIViewController {
             }
         }
         
+        
+        
+        ///////////////////////////   connect to the database
         let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
         let path = documentsFolder.stringByAppendingPathComponent("ff.db")
-        
         let database = FMDatabase(path: path)
-        
         if !database.open() {
             println("Unable to open database")
             return
         }
         
+        
        
+        ///////////////////////////   code to load the database
         if (ffdbLoaded==false){
             database.executeUpdate("DROP TABLE cheers", withArgumentsInArray: nil)
             
