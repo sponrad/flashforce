@@ -26,6 +26,7 @@
 		799935541B4B83F500575085 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 799935531B4B83F500575085 /* libsqlite3.dylib */; };
 		79E5BAC71B182AA800870AA6 /* TegKeychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E5BAC61B182AA800870AA6 /* TegKeychain.swift */; };
 		79E5BAC91B195DC800870AA6 /* TegKeychainConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E5BAC81B195DC800870AA6 /* TegKeychainConstants.swift */; };
+		79E7059F1B5600FA0072B716 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79E7059E1B5600FA0072B716 /* StoreKit.framework */; };
 		79F8CCD71B54C9EE009BF242 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F8CCD61B54C9EE009BF242 /* Reachability.swift */; };
 /* End PBXBuildFile section */
 
@@ -71,6 +72,7 @@
 		799935551B4B8C6900575085 /* ff.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = ff.db; sourceTree = "<group>"; };
 		79E5BAC61B182AA800870AA6 /* TegKeychain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TegKeychain.swift; sourceTree = "<group>"; };
 		79E5BAC81B195DC800870AA6 /* TegKeychainConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TegKeychainConstants.swift; sourceTree = "<group>"; };
+		79E7059E1B5600FA0072B716 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		79F8CCD61B54C9EE009BF242 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -80,6 +82,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				799935541B4B83F500575085 /* libsqlite3.dylib in Frameworks */,
+				79E7059F1B5600FA0072B716 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -96,8 +99,9 @@
 		79700A8D1B0F03A50060E81D = {
 			isa = PBXGroup;
 			children = (
+				79E7059E1B5600FA0072B716 /* StoreKit.framework */,
 				799935531B4B83F500575085 /* libsqlite3.dylib */,
-				79700A981B0F03A50060E81D /* whoscheering */,
+				79700A981B0F03A50060E81D /* flashforce */,
 				79700AAE1B0F03A50060E81D /* whoscheeringTests */,
 				79700A971B0F03A50060E81D /* Products */,
 			);
@@ -112,7 +116,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		79700A981B0F03A50060E81D /* whoscheering */ = {
+		79700A981B0F03A50060E81D /* flashforce */ = {
 			isa = PBXGroup;
 			children = (
 				79700A9B1B0F03A50060E81D /* AppDelegate.swift */,
@@ -127,6 +131,7 @@
 				799935551B4B8C6900575085 /* ff.db */,
 				79700A991B0F03A50060E81D /* Supporting Files */,
 			);
+			name = flashforce;
 			path = whoscheering;
 			sourceTree = "<group>";
 		};
@@ -221,6 +226,11 @@
 					79700A951B0F03A50060E81D = {
 						CreatedOnToolsVersion = 6.3.2;
 						DevelopmentTeam = 436GFV8Y5W;
+						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
+						};
 					};
 					79700AAA1B0F03A50060E81D = {
 						CreatedOnToolsVersion = 6.3.2;
