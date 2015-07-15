@@ -47,7 +47,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
             self.testCheerButton.enabled = false
         }
         else {
-            //check if they own the theme or not
+            //check if they own the product or not
             //if owned: display the start cheer button
             //if not owned:
             //check Keychain for if first theme has been purchased
@@ -65,12 +65,12 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
                 self.startCheeringButton.enabled = true
                 self.testCheerButton.enabled = true
                 self.actionButton.hidden = false
-                self.actionButton.setTitle("Buy Cheer $x.xx", forState: .Normal)
+                self.actionButton.setTitle("Buy $x.xx", forState: .Normal)
             }
             else{
                 self.startCheeringButton.enabled = true
                 self.actionButton.hidden = false
-                self.actionButton.setTitle("Start Cheering", forState: .Normal)
+                self.actionButton.setTitle("Start Flash", forState: .Normal)
                 self.outfitLabel.text = ""
             }
         }
@@ -131,7 +131,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
     }
 
     @IBAction func actionButtonTapped(sender: AnyObject) {
-        var alert = UIAlertController(title: "Future functionality", message: "Buy this cheer, get first free, or start cheering if owned", preferredStyle: UIAlertControllerStyle.Alert)
+        var alert = UIAlertController(title: "In App Purchase in progress", message: "Buy this flash, get first free, or start cheering if owned. Use \"Test\" above while in testing.", preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
         self.presentViewController(alert, animated: true, completion: nil)
         

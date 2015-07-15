@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <scenes>
-        <!--Browsing Cheers-->
+        <!--Browsing-->
         <scene sceneID="uey-le-Tbs">
             <objects>
                 <tableViewController id="MbV-DC-qNN" customClass="BrowseViewController" customModule="Flash_Force" customModuleProvider="target" sceneMemberID="viewController">
@@ -39,7 +39,7 @@
                             <outlet property="delegate" destination="MbV-DC-qNN" id="hKv-e4-6om"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Browsing Cheers" id="Qyk-04-O0l">
+                    <navigationItem key="navigationItem" title="Browsing" id="Qyk-04-O0l">
                         <barButtonItem key="backBarButtonItem" title="Back" id="B3P-Nq-K0N"/>
                     </navigationItem>
                     <connections>
@@ -139,7 +139,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="40"/>
                                 <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
-                                <state key="normal" title="Start Cheering">
+                                <state key="normal" title="Start Flash">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -163,7 +163,7 @@
                                     <constraint firstAttribute="height" constant="75" id="qPD-MF-efE"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="38"/>
-                                <state key="normal" title="Browse Cheers">
+                                <state key="normal" title="Browse">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <variation key="default">
@@ -209,12 +209,18 @@
                     </view>
                     <navigationItem key="navigationItem" title="Flash Force" id="c7R-9K-f7h">
                         <barButtonItem key="backBarButtonItem" title="Back" id="MTr-hB-fv5"/>
-                        <barButtonItem key="leftBarButtonItem" style="plain" id="lwr-gf-ptC">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="99C-zS-bbP">
+                        <barButtonItem key="leftBarButtonItem" style="done" id="lwr-gf-ptC">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" id="99C-zS-bbP">
                                 <rect key="frame" x="531" y="64" width="69" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="TestCheer">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="Test">
+                                            <attributes>
+                                                <font key="NSFont" size="15" name="HelveticaNeue"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
                                 </state>
                                 <variation key="widthClass=regular" ambiguous="YES" misplaced="YES">
                                     <rect key="frame" x="366" y="550" width="69" height="30"/>
@@ -255,7 +261,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="syncing..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cGw-zc-5Wk">
                                 <rect key="frame" x="257" y="64" width="86" height="21"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="86" id="yCb-Ej-Psw"/>
+                                    <constraint firstAttribute="width" constant="86" id="lhT-AY-TNI"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -267,69 +273,19 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A35-nT-noB">
-                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="73" id="7kK-jY-WPr"/>
-                                </constraints>
-                                <state key="normal" title="Stop Cheering">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="7kK-jY-WPr"/>
-                                    </mask>
-                                </variation>
-                                <variation key="widthClass=compact">
-                                    <mask key="constraints">
-                                        <include reference="7kK-jY-WPr"/>
-                                    </mask>
-                                </variation>
-                                <connections>
-                                    <action selector="clickStopCheeringButton:" destination="YJg-Mg-Wnw" eventType="touchUpInside" id="cej-bD-gd9"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="pji-IL-V4t" firstAttribute="top" secondItem="Z6X-de-Ovi" secondAttribute="bottom" constant="8" symbolic="YES" id="1Gb-cf-Gvy">
-                                <variation key="widthClass=compact" constant="52"/>
-                            </constraint>
-                            <constraint firstItem="pji-IL-V4t" firstAttribute="leading" secondItem="eld-kE-Br7" secondAttribute="leading" id="1Hr-30-ZpI"/>
-                            <constraint firstItem="A35-nT-noB" firstAttribute="bottom" secondItem="Fxy-co-wRb" secondAttribute="top" id="29e-EW-RiU"/>
-                            <constraint firstItem="cGw-zc-5Wk" firstAttribute="top" secondItem="Z6X-de-Ovi" secondAttribute="bottom" id="81v-JX-0f4">
-                                <variation key="widthClass=compact" constant="44"/>
-                            </constraint>
-                            <constraint firstAttribute="trailing" secondItem="pji-IL-V4t" secondAttribute="trailing" id="Hx7-5w-xJ2"/>
-                            <constraint firstItem="A35-nT-noB" firstAttribute="trailing" secondItem="pji-IL-V4t" secondAttribute="trailing" id="Wfr-N1-VJZ"/>
-                            <constraint firstItem="A35-nT-noB" firstAttribute="leading" secondItem="pji-IL-V4t" secondAttribute="leading" id="WhP-Mz-Pvo"/>
-                            <constraint firstItem="cGw-zc-5Wk" firstAttribute="centerX" secondItem="pji-IL-V4t" secondAttribute="centerX" id="ZAa-cJ-XaQ"/>
-                            <constraint firstItem="pji-IL-V4t" firstAttribute="bottom" secondItem="Fxy-co-wRb" secondAttribute="top" id="p6h-IW-4p2"/>
+                            <constraint firstItem="pji-IL-V4t" firstAttribute="top" secondItem="Z6X-de-Ovi" secondAttribute="bottom" constant="52" id="1dm-Wf-wkx"/>
+                            <constraint firstAttribute="trailing" secondItem="pji-IL-V4t" secondAttribute="trailing" id="3sp-Jz-HQQ"/>
+                            <constraint firstItem="pji-IL-V4t" firstAttribute="leading" secondItem="eld-kE-Br7" secondAttribute="leading" id="Oa1-he-W7R"/>
+                            <constraint firstItem="pji-IL-V4t" firstAttribute="centerX" secondItem="cGw-zc-5Wk" secondAttribute="centerX" id="UwY-83-OBu"/>
+                            <constraint firstItem="cGw-zc-5Wk" firstAttribute="top" secondItem="Z6X-de-Ovi" secondAttribute="bottom" constant="44" id="VaT-t7-9uR"/>
+                            <constraint firstItem="pji-IL-V4t" firstAttribute="bottom" secondItem="Fxy-co-wRb" secondAttribute="top" id="hL7-Wz-qsj"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="A35-nT-noB"/>
-                            </mask>
-                            <mask key="constraints">
-                                <exclude reference="29e-EW-RiU"/>
-                                <exclude reference="Wfr-N1-VJZ"/>
-                                <exclude reference="WhP-Mz-Pvo"/>
-                            </mask>
-                        </variation>
-                        <variation key="widthClass=compact">
-                            <mask key="subviews">
-                                <include reference="A35-nT-noB"/>
-                            </mask>
-                            <mask key="constraints">
-                                <include reference="29e-EW-RiU"/>
-                                <include reference="Wfr-N1-VJZ"/>
-                                <include reference="WhP-Mz-Pvo"/>
-                            </mask>
-                        </variation>
                     </view>
                     <connections>
                         <outlet property="shakeLabel" destination="pji-IL-V4t" id="2n8-CK-Yx4"/>
-                        <outlet property="stopCheeringButton" destination="A35-nT-noB" id="5dp-a0-uz8"/>
                         <outlet property="syncingLabel" destination="cGw-zc-5Wk" id="Bkl-Mo-ZoW"/>
                     </connections>
                 </viewController>
@@ -360,6 +316,6 @@
         <image name="flash-forward-three-boxes.png" width="1024" height="1024"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="f2C-1Z-ZTV"/>
+        <segue reference="bH8-89-pL4"/>
     </inferredMetricsTieBreakers>
 </document>
