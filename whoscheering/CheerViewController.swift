@@ -91,7 +91,8 @@ class CheerViewController: UIViewController {
             
             println("ping: \(ping)")
             
-            var offset = serverEpoch - nct + (ping / 2.0)
+            //var offset = serverEpoch - nct + (ping / 2.0)
+            var offset = avgOffset
             
             println("offset: \(offset)")
             

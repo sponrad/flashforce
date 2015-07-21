@@ -10,6 +10,7 @@ import UIKit
 
 var ffdbLoaded = false
 var selectedId: Int32 = 0
+var avgOffset: Double = 0
 
 class ViewController: UIViewController {
 
@@ -82,6 +83,9 @@ class ViewController: UIViewController {
             if !database.executeUpdate("create table cheers(id integer primary key autoincrement, storecode text, name text, category text, pattern text, timing real, price real, pattern1 text, pattern2 text, pattern3 text, pattern4 text, pattern5 text)", withArgumentsInArray: nil) {
                 println("create table failed: \(database.lastErrorMessage())")
             }
+            if !database.executeUpdate("create table offsets(id integer primary key autoincrement, offset real)", withArgumentsInArray: nil) {
+                println("create table failed: \(database.lastErrorMessage()), probably already created")
+            }
             database.executeUpdate("DELETE FROM cheers", withArgumentsInArray: nil)
             //loop through initialData to build the database
             for record in StoreData.initialData {
@@ -95,8 +99,34 @@ class ViewController: UIViewController {
                 let price = 3.99
                 database.executeUpdate("insert into cheers values (NULL, '\(record[0])', '\(record[2])', '\(record[1])', '\(pattern)', \(timing), \(price), '\(pattern1)', '\(pattern2)', '\(pattern3)', '\(pattern4)', '\(pattern5)')", withArgumentsInArray: nil)
             }
+            
+            
+            //load offsets
+            var averageOffset:[Double] = []
+            averageOffset.append(getOffset())
+            averageOffset.append(getOffset())
+            averageOffset.append(getOffset())
+            let average = averageOffset.reduce(0) { $0 + $1 } / Double(averageOffset.count)
+            println( average )
+            database.executeUpdate("insert into offsets values (NULL, '\(String(stringInterpolationSegment: average))')", withArgumentsInArray: nil)
+            
+            avgOffset = average
+            //average all of the stored offsets
+            var offsets:[Double] = []
+            if let rs = database.executeQuery("SELECT * FROM offsets", withArgumentsInArray: nil) {
+                while rs.next() {
+                    var offset = rs.doubleForColumn("offset")
+                    offsets.append(offset)
+                }
+                avgOffset = offsets.reduce(0) { $0 + $1 } / Double(offsets.count)
+                println(avgOffset)
+            }
+            
             ffdbLoaded = true
         }
+        
+
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -124,6 +154,30 @@ class ViewController: UIViewController {
         
         //Buy the cheer
         //OR Start cheering
+    }
+    
+    func getOffset() -> Double {
+        var offset : Double = 0
+        if Reachability.isConnectedToNetwork() == true {
+            let ct = NSDate().timeIntervalSince1970
+            let serverEpochStr: String = parseJSON( getJSON("http://alignthebeat.appspot.com") )["epoch"] as! String
+            let serverEpoch = (serverEpochStr as NSString).doubleValue
+            let nct = NSDate().timeIntervalSince1970
+            let ping = nct - ct
+            offset = serverEpoch - nct + (ping / 2.0)
+        }
+        return offset
+    }
+    
+    func getJSON(urlToRequest: String) -> NSData{
+        return NSData(contentsOfURL: NSURL(string: urlToRequest)!)!
+    }
+    
+    func parseJSON(inputData: NSData) -> NSDictionary{
+        var error: NSError?
+        var boardsDictionary: NSDictionary = NSJSONSerialization.JSONObjectWithData(inputData, options: NSJSONReadingOptions.MutableContainers, error: &error) as! NSDictionary
+        
+        return boardsDictionary
     }
     
 }

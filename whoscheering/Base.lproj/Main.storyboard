@@ -209,7 +209,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Flash Force" id="c7R-9K-f7h">
                         <barButtonItem key="backBarButtonItem" title="Back" id="MTr-hB-fv5"/>
-                        <barButtonItem key="leftBarButtonItem" style="plain" id="lwr-gf-ptC">
+                        <barButtonItem key="leftBarButtonItem" style="done" id="lwr-gf-ptC">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="99C-zS-bbP">
                                 <rect key="frame" x="531" y="64" width="69" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
