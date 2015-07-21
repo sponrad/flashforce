@@ -93,11 +93,13 @@ class CheerViewController: UIViewController {
             
             //var offset = serverEpoch - nct + (ping / 2.0)
             var offset = avgOffset
+            var count = Double(colors.count)
             
-            println("offset: \(offset)")
-            
-            modOffset = (NSDate().timeIntervalSince1970 + offset) % modnumber
-            modDelay = (interval * Double(colors.count)) - modOffset
+            //modOffset = (NSDate().timeIntervalSince1970 + offset) % modnumber
+            //println(modOffset)
+            //modDelay = (interval * count) - modOffset
+            modDelay = (interval * count) - ((NSDate().timeIntervalSince1970 + offset) % modnumber)
+            //TODO think of new method that jumps straight to the current color so that modDelay is always less than value for interval
         }
         
         delay(modDelay){
