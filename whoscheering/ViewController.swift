@@ -123,10 +123,9 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
             println( average )
             database.executeUpdate("insert into offsets values (NULL, '\(String(stringInterpolationSegment: average))')", withArgumentsInArray: nil)
             
-            avgOffset = average
             //average all of the stored offsets
             var offsets:[Double] = []
-            if let rs = database.executeQuery("SELECT * FROM offsets", withArgumentsInArray: nil) {
+            if let rs = database.executeQuery("SELECT * FROM offsets LIMIT 50", withArgumentsInArray: nil) {
                 while rs.next() {
                     var offset = rs.doubleForColumn("offset")
                     offsets.append(offset)

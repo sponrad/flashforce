@@ -153,10 +153,10 @@
                                     <action selector="actionButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Q52-kq-FG9"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="flash-forward-three-boxes.png" translatesAutoresizingMaskIntoConstraints="NO" id="v2D-Mr-0u7">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="flash-forward-three-boxes.png" translatesAutoresizingMaskIntoConstraints="NO" id="v2D-Mr-0u7">
                                 <rect key="frame" x="0.0" y="72" width="600" height="230"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RyF-4m-Ac3">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RyF-4m-Ac3">
                                 <rect key="frame" x="0.0" y="310" width="600" height="75"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="75" id="Lzf-Du-QCH"/>
