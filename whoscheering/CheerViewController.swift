@@ -72,40 +72,21 @@ class CheerViewController: UIViewController {
         UIApplication.sharedApplication().idleTimerDisabled = true   //screen will not dim
         let modnumber = Double(colors.count) * interval
         
-
-        
         var modOffset: Double = 1
         var modDelay: Double = 1
         
-        if Reachability.isConnectedToNetwork() == true {
-            
-            let ct = NSDate().timeIntervalSince1970
-            //grab the server time
-            let serverEpochStr: String = parseJSON( getJSON("http://alignthebeat.appspot.com") )["epoch"] as! String
-            let serverEpoch = (serverEpochStr as NSString).doubleValue
-            
-            let nct = NSDate().timeIntervalSince1970
-            println("nct: \(nct)")
-            println("server: \(serverEpoch)")
-            let ping = nct - ct
-            
-            println("ping: \(ping)")
-            
-            //var offset = serverEpoch - nct + (ping / 2.0)
-            var offset = avgOffset
-            var count = Double(colors.count)
-            
-            //modOffset = (NSDate().timeIntervalSince1970 + offset) % modnumber
-            //println(modOffset)
-            //modDelay = (interval * count) - modOffset
-            modDelay = (interval * count) - ((NSDate().timeIntervalSince1970 + offset) % modnumber)
-            //TODO think of new method that jumps straight to the current color so that modDelay is always less than value for interval
-        }
+        //get what color we are on
+        modOffset = (NSDate().timeIntervalSince1970 + avgOffset) % modnumber
+        self.color = Int( modOffset / interval )
+        
+        //small delay to next color change
+        modDelay = interval - ((NSDate().timeIntervalSince1970 + avgOffset) % interval)
         
         delay(modDelay){
             self.timer = NSTimer.scheduledTimerWithTimeInterval(self.interval , target: self, selector: Selector("update"), userInfo: nil, repeats: true)
             //self.timer.tolerance = 0.1
             self.syncingLabel.text = ""
+            self.view.backgroundColor = self.colorWithHexString(self.colors[self.color])
         }
 
     }
