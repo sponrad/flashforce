@@ -20,14 +20,15 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
     @IBOutlet weak var testCheerButton: UIBarButtonItem!
     @IBOutlet weak var outfitButton: UIButton!
     
-    var team = String()
+    var team = String()   // set from the secondbrowseviewcontroller
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.navigationItem.hidesBackButton = true;
-        self.teamLabel.text = "fwfwef"
-        println(selectedId)
+        self.teamLabel.text = ""
+        self.outfitButton.enabled = false
+        self.outfitButton.hidden = true
 
         ///////////////////////////   connect to the database
         let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
@@ -42,8 +43,20 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
             if let rs = database.executeQuery("SELECT * FROM cheers WHERE id=\(String(selectedId))", withArgumentsInArray: nil) {
                 while rs.next() {
                     self.teamLabel.text = rs.stringForColumn("name")
+                    self.team = rs.stringForColumn("name")
                     self.outfitButton.setTitle(rs.stringForColumn("alt1"), forState: UIControlState.Normal)
                 }
+            } else {
+                println("select failed: \(database.lastErrorMessage())")
+            }
+            
+            //check if there are alternates
+            if let count = database.intForQuery("SELECT COUNT(name) FROM cheers WHERE name='\(self.team)'") {
+                    if (count > 1){
+                        self.outfitButton.enabled = true
+                        self.outfitButton.hidden = false
+                        self.outfitButton.setTitle("Choose Alternate", forState: UIControlState.Normal)
+                    }
             } else {
                 println("select failed: \(database.lastErrorMessage())")
             }
