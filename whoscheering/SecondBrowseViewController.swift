@@ -33,7 +33,7 @@ class SecondBrowseViewController: UITableViewController {
             return
         }
         
-        if let rs = database.executeQuery("SELECT * FROM cheers WHERE category='\(self.category)' ORDER BY name", withArgumentsInArray: nil) {
+        if let rs = database.executeQuery("SELECT name, id FROM cheers WHERE category='\(self.category)' GROUP BY name ORDER BY name", withArgumentsInArray: nil) {
             while rs.next() {
                 self.details.append([rs.stringForColumn("name"), rs.intForColumn("id")])
             }

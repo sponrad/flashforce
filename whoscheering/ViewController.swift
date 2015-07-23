@@ -92,6 +92,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
         ///////////////////////////   code to load the database
         if (ffdbLoaded==false){
             database.executeUpdate("DROP TABLE cheers", withArgumentsInArray: nil)
+            //database.executeUpdate("DROP TABLE offsets", withArgumentsInArray: nil)
             
             if !database.executeUpdate("create table cheers(id integer primary key autoincrement, storecode text, name text, category text, pattern text, timing real, price real, pattern1 text, pattern2 text, pattern3 text, pattern4 text, pattern5 text)", withArgumentsInArray: nil) {
                 println("create table failed: \(database.lastErrorMessage())")

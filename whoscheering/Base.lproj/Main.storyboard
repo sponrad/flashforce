@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="QEB-ik-ZkY">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <scenes>
@@ -153,10 +154,10 @@
                                     <action selector="actionButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Q52-kq-FG9"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="flash-forward-three-boxes.png" translatesAutoresizingMaskIntoConstraints="NO" id="v2D-Mr-0u7">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="flash-forward-three-boxes.png" translatesAutoresizingMaskIntoConstraints="NO" id="v2D-Mr-0u7">
                                 <rect key="frame" x="0.0" y="72" width="600" height="230"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RyF-4m-Ac3">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RyF-4m-Ac3">
                                 <rect key="frame" x="0.0" y="310" width="600" height="75"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="75" id="Lzf-Du-QCH"/>
@@ -189,9 +190,9 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="v2D-Mr-0u7" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" symbolic="YES" id="2Dd-Rp-txw"/>
+                            <constraint firstItem="v2D-Mr-0u7" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="52" id="2Dd-Rp-txw"/>
                             <constraint firstAttribute="trailing" secondItem="RyF-4m-Ac3" secondAttribute="trailing" id="4pI-ag-6zQ"/>
-                            <constraint firstItem="RyF-4m-Ac3" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="246" id="Cxt-HT-2vg"/>
+                            <constraint firstItem="RyF-4m-Ac3" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="290" id="Cxt-HT-2vg"/>
                             <constraint firstItem="RyF-4m-Ac3" firstAttribute="leading" secondItem="Pf1-0y-sbG" secondAttribute="leading" id="JTY-vq-85j"/>
                             <constraint firstItem="RyF-4m-Ac3" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="KkL-Bs-vha"/>
                             <constraint firstItem="30l-NR-NQx" firstAttribute="trailing" secondItem="Pf1-0y-sbG" secondAttribute="trailing" id="O0R-xs-8pS"/>
