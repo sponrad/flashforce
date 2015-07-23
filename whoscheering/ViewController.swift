@@ -19,6 +19,11 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
     @IBOutlet weak var browseButton: UIButton!
     @IBOutlet weak var testCheerButton: UIBarButtonItem!
     @IBOutlet weak var outfitButton: UIButton!
+    @IBOutlet weak var color1Label: UILabel!
+    @IBOutlet weak var color2Label: UILabel!
+    @IBOutlet weak var color3Label: UILabel!
+    @IBOutlet weak var color4Label: UILabel!
+    @IBOutlet weak var color5Label: UILabel!
     
     var team = String()   // set from the secondbrowseviewcontroller
 
@@ -28,6 +33,8 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
         self.navigationItem.hidesBackButton = true;
         self.outfitButton.enabled = false
         self.outfitButton.hidden = true
+        
+        //self.color1Label.backgroundColor = UIColor.whiteColor()
 
         ///////////////////////////   connect to the database
         let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
