@@ -112,7 +112,7 @@ struct StoreData{
         ["", "NFL", "Philadelphia Eagles", "", "", "003B48", "000000", "708090", "C0C0C0", "", "", "", "", "", "", "USA", "Philadelphia", "Pennsylvania", ""],
         ["", "NFL", "Indianapolis Colts", "", "", "003B7B", "", "", "", "", "", "", "", "", "", "USA", "Indianapolis", "Indiana", ""],
         ["", "NFL", "Seattle Seahawks", "", "", "06192E", "4EAE47", "ACB6BC", "", "", "", "", "", "", "", "USA", "Seattle", "Washington", ""],
-        ["", "NFL", "Arizona Cardinals", "", "", "870619", "000000", "", "", "", "", "", "", "", "", "USA", "", "Arizona", ""],
+        ["", "NFL", "Arizona Cardinals", "test", "", "870619", "000000", "", "", "", "", "", "", "", "", "USA", "", "Arizona", ""],
         ["", "NFL", "Arizona Cardinals", "Alternate", "0.99", "111C24", "97233F", "", "", "", "", "", "", "", "", "USA", "", "Arizona", ""],
         ["", "NFL", "Atlanta Falcons", "", "", "BD0D18", "000000", "DCE0E5", "", "", "", "", "", "", "", "USA", "Atlanta", "Georgia", ""],
         ["", "NFL", "Houston Texans", "", "", "02253A", "B31B34", "", "", "", "", "", "", "", "", "USA", "Houston", "Texas", ""],

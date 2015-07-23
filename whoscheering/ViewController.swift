@@ -10,26 +10,46 @@ import UIKit
 import StoreKit
 
 var ffdbLoaded = false
-var selectedId: Int32 = 0
-var avgOffset: Double = 0
+var selectedId: Int32 = 9999999
+var avgOffset: Double = 9999999
 
 class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
 
     @IBOutlet weak var teamLabel: UILabel!
-    @IBOutlet weak var outfitLabel: UILabel!
-    @IBOutlet weak var startCheeringButton: UIButton!
     @IBOutlet weak var actionButton: UIButton!
     @IBOutlet weak var testCheerButton: UIBarButtonItem!
+    @IBOutlet weak var outfitButton: UIButton!
     
     var team = String()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        self.teamLabel.text = self.team
-        self.outfitLabel.text = ""
-        
         self.navigationItem.hidesBackButton = true;
+        self.teamLabel.text = "fwfwef"
+        println(selectedId)
+
+        ///////////////////////////   connect to the database
+        let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
+        let path = documentsFolder.stringByAppendingPathComponent("ff.db")
+        let database = FMDatabase(path: path)
+        if !database.open() {
+            println("Unable to open database")
+            return
+        }
+        
+        if (selectedId != 9999999){
+            if let rs = database.executeQuery("SELECT * FROM cheers WHERE id=\(String(selectedId))", withArgumentsInArray: nil) {
+                while rs.next() {
+                    self.teamLabel.text = rs.stringForColumn("name")
+                    self.outfitButton.setTitle(rs.stringForColumn("alt1"), forState: UIControlState.Normal)
+                }
+            } else {
+                println("select failed: \(database.lastErrorMessage())")
+            }
+        }
+        
+        
         
         if (SKPaymentQueue.canMakePayments()){
             println("can make payments")
@@ -39,13 +59,12 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
         }
         
         
-        
         ///////////////////////////   flash button logic
         if (self.team == ""){
-            self.startCheeringButton.enabled = false
-            self.startCheeringButton.alpha = 0.3
+            self.actionButton.enabled = false
+            self.actionButton.alpha = 0.3
             self.actionButton.hidden = true
-            self.testCheerButton.enabled = false
+            self.actionButton.enabled = false
         }
         else {
             //check if they own the product or not
@@ -63,38 +82,25 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
             
             if contains(["Duke", "Fireworks", "Kings"], self.team){
                 //example not owned
-                self.startCheeringButton.enabled = true
+                self.actionButton.enabled = true
                 self.testCheerButton.enabled = true
                 self.actionButton.hidden = false
-                self.actionButton.setTitle("Buy $x.xx", forState: .Normal)
+                self.actionButton.setTitle("Buy $x.xx", forState: UIControlState.Normal)
             }
             else{
-                self.startCheeringButton.enabled = true
+                self.actionButton.enabled = true
                 self.actionButton.hidden = false
-                self.actionButton.setTitle("Start Flash", forState: .Normal)
-                self.outfitLabel.text = ""
+                self.actionButton.setTitle("Start Flash", forState: UIControlState.Normal)
             }
         }
         
-        
-        
-        ///////////////////////////   connect to the database
-        let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
-        let path = documentsFolder.stringByAppendingPathComponent("ff.db")
-        let database = FMDatabase(path: path)
-        if !database.open() {
-            println("Unable to open database")
-            return
-        }
-        
-        
-       
-        ///////////////////////////   code to load the database
+
+        ///////////////////////////   code to load the database with data
         if (ffdbLoaded==false){
             database.executeUpdate("DROP TABLE cheers", withArgumentsInArray: nil)
             //database.executeUpdate("DROP TABLE offsets", withArgumentsInArray: nil)
             
-            if !database.executeUpdate("create table cheers(id integer primary key autoincrement, storecode text, name text, category text, pattern text, timing real, price real, pattern1 text, pattern2 text, pattern3 text, pattern4 text, pattern5 text)", withArgumentsInArray: nil) {
+            if !database.executeUpdate("create table cheers(id integer primary key autoincrement, storecode text, name text, category text, pattern text, timing real, price real, pattern1 text, pattern2 text, pattern3 text, pattern4 text, pattern5 text, alt1 text)", withArgumentsInArray: nil) {
                 println("create table failed: \(database.lastErrorMessage())")
             }
             if !database.executeUpdate("create table offsets(id integer primary key autoincrement, offset real)", withArgumentsInArray: nil) {
@@ -109,9 +115,9 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
                 var pattern3 = record[7]
                 var pattern4 = record[8]
                 var pattern5 = record[9]
-                let timing = 2.0
-                let price = 3.99
-                database.executeUpdate("insert into cheers values (NULL, '\(record[0])', '\(record[2])', '\(record[1])', '\(pattern)', \(timing), \(price), '\(pattern1)', '\(pattern2)', '\(pattern3)', '\(pattern4)', '\(pattern5)')", withArgumentsInArray: nil)
+                let timing = 1.0
+                let price = 0.99
+                database.executeUpdate("insert into cheers values (NULL, '\(record[0])', '\(record[2])', '\(record[1])', '\(pattern)', \(timing), \(price), '\(pattern1)', '\(pattern2)', '\(pattern3)', '\(pattern4)', '\(pattern5)', '\(record[3])')", withArgumentsInArray: nil)
             }
             
             
@@ -138,8 +144,6 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
             ffdbLoaded = true
         }
         
-
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -151,7 +155,6 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
         navigationController?.navigationBarHidden = false
         super.viewWillAppear(animated)
     }
-    
     
     override func viewWillDisappear(animated: Bool) {
         if (navigationController?.topViewController != self) {
