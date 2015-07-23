@@ -104,25 +104,11 @@
                         <rect key="frame" x="0.0" y="64" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pf1-0y-sbG">
-                                <rect key="frame" x="0.0" y="235" width="600" height="60"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="ury-tS-8It"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="40"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="widthClass=regular" ambiguous="YES" misplaced="YES">
-                                    <rect key="frame" x="100" y="219" width="600" height="60"/>
-                                </variation>
-                                <variation key="heightClass=regular-widthClass=regular" ambiguous="YES" misplaced="YES">
-                                    <rect key="frame" x="-112" y="219" width="1024" height="60"/>
-                                </variation>
-                            </label>
                             <button opaque="NO" contentMode="redraw" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z39-rz-1uV">
                                 <rect key="frame" x="0.0" y="529" width="600" height="71"/>
                                 <color key="backgroundColor" red="0.074509803921568626" green="0.5725490196078431" blue="0.86274509803921573" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="71" id="oAg-Bc-xxR"/>
+                                    <constraint firstAttribute="height" constant="71" id="0wO-EO-6mw"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="40"/>
                                 <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
@@ -143,13 +129,13 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="flash-forward-three-boxes.png" translatesAutoresizingMaskIntoConstraints="NO" id="v2D-Mr-0u7">
                                 <rect key="frame" x="0.0" y="28" width="600" height="116"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="116" id="V1C-Z9-c6O"/>
+                                    <constraint firstAttribute="height" constant="116" id="Q37-rK-3zL"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RyF-4m-Ac3">
                                 <rect key="frame" x="0.0" y="152" width="600" height="75"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="75" id="knU-8I-HNa"/>
+                                    <constraint firstAttribute="height" constant="75" id="XCD-Nk-Jyi"/>
                                     <constraint firstAttribute="height" constant="75" id="qPD-MF-efE"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="38"/>
@@ -177,9 +163,9 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xQq-hb-VP3">
-                                <rect key="frame" x="0.0" y="303" width="600" height="75"/>
+                                <rect key="frame" x="0.0" y="235" width="600" height="75"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="75" id="vrg-fU-ZFo"/>
+                                    <constraint firstAttribute="height" constant="75" id="E4x-yj-B5s"/>
                                     <constraint firstAttribute="height" constant="75" id="xRc-lT-vfA"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="38"/>
@@ -209,21 +195,18 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="xQq-hb-VP3" firstAttribute="leading" secondItem="Pf1-0y-sbG" secondAttribute="leading" id="2EW-Gk-qOC"/>
-                            <constraint firstAttribute="trailing" secondItem="Z39-rz-1uV" secondAttribute="trailing" id="2IQ-cv-WjX"/>
-                            <constraint firstItem="RyF-4m-Ac3" firstAttribute="trailing" secondItem="v2D-Mr-0u7" secondAttribute="trailing" id="59K-Lq-da3"/>
-                            <constraint firstItem="xQq-hb-VP3" firstAttribute="trailing" secondItem="Pf1-0y-sbG" secondAttribute="trailing" id="7MS-UE-wvb"/>
-                            <constraint firstItem="v2D-Mr-0u7" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" symbolic="YES" id="Esm-Nd-PM5"/>
-                            <constraint firstItem="RyF-4m-Ac3" firstAttribute="leading" secondItem="v2D-Mr-0u7" secondAttribute="leading" id="F63-x3-mUM"/>
-                            <constraint firstItem="Pf1-0y-sbG" firstAttribute="top" secondItem="RyF-4m-Ac3" secondAttribute="bottom" constant="8" symbolic="YES" id="HWk-rV-7AO"/>
-                            <constraint firstItem="RyF-4m-Ac3" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="LwB-dX-lNS"/>
-                            <constraint firstItem="xQq-hb-VP3" firstAttribute="top" secondItem="Pf1-0y-sbG" secondAttribute="bottom" constant="8" symbolic="YES" id="Q69-H1-Ax5"/>
-                            <constraint firstItem="RyF-4m-Ac3" firstAttribute="trailing" secondItem="Pf1-0y-sbG" secondAttribute="trailing" id="RGh-LE-Yox"/>
-                            <constraint firstItem="xQq-hb-VP3" firstAttribute="trailing" secondItem="Z39-rz-1uV" secondAttribute="trailing" id="TPr-nV-KsR"/>
-                            <constraint firstItem="RyF-4m-Ac3" firstAttribute="leading" secondItem="Pf1-0y-sbG" secondAttribute="leading" id="VIF-O1-kgE"/>
-                            <constraint firstItem="RyF-4m-Ac3" firstAttribute="top" secondItem="v2D-Mr-0u7" secondAttribute="bottom" constant="8" symbolic="YES" id="gcc-Lh-Dp4"/>
-                            <constraint firstItem="Z39-rz-1uV" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="pCd-R8-5j9"/>
-                            <constraint firstItem="Z39-rz-1uV" firstAttribute="leading" secondItem="xQq-hb-VP3" secondAttribute="leading" id="tG3-3a-r0r"/>
+                            <constraint firstItem="xQq-hb-VP3" firstAttribute="leading" secondItem="RyF-4m-Ac3" secondAttribute="leading" id="7BQ-nR-XPY"/>
+                            <constraint firstItem="Z39-rz-1uV" firstAttribute="trailing" secondItem="xQq-hb-VP3" secondAttribute="trailing" id="BHH-aW-dY9"/>
+                            <constraint firstItem="xQq-hb-VP3" firstAttribute="trailing" secondItem="RyF-4m-Ac3" secondAttribute="trailing" id="Caz-hv-p3Y"/>
+                            <constraint firstItem="RyF-4m-Ac3" firstAttribute="top" secondItem="v2D-Mr-0u7" secondAttribute="bottom" constant="8" symbolic="YES" id="QKc-jT-xXh"/>
+                            <constraint firstItem="v2D-Mr-0u7" firstAttribute="trailing" secondItem="RyF-4m-Ac3" secondAttribute="trailing" id="SWW-8e-EUe"/>
+                            <constraint firstItem="v2D-Mr-0u7" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" symbolic="YES" id="XXH-MX-Z3N"/>
+                            <constraint firstAttribute="trailing" secondItem="xQq-hb-VP3" secondAttribute="trailing" id="Zxv-Qf-J7Y"/>
+                            <constraint firstItem="xQq-hb-VP3" firstAttribute="leading" secondItem="Z39-rz-1uV" secondAttribute="leading" id="aSU-tb-4fA"/>
+                            <constraint firstItem="xQq-hb-VP3" firstAttribute="top" secondItem="RyF-4m-Ac3" secondAttribute="bottom" constant="8" symbolic="YES" id="d9c-hB-p05"/>
+                            <constraint firstItem="Z39-rz-1uV" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="f5u-zb-Zee"/>
+                            <constraint firstItem="Z39-rz-1uV" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="gKl-rt-1fN"/>
+                            <constraint firstItem="v2D-Mr-0u7" firstAttribute="leading" secondItem="RyF-4m-Ac3" secondAttribute="leading" id="iLt-nA-rpH"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Flash Force" id="c7R-9K-f7h">
@@ -255,8 +238,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="actionButton" destination="Z39-rz-1uV" id="D4e-qj-Zwa"/>
+                        <outlet property="browseButton" destination="RyF-4m-Ac3" id="xRE-0V-EEW"/>
                         <outlet property="outfitButton" destination="xQq-hb-VP3" id="Fdf-Tj-2gg"/>
-                        <outlet property="teamLabel" destination="Pf1-0y-sbG" id="aJG-Ja-PSl"/>
                         <outlet property="testCheerButton" destination="lwr-gf-ptC" id="Egj-Mx-Ln1"/>
                     </connections>
                 </viewController>

@@ -15,8 +15,8 @@ var avgOffset: Double = 9999999
 
 class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
 
-    @IBOutlet weak var teamLabel: UILabel!
     @IBOutlet weak var actionButton: UIButton!
+    @IBOutlet weak var browseButton: UIButton!
     @IBOutlet weak var testCheerButton: UIBarButtonItem!
     @IBOutlet weak var outfitButton: UIButton!
     
@@ -26,7 +26,6 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.navigationItem.hidesBackButton = true;
-        self.teamLabel.text = ""
         self.outfitButton.enabled = false
         self.outfitButton.hidden = true
 
@@ -58,7 +57,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
             //display correct information
             if let rs = database.executeQuery("SELECT * FROM cheers WHERE id=\(String(selectedId))", withArgumentsInArray: nil) {
                 while rs.next() {
-                    self.teamLabel.text = rs.stringForColumn("name")
+                    self.browseButton.setTitle(rs.stringForColumn("name"), forState: UIControlState.Normal)
                     self.team = rs.stringForColumn("name")
                     self.outfitButton.setTitle(rs.stringForColumn("alt1"), forState: UIControlState.Normal)
                     if rs.stringForColumn("alt1").isEmpty {
