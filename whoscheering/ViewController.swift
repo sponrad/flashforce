@@ -40,23 +40,31 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
         }
         
         if (selectedId != 9999999){
-            if let rs = database.executeQuery("SELECT * FROM cheers WHERE id=\(String(selectedId))", withArgumentsInArray: nil) {
-                while rs.next() {
-                    self.teamLabel.text = rs.stringForColumn("name")
-                    self.team = rs.stringForColumn("name")
-                    self.outfitButton.setTitle(rs.stringForColumn("alt1"), forState: UIControlState.Normal)
+            //check if there are alternates
+            if let count = database.intForQuery("SELECT COUNT(name) FROM cheers WHERE name='\(self.team)'") {
+                if (count > 1){
+                    self.outfitButton.enabled = true
+                    self.outfitButton.hidden = false
+                    self.outfitButton.setTitle("Choose Alternate", forState: UIControlState.Normal)
+                }
+                else {
+                    self.outfitButton.enabled = false
+                    self.outfitButton.hidden = true
                 }
             } else {
                 println("select failed: \(database.lastErrorMessage())")
             }
             
-            //check if there are alternates
-            if let count = database.intForQuery("SELECT COUNT(name) FROM cheers WHERE name='\(self.team)'") {
-                    if (count > 1){
-                        self.outfitButton.enabled = true
-                        self.outfitButton.hidden = false
-                        self.outfitButton.setTitle("Choose Alternate", forState: UIControlState.Normal)
+            //display correct information
+            if let rs = database.executeQuery("SELECT * FROM cheers WHERE id=\(String(selectedId))", withArgumentsInArray: nil) {
+                while rs.next() {
+                    self.teamLabel.text = rs.stringForColumn("name")
+                    self.team = rs.stringForColumn("name")
+                    self.outfitButton.setTitle(rs.stringForColumn("alt1"), forState: UIControlState.Normal)
+                    if rs.stringForColumn("alt1").isEmpty {
+                        self.outfitButton.setTitle("Default", forState: UIControlState.Normal)
                     }
+                }
             } else {
                 println("select failed: \(database.lastErrorMessage())")
             }

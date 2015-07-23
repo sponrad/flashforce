@@ -35,9 +35,17 @@ class AlternateViewController: UITableViewController {
             println("select failed: \(database.lastErrorMessage())")
         }
         
+        
+        
         if let rs = database.executeQuery("SELECT alt1, id FROM cheers WHERE name='\(self.name)' ORDER BY alt1", withArgumentsInArray: nil) {
             while rs.next() {
-                self.details.append([rs.stringForColumn("alt1"), rs.intForColumn("id")])
+                var text: String = ""
+                if rs.stringForColumn("alt1").isEmpty{
+                    text = "Default"
+                } else {
+                    text = String(stringInterpolationSegment: rs.stringForColumn("alt1"))
+                }
+                self.details.append([text, rs.intForColumn("id")])
             }
         } else {
             println("select failed: \(database.lastErrorMessage())")
@@ -119,7 +127,7 @@ class AlternateViewController: UITableViewController {
         var selectedCheer = self.drillTable.indexPathForSelectedRow()?.row
         
         if let homeVC = segue.destinationViewController as? ViewController{
-            homeVC.team = String(stringInterpolationSegment: self.details[selectedCheer!][0])
+            homeVC.team = self.name
             selectedId = (self.details[selectedCheer!][1] as? Int32)!
         }
     }
