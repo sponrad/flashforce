@@ -49,7 +49,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qxV-KN-T1K" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-350" y="-458"/>
+            <point key="canvasLocation" x="-542" y="-458"/>
         </scene>
         <!--Browsing Teams-->
         <scene sceneID="zeU-4t-1bh">
@@ -202,6 +202,9 @@
                                 <variation key="heightClass=regular-widthClass=regular" ambiguous="YES" misplaced="YES">
                                     <rect key="frame" x="0.0" y="153" width="800" height="58"/>
                                 </variation>
+                                <connections>
+                                    <segue destination="fhI-vs-ZaT" kind="show" id="CEg-v7-5vp"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -261,6 +264,41 @@
             </objects>
             <point key="canvasLocation" x="-618" y="685"/>
         </scene>
+        <!--Browsing Alternates-->
+        <scene sceneID="0BD-b2-h2c">
+            <objects>
+                <tableViewController id="fhI-vs-ZaT" customClass="AlternateViewController" customModule="Flash_Force" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="z6k-A8-TUm">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="drillCell" id="mCb-fZ-hi6">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mCb-fZ-hi6" id="Hc0-qe-uTO">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="BYZ-38-t0r" kind="show" id="J5r-Dj-GRO"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="fhI-vs-ZaT" id="iGG-KS-hN8"/>
+                            <outlet property="delegate" destination="fhI-vs-ZaT" id="tk5-jj-onP"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Browsing Alternates" id="6ij-yf-QPF">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="ZwZ-vl-auk"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="drillTable" destination="z6k-A8-TUm" id="kM9-bS-hu6"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MKL-i5-1UH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="368" y="488"/>
+        </scene>
         <!--Cheer-->
         <scene sceneID="Hee-9z-8eU">
             <objects>
@@ -306,7 +344,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xXO-1V-d7a" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1030.5" y="724"/>
+            <point key="canvasLocation" x="-618" y="1724"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="sbf-s0-3z2">
@@ -331,6 +369,6 @@
         <image name="flash-forward-three-boxes.png" width="1024" height="1024"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="bH8-89-pL4"/>
+        <segue reference="J5r-Dj-GRO"/>
     </inferredMetricsTieBreakers>
 </document>
