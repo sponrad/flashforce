@@ -24,6 +24,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
     @IBOutlet weak var color3Label: UILabel!
     @IBOutlet weak var color4Label: UILabel!
     @IBOutlet weak var color5Label: UILabel!
+    @IBOutlet weak var tapButton: UIButton!
     
     var team = String()   // set from the secondbrowseviewcontroller
 
@@ -33,6 +34,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
         self.navigationItem.hidesBackButton = true;
         self.outfitButton.enabled = false
         self.outfitButton.hidden = true
+        self.tapButton.setTitle("", forState: UIControlState.Normal)
         
         //self.color1Label.backgroundColor = UIColor.whiteColor()
 

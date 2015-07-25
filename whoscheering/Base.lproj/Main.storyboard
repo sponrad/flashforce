@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="QEB-ik-ZkY">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Browsing-->
@@ -95,7 +95,7 @@
         <!--Home-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" userLabel="Home" customClass="ViewController" customModule="Flash_Force" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomeView" id="BYZ-38-t0r" userLabel="Home" customClass="ViewController" customModule="Flash_Force" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -192,11 +192,19 @@
                                     <segue destination="fhI-vs-ZaT" kind="show" id="CEg-v7-5vp"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uSn-uI-Ptt">
+                                <rect key="frame" x="16" y="0.0" width="568" height="144"/>
+                                <state key="normal" title="tapButton">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="uSn-uI-Ptt" firstAttribute="centerX" secondItem="v2D-Mr-0u7" secondAttribute="centerX" id="1Bd-3y-cYw"/>
                             <constraint firstItem="v2D-Mr-0u7" firstAttribute="trailing" secondItem="RyF-4m-Ac3" secondAttribute="trailing" id="6ZI-KI-gNg"/>
                             <constraint firstItem="RyF-4m-Ac3" firstAttribute="top" secondItem="v2D-Mr-0u7" secondAttribute="bottom" constant="8" symbolic="YES" id="8Yo-cz-Uym"/>
+                            <constraint firstItem="uSn-uI-Ptt" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="BEO-xQ-O7E"/>
                             <constraint firstItem="RyF-4m-Ac3" firstAttribute="leading" secondItem="v2D-Mr-0u7" secondAttribute="leading" id="DKx-YD-2p4"/>
                             <constraint firstItem="RyF-4m-Ac3" firstAttribute="trailing" secondItem="xQq-hb-VP3" secondAttribute="trailing" id="GLd-tW-YvI"/>
                             <constraint firstItem="xQq-hb-VP3" firstAttribute="trailing" secondItem="Z39-rz-1uV" secondAttribute="trailing" id="PAr-vu-nDT"/>
@@ -205,7 +213,9 @@
                             <constraint firstItem="Z39-rz-1uV" firstAttribute="leading" secondItem="xQq-hb-VP3" secondAttribute="leading" id="b6g-M5-dj8"/>
                             <constraint firstItem="RyF-4m-Ac3" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="bBt-g7-6fc"/>
                             <constraint firstItem="Z39-rz-1uV" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="cFQ-D5-FlE"/>
+                            <constraint firstItem="uSn-uI-Ptt" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="eNk-bN-jdn"/>
                             <constraint firstItem="RyF-4m-Ac3" firstAttribute="leading" secondItem="xQq-hb-VP3" secondAttribute="leading" id="gat-Co-fwb"/>
+                            <constraint firstItem="RyF-4m-Ac3" firstAttribute="top" secondItem="uSn-uI-Ptt" secondAttribute="bottom" constant="8" symbolic="YES" id="sD3-7i-tZK"/>
                             <constraint firstItem="v2D-Mr-0u7" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" symbolic="YES" id="vAm-x1-QM4"/>
                         </constraints>
                     </view>
@@ -240,6 +250,7 @@
                         <outlet property="actionButton" destination="Z39-rz-1uV" id="D4e-qj-Zwa"/>
                         <outlet property="browseButton" destination="RyF-4m-Ac3" id="xRE-0V-EEW"/>
                         <outlet property="outfitButton" destination="xQq-hb-VP3" id="Fdf-Tj-2gg"/>
+                        <outlet property="tapButton" destination="uSn-uI-Ptt" id="I7I-ee-IIP"/>
                         <outlet property="testCheerButton" destination="lwr-gf-ptC" id="Egj-Mx-Ln1"/>
                     </connections>
                 </viewController>
