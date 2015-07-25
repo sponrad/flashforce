@@ -201,6 +201,52 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
         //OR Start cheering
     }
     
+    @IBAction func tapButtonTapped(sender: AnyObject) {
+        println("resetting the offsets database")
+        // reset the offsets database.
+        ///////////////////////////   connect to the database
+        let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
+        let path = documentsFolder.stringByAppendingPathComponent("ff.db")
+        let database = FMDatabase(path: path)
+        if !database.open() {
+            println("Unable to open database")
+            return
+        }
+        database.executeUpdate("DROP TABLE offsets", withArgumentsInArray: nil)
+
+        
+        if !database.executeUpdate("create table offsets(id integer primary key autoincrement, offset real)", withArgumentsInArray: nil) {
+            println("create table failed: \(database.lastErrorMessage()), probably already created")
+        }
+        
+        //load offsets
+        var averageOffset:[Double] = []
+        averageOffset.append(getOffset())
+        averageOffset.append(getOffset())
+        averageOffset.append(getOffset())
+        averageOffset.append(getOffset())
+        averageOffset.append(getOffset())
+        averageOffset.append(getOffset())
+        averageOffset.append(getOffset())
+        averageOffset.append(getOffset())
+        let average = averageOffset.reduce(0) { $0 + $1 } / Double(averageOffset.count)
+        println( average )
+        database.executeUpdate("insert into offsets values (NULL, '\(String(stringInterpolationSegment: average))')", withArgumentsInArray: nil)
+        
+        //average all of the stored offsets
+        var offsets:[Double] = []
+        if let rs = database.executeQuery("SELECT * FROM offsets LIMIT 50", withArgumentsInArray: nil) {
+            while rs.next() {
+                var offset = rs.doubleForColumn("offset")
+                offsets.append(offset)
+            }
+            avgOffset = offsets.reduce(0) { $0 + $1 } / Double(offsets.count)
+            println(avgOffset)
+        }
+
+    }
+    
+    
     func getOffset() -> Double {
         var offset : Double = 0
         if Reachability.isConnectedToNetwork() == true {
