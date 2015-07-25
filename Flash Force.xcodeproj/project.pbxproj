@@ -21,6 +21,7 @@
 		79914B871B60C1D200CCE6C2 /* FMDatabaseAdditionsVariadic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79914B851B60C1D200CCE6C2 /* FMDatabaseAdditionsVariadic.swift */; };
 		79914B881B60C1D200CCE6C2 /* FMDatabaseVariadic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79914B861B60C1D200CCE6C2 /* FMDatabaseVariadic.swift */; };
 		79914B8A1B60C3FE00CCE6C2 /* AlternateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79914B891B60C3FE00CCE6C2 /* AlternateViewController.swift */; };
+		79914B8C1B64197F00CCE6C2 /* FetchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79914B8B1B64197F00CCE6C2 /* FetchViewController.swift */; };
 		7999354E1B4B757800575085 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 799935441B4B757800575085 /* FMDatabase.m */; };
 		7999354F1B4B757800575085 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 799935461B4B757800575085 /* FMDatabaseAdditions.m */; };
 		799935501B4B757800575085 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 799935481B4B757800575085 /* FMDatabasePool.m */; };
@@ -62,6 +63,7 @@
 		79914B851B60C1D200CCE6C2 /* FMDatabaseAdditionsVariadic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FMDatabaseAdditionsVariadic.swift; sourceTree = "<group>"; };
 		79914B861B60C1D200CCE6C2 /* FMDatabaseVariadic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FMDatabaseVariadic.swift; sourceTree = "<group>"; };
 		79914B891B60C3FE00CCE6C2 /* AlternateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlternateViewController.swift; sourceTree = "<group>"; };
+		79914B8B1B64197F00CCE6C2 /* FetchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchViewController.swift; sourceTree = "<group>"; };
 		799935421B4B757700575085 /* whoscheering-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "whoscheering-Bridging-Header.h"; sourceTree = "<group>"; };
 		799935431B4B757800575085 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
 		799935441B4B757800575085 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				79700A9B1B0F03A50060E81D /* AppDelegate.swift */,
+				79914B8B1B64197F00CCE6C2 /* FetchViewController.swift */,
 				79700A9D1B0F03A50060E81D /* ViewController.swift */,
 				7972FB411B0F0EB30046B1B7 /* CheerViewController.swift */,
 				796C356D1B1427E500ABE2FE /* BrowseViewController.swift */,
@@ -236,6 +239,9 @@
 						CreatedOnToolsVersion = 6.3.2;
 						DevelopmentTeam = 436GFV8Y5W;
 						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
 							com.apple.InAppPurchase = {
 								enabled = 1;
 							};
@@ -297,6 +303,7 @@
 				799935501B4B757800575085 /* FMDatabasePool.m in Sources */,
 				799935521B4B757800575085 /* FMResultSet.m in Sources */,
 				796C35701B142CB200ABE2FE /* SecondBrowseViewController.swift in Sources */,
+				79914B8C1B64197F00CCE6C2 /* FetchViewController.swift in Sources */,
 				796C35721B14328000ABE2FE /* StoreData.swift in Sources */,
 				79914B8A1B60C3FE00CCE6C2 /* AlternateViewController.swift in Sources */,
 				799935511B4B757800575085 /* FMDatabaseQueue.m in Sources */,
