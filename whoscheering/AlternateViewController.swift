@@ -41,7 +41,7 @@ class AlternateViewController: UITableViewController {
             while rs.next() {
                 var text: String = ""
                 if rs.stringForColumn("alt1").isEmpty{
-                    text = self.name+" Default"
+                    text = self.name+" Home"
                 } else {
                     text = String(stringInterpolationSegment: rs.stringForColumn("alt1"))
                 }

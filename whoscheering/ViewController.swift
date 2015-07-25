@@ -70,7 +70,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
                     self.team = rs.stringForColumn("name")
                     self.outfitButton.setTitle(rs.stringForColumn("alt1"), forState: UIControlState.Normal)
                     if rs.stringForColumn("alt1").isEmpty {
-                        self.outfitButton.setTitle("Default", forState: UIControlState.Normal)
+                        self.outfitButton.setTitle("Home", forState: UIControlState.Normal)
                     }
                 }
             } else {
