@@ -46,17 +46,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Support for background fetch
     func application(application: UIApplication, performFetchWithCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
         
-        if let tabBarController = window?.rootViewController as? UITabBarController,
-            viewControllers = tabBarController.viewControllers as? [UIViewController] {
-                for viewController in viewControllers {
-                    if let fetchViewController = viewController as? FetchViewController {
-                        fetchViewController.fetch {
-                            fetchViewController.updateUI()
-                            completionHandler(.NewData)
-                        }
-                    }
-                }
-        }
+        let fetchView = FetchViewController()
+        fetchView.fetch{ completionHandler(.NewData) }
+        
     }
 
 
