@@ -72,13 +72,37 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
                     if rs.stringForColumn("alt1").isEmpty {
                         self.outfitButton.setTitle("Home", forState: UIControlState.Normal)
                     }
+                    //TODO draw color boxes
+                    var colors = [String]()
+                    if (rs.stringForColumn("pattern1") != ""){
+                        colors.append(rs.stringForColumn("pattern1"))
+                    }
+                    if (rs.stringForColumn("pattern2") != ""){
+                        colors.append(rs.stringForColumn("pattern2"))
+                    }
+                    if (rs.stringForColumn("pattern3") != ""){
+                        colors.append(rs.stringForColumn("pattern3"))
+                    }
+                    if (rs.stringForColumn("pattern4") != ""){
+                        colors.append(rs.stringForColumn("pattern4"))
+                    }
+                    if (rs.stringForColumn("pattern5") != ""){
+                        colors.append(rs.stringForColumn("pattern5"))
+                    }
+                    
+                    for (index, color) in enumerate(colors) {
+                        var imageSize = CGSize(width: 20, height: 20)
+                        var imageView = UIImageView(frame: CGRect(origin: CGPoint(x: (100+(index * 40)), y: 250), size: imageSize))
+                        self.view.addSubview(imageView)
+                        var image = drawCustomImage(imageSize, color: colorWithHexString(color))
+                        imageView.image = image
+                    }
+
                 }
             } else {
                 println("select failed: \(database.lastErrorMessage())")
             }
         }
-        
-        
         
         if (SKPaymentQueue.canMakePayments()){
             println("can make payments")
@@ -86,7 +110,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
         else {
             println("no payment support")
         }
-        
+
         
         ///////////////////////////   flash button logic
         if (self.team == ""){
@@ -173,12 +197,6 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
             ffdbLoaded = true
         }
         
-        
-        let imageSize = CGSize(width: 50, height: 50)
-        let imageView = UIImageView(frame: CGRect(origin: CGPoint(x: 100, y: 100), size: imageSize))
-        self.view.addSubview(imageView)
-        let image = drawCustomImage(imageSize)
-        imageView.image = image
     }
 
     override func didReceiveMemoryWarning() {
@@ -276,7 +294,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
         return boardsDictionary
     }
     
-    func drawCustomImage(size: CGSize) -> UIImage {
+    func drawCustomImage(size: CGSize, color: UIColor) -> UIImage {
         // Setup our context
         let bounds = CGRect(origin: CGPoint.zeroPoint, size: size)
         let opaque = false
@@ -285,10 +303,10 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
         let context = UIGraphicsGetCurrentContext()
         
         // Setup complete, do drawing here
-        CGContextSetStrokeColorWithColor(context, UIColor.redColor().CGColor)
+        CGContextSetStrokeColorWithColor(context, color.CGColor)
         CGContextSetLineWidth(context, 2.0)
         
-        CGContextSetRGBFillColor(context, 1.0, 0.0, 0.0, 1.0);
+        CGContextSetFillColorWithColor(context, color.CGColor);
         CGContextSetRGBStrokeColor(context, 0.0, 1.0, 0.0, 1.0);
         CGContextFillRect(context, bounds);
         
@@ -296,6 +314,30 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
         UIGraphicsEndImageContext()
         return image
         
+    }
+    
+    func colorWithHexString (hex:String) -> UIColor {
+        var cString:String = hex.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()).uppercaseString
+        
+        if (cString.hasPrefix("#")) {
+            cString = (cString as NSString).substringFromIndex(1)
+        }
+        
+        if (count(cString) != 6) {
+            return UIColor.grayColor()
+        }
+        
+        var rString = (cString as NSString).substringToIndex(2)
+        var gString = ((cString as NSString).substringFromIndex(2) as NSString).substringToIndex(2)
+        var bString = ((cString as NSString).substringFromIndex(4) as NSString).substringToIndex(2)
+        
+        var r:CUnsignedInt = 0, g:CUnsignedInt = 0, b:CUnsignedInt = 0;
+        NSScanner(string: rString).scanHexInt(&r)
+        NSScanner(string: gString).scanHexInt(&g)
+        NSScanner(string: bString).scanHexInt(&b)
+        
+        
+        return UIColor(red: CGFloat(r) / 255.0, green: CGFloat(g) / 255.0, blue: CGFloat(b) / 255.0, alpha: CGFloat(1))
     }
     
 }
