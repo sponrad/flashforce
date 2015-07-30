@@ -173,6 +173,12 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
             ffdbLoaded = true
         }
         
+        
+        let imageSize = CGSize(width: 50, height: 50)
+        let imageView = UIImageView(frame: CGRect(origin: CGPoint(x: 100, y: 100), size: imageSize))
+        self.view.addSubview(imageView)
+        let image = drawCustomImage(imageSize)
+        imageView.image = image
     }
 
     override func didReceiveMemoryWarning() {
@@ -246,7 +252,6 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
 
     }
     
-    
     func getOffset() -> Double {
         var offset : Double = 0
         if Reachability.isConnectedToNetwork() == true {
@@ -269,6 +274,28 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
         var boardsDictionary: NSDictionary = NSJSONSerialization.JSONObjectWithData(inputData, options: NSJSONReadingOptions.MutableContainers, error: &error) as! NSDictionary
         
         return boardsDictionary
+    }
+    
+    func drawCustomImage(size: CGSize) -> UIImage {
+        // Setup our context
+        let bounds = CGRect(origin: CGPoint.zeroPoint, size: size)
+        let opaque = false
+        let scale: CGFloat = 0
+        UIGraphicsBeginImageContextWithOptions(size, opaque, scale)
+        let context = UIGraphicsGetCurrentContext()
+        
+        // Setup complete, do drawing here
+        CGContextSetStrokeColorWithColor(context, UIColor.redColor().CGColor)
+        CGContextSetLineWidth(context, 2.0)
+        
+        CGContextSetRGBFillColor(context, 1.0, 0.0, 0.0, 1.0);
+        CGContextSetRGBStrokeColor(context, 0.0, 1.0, 0.0, 1.0);
+        CGContextFillRect(context, bounds);
+        
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
+        
     }
     
 }
