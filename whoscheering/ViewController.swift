@@ -173,15 +173,17 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
                 database.executeUpdate("insert into cheers values (NULL, '\(record[0])', '\(record[2])', '\(record[1])', '\(pattern)', \(timing), \(price), '\(pattern1)', '\(pattern2)', '\(pattern3)', '\(pattern4)', '\(pattern5)', '\(record[3])')", withArgumentsInArray: nil)
             }
             
-            
-            //load offsets
-            var averageOffset:[Double] = []
-            averageOffset.append(getOffset())
-            averageOffset.append(getOffset())
-            averageOffset.append(getOffset())
-            let average = averageOffset.reduce(0) { $0 + $1 } / Double(averageOffset.count)
-            println( average )
-            database.executeUpdate("insert into offsets values (NULL, '\(String(stringInterpolationSegment: average))')", withArgumentsInArray: nil)
+            let reachability = Reachability.reachabilityForInternetConnection()
+            if reachability.isReachable() {
+                //load offsets
+                var averageOffset:[Double] = []
+                averageOffset.append(getOffset())
+                averageOffset.append(getOffset())
+                averageOffset.append(getOffset())
+                let average = averageOffset.reduce(0) { $0 + $1 } / Double(averageOffset.count)
+                println( average )
+                database.executeUpdate("insert into offsets values (NULL, '\(String(stringInterpolationSegment: average))')", withArgumentsInArray: nil)
+            }
             
             //average all of the stored offsets
             var offsets:[Double] = []
@@ -229,58 +231,57 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
         println("resetting the offsets database")
         // reset the offsets database.
         ///////////////////////////   connect to the database
-        let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
-        let path = documentsFolder.stringByAppendingPathComponent("ff.db")
-        let database = FMDatabase(path: path)
-        if !database.open() {
-            println("Unable to open database")
-            return
-        }
-        database.executeUpdate("DROP TABLE offsets", withArgumentsInArray: nil)
-
-        
-        if !database.executeUpdate("create table offsets(id integer primary key autoincrement, offset real)", withArgumentsInArray: nil) {
-            println("create table failed: \(database.lastErrorMessage()), probably already created")
-        }
-        
-        //load offsets
-        var averageOffset:[Double] = []
-        averageOffset.append(getOffset())
-        averageOffset.append(getOffset())
-        averageOffset.append(getOffset())
-        averageOffset.append(getOffset())
-        averageOffset.append(getOffset())
-        averageOffset.append(getOffset())
-        averageOffset.append(getOffset())
-        averageOffset.append(getOffset())
-        let average = averageOffset.reduce(0) { $0 + $1 } / Double(averageOffset.count)
-        println( average )
-        database.executeUpdate("insert into offsets values (NULL, '\(String(stringInterpolationSegment: average))')", withArgumentsInArray: nil)
-        
-        //average all of the stored offsets
-        var offsets:[Double] = []
-        if let rs = database.executeQuery("SELECT * FROM offsets LIMIT 50", withArgumentsInArray: nil) {
-            while rs.next() {
-                var offset = rs.doubleForColumn("offset")
-                offsets.append(offset)
+        let reachability = Reachability.reachabilityForInternetConnection()
+        if reachability.isReachable() {
+            
+            let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
+            let path = documentsFolder.stringByAppendingPathComponent("ff.db")
+            let database = FMDatabase(path: path)
+            if !database.open() {
+                println("Unable to open database")
+                return
             }
-            avgOffset = offsets.reduce(0) { $0 + $1 } / Double(offsets.count)
-            println(avgOffset)
+            database.executeUpdate("DROP TABLE offsets", withArgumentsInArray: nil)
+            
+            
+            if !database.executeUpdate("create table offsets(id integer primary key autoincrement, offset real)", withArgumentsInArray: nil) {
+                println("create table failed: \(database.lastErrorMessage()), probably already created")
+            }
+            
+            //load offsets
+            var averageOffset:[Double] = []
+            averageOffset.append(getOffset())
+            averageOffset.append(getOffset())
+            averageOffset.append(getOffset())
+            let average = averageOffset.reduce(0) { $0 + $1 } / Double(averageOffset.count)
+            println( average )
+            database.executeUpdate("insert into offsets values (NULL, '\(String(stringInterpolationSegment: average))')", withArgumentsInArray: nil)
+            
+            //average all of the stored offsets
+            var offsets:[Double] = []
+            if let rs = database.executeQuery("SELECT * FROM offsets LIMIT 50", withArgumentsInArray: nil) {
+                while rs.next() {
+                    var offset = rs.doubleForColumn("offset")
+                    offsets.append(offset)
+                }
+                avgOffset = offsets.reduce(0) { $0 + $1 } / Double(offsets.count)
+                println(avgOffset)
+            }
         }
-
+        else {
+            println("not reachable")
+        }
+        
     }
     
     func getOffset() -> Double {
         var offset : Double = 0
-        let reachability = Reachability.reachabilityForInternetConnection()
-        if reachability.isReachable() {
-            let ct = NSDate().timeIntervalSince1970
-            let serverEpochStr: String = parseJSON( getJSON("http://alignthebeat.appspot.com") )["epoch"] as! String
-            let serverEpoch = (serverEpochStr as NSString).doubleValue
-            let nct = NSDate().timeIntervalSince1970
-            let ping = nct - ct
-            offset = serverEpoch - nct + (ping / 2.0)
-        }
+        let ct = NSDate().timeIntervalSince1970
+        let serverEpochStr: String = parseJSON( getJSON("http://alignthebeat.appspot.com") )["epoch"] as! String
+        let serverEpoch = (serverEpochStr as NSString).doubleValue
+        let nct = NSDate().timeIntervalSince1970
+        let ping = nct - ct
+        offset = serverEpoch - nct + ping
         return offset
     }
     

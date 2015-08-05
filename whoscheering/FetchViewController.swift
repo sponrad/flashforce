@@ -27,22 +27,26 @@ class FetchViewController: UIViewController {
         
         //load offsets
         var averageOffset:[Double] = []
-        averageOffset.append(getOffset())
-        averageOffset.append(getOffset())
-        averageOffset.append(getOffset())
-        let average = averageOffset.reduce(0) { $0 + $1 } / Double(averageOffset.count)
-        database.executeUpdate("insert into offsets values (NULL, '\(String(stringInterpolationSegment: average))')", withArgumentsInArray: nil)
-        
-        
-        //average all of the stored offsets
-        var offsets:[Double] = []
-        if let rs = database.executeQuery("SELECT * FROM offsets LIMIT 50", withArgumentsInArray: nil) {
-            while rs.next() {
-                var offset = rs.doubleForColumn("offset")
-                offsets.append(offset)
+        let reachability = Reachability.reachabilityForInternetConnection()
+        if reachability.isReachable() {
+            
+            averageOffset.append(getOffset())
+            averageOffset.append(getOffset())
+            averageOffset.append(getOffset())
+            let average = averageOffset.reduce(0) { $0 + $1 } / Double(averageOffset.count)
+            database.executeUpdate("insert into offsets values (NULL, '\(String(stringInterpolationSegment: average))')", withArgumentsInArray: nil)
+            
+            
+            //average all of the stored offsets
+            var offsets:[Double] = []
+            if let rs = database.executeQuery("SELECT * FROM offsets LIMIT 50", withArgumentsInArray: nil) {
+                while rs.next() {
+                    var offset = rs.doubleForColumn("offset")
+                    offsets.append(offset)
+                }
+                avgOffset = offsets.reduce(0) { $0 + $1 } / Double(offsets.count)
+                println(avgOffset)
             }
-            avgOffset = offsets.reduce(0) { $0 + $1 } / Double(offsets.count)
-            println(avgOffset)
         }
         
         completion()
@@ -50,15 +54,12 @@ class FetchViewController: UIViewController {
     
     func getOffset() -> Double {
         var offset : Double = 0
-        let reachability = Reachability.reachabilityForInternetConnection()
-        if reachability.isReachable() {
-            let ct = NSDate().timeIntervalSince1970
-            let serverEpochStr: String = parseJSON( getJSON("http://alignthebeat.appspot.com") )["epoch"] as! String
-            let serverEpoch = (serverEpochStr as NSString).doubleValue
-            let nct = NSDate().timeIntervalSince1970
-            let ping = nct - ct
-            offset = serverEpoch - nct + (ping / 2.0)
-        }
+        let ct = NSDate().timeIntervalSince1970
+        let serverEpochStr: String = parseJSON( getJSON("http://alignthebeat.appspot.com") )["epoch"] as! String
+        let serverEpoch = (serverEpochStr as NSString).doubleValue
+        let nct = NSDate().timeIntervalSince1970
+        let ping = nct - ct
+        offset = serverEpoch - nct + ping
         return offset
     }
     
