@@ -50,7 +50,8 @@ class FetchViewController: UIViewController {
     
     func getOffset() -> Double {
         var offset : Double = 0
-        if Reachability.isConnectedToNetwork() == true {
+        let reachability = Reachability.reachabilityForInternetConnection()
+        if reachability.isReachable() {
             let ct = NSDate().timeIntervalSince1970
             let serverEpochStr: String = parseJSON( getJSON("http://alignthebeat.appspot.com") )["epoch"] as! String
             let serverEpoch = (serverEpochStr as NSString).doubleValue

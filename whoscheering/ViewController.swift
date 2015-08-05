@@ -48,7 +48,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
         }
         
         if (selectedId != 9999999){
-            //check if there are alternates
+            //check if there are alternates for the selected team (depends of flash name being somewhat unique)
             if let count = database.intForQuery("SELECT COUNT(name) FROM cheers WHERE name='\(self.team)'") {
                 if (count > 1){
                     self.outfitButton.enabled = true
@@ -272,7 +272,8 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
     
     func getOffset() -> Double {
         var offset : Double = 0
-        if Reachability.isConnectedToNetwork() == true {
+        let reachability = Reachability.reachabilityForInternetConnection()
+        if reachability.isReachable() {
             let ct = NSDate().timeIntervalSince1970
             let serverEpochStr: String = parseJSON( getJSON("http://alignthebeat.appspot.com") )["epoch"] as! String
             let serverEpoch = (serverEpochStr as NSString).doubleValue
