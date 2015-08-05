@@ -281,6 +281,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
         let serverEpoch = (serverEpochStr as NSString).doubleValue
         let nct = NSDate().timeIntervalSince1970
         let ping = nct - ct
+        println("ping \(ping)")
         offset = serverEpoch - nct + ping
         return offset
     }
