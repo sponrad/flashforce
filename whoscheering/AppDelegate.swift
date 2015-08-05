@@ -16,8 +16,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        //UIApplication.sharedApplication().setMinimumBackgroundFetchInterval(43200)
         UIApplication.sharedApplication().setMinimumBackgroundFetchInterval(
-            43200)
+            UIApplicationBackgroundFetchIntervalMinimum)
         return true
     }
 
