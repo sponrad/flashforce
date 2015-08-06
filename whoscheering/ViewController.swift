@@ -186,6 +186,8 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
                 println( average )
                 database.executeUpdate("insert into offsets values (NULL, '\(String(stringInterpolationSegment: average))')", withArgumentsInArray: nil)
             }
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "reachabilityChanged:", name: ReachabilityChangedNotification, object: reachability)
+            reachability.startNotifier()
             
             //average all of the stored offsets
             var offsets:[Double] = []
@@ -275,6 +277,11 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
             println("not reachable")
         }
         
+    }
+    
+    func reachabilityChanged(notification: NSNotification){
+        println("reachability changed")
+        println(notification.description)
     }
     
     func getOffset() -> Double {
