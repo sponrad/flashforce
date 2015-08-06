@@ -30,6 +30,7 @@ class FetchViewController: UIViewController {
         let reachability = Reachability.reachabilityForInternetConnection()
         if reachability.isReachable() {
             
+            getOffset()
             averageOffset.append(getOffset())
             averageOffset.append(getOffset())
             averageOffset.append(getOffset())

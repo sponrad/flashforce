@@ -250,6 +250,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
             
             //load offsets
             var averageOffset:[Double] = []
+            getOffset()
             averageOffset.append(getOffset())
             averageOffset.append(getOffset())
             averageOffset.append(getOffset())
