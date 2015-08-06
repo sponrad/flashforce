@@ -349,7 +349,7 @@
         <!--Navigation Controller-->
         <scene sceneID="sbf-s0-3z2">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="QEB-ik-ZkY" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="storynavid" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="QEB-ik-ZkY" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="Dpn-RF-Gbv">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -369,6 +369,6 @@
         <image name="flash-forward-three-boxes.png" width="1024" height="1024"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="J5r-Dj-GRO"/>
+        <segue reference="f2C-1Z-ZTV"/>
     </inferredMetricsTieBreakers>
 </document>
