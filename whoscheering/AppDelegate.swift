@@ -38,6 +38,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        println("becoming active")
+        if cheering {
+            println("awakening from cheer") //resync the cheer
+            
+            // "Main" is name of .storybord file "
+            let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            // "MiniGameView" is the ID given to the ViewController in the interfacebuilder
+            // MiniGameViewController is the CLASS name of the ViewController.swift file acosiated to the ViewController
+            var setViewController = mainStoryboard.instantiateViewControllerWithIdentifier("cheer") as! UIViewController
+            var rootViewController = self.window!.rootViewController
+            rootViewController?.presentViewController(setViewController, animated: false, completion: nil)
+        }
     }
 
     func applicationWillTerminate(application: UIApplication) {

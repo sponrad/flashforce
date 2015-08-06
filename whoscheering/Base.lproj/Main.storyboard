@@ -302,7 +302,7 @@
         <!--Cheer-->
         <scene sceneID="Hee-9z-8eU">
             <objects>
-                <viewController storyboardIdentifier="cheer" id="YJg-Mg-Wnw" userLabel="Cheer" customClass="CheerViewController" customModule="Flash_Force" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="cheer" useStoryboardIdentifierAsRestorationIdentifier="YES" id="YJg-Mg-Wnw" userLabel="Cheer" customClass="CheerViewController" customModule="Flash_Force" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Z6X-de-Ovi"/>
                         <viewControllerLayoutGuide type="bottom" id="Fxy-co-wRb"/>

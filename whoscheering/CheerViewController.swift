@@ -27,8 +27,11 @@ class CheerViewController: UIViewController {
         let vc : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("ViewController") as! UIViewController
         self.presentViewController(vc, animated: true, completion: nil)
     }
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        cheering = true
         
         // // // GET INFO FROM DATABASE // // //
         let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String

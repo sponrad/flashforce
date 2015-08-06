@@ -12,6 +12,7 @@ import StoreKit
 var ffdbLoaded = false
 var selectedId: Int32 = 9999999
 var avgOffset: Double = 9999999
+var cheering = false
 
 class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
 
@@ -30,6 +31,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        cheering = false
         // Do any additional setup after loading the view, typically from a nib.
         self.navigationItem.hidesBackButton = true;
         self.outfitButton.enabled = false
