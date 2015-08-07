@@ -52,10 +52,10 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
         //draw design gray rectangles
         let screenSize: CGRect = UIScreen.mainScreen().bounds
         //browse button underline
-        let offset : CGFloat = 40   //offset from sides of screen
+        let offset : CGFloat = 30   //offset from sides of screen
         let width = screenSize.width - (2 * offset)
         var boxSize = CGSize(width: width, height: 2)
-        var boxView = UIImageView(frame: CGRect(origin: CGPoint(x: offset, y: screenSize.height - 175), size: boxSize))
+        var boxView = UIImageView(frame: CGRect(origin: CGPoint(x: offset, y: screenSize.height - 240), size: boxSize))
         self.view.addSubview(boxView)
         var image = drawRect(boxSize, color: colorWithHexString("666666"))
         boxView.image = image
@@ -63,11 +63,10 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
         if (selectedId != 9999999){
             //draw the rect over the flash button        
             boxSize = CGSize(width: screenSize.width, height: 10)
-            boxView = UIImageView(frame: CGRect(origin: CGPoint(x: 0, y: screenSize.height - 80), size: boxSize))
+            boxView = UIImageView(frame: CGRect(origin: CGPoint(x: 0, y: screenSize.height - 82), size: boxSize))
             self.view.addSubview(boxView)
             var imagef = drawRect(boxSize, color: colorWithHexString("EEEEEE"))
             boxView.image = imagef
-            
             
             //check if there are alternates for the selected team (depends of flash name being somewhat unique)
             if let count = database.intForQuery("SELECT COUNT(name) FROM cheers WHERE name='\(self.team)'") {
@@ -78,7 +77,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
                     
                     //draw alternate outfit button underline
                     boxSize = CGSize(width: width, height: 2)
-                    boxView = UIImageView(frame: CGRect(origin: CGPoint(x: offset, y: screenSize.height - 105), size: boxSize))
+                    boxView = UIImageView(frame: CGRect(origin: CGPoint(x: offset, y: screenSize.height - 160), size: boxSize))
                     self.view.addSubview(boxView)
                     image = drawRect(boxSize, color: colorWithHexString("666666"))
                     boxView.image = image
@@ -100,7 +99,8 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
                     if rs.stringForColumn("alt1").isEmpty {
                         self.outfitButton.setTitle("Home", forState: UIControlState.Normal)
                     }
-                    //TODO draw color boxes
+                    
+                    ///////////draw color boxes
                     var colors = [String]()
                     if (rs.stringForColumn("pattern1") != ""){
                         colors.append(rs.stringForColumn("pattern1"))
@@ -117,10 +117,10 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
                     if (rs.stringForColumn("pattern5") != ""){
                         colors.append(rs.stringForColumn("pattern5"))
                     }
-                    
+                    let startingX = (Double(screenSize.width) / 2.0) - (20.0*((2.0*Double(colors.count))-1.0)/2.0)   //TODO clean this
                     for (index, color) in enumerate(colors) {
                         var imageSize = CGSize(width: 20, height: 20)
-                        var imageView = UIImageView(frame: CGRect(origin: CGPoint(x: (100+(index * 40)), y: 250), size: imageSize))
+                        var imageView = UIImageView(frame: CGRect(origin: CGPoint(x: CGFloat(startingX+Double(index * 40)), y: screenSize.height - 130), size: imageSize))
                         self.view.addSubview(imageView)
                         var image = drawRect(imageSize, color: colorWithHexString(color))
                         imageView.image = image
