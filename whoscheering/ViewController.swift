@@ -49,6 +49,18 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
             return
         }
         
+        //draw design gray rectangles
+        
+        //browse button underline
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        let offset : CGFloat = 40   //offset from sides of screen
+        let width = screenSize.width - (2 * offset)
+        var boxSize = CGSize(width: width, height: 2)
+        var boxView = UIImageView(frame: CGRect(origin: CGPoint(x: offset, y: screenSize.height - 170), size: boxSize))
+        self.view.addSubview(boxView)
+        var image = drawRect(boxSize, color: colorWithHexString("CCC"))
+        boxView.image = image
+        
         if (selectedId != 9999999){
             //check if there are alternates for the selected team (depends of flash name being somewhat unique)
             if let count = database.intForQuery("SELECT COUNT(name) FROM cheers WHERE name='\(self.team)'") {
@@ -56,6 +68,12 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
                     self.outfitButton.enabled = true
                     self.outfitButton.hidden = false
                     self.outfitButton.setTitle("Choose Alternate", forState: UIControlState.Normal)
+                    
+                    //draw alternate outfit button underline
+                    boxView = UIImageView(frame: CGRect(origin: CGPoint(x: offset, y: screenSize.height - 105), size: boxSize))
+                    self.view.addSubview(boxView)
+                    image = drawRect(boxSize, color: colorWithHexString("CCC"))
+                    boxView.image = image
                 }
                 else {
                     self.outfitButton.enabled = false
@@ -96,7 +114,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
                         var imageSize = CGSize(width: 20, height: 20)
                         var imageView = UIImageView(frame: CGRect(origin: CGPoint(x: (100+(index * 40)), y: 250), size: imageSize))
                         self.view.addSubview(imageView)
-                        var image = drawFlashSquare(imageSize, color: colorWithHexString(color))
+                        var image = drawRect(imageSize, color: colorWithHexString(color))
                         imageView.image = image
                     }
 
@@ -307,7 +325,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
         return boardsDictionary
     }
     
-    func drawFlashSquare(size: CGSize, color: UIColor) -> UIImage {
+    func drawRect(size: CGSize, color: UIColor) -> UIImage {
         // Setup our context
         let bounds = CGRect(origin: CGPoint.zeroPoint, size: size)
         let opaque = false
