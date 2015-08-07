@@ -205,6 +205,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
             if reachability.isReachable() {
                 //load offsets
                 var averageOffset:[Double] = []
+                getOffset()
                 averageOffset.append(getOffset())
                 averageOffset.append(getOffset())
                 averageOffset.append(getOffset())
