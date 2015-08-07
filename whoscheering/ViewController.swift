@@ -96,7 +96,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
                         var imageSize = CGSize(width: 20, height: 20)
                         var imageView = UIImageView(frame: CGRect(origin: CGPoint(x: (100+(index * 40)), y: 250), size: imageSize))
                         self.view.addSubview(imageView)
-                        var image = drawCustomImage(imageSize, color: colorWithHexString(color))
+                        var image = drawFlashSquare(imageSize, color: colorWithHexString(color))
                         imageView.image = image
                     }
 
@@ -307,7 +307,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
         return boardsDictionary
     }
     
-    func drawCustomImage(size: CGSize, color: UIColor) -> UIImage {
+    func drawFlashSquare(size: CGSize, color: UIColor) -> UIImage {
         // Setup our context
         let bounds = CGRect(origin: CGPoint.zeroPoint, size: size)
         let opaque = false
