@@ -50,18 +50,25 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
         }
         
         //draw design gray rectangles
-        
-        //browse button underline
         let screenSize: CGRect = UIScreen.mainScreen().bounds
+        //browse button underline
         let offset : CGFloat = 40   //offset from sides of screen
         let width = screenSize.width - (2 * offset)
         var boxSize = CGSize(width: width, height: 2)
-        var boxView = UIImageView(frame: CGRect(origin: CGPoint(x: offset, y: screenSize.height - 170), size: boxSize))
+        var boxView = UIImageView(frame: CGRect(origin: CGPoint(x: offset, y: screenSize.height - 175), size: boxSize))
         self.view.addSubview(boxView)
-        var image = drawRect(boxSize, color: colorWithHexString("CCC"))
+        var image = drawRect(boxSize, color: colorWithHexString("666666"))
         boxView.image = image
         
         if (selectedId != 9999999){
+            //draw the rect over the flash button        
+            boxSize = CGSize(width: screenSize.width, height: 10)
+            boxView = UIImageView(frame: CGRect(origin: CGPoint(x: 0, y: screenSize.height - 80), size: boxSize))
+            self.view.addSubview(boxView)
+            var imagef = drawRect(boxSize, color: colorWithHexString("EEEEEE"))
+            boxView.image = imagef
+            
+            
             //check if there are alternates for the selected team (depends of flash name being somewhat unique)
             if let count = database.intForQuery("SELECT COUNT(name) FROM cheers WHERE name='\(self.team)'") {
                 if (count > 1){
@@ -70,9 +77,10 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
                     self.outfitButton.setTitle("Choose Alternate", forState: UIControlState.Normal)
                     
                     //draw alternate outfit button underline
+                    boxSize = CGSize(width: width, height: 2)
                     boxView = UIImageView(frame: CGRect(origin: CGPoint(x: offset, y: screenSize.height - 105), size: boxSize))
                     self.view.addSubview(boxView)
-                    image = drawRect(boxSize, color: colorWithHexString("CCC"))
+                    image = drawRect(boxSize, color: colorWithHexString("666666"))
                     boxView.image = image
                 }
                 else {
