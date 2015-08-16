@@ -14,6 +14,7 @@ var selectedId: Int32 = 9999999
 var avgOffset: Double = 9999999
 var cheering = false
 var actionButtonStatus = "None"
+var selectedStoreId: String = ""
 
 
 class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
@@ -102,6 +103,8 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
                         self.outfitButton.setTitle("Home", forState: UIControlState.Normal)
                     }
                     
+                    selectedStoreId = rs.stringForColumn("storecode")
+                    
                     ///////////draw color boxes for selected flash
                     var colors = [String]()
                     if (rs.stringForColumn("pattern1") != ""){
@@ -153,7 +156,12 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
         }
         else {
             //check if they own the product or not
-            var owned = false
+            var owned = false  //check against app store
+            
+            //check against keychain
+            if TegKeychain.get("freecheer") == selectedStoreId {
+                owned = true
+            }
             
             //if owned: display the start flash button
             if (owned == true){
@@ -167,7 +175,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
             if (owned == false) {
                 
                 //check Keychain for if first theme has been purchased
-                if var result = TegKeychain.get("usedfreecheer") {   //this is set when the flash button is tapped
+                if var result = TegKeychain.get("freecheer") {   //this is set when the flash button is tapped
                     println("In Keychain: \(result)")
                     //if yes, display the normal IAP button
                     actionButtonStatus = "buy"
@@ -274,6 +282,8 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
                 var alert = UIAlertController(title: "Get flash free", message: "Get flash free and log into keychain", preferredStyle: UIAlertControllerStyle.Alert)
                 alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
                 self.presentViewController(alert, animated: true, completion: nil)
+                //TegKeychain.set("freecheer", value: selectedStoreId)
+                //todo start cheering, or update the action button to be flash now
             case "buy":
                 var alert = UIAlertController(title: "Buy", message: "Buy this flash normally", preferredStyle: UIAlertControllerStyle.Alert)
                 alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
