@@ -160,7 +160,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
                 self.actionButton.enabled = true
                 self.actionButton.hidden = false
                 self.actionButton.setTitle("Start Flash", forState: UIControlState.Normal)
-                
+                actionButtonStatus = "flash"
             }
             
             //if not owned:
@@ -265,13 +265,22 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
     }
 
     @IBAction func actionButtonTapped(sender: AnyObject) {
-        var alert = UIAlertController(title: "In App Purchase in progress", message: "Buy this flash, get first free, or start cheering if owned. Use \"Test\" above while in testing.", preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
-        self.presentViewController(alert, animated: true, completion: nil)
-        
-        //Get the cheer free
-        //Buy the cheer
-        //OR Start cheering
+        switch actionButtonStatus {
+            case "flash":
+                var alert = UIAlertController(title: "Start Flash", message: "Flash would normally start here", preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController(alert, animated: true, completion: nil)
+            case "getfree":
+                var alert = UIAlertController(title: "Get flash free", message: "Get flash free and log into keychain", preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController(alert, animated: true, completion: nil)
+            case "buy":
+                var alert = UIAlertController(title: "Buy", message: "Buy this flash normally", preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController(alert, animated: true, completion: nil)
+            default:
+                println("do nothing")
+        }
     }
     
     @IBAction func tapButtonTapped(sender: AnyObject) {
