@@ -279,14 +279,16 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
                 alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
                 self.presentViewController(alert, animated: true, completion: nil)
             case "getfree":
-                var alert = UIAlertController(title: "Get flash free", message: "Get flash free and log into keychain", preferredStyle: UIAlertControllerStyle.Alert)
+                var alert = UIAlertController(title: "Free Flash", message: "Do you want to use your one free flash for this product?", preferredStyle: UIAlertControllerStyle.Alert)
                 alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+                alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
                 self.presentViewController(alert, animated: true, completion: nil)
                 //TegKeychain.set("freecheer", value: selectedStoreId)
                 //todo start cheering, or update the action button to be flash now
             case "buy":
-                var alert = UIAlertController(title: "Buy", message: "Buy this flash normally", preferredStyle: UIAlertControllerStyle.Alert)
+                var alert = UIAlertController(title: "Buy Flash", message: "Buy this flash for $0.99?", preferredStyle: UIAlertControllerStyle.Alert)
                 alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+                alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
                 self.presentViewController(alert, animated: true, completion: nil)
             default:
                 println("do nothing")
