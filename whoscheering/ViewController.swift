@@ -13,6 +13,8 @@ var ffdbLoaded = false
 var selectedId: Int32 = 9999999
 var avgOffset: Double = 9999999
 var cheering = false
+var actionButtonStatus = "None"
+
 
 class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
 
@@ -151,30 +153,41 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
         }
         else {
             //check if they own the product or not
-            //if owned: display the start cheer button
-            //if not owned:
-            //check Keychain for if first theme has been purchased
-            //TegKeychain.clear()
-            if var result = TegKeychain.get("visitedcheer") {   //this is currently set in CheerViewController
-                println("In Keychain: \(result)")
-            } else {
-                println("no value in keychain")
-            }
-            //if yes then display the normal IAP button
-            //if no, give option to grant this theme for free, with confirmation
+            var owned = false
             
-            if contains(["Duke", "Fireworks", "Kings"], self.team){
-                //example not owned
-                self.actionButton.enabled = true
-                self.testCheerButton.enabled = true
-                self.actionButton.hidden = false
-                self.actionButton.setTitle("Buy $x.xx", forState: UIControlState.Normal)
-            }
-            else{
+            //if owned: display the start flash button
+            if (owned == true){
                 self.actionButton.enabled = true
                 self.actionButton.hidden = false
                 self.actionButton.setTitle("Start Flash", forState: UIControlState.Normal)
+                
             }
+            
+            //if not owned:
+            if (owned == false) {
+                
+                //check Keychain for if first theme has been purchased
+                if var result = TegKeychain.get("usedfreecheer") {   //this is set when the flash button is tapped
+                    println("In Keychain: \(result)")
+                    //if yes, display the normal IAP button
+                    actionButtonStatus = "buy"
+                    self.actionButton.enabled = true
+                    self.testCheerButton.enabled = true
+                    self.actionButton.hidden = false
+                    self.actionButton.setTitle("Buy $x.xx", forState: UIControlState.Normal)
+                    
+                } else {
+                    println("no value in keychain")
+                    //if no, give option to grant this theme for free, with confirmation
+                    actionButtonStatus = "getfree"
+                    self.actionButton.enabled = true
+                    self.testCheerButton.enabled = true
+                    self.actionButton.hidden = false
+                    self.actionButton.setTitle("Get for Free", forState: UIControlState.Normal)
+                }
+       
+            }
+            
         }
         
 
@@ -256,6 +269,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
         self.presentViewController(alert, animated: true, completion: nil)
         
+        //Get the cheer free
         //Buy the cheer
         //OR Start cheering
     }
