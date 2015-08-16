@@ -117,12 +117,14 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
                     if (rs.stringForColumn("pattern5") != ""){
                         colors.append(rs.stringForColumn("pattern5"))
                     }
-                    let startingX = (Double(screenSize.width) / 2.0) - (20.0 * Double(colors.count)) + 10.0  //TODO add thin border around each box
+                    let boxSize = 25.0
+                    let startingX = (Double(screenSize.width) / 2.0) - (boxSize * Double(colors.count)) + 10.0  //TODO add thin border around each box
                     for (index, color) in enumerate(colors) {
-                        var imageSize = CGSize(width: 20, height: 20)
-                        var imageView = UIImageView(frame: CGRect(origin: CGPoint(x: CGFloat(startingX+Double(index * 40)), y: screenSize.height - 130), size: imageSize))
+                        var imageSize = CGSize(width: boxSize, height: boxSize)
+                        let xCoord = CGFloat((2.0 * Double(index) * boxSize) + startingX)
+                        var imageView = UIImageView(frame: CGRect(origin: CGPoint(x: xCoord, y: CGFloat(screenSize.height - 130)), size: imageSize))
                         self.view.addSubview(imageView)
-                        var image = drawRect(imageSize, color: colorWithHexString(color))
+                        var image = drawBordered(imageSize, color: colorWithHexString(color))
                         imageView.image = image
                     }
 
@@ -343,9 +345,6 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
         let context = UIGraphicsGetCurrentContext()
         
         // Setup complete, do drawing here
-        CGContextSetStrokeColorWithColor(context, color.CGColor)
-        CGContextSetLineWidth(context, 2.0)
-        
         CGContextSetFillColorWithColor(context, color.CGColor);
         CGContextSetRGBStrokeColor(context, 0.0, 1.0, 0.0, 1.0);
         CGContextFillRect(context, bounds);
@@ -353,7 +352,29 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return image
+    }
+    
+    func drawBordered(size: CGSize, color: UIColor) -> UIImage {
+        // Setup our context
+        let bounds = CGRect(origin: CGPoint.zeroPoint, size: size)
+        let opaque = false
+        let scale: CGFloat = 0
+        UIGraphicsBeginImageContextWithOptions(size, opaque, scale)
+        let context = UIGraphicsGetCurrentContext()
         
+        //Draw fill
+        CGContextSetFillColorWithColor(context, color.CGColor);
+        CGContextSetRGBStrokeColor(context, 0.0, 1.0, 0.0, 1.0);
+        CGContextFillRect(context, bounds);
+        
+        // Draw Border
+        CGContextSetStrokeColorWithColor(context, UIColor.grayColor().CGColor)
+        CGContextSetLineWidth(context, 2.0)
+        CGContextStrokeRect(context, bounds)
+        
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
     }
     
     func colorWithHexString (hex:String) -> UIColor {
