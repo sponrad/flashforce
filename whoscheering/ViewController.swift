@@ -117,7 +117,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
                     if (rs.stringForColumn("pattern5") != ""){
                         colors.append(rs.stringForColumn("pattern5"))
                     }
-                    let startingX = (Double(screenSize.width) / 2.0) - (20.0 * Double(colors.count)) + 10.0   //TODO clean this
+                    let startingX = (Double(screenSize.width) / 2.0) - (20.0 * Double(colors.count)) + 10.0  //TODO add thin border around each box
                     for (index, color) in enumerate(colors) {
                         var imageSize = CGSize(width: 20, height: 20)
                         var imageView = UIImageView(frame: CGRect(origin: CGPoint(x: CGFloat(startingX+Double(index * 40)), y: screenSize.height - 130), size: imageSize))
