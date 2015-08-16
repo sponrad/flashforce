@@ -65,7 +65,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
         if (selectedId != 9999999){
             //draw the rect over the flash button        
             boxSize = CGSize(width: screenSize.width, height: 10)
-            boxView = UIImageView(frame: CGRect(origin: CGPoint(x: 0, y: screenSize.height - 82), size: boxSize))
+            boxView = UIImageView(frame: CGRect(origin: CGPoint(x: 0, y: screenSize.height - 78), size: boxSize))
             self.view.addSubview(boxView)
             var imagef = drawRect(boxSize, color: colorWithHexString("EEEEEE"))
             boxView.image = imagef
