@@ -199,7 +199,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
                 var pattern4 = record[8]
                 var pattern5 = record[9]
                 let timing = 1.0
-                let price = 0.99
+                let price = record[4]
                 database.executeUpdate("insert into cheers values (NULL, '\(record[0])', '\(record[2])', '\(record[1])', '\(pattern)', \(timing), \(price), '\(pattern1)', '\(pattern2)', '\(pattern3)', '\(pattern4)', '\(pattern5)', '\(record[3])')", withArgumentsInArray: nil)
             }
             
