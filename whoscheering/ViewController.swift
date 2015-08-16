@@ -100,7 +100,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
                         self.outfitButton.setTitle("Home", forState: UIControlState.Normal)
                     }
                     
-                    ///////////draw color boxes
+                    ///////////draw color boxes for selected flash
                     var colors = [String]()
                     if (rs.stringForColumn("pattern1") != ""){
                         colors.append(rs.stringForColumn("pattern1"))
@@ -117,7 +117,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
                     if (rs.stringForColumn("pattern5") != ""){
                         colors.append(rs.stringForColumn("pattern5"))
                     }
-                    let startingX = (Double(screenSize.width) / 2.0) - (20.0*((2.0*Double(colors.count))-1.0)/2.0)   //TODO clean this
+                    let startingX = (Double(screenSize.width) / 2.0) - (20.0 * Double(colors.count)) + 10.0   //TODO clean this
                     for (index, color) in enumerate(colors) {
                         var imageSize = CGSize(width: 20, height: 20)
                         var imageView = UIImageView(frame: CGRect(origin: CGPoint(x: CGFloat(startingX+Double(index * 40)), y: screenSize.height - 130), size: imageSize))
