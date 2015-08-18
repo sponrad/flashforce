@@ -295,7 +295,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
     
     @IBAction func tapButtonTapped(sender: AnyObject) {
         //reset the keychain
-        TegKeychain.delete("freecheer")
+        //TegKeychain.delete("freecheer")
         println("resetting the offsets database")
         // reset the offsets database.
         ///////////////////////////   connect to the database
