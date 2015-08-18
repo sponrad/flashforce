@@ -15,6 +15,7 @@ var avgOffset: Double = 9999999
 var cheering = false
 var actionButtonStatus = "None"
 var selectedStoreId: String = ""
+var selectedPrice: String = ""
 
 
 class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
@@ -104,6 +105,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
                     }
                     
                     selectedStoreId = rs.stringForColumn("storecode")
+                    selectedPrice = rs.stringForColumn("price")
                     
                     ///////////draw color boxes for selected flash
                     var colors = [String]()
@@ -184,7 +186,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
                     self.actionButton.enabled = true
                     self.testCheerButton.enabled = true
                     self.actionButton.hidden = false
-                    self.actionButton.setTitle("Buy $x.xx", forState: UIControlState.Normal)
+                    self.actionButton.setTitle("Buy $\(selectedPrice)", forState: UIControlState.Normal)
                 } else {
                     //if no, give option to grant this theme for free, with confirmation
                     actionButtonStatus = "getfree"
@@ -285,7 +287,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
                 alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
                 self.presentViewController(alert, animated: true, completion: nil)
             case "buy":
-                var alert = UIAlertController(title: "Buy Flash", message: "Buy this flash for $0.99?", preferredStyle: UIAlertControllerStyle.Alert)
+                var alert = UIAlertController(title: "Buy Flash !!!NOT DONE YET!!!", message: "Buy this flash for $\(selectedPrice)?", preferredStyle: UIAlertControllerStyle.Alert)
                 alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
                 alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
                 self.presentViewController(alert, animated: true, completion: nil)
