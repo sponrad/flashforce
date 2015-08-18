@@ -36,7 +36,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
         super.viewDidLoad()
         cheering = false
         // Do any additional setup after loading the view, typically from a nib.
-        self.navigationItem.hidesBackButton = true;
+        self.navigationItem.hidesBackButton = false;
         self.outfitButton.enabled = false
         self.outfitButton.hidden = true
         self.tapButton.setTitle("", forState: UIControlState.Normal)
@@ -157,10 +157,12 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
         else {
             //check if they own the product or not
             var owned = false  //check against app store
-            
+                      
             //check against keychain
-            if TegKeychain.get("freecheer") == selectedStoreId {
-                owned = true
+            if (TegKeychain.get("freecheer") != nil){
+                if TegKeychain.get("freecheer")! == selectedStoreId {
+                    owned = true
+                }
             }
             
             //if owned: display the start flash button
@@ -183,9 +185,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
                     self.testCheerButton.enabled = true
                     self.actionButton.hidden = false
                     self.actionButton.setTitle("Buy $x.xx", forState: UIControlState.Normal)
-                    
                 } else {
-                    println("no value in keychain")
                     //if no, give option to grant this theme for free, with confirmation
                     actionButtonStatus = "getfree"
                     self.actionButton.enabled = true
@@ -280,11 +280,9 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
                 self.presentViewController(alert, animated: true, completion: nil)
             case "getfree":
                 var alert = UIAlertController(title: "Free Flash", message: "Do you want to use your one free flash for this product?", preferredStyle: UIAlertControllerStyle.Alert)
-                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: purchaseFreeFlash ))
                 alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
                 self.presentViewController(alert, animated: true, completion: nil)
-                //TegKeychain.set("freecheer", value: selectedStoreId)
-                //todo start cheering, or update the action button to be flash now
             case "buy":
                 var alert = UIAlertController(title: "Buy Flash", message: "Buy this flash for $0.99?", preferredStyle: UIAlertControllerStyle.Alert)
                 alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
@@ -296,6 +294,8 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
     }
     
     @IBAction func tapButtonTapped(sender: AnyObject) {
+        //reset the keychain
+        TegKeychain.delete("freecheer")
         println("resetting the offsets database")
         // reset the offsets database.
         ///////////////////////////   connect to the database
@@ -434,6 +434,15 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
         
         
         return UIColor(red: CGFloat(r) / 255.0, green: CGFloat(g) / 255.0, blue: CGFloat(b) / 255.0, alpha: CGFloat(1))
+    }
+    
+    //purchase a flash for free, set the token, and change the action button
+    func purchaseFreeFlash (alert: UIAlertAction!){
+        TegKeychain.set("freecheer", value: selectedStoreId)
+        self.actionButton.enabled = true
+        self.actionButton.hidden = false
+        self.actionButton.setTitle("Start Flash", forState: UIControlState.Normal)
+        actionButtonStatus = "flash"
     }
     
 }
