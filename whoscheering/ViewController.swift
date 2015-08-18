@@ -275,9 +275,10 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
     @IBAction func actionButtonTapped(sender: AnyObject) {
         switch actionButtonStatus {
             case "flash":
-                var alert = UIAlertController(title: "Start Flash", message: "Flash would normally start here", preferredStyle: UIAlertControllerStyle.Alert)
-                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
-                self.presentViewController(alert, animated: true, completion: nil)
+                let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                var setViewController = mainStoryboard.instantiateViewControllerWithIdentifier("cheer") as! UIViewController
+                navigationController?.pushViewController(setViewController, animated: true)
+                
             case "getfree":
                 var alert = UIAlertController(title: "Free Flash", message: "Do you want to use your one free flash for this product?", preferredStyle: UIAlertControllerStyle.Alert)
                 alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: purchaseFreeFlash ))

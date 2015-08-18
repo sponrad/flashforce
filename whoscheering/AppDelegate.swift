@@ -40,16 +40,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         println("became active")
         if cheering {
-            println("in cheering mode") //do something!
-            
-            
-            // "Main" is name of .storybord file "
             let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            // "MiniGameView" is the ID given to the ViewController in the interfacebuilder
-            // MiniGameViewController is the CLASS name of the ViewController.swift file acosiated to the ViewController
             var setViewController = mainStoryboard.instantiateViewControllerWithIdentifier("cheer") as! UIViewController
             var rootViewController = self.window!.rootViewController
-            //rootViewController?.presentViewController(setViewController, animated: false, completion: nil)
             
             rootViewController?.navigationController?.pushViewController(setViewController, animated: true)
             //var VC1 = mainStoryboard.instantiateViewControllerWithIdentifier("HomeView") as! UIViewController
