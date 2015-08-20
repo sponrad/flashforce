@@ -162,6 +162,7 @@ class CheerViewController: UIViewController {
         }
     }
     
+    //revert brightness
     override func viewWillDisappear(animated : Bool) {
         super.viewWillDisappear(animated)
         

@@ -28,6 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+        UIScreen.mainScreen().brightness = oldBrightness
     }
 
     func applicationDidEnterBackground(application: UIApplication) {
@@ -46,6 +47,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
             var setViewController = mainStoryboard.instantiateViewControllerWithIdentifier("cheer") as! UIViewController
             var rootViewController = self.window!.rootViewController
+            
+            UIScreen.mainScreen().brightness = CGFloat(1.0)
             
             rootViewController?.navigationController?.pushViewController(setViewController, animated: true)
             //var VC1 = mainStoryboard.instantiateViewControllerWithIdentifier("HomeView") as! UIViewController
