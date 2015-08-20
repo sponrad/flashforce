@@ -16,6 +16,7 @@ var cheering = false
 var actionButtonStatus = "None"
 var selectedStoreId: String = ""
 var selectedPrice: String = ""
+var oldBrightness: CGFloat = 0.5
 
 
 class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
@@ -41,6 +42,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
         self.outfitButton.enabled = false
         self.outfitButton.hidden = true
         self.tapButton.setTitle("", forState: UIControlState.Normal)
+        UIScreen.mainScreen().brightness = oldBrightness
         
         //self.color1Label.backgroundColor = UIColor.whiteColor()
 

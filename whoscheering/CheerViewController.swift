@@ -30,7 +30,7 @@ class CheerViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        UIScreen.mainScreen().brightness = CGFloat(1.0)
         cheering = true
         
         // // // GET INFO FROM DATABASE // // //
@@ -159,6 +159,15 @@ class CheerViewController: UIViewController {
         if motion == .MotionShake {
             self.shakeLabel.text = "D!"
             
+        }
+    }
+    
+    override func viewWillDisappear(animated : Bool) {
+        super.viewWillDisappear(animated)
+        
+        if (self.isMovingFromParentViewController()==true){
+            // Your code...
+            UIScreen.mainScreen().brightness = oldBrightness
         }
     }
 

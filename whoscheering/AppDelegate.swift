@@ -15,11 +15,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        oldBrightness = UIScreen.mainScreen().brightness
+        
         // Override point for customization after application launch.
         //UIApplication.sharedApplication().setMinimumBackgroundFetchInterval(43200)
         UIApplication.sharedApplication().setMinimumBackgroundFetchInterval(
             UIApplicationBackgroundFetchIntervalMinimum)
         return true
+        
     }
 
     func applicationWillResignActive(application: UIApplication) {
