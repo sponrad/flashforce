@@ -171,5 +171,31 @@ class CheerViewController: UIViewController {
             UIScreen.mainScreen().brightness = oldBrightness
         }
     }
+    
+    func relativeBrightness(hex:String) -> Double {
+        var cString:String = hex.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()).uppercaseString
+        
+        if (cString.hasPrefix("#")) {
+            cString = (cString as NSString).substringFromIndex(1)
+        }
+        
+        var rString = (cString as NSString).substringToIndex(2)
+        var gString = ((cString as NSString).substringFromIndex(2) as NSString).substringToIndex(2)
+        var bString = ((cString as NSString).substringFromIndex(4) as NSString).substringToIndex(2)
+        
+        var r:Double = 0, g:Double = 0, b:Double = 0;
+        NSScanner(string: rString).scanHexDouble(&r)
+        NSScanner(string: gString).scanHexDouble(&g)
+        NSScanner(string: bString).scanHexDouble(&b)
+        
+        var brightness : Double = (r * r * 0.241)
+        
+        brightness = brightness + (g * g * 0.691)
+        brightness = brightness + (b * b * 0.068)
+        brightness = sqrt( brightness )
+
+        println(brightness)
+        return Double(brightness)
+    }
 
 }
