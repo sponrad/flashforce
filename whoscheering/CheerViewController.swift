@@ -71,6 +71,7 @@ class CheerViewController: UIViewController {
         TegKeychain.set("visitedcheer", value: "yes!")               //only for testing
         
         self.view.backgroundColor = colorWithHexString(colors[0])
+        relativeBrightness(colors[0])
         self.syncingLabel.text = "syncing..."
         UIApplication.sharedApplication().idleTimerDisabled = true   //screen will not dim
         let modnumber = Double(colors.count) * interval
@@ -183,15 +184,18 @@ class CheerViewController: UIViewController {
         var gString = ((cString as NSString).substringFromIndex(2) as NSString).substringToIndex(2)
         var bString = ((cString as NSString).substringFromIndex(4) as NSString).substringToIndex(2)
         
-        var r:Double = 0, g:Double = 0, b:Double = 0;
-        NSScanner(string: rString).scanHexDouble(&r)
-        NSScanner(string: gString).scanHexDouble(&g)
-        NSScanner(string: bString).scanHexDouble(&b)
+        var r:CUnsignedInt = 0, g:CUnsignedInt = 0, b:CUnsignedInt = 0;
+        NSScanner(string: rString).scanHexInt(&r)
+        NSScanner(string: gString).scanHexInt(&g)
+        NSScanner(string: bString).scanHexInt(&b)
         
-        var brightness : Double = (r * r * 0.241)
+        println(r)
+        println(g)
+        println(b)
         
-        brightness = brightness + (g * g * 0.691)
-        brightness = brightness + (b * b * 0.068)
+        var brightness : Double = (Double(r) * Double(r) * 0.241)
+        brightness = brightness + (Double(g) * Double(g) * 0.691)
+        brightness = brightness + (Double(b) * Double(b) * 0.068)
         brightness = sqrt( brightness )
 
         println(brightness)
