@@ -253,7 +253,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 79700A911B0F03A50060E81D /* Build configuration list for PBXProject "Flash Force" */;
+			buildConfigurationList = 79700A911B0F03A50060E81D /* Build configuration list for PBXProject "FlashForce" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -512,7 +512,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		79700A911B0F03A50060E81D /* Build configuration list for PBXProject "Flash Force" */ = {
+		79700A911B0F03A50060E81D /* Build configuration list for PBXProject "FlashForce" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				79700AB31B0F03A50060E81D /* Debug */,

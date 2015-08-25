@@ -57,17 +57,33 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
         
         //draw design gray rectangles
         let screenSize: CGRect = UIScreen.mainScreen().bounds
-        //browse button underline
-        let offset : CGFloat = 30   //offset from sides of screen
+        
+        //teambutton underline
+        let offset : CGFloat = 0   //offset from sides of screen
         let width = screenSize.width - (2 * offset)
-        var boxSize = CGSize(width: width, height: 2)
+        var boxSize = CGSize(width: width, height: 10)
         var boxView = UIImageView(frame: CGRect(origin: CGPoint(x: offset, y: screenSize.height - 240), size: boxSize))
         self.view.addSubview(boxView)
-        var image = drawRect(boxSize, color: colorWithHexString("666666"))
+        var image = drawRect(boxSize, color: colorWithHexString("EEEEEE"))
+        boxView.image = image
+        
+        //browse button underline
+        boxSize = CGSize(width: width, height: 10)
+        boxView = UIImageView(frame: CGRect(origin: CGPoint(x: offset, y: screenSize.height - 320), size: boxSize))
+        self.view.addSubview(boxView)
+        image = drawRect(boxSize, color: colorWithHexString("EEEEEE"))
+        boxView.image = image
+        
+        
+        //browse button overline
+        boxSize = CGSize(width: width, height: 10)
+        boxView = UIImageView(frame: CGRect(origin: CGPoint(x: offset, y: screenSize.height - 400), size: boxSize))
+        self.view.addSubview(boxView)
+        image = drawRect(boxSize, color: colorWithHexString("EEEEEE"))
         boxView.image = image
         
         if (selectedId != 9999999){
-            //draw the rect over the flash button        
+            //draw the rect over the flash button
             boxSize = CGSize(width: screenSize.width, height: 10)
             boxView = UIImageView(frame: CGRect(origin: CGPoint(x: 0, y: screenSize.height - 78), size: boxSize))
             self.view.addSubview(boxView)
@@ -81,12 +97,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
                     self.outfitButton.hidden = false
                     self.outfitButton.setTitle("Choose Alternate", forState: UIControlState.Normal)
                     
-                    //draw alternate outfit button underline
-                    boxSize = CGSize(width: width, height: 2)
-                    boxView = UIImageView(frame: CGRect(origin: CGPoint(x: offset, y: screenSize.height - 160), size: boxSize))
-                    self.view.addSubview(boxView)
-                    image = drawRect(boxSize, color: colorWithHexString("666666"))
-                    boxView.image = image
+                    
                 }
                 else {
                     self.outfitButton.enabled = false
@@ -126,8 +137,9 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
                     if (rs.stringForColumn("pattern5") != ""){
                         colors.append(rs.stringForColumn("pattern5"))
                     }
-                    let boxSize = 25.0
-                    let startingX = (Double(screenSize.width) / 2.0) - (boxSize * Double(colors.count)) + 10.0  //TODO add thin border around each box
+                    let boxSize = 38.0
+                    //let startingX = (Double(screenSize.width) / 2.0) - (boxSize * Double(colors.count)) + 10.0
+                    let startingX = 20.0
                     for (index, color) in enumerate(colors) {
                         var imageSize = CGSize(width: boxSize, height: boxSize)
                         let xCoord = CGFloat((2.0 * Double(index) * boxSize) + startingX)
