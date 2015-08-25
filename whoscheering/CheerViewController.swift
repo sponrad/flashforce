@@ -16,6 +16,7 @@ class CheerViewController: UIViewController {
     var colors = ["D4001F", "000000"]
     var interval = 0.25 //base interval
     var timer : NSTimer!
+    var brightnessArray = [Double]()
     
    
     @IBOutlet weak var syncingLabel: UILabel!
@@ -45,31 +46,36 @@ class CheerViewController: UIViewController {
         if let rs = database.executeQuery("SELECT * FROM cheers WHERE id=\(String(selectedId))", withArgumentsInArray: nil) {
             while rs.next() {
                 var timing = split(rs.stringForColumn("timing")) {$0 == "_"}
-
+                println("Here come the codes")
                 colors = [String]()
                 if (rs.stringForColumn("pattern1") != ""){
                     for var i = 0.0; i < ( Double(timing[0].toInt()!)); i++ {
                         colors.append(rs.stringForColumn("pattern1"))
+                        brightnessArray.append(relativeBrightness(rs.stringForColumn("pattern1")))
                     }
                 }
                 if (rs.stringForColumn("pattern2") != ""){
                     for var i = 0.0; i < ( Double(timing[1].toInt()!)); i++ {
                         colors.append(rs.stringForColumn("pattern2"))
+                        brightnessArray.append(relativeBrightness(rs.stringForColumn("pattern2")))
                     }
                 }
                 if (rs.stringForColumn("pattern3") != ""){
                     for var i = 0.0; i < ( Double(timing[2].toInt()!)); i++ {
                         colors.append(rs.stringForColumn("pattern3"))
+                        brightnessArray.append(relativeBrightness(rs.stringForColumn("pattern3")))
                     }
                 }
                 if (rs.stringForColumn("pattern4") != ""){
                     for var i = 0.0; i < ( Double(timing[3].toInt()!)); i++ {
                         colors.append(rs.stringForColumn("pattern4"))
+                        brightnessArray.append(relativeBrightness(rs.stringForColumn("pattern4")))
                     }
                 }
                 if (rs.stringForColumn("pattern5") != ""){
                     for var i = 0.0; i < ( Double(timing[4].toInt()!) ); i++ {
                         colors.append(rs.stringForColumn("pattern5"))
+                        brightnessArray.append(relativeBrightness(rs.stringForColumn("pattern5")))
                     }
                 }
             }
@@ -82,7 +88,7 @@ class CheerViewController: UIViewController {
         TegKeychain.set("visitedcheer", value: "yes!")               //only for testing
         
         self.view.backgroundColor = colorWithHexString(colors[0])
-        relativeBrightness(colors[0])
+
         self.syncingLabel.text = "syncing..."
         UIApplication.sharedApplication().idleTimerDisabled = true   //screen will not dim
         let modnumber = Double(colors.count) * interval
@@ -102,6 +108,7 @@ class CheerViewController: UIViewController {
             //self.timer.tolerance = 0.1
             self.syncingLabel.text = ""
             self.view.backgroundColor = self.colorWithHexString(self.colors[self.color])
+            UIScreen.mainScreen().brightness = CGFloat( self.brightnessArray[self.color] )
         }
 
     }
@@ -200,17 +207,21 @@ class CheerViewController: UIViewController {
         NSScanner(string: gString).scanHexInt(&g)
         NSScanner(string: bString).scanHexInt(&b)
         
-        println(r)
-        println(g)
-        println(b)
+        //println(r)
+        //println(g)
+        //println(b)
         
         var brightness : Double = (Double(r) * Double(r) * 0.241)
         brightness = brightness + (Double(g) * Double(g) * 0.691)
         brightness = brightness + (Double(b) * Double(b) * 0.068)
         brightness = sqrt( brightness )
 
-        println(brightness)
-        return Double(brightness)
+        //println(brightness)
+        //need a scale from 80 to 100
+        //brightness of 255 returns 80 or low point, 0 returns 100 or full value
+        var modified = (90.0 + (10.0 * (255.0 - Double(brightness) ) / 255.0 ))
+        //println(modified)
+        return modified
     }
 
 }
