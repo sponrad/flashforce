@@ -14,7 +14,7 @@ class CheerViewController: UIViewController {
     
     var color = 0
     var colors = ["D4001F", "000000"]
-    var interval = 0.25 //interval in s
+    var interval = 0.25 //base interval
     var timer : NSTimer!
     
    
@@ -48,27 +48,27 @@ class CheerViewController: UIViewController {
 
                 colors = [String]()
                 if (rs.stringForColumn("pattern1") != ""){
-                    for var i = 0; i < (timing[0].toInt()! * 4); i++ {
+                    for var i = 0.0; i < ( Double(timing[0].toInt()!)); i++ {
                         colors.append(rs.stringForColumn("pattern1"))
                     }
                 }
                 if (rs.stringForColumn("pattern2") != ""){
-                    for var i = 0; i < (timing[1].toInt()! * 4); i++ {
+                    for var i = 0.0; i < ( Double(timing[1].toInt()!)); i++ {
                         colors.append(rs.stringForColumn("pattern2"))
                     }
                 }
                 if (rs.stringForColumn("pattern3") != ""){
-                    for var i = 0; i < (timing[2].toInt()! * 4); i++ {
+                    for var i = 0.0; i < ( Double(timing[2].toInt()!)); i++ {
                         colors.append(rs.stringForColumn("pattern3"))
                     }
                 }
                 if (rs.stringForColumn("pattern4") != ""){
-                    for var i = 0; i < (timing[3].toInt()! * 4); i++ {
+                    for var i = 0.0; i < ( Double(timing[3].toInt()!)); i++ {
                         colors.append(rs.stringForColumn("pattern4"))
                     }
                 }
                 if (rs.stringForColumn("pattern5") != ""){
-                    for var i = 0; i < (timing[4].toInt()! * 4); i++ {
+                    for var i = 0.0; i < ( Double(timing[4].toInt()!) ); i++ {
                         colors.append(rs.stringForColumn("pattern5"))
                     }
                 }
