@@ -208,7 +208,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
             database.executeUpdate("DROP TABLE cheers", withArgumentsInArray: nil)
             //database.executeUpdate("DROP TABLE offsets", withArgumentsInArray: nil)
             
-            if !database.executeUpdate("create table cheers(id integer primary key autoincrement, storecode text, name text, category text, pattern text, timing real, price real, pattern1 text, pattern2 text, pattern3 text, pattern4 text, pattern5 text, alt1 text)", withArgumentsInArray: nil) {
+            if !database.executeUpdate("create table cheers(id integer primary key autoincrement, storecode text, name text, category text, pattern text, timing text, price real, pattern1 text, pattern2 text, pattern3 text, pattern4 text, pattern5 text, alt1 text)", withArgumentsInArray: nil) {
                 println("create table failed: \(database.lastErrorMessage())")
             }
             if !database.executeUpdate("create table offsets(id integer primary key autoincrement, offset real)", withArgumentsInArray: nil) {
@@ -225,7 +225,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
                 var pattern5 = record[9]
                 let timing = record[18]
                 let price = record[4]
-                database.executeUpdate("insert into cheers values (NULL, '\(record[0])', '\(record[2])', '\(record[1])', '\(pattern)', \(timing), \(price), '\(pattern1)', '\(pattern2)', '\(pattern3)', '\(pattern4)', '\(pattern5)', '\(record[3])')", withArgumentsInArray: nil)
+                database.executeUpdate("insert into cheers values (NULL, '\(record[0])', '\(record[2])', '\(record[1])', '\(pattern)', '\(timing)', \(price), '\(pattern1)', '\(pattern2)', '\(pattern3)', '\(pattern4)', '\(pattern5)', '\(record[3])')", withArgumentsInArray: nil)
             }
             
             let reachability = Reachability.reachabilityForInternetConnection()

@@ -44,23 +44,34 @@ class CheerViewController: UIViewController {
         
         if let rs = database.executeQuery("SELECT * FROM cheers WHERE id=\(String(selectedId))", withArgumentsInArray: nil) {
             while rs.next() {
+                var timing = split(rs.stringForColumn("timing")) {$0 == "_"}
+
                 colors = [String]()
                 if (rs.stringForColumn("pattern1") != ""){
-                    colors.append(rs.stringForColumn("pattern1"))
+                    for var i = 0; i < (timing[0].toInt()! * 4); i++ {
+                        colors.append(rs.stringForColumn("pattern1"))
+                    }
                 }
                 if (rs.stringForColumn("pattern2") != ""){
-                    colors.append(rs.stringForColumn("pattern2"))
+                    for var i = 0; i < (timing[1].toInt()! * 4); i++ {
+                        colors.append(rs.stringForColumn("pattern2"))
+                    }
                 }
                 if (rs.stringForColumn("pattern3") != ""){
-                    colors.append(rs.stringForColumn("pattern3"))
+                    for var i = 0; i < (timing[2].toInt()! * 4); i++ {
+                        colors.append(rs.stringForColumn("pattern3"))
+                    }
                 }
                 if (rs.stringForColumn("pattern4") != ""){
-                    colors.append(rs.stringForColumn("pattern4"))
+                    for var i = 0; i < (timing[3].toInt()! * 4); i++ {
+                        colors.append(rs.stringForColumn("pattern4"))
+                    }
                 }
                 if (rs.stringForColumn("pattern5") != ""){
-                    colors.append(rs.stringForColumn("pattern5"))
+                    for var i = 0; i < (timing[4].toInt()! * 4); i++ {
+                        colors.append(rs.stringForColumn("pattern5"))
+                    }
                 }
-                //interval =
             }
         } else {
             println("select failed: \(database.lastErrorMessage())")
