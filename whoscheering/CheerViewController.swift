@@ -176,8 +176,7 @@ class CheerViewController: UIViewController {
     
     override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent) {
         if motion == .MotionShake {
-            self.shakeLabel.text = "D!"
-            
+            //self.shakeLabel.text = "★"
         }
     }
     
@@ -220,7 +219,7 @@ class CheerViewController: UIViewController {
         //need a scale from 80 to 100
         //brightness of 255 returns 80 or low point, 0 returns 100 or full value
         var modified = (90.0 + (10.0 * (255.0 - Double(brightness) ) / 255.0 ))
-        //println(modified)
+        println(modified)
         return modified
     }
 
