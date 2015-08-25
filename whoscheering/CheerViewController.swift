@@ -14,7 +14,7 @@ class CheerViewController: UIViewController {
     
     var color = 0
     var colors = ["D4001F", "000000"]
-    var interval = 1.0 //interval in s
+    var interval = 0.25 //interval in s
     var timer : NSTimer!
     
    
