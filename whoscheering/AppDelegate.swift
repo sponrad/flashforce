@@ -38,6 +38,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillEnterForeground(application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+        println("entered foreground")
+        if cheering {
+            let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            var setViewController = mainStoryboard.instantiateViewControllerWithIdentifier("cheer") as! UIViewController
+            var rootViewController = self.window!.rootViewController
+            
+            UIScreen.mainScreen().brightness = CGFloat(1.0)
+            
+            rootViewController?.navigationController?.pushViewController(setViewController, animated: true)
+            //var VC1 = mainStoryboard.instantiateViewControllerWithIdentifier("HomeView") as! UIViewController
+            //let navController = UINavigationController(rootViewController: setViewController)
+            //rootViewController?.presentViewController(navController, animated: false, completion: nil)
+        }
     }
 
     func applicationDidBecomeActive(application: UIApplication) {
