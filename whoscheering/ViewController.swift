@@ -25,6 +25,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
     @IBOutlet weak var browseButton: UIButton!
     @IBOutlet weak var testCheerButton: UIBarButtonItem!
     @IBOutlet weak var outfitButton: UIButton!
+    @IBOutlet weak var teamButton: UIButton!
     @IBOutlet weak var color1Label: UILabel!
     @IBOutlet weak var color2Label: UILabel!
     @IBOutlet weak var color3Label: UILabel!
@@ -44,6 +45,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
         self.navigationItem.hidesBackButton = false;
         self.outfitButton.enabled = false
         self.outfitButton.hidden = true
+        self.teamButton.setTitle("", forState: UIControlState.Normal)
         self.tapButton.setTitle("", forState: UIControlState.Normal)
         self.labelBottomArrow.hidden = true
         self.labelMiddleArrow.hidden = true
@@ -117,7 +119,8 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
             //display correct information
             if let rs = database.executeQuery("SELECT * FROM cheers WHERE id=\(String(selectedId))", withArgumentsInArray: nil) {
                 while rs.next() {
-                    self.browseButton.setTitle(rs.stringForColumn("name"), forState: UIControlState.Normal)
+                    self.browseButton.setTitle(rs.stringForColumn("category"), forState: UIControlState.Normal)
+                    self.teamButton.setTitle(rs.stringForColumn("name"), forState: UIControlState.Normal)
                     self.team = rs.stringForColumn("name")
                     self.outfitButton.setTitle(rs.stringForColumn("alt1"), forState: UIControlState.Normal)
                     if rs.stringForColumn("alt1").isEmpty {

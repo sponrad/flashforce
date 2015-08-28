@@ -27,6 +27,17 @@ class SecondBrowseViewController: UITableViewController {
             return
         }
         
+        if (self.category == ""){  //this fires if use is changing team after selecting one previously
+            println("Not set")
+            if let rs1 = database.executeQuery("SELECT category FROM cheers WHERE id='\(selectedId)'", withArgumentsInArray: nil) {
+                while rs1.next() {
+                    self.category = rs1.stringForColumn("category")
+                }
+            } else {
+                println("select failed: \(database.lastErrorMessage())")
+            }
+        }
+        
         if let rs = database.executeQuery("SELECT name, id FROM cheers WHERE category='\(self.category)' GROUP BY name ORDER BY name", withArgumentsInArray: nil) {
             while rs.next() {
                 self.details.append([rs.stringForColumn("name"), rs.intForColumn("id")])
