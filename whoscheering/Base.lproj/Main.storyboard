@@ -333,6 +333,9 @@
                     <connections>
                         <outlet property="actionButton" destination="Z39-rz-1uV" id="D4e-qj-Zwa"/>
                         <outlet property="browseButton" destination="RyF-4m-Ac3" id="xRE-0V-EEW"/>
+                        <outlet property="labelBottomArrow" destination="5WP-KU-8aB" id="vPw-j1-4wb"/>
+                        <outlet property="labelMiddleArrow" destination="1jw-HA-hhU" id="hor-Jm-whP"/>
+                        <outlet property="labelTopArrow" destination="tgJ-lS-oK9" id="Pz3-4E-pdF"/>
                         <outlet property="outfitButton" destination="xQq-hb-VP3" id="Fdf-Tj-2gg"/>
                         <outlet property="tapButton" destination="uSn-uI-Ptt" id="I7I-ee-IIP"/>
                         <outlet property="testCheerButton" destination="lwr-gf-ptC" id="Egj-Mx-Ln1"/>

@@ -31,6 +31,9 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
     @IBOutlet weak var color4Label: UILabel!
     @IBOutlet weak var color5Label: UILabel!
     @IBOutlet weak var tapButton: UIButton!
+    @IBOutlet weak var labelTopArrow: UILabel!
+    @IBOutlet weak var labelBottomArrow: UILabel!
+    @IBOutlet weak var labelMiddleArrow: UILabel!
     
     var team = String()   // set from the secondbrowseviewcontroller
 
@@ -42,6 +45,9 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
         self.outfitButton.enabled = false
         self.outfitButton.hidden = true
         self.tapButton.setTitle("", forState: UIControlState.Normal)
+        self.labelBottomArrow.hidden = true
+        self.labelMiddleArrow.hidden = true
+        
         UIScreen.mainScreen().brightness = oldBrightness
         
         //self.color1Label.backgroundColor = UIColor.whiteColor()
@@ -89,6 +95,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
             self.view.addSubview(boxView)
             var imagef = drawRect(boxSize, color: colorWithHexString("EEEEEE"))
             boxView.image = imagef
+            self.labelMiddleArrow.hidden = false
             
             //check if there are alternates for the selected team (depends of flash name being somewhat unique)
             if let count = database.intForQuery("SELECT COUNT(name) FROM cheers WHERE name='\(self.team)'") {
@@ -96,7 +103,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
                     self.outfitButton.enabled = true
                     self.outfitButton.hidden = false
                     self.outfitButton.setTitle("Choose Alternate", forState: UIControlState.Normal)
-                    
+                    self.labelBottomArrow.hidden = false
                     
                 }
                 else {
