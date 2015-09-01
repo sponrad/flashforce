@@ -67,20 +67,13 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
         //draw design gray rectangles
         let screenSize: CGRect = UIScreen.mainScreen().bounds
         
-        //teambutton underline
+        //browse button underline
         let offset : CGFloat = 0   //offset from sides of screen
         let width = screenSize.width - (2 * offset)
         var boxSize = CGSize(width: width, height: 10)
-        var boxView = UIImageView(frame: CGRect(origin: CGPoint(x: offset, y: screenSize.height - 240), size: boxSize))
+        var boxView = UIImageView(frame: CGRect(origin: CGPoint(x: offset, y: screenSize.height - 320), size: boxSize))
         self.view.addSubview(boxView)
         var image = drawRect(boxSize, color: colorWithHexString("EEEEEE"))
-        boxView.image = image
-        
-        //browse button underline
-        boxSize = CGSize(width: width, height: 10)
-        boxView = UIImageView(frame: CGRect(origin: CGPoint(x: offset, y: screenSize.height - 320), size: boxSize))
-        self.view.addSubview(boxView)
-        image = drawRect(boxSize, color: colorWithHexString("EEEEEE"))
         boxView.image = image
         
         //browse button overline
@@ -91,6 +84,13 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
         boxView.image = image
         
         if (selectedId != 9999999){
+            //teambutton underline
+            boxSize = CGSize(width: width, height: 10)
+            boxView = UIImageView(frame: CGRect(origin: CGPoint(x: offset, y: screenSize.height - 240), size: boxSize))
+            self.view.addSubview(boxView)
+            image = drawRect(boxSize, color: colorWithHexString("EEEEEE"))
+            boxView.image = image
+            
             //draw the rect over the flash button
             boxSize = CGSize(width: screenSize.width, height: 10)
             boxView = UIImageView(frame: CGRect(origin: CGPoint(x: 0, y: screenSize.height - 78), size: boxSize))
