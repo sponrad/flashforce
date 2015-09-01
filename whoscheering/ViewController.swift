@@ -83,6 +83,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
         image = drawRect(boxSize, color: colorWithHexString("EEEEEE"))
         boxView.image = image
         
+        //there is a team selected (will never fire on first boot)
         if (selectedId != 9999999){
             //teambutton underline
             boxSize = CGSize(width: width, height: 10)
@@ -151,7 +152,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
                     let startingX = 20.0
                     for (index, color) in enumerate(colors) {
                         var imageSize = CGSize(width: boxSize, height: boxSize)
-                        let xCoord = CGFloat((2.0 * Double(index) * boxSize) + startingX)
+                        let xCoord = CGFloat((1.5 * Double(index) * boxSize) + startingX)
                         var imageView = UIImageView(frame: CGRect(origin: CGPoint(x: xCoord, y: CGFloat(screenSize.height - 130)), size: imageSize))
                         self.view.addSubview(imageView)
                         var image = drawBordered(imageSize, color: colorWithHexString(color))
@@ -171,7 +172,6 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
             println("no payment support")
         }
 
-        
         ///////////////////////////   flash button logic
         if (self.team == ""){
             self.actionButton.enabled = false
@@ -223,7 +223,6 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
             
         }
         
-
         ///////////////////////////   code to load the database with data
         if (ffdbLoaded==false){
             database.executeUpdate("DROP TABLE cheers", withArgumentsInArray: nil)
