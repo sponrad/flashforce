@@ -30,6 +30,7 @@ class CheerViewController: UIViewController {
         super.viewDidLoad()
         UIScreen.mainScreen().brightness = CGFloat(1.0)
         cheering = true
+        println("ok cheer loaded")
         
         // // // GET INFO FROM DATABASE // // //
         let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
