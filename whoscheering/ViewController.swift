@@ -272,6 +272,10 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
             var offsets:[Double] = []
             if let rs = database.executeQuery("SELECT * FROM offsets LIMIT 50", withArgumentsInArray: nil) {
                 while rs.next() {
+                    var nRows = rs.intForColumnIndex(0)
+                    if (nRows > 1){
+                        flashAble = true
+                    }
                     var offset = rs.doubleForColumn("offset")
                     offsets.append(offset)
                 }
