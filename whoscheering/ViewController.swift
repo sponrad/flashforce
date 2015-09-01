@@ -17,6 +17,7 @@ var actionButtonStatus = "None"
 var selectedStoreId: String = ""
 var selectedPrice: String = ""
 var oldBrightness: CGFloat = 0.5
+var flashAble = false
 
 
 class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
@@ -82,7 +83,6 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
         image = drawRect(boxSize, color: colorWithHexString("EEEEEE"))
         boxView.image = image
         
-        
         //browse button overline
         boxSize = CGSize(width: width, height: 10)
         boxView = UIImageView(frame: CGRect(origin: CGPoint(x: offset, y: screenSize.height - 400), size: boxSize))
@@ -106,7 +106,6 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
                     self.outfitButton.hidden = false
                     self.outfitButton.setTitle("Choose Alternate", forState: UIControlState.Normal)
                     self.labelBottomArrow.hidden = false
-                    
                 }
                 else {
                     self.outfitButton.enabled = false
@@ -261,6 +260,10 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
                 let average = averageOffset.reduce(0) { $0 + $1 } / Double(averageOffset.count)
                 println( average )
                 database.executeUpdate("insert into offsets values (NULL, '\(String(stringInterpolationSegment: average))')", withArgumentsInArray: nil)
+                flashAble = true
+            }
+            else {
+                println("not reachable")
             }
             NSNotificationCenter.defaultCenter().addObserver(self, selector: "reachabilityChanged:", name: ReachabilityChangedNotification, object: reachability)
             reachability.startNotifier()
@@ -301,10 +304,18 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
     @IBAction func actionButtonTapped(sender: AnyObject) {
         switch actionButtonStatus {
             case "flash":
-                let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                var setViewController = mainStoryboard.instantiateViewControllerWithIdentifier("cheer") as! UIViewController
-                navigationController?.pushViewController(setViewController, animated: true)
-                
+                if flashAble {
+                    let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                    var setViewController = mainStoryboard.instantiateViewControllerWithIdentifier("cheer") as! UIViewController
+                    navigationController?.pushViewController(setViewController, animated: true)
+                }
+                else {
+                    println("do not flash if no reachability")
+                    var alert = UIAlertController(title: "Unable to Flash", message: "Please connect to the internet", preferredStyle: UIAlertControllerStyle.Alert)
+                    
+                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: purchaseFreeFlash ))
+                    self.presentViewController(alert, animated: true, completion: nil)
+                }
             case "getfree":
                 var alert = UIAlertController(title: "Free Flash", message: "Do you want to use your one free flash for this product?", preferredStyle: UIAlertControllerStyle.Alert)
                 alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: purchaseFreeFlash ))
@@ -328,6 +339,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
         ///////////////////////////   connect to the database
         let reachability = Reachability.reachabilityForInternetConnection()
         if reachability.isReachable() {
+            flashAble = true
             
             let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
             let path = documentsFolder.stringByAppendingPathComponent("ff.db")
@@ -366,6 +378,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
         }
         else {
             println("not reachable")
+            flashAble = false
         }
         
     }
@@ -458,7 +471,6 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
         NSScanner(string: rString).scanHexInt(&r)
         NSScanner(string: gString).scanHexInt(&g)
         NSScanner(string: bString).scanHexInt(&b)
-        
         
         return UIColor(red: CGFloat(r) / 255.0, green: CGFloat(g) / 255.0, blue: CGFloat(b) / 255.0, alpha: CGFloat(1))
     }

@@ -10,15 +10,12 @@ import UIKit
 
 class CheerViewController: UIViewController {
     
-
-    
     var color = 0
     var colors = ["D4001F", "000000"]
     var interval = 0.25 //base interval
     var timer : NSTimer!
     var brightnessArray = [Double]()
     
-   
     @IBOutlet weak var syncingLabel: UILabel!
     @IBOutlet weak var shakeLabel: UILabel!
     @IBOutlet weak var stopCheeringButton: UIButton!
@@ -46,7 +43,7 @@ class CheerViewController: UIViewController {
         if let rs = database.executeQuery("SELECT * FROM cheers WHERE id=\(String(selectedId))", withArgumentsInArray: nil) {
             while rs.next() {
                 var timing = split(rs.stringForColumn("timing")) {$0 == "_"}
-                println("Here come the codes")
+                //println("Here come the codes")
                 colors = [String]()
                 if (rs.stringForColumn("pattern1") != ""){
                     for var i = 0.0; i < ( Double(timing[0].toInt()!)); i++ {
@@ -219,7 +216,7 @@ class CheerViewController: UIViewController {
         //need a scale from 80 to 100
         //brightness of 255 returns 80 or low point, 0 returns 100 or full value
         var modified = (90.0 + (10.0 * (255.0 - Double(brightness) ) / 255.0 ))
-        println(modified)
+        //println(modified)
         return modified
     }
 
