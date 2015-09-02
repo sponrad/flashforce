@@ -42,16 +42,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-        if cheering {
- /*           println("in cheering mode") //do something!
-            
-            let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-
-            var setViewController = mainStoryboard.instantiateViewControllerWithIdentifier("cheer") as! UIViewController
-            var rootViewController = self.window!.rootViewController
-
-            //rootViewController?.navigationController?.pushViewController(setViewController, animated: true)
-            setViewController.viewDidLoad() */
         }
     }
 
