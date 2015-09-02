@@ -25,12 +25,24 @@ class CheerViewController: UIViewController {
         let vc : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("ViewController") as! UIViewController
         self.presentViewController(vc, animated: true, completion: nil)
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:"mainFlash", name:UIApplicationDidBecomeActiveNotification, object: nil)
+        mainFlash()
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    func mainFlash(){
         UIScreen.mainScreen().brightness = CGFloat(1.0)
-        cheering = true
-        println("ok cheer loaded")
+        
+        if (cheering == true){
+            self.timer.invalidate()
+        }
         
         // // // GET INFO FROM DATABASE // // //
         let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
@@ -81,12 +93,9 @@ class CheerViewController: UIViewController {
             println("select failed: \(database.lastErrorMessage())")
         }
         // // // END GET INFO FROM DATABASE // // //
-
-        
-        TegKeychain.set("visitedcheer", value: "yes!")               //only for testing
         
         self.view.backgroundColor = colorWithHexString(colors[0])
-
+        
         self.syncingLabel.text = "syncing..."
         UIApplication.sharedApplication().idleTimerDisabled = true   //screen will not dim
         let modnumber = Double(colors.count) * interval
@@ -106,14 +115,12 @@ class CheerViewController: UIViewController {
             //self.timer.tolerance = 0.1
             self.syncingLabel.text = ""
             self.view.backgroundColor = self.colorWithHexString(self.colors[self.color])
-            UIScreen.mainScreen().brightness = CGFloat( self.brightnessArray[self.color] )
+            UIScreen.mainScreen().brightness = CGFloat( self.brightnessArray[self.color])
         }
-
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
+        cheering = true
+        println("ok cheer loaded")
+        
     }
     
     func update() {
@@ -212,7 +219,7 @@ class CheerViewController: UIViewController {
         brightness = brightness + (Double(g) * Double(g) * 0.691)
         brightness = brightness + (Double(b) * Double(b) * 0.068)
         brightness = sqrt( brightness )
-
+        
         //println(brightness)
         //need a scale from 80 to 100
         //brightness of 255 returns 80 or low point, 0 returns 100 or full value
@@ -220,5 +227,5 @@ class CheerViewController: UIViewController {
         //println(modified)
         return modified
     }
-
+    
 }

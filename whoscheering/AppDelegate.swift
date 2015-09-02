@@ -38,39 +38,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillEnterForeground(application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-        println("entered foreground")
-        if cheering {
-            println("was cheering")
-            let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            var setViewController = mainStoryboard.instantiateViewControllerWithIdentifier("cheer") as! UIViewController
-            var rootViewController = self.window!.rootViewController as! UINavigationController
-            
-            UIScreen.mainScreen().brightness = CGFloat(1.0)
-            
-            rootViewController.pushViewController(setViewController, animated: true)
-            //var VC1 = mainStoryboard.instantiateViewControllerWithIdentifier("HomeView") as! UIViewController
-            //let navController = UINavigationController(rootViewController: setViewController)
-            //rootViewController?.presentViewController(navController, animated: false, completion: nil)
-        }
     }
 
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-        println("became active")
         if cheering {
-            //println("was cheering__from become active")
-            //let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            //var setViewController = mainStoryboard.instantiateViewControllerWithIdentifier("cheer") as! UIViewController
-            //var rootViewController = self.window!.rootViewController
+ /*           println("in cheering mode") //do something!
             
-            //UIScreen.mainScreen().brightness = CGFloat(1.0)
-            
-            //rootViewController?.navigationController?.pushViewController(setViewController, animated: true)
-            //var VC1 = mainStoryboard.instantiateViewControllerWithIdentifier("HomeView") as! UIViewController
-            //let navController = UINavigationController(rootViewController: setViewController)
-            //rootViewController?.presentViewController(navController, animated: false, completion: nil)
-        }
+            let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
 
+            var setViewController = mainStoryboard.instantiateViewControllerWithIdentifier("cheer") as! UIViewController
+            var rootViewController = self.window!.rootViewController
+
+            //rootViewController?.navigationController?.pushViewController(setViewController, animated: true)
+            setViewController.viewDidLoad() */
+        }
     }
 
     func applicationWillTerminate(application: UIApplication) {
