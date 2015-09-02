@@ -250,6 +250,14 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
             
             let reachability = Reachability.reachabilityForInternetConnection()
             if reachability.isReachable() {
+                
+                database.executeUpdate("DROP TABLE offsets", withArgumentsInArray: nil)
+                
+                
+                if !database.executeUpdate("create table offsets(id integer primary key autoincrement, offset real)", withArgumentsInArray: nil) {
+                    println("create table failed: \(database.lastErrorMessage()), probably already created")
+                }
+                
                 //load offsets
                 var averageOffset:[Double] = []
                 getOffset()
