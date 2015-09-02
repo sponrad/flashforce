@@ -71,14 +71,14 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
         let offset : CGFloat = 0   //offset from sides of screen
         let width = screenSize.width - (2 * offset)
         var boxSize = CGSize(width: width, height: 10)
-        var boxView = UIImageView(frame: CGRect(origin: CGPoint(x: offset, y: screenSize.height - 320), size: boxSize))
+        var boxView = UIImageView(frame: CGRect(origin: CGPoint(x: offset, y: screenSize.height - 330), size: boxSize))
         self.view.addSubview(boxView)
         var image = drawRect(boxSize, color: colorWithHexString("EEEEEE"))
         boxView.image = image
         
         //browse button overline
         boxSize = CGSize(width: width, height: 10)
-        boxView = UIImageView(frame: CGRect(origin: CGPoint(x: offset, y: screenSize.height - 400), size: boxSize))
+        boxView = UIImageView(frame: CGRect(origin: CGPoint(x: offset, y: screenSize.height - 410), size: boxSize))
         self.view.addSubview(boxView)
         image = drawRect(boxSize, color: colorWithHexString("EEEEEE"))
         boxView.image = image
