@@ -24,6 +24,12 @@ class FetchViewController: UIViewController {
             return
         }
         
+        database.executeUpdate("DROP TABLE offsets", withArgumentsInArray: nil)
+        
+        
+        if !database.executeUpdate("create table offsets(id integer primary key autoincrement, offset real)", withArgumentsInArray: nil) {
+            println("create table failed: \(database.lastErrorMessage()), probably already created")
+        }
         
         //load offsets
         var averageOffset:[Double] = []
