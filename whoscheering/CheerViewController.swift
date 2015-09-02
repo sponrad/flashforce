@@ -41,7 +41,7 @@ class CheerViewController: UIViewController {
         UIScreen.mainScreen().brightness = CGFloat(1.0)
         
         if (cheering == true){
-            self.timer.invalidate()
+            self.timer?.invalidate()
         }
         
         // // // GET INFO FROM DATABASE // // //
