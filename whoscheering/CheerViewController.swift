@@ -43,6 +43,8 @@ class CheerViewController: UIViewController {
         if (cheering == true){
             self.timer?.invalidate()
         }
+        else {
+        }
         
         // // // GET INFO FROM DATABASE // // //
         let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
