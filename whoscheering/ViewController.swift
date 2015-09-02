@@ -322,7 +322,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
                 }
                 else {
                     println("do not flash if no reachability")
-                    var alert = UIAlertController(title: "Unable to Flash", message: "Please connect to the internet", preferredStyle: UIAlertControllerStyle.Alert)
+                    var alert = UIAlertController(title: "Unable to Flash", message: "Please connect to the internet and restart Flash Force", preferredStyle: UIAlertControllerStyle.Alert)
                     
                     alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: purchaseFreeFlash ))
                     self.presentViewController(alert, animated: true, completion: nil)
