@@ -280,8 +280,8 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
             if let rs = database.executeQuery("SELECT * FROM offsets LIMIT 50", withArgumentsInArray: nil) {
                 while rs.next() {
                     var nRows = rs.intForColumnIndex(0)
-                    if (nRows > 1){
-                        flashAble = true
+                    if (nRows > 0){
+                        flashAble = true   //allow flash if there is at least one offset stored
                     }
                     var offset = rs.doubleForColumn("offset")
                     offsets.append(offset)
@@ -321,7 +321,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
                     navigationController?.pushViewController(setViewController, animated: true)
                 }
                 else {
-                    println("do not flash if no reachability")
+                    println("do not flash if no offsets stored")
                     var alert = UIAlertController(title: "Unable to Flash", message: "Please connect to the internet and restart Flash Force", preferredStyle: UIAlertControllerStyle.Alert)
                     
                     alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: purchaseFreeFlash ))
@@ -389,7 +389,6 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
         }
         else {
             println("not reachable")
-            flashAble = false
         }
         
     }
