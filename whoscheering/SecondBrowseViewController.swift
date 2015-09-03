@@ -8,16 +8,25 @@
 
 import UIKit
 
-class SecondBrowseViewController: UITableViewController {
+class SecondBrowseViewController: UITableViewController, UISearchResultsUpdating {
     
 
     @IBOutlet var drillTable: UITableView!
     
+    let searchController = UISearchController(searchResultsController: nil)
     var category = String()  //set by previous view
     var details = [[Any]]()
+    var filteredDetails = [[Any]]()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        searchController.searchResultsUpdater = self
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.searchBar.sizeToFit()
+        self.tableView.tableHeaderView = searchController.searchBar
         
         let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
         let path = documentsFolder.stringByAppendingPathComponent("ff.db")
@@ -46,6 +55,18 @@ class SecondBrowseViewController: UITableViewController {
             println("select failed: \(database.lastErrorMessage())")
         }
     }
+    
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        let sb = searchController.searchBar
+        let target = sb.text
+        self.filteredDetails = self.details.filter {
+            s in
+            let options = NSStringCompareOptions.CaseInsensitiveSearch
+            let found = String(stringInterpolationSegment: s[0]).rangeOfString(target, options: options)
+            return (found != nil)
+        }
+        self.tableView.reloadData()
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -61,16 +82,25 @@ class SecondBrowseViewController: UITableViewController {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return self.details.count
+        if searchController.active{
+            return filteredDetails.count
+        }
+        else {
+            return details.count
+        }
     }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("drillCell", forIndexPath: indexPath) as! UITableViewCell
 
-        // Configure the cell...
-        cell.textLabel!.text = String(stringInterpolationSegment: self.details[indexPath.row][0])
-
+        if searchController.active{
+            cell.textLabel!.text = String(stringInterpolationSegment: self.filteredDetails[indexPath.row][0])
+        }
+        else {
+            cell.textLabel!.text = String(stringInterpolationSegment: self.details[indexPath.row][0])
+        }
+        
         return cell
     }
 
