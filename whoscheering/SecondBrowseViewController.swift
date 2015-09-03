@@ -149,6 +149,8 @@ class SecondBrowseViewController: UITableViewController, UISearchResultsUpdating
         // Pass the selected object to the new view
         var selectedCheer = self.drillTable.indexPathForSelectedRow()?.row
         
+        searchController.active = false
+        
         if let homeVC = segue.destinationViewController as? ViewController{
             homeVC.team = String(stringInterpolationSegment: self.details[selectedCheer!][0])
             selectedId = (self.details[selectedCheer!][1] as? Int32)!

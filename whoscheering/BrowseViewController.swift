@@ -112,6 +112,8 @@ class BrowseViewController: UITableViewController, UISearchResultsUpdating {
         // Pass the selected object to the new view controller.
         var i = self.browseTable.indexPathForSelectedRow()?.row
         
+        searchController.active = false
+        
         if let destinationVC = segue.destinationViewController as? SecondBrowseViewController{
             destinationVC.title = self.categories[i!]
             destinationVC.category = self.categories[i!]
