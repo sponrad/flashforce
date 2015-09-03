@@ -55,11 +55,16 @@ class BrowseViewController: UITableViewController, UISearchResultsUpdating {
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         let sb = searchController.searchBar
         let target = sb.text
-        self.filteredCategories = self.categories.filter {
-            s in
-            let options = NSStringCompareOptions.CaseInsensitiveSearch
-            let found = s.rangeOfString(target, options: options)
-            return (found != nil)
+        if (target == ""){
+            self.filteredCategories = self.categories
+        }
+        else {
+            self.filteredCategories = self.categories.filter {
+                s in
+                let options = NSStringCompareOptions.CaseInsensitiveSearch
+                let found = s.rangeOfString(target, options: options)
+                return (found != nil)
+            }
         }
         self.tableView.reloadData()
     }

@@ -59,11 +59,16 @@ class SecondBrowseViewController: UITableViewController, UISearchResultsUpdating
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         let sb = searchController.searchBar
         let target = sb.text
-        self.filteredDetails = self.details.filter {
-            s in
-            let options = NSStringCompareOptions.CaseInsensitiveSearch
-            let found = String(stringInterpolationSegment: s[0]).rangeOfString(target, options: options)
-            return (found != nil)
+        if (target == ""){
+            self.filteredDetails = self.details
+        }
+        else {
+            self.filteredDetails = self.details.filter {
+                s in
+                let options = NSStringCompareOptions.CaseInsensitiveSearch
+                let found = String(stringInterpolationSegment: s[0]).rangeOfString(target, options: options)
+                return (found != nil)
+            }
         }
         self.tableView.reloadData()
     }
