@@ -8,11 +8,11 @@
 
 import UIKit
 
-class BrowseViewController: UITableViewController, UISearchResultsUpdating {
+class BrowseViewController: UITableViewController {
     
     @IBOutlet var browseTable: UITableView!
     
-    let searchController = UISearchController(searchResultsController: nil)
+    //let searchController = UISearchController(searchResultsController: nil)
     var categories: [String] = []
     var filteredCategories: [String] = []
 
@@ -20,11 +20,11 @@ class BrowseViewController: UITableViewController, UISearchResultsUpdating {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        searchController.searchResultsUpdater = self
-        searchController.hidesNavigationBarDuringPresentation = false
-        searchController.dimsBackgroundDuringPresentation = false
-        searchController.searchBar.sizeToFit()
-        self.tableView.tableHeaderView = searchController.searchBar
+        //searchController.searchResultsUpdater = self
+        //searchController.hidesNavigationBarDuringPresentation = false
+        //searchController.dimsBackgroundDuringPresentation = false
+        //searchController.searchBar.sizeToFit()
+        //self.tableView.tableHeaderView = searchController.searchBar
         
         let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
         let path = documentsFolder.stringByAppendingPathComponent("ff.db")
@@ -52,6 +52,7 @@ class BrowseViewController: UITableViewController, UISearchResultsUpdating {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
+    /*
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         let sb = searchController.searchBar
         let target = sb.text
@@ -67,7 +68,7 @@ class BrowseViewController: UITableViewController, UISearchResultsUpdating {
             }
         }
         self.tableView.reloadData()
-    }
+    }*/
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -85,27 +86,27 @@ class BrowseViewController: UITableViewController, UISearchResultsUpdating {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        if searchController.active{
-            return filteredCategories.count
-        }
-        else {
-            return categories.count
-        }
+        //if searchController.active{
+        //    return filteredCategories.count
+       // }
+        //else {
+        return self.categories.count
+        //}
     }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("categoryCell", forIndexPath: indexPath) as! UITableViewCell
         
-        if searchController.active {
-            cell.textLabel!.text = self.filteredCategories[indexPath.row]
-            cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
-        }
-        else{
+        //if searchController.active {
+        //    cell.textLabel!.text = self.filteredCategories[indexPath.row]
+        //    cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+       // }
+       // else{
             // Configure the cell
-            cell.textLabel!.text = self.categories[indexPath.row]
-            cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
-        }
+        cell.textLabel!.text = self.categories[indexPath.row]
+        cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+        //}
 
 
         return cell
@@ -117,7 +118,7 @@ class BrowseViewController: UITableViewController, UISearchResultsUpdating {
         // Pass the selected object to the new view controller.
         var i = self.browseTable.indexPathForSelectedRow()?.row
         
-        searchController.active = false
+        //searchController.active = false
         
         if let destinationVC = segue.destinationViewController as? SecondBrowseViewController{
             destinationVC.title = self.categories[i!]
