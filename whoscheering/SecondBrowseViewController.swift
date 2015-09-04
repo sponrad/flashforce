@@ -22,6 +22,7 @@ class SecondBrowseViewController: UITableViewController, UISearchResultsUpdating
     override func viewDidLoad() {
         super.viewDidLoad()
         
+
         searchController.searchResultsUpdater = self
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.dimsBackgroundDuringPresentation = false
@@ -54,6 +55,8 @@ class SecondBrowseViewController: UITableViewController, UISearchResultsUpdating
         } else {
             println("select failed: \(database.lastErrorMessage())")
         }
+        
+        self.filteredDetails = self.details
     }
     
     func updateSearchResultsForSearchController(searchController: UISearchController) {
@@ -87,7 +90,7 @@ class SecondBrowseViewController: UITableViewController, UISearchResultsUpdating
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        if searchController.active{
+        if self.searchController.active{
             return filteredDetails.count
         }
         else {
@@ -157,8 +160,17 @@ class SecondBrowseViewController: UITableViewController, UISearchResultsUpdating
         searchController.active = false
         
         if let homeVC = segue.destinationViewController as? ViewController{
-            homeVC.team = String(stringInterpolationSegment: self.details[selectedCheer!][0])
-            selectedId = (self.details[selectedCheer!][1] as? Int32)!
+            if searchController.active {
+                println("yeah this is firing")
+                homeVC.team = String(stringInterpolationSegment: self.filteredDetails[selectedCheer!][0])
+                selectedId = (self.filteredDetails[selectedCheer!][1] as? Int32)!
+            }
+            else{
+                println("NO THIS ONE IS FIRING")
+                homeVC.team = String(stringInterpolationSegment: self.details[selectedCheer!][0])
+                selectedId = (self.filteredDetails[selectedCheer!][1] as? Int32)!
+            }
+            
         }
     }
 
