@@ -19,8 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Override point for customization after application launch.
         //UIApplication.sharedApplication().setMinimumBackgroundFetchInterval(43200)
-        UIApplication.sharedApplication().setMinimumBackgroundFetchInterval(
-            UIApplicationBackgroundFetchIntervalMinimum)
+        //UIApplication.sharedApplication().setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
         return true
         
     }
