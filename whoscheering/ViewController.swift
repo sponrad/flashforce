@@ -326,10 +326,11 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                 alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
                 self.presentViewController(alert, animated: true, completion: nil)
             case "buy":
-                var alert = UIAlertController(title: "Buy Flash !!!NOT DONE YET!!!", message: "Buy this flash for $\(selectedPrice)?", preferredStyle: UIAlertControllerStyle.Alert)
-                alert.addAction(UIAlertAction(title: "Buy", style: UIAlertActionStyle.Default, handler: buyNonConsumable()))
+                buyNonConsumable()
+                /*var alert = UIAlertController(title: "Buy Flash !!!NOT DONE YET!!!", message: "Buy this flash for $\(selectedPrice)?", preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "Buy", style: UIAlertActionStyle.Default, handler: buyNonConsumable ))
                 alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
-                self.presentViewController(alert, animated: true, completion: nil)
+                self.presentViewController(alert, animated: true, completion: nil)*/
             default:
                 println("do nothing")
         }
@@ -492,8 +493,8 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         // We check that we are allow to make the purchase.
         if (SKPaymentQueue.canMakePayments())
         {
-            var productID:NSSet = NSSet(object: selectedId);
-            var productsRequest:SKProductsRequest = SKProductsRequest(productIdentifiers: selectedId);
+            var productID:NSSet = NSSet(object: String(selectedStoreId));
+            var productsRequest:SKProductsRequest = SKProductsRequest(productIdentifiers: productID as Set<NSObject>);
             productsRequest.delegate = self;
             productsRequest.start();
             println("Fething Products");
@@ -514,8 +515,8 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         var count : Int = response.products.count
         if (count>0) {
             var validProducts = response.products
-            var validProduct: SKProduct = response.products[0] as SKProduct
-            if (validProduct.productIdentifier == self.product_id) {
+            var validProduct: SKProduct = response.products[0] as! SKProduct
+            if (validProduct.productIdentifier == String(selectedStoreId)) {
                 println(validProduct.localizedTitle)
                 println(validProduct.localizedDescription)
                 println(validProduct.price)
@@ -526,6 +527,30 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         } else {
             println("nothing")
         }
+    }
+    
+    func paymentQueue(queue: SKPaymentQueue!, updatedTransactions transactions: [AnyObject]!)    {
+        println("Received Payment Transaction Response from Apple");
+        
+        for transaction:AnyObject in transactions {
+            if let trans:SKPaymentTransaction = transaction as? SKPaymentTransaction{
+                switch trans.transactionState {
+                case .Purchased:
+                    println("Product Purchased");
+                    SKPaymentQueue.defaultQueue().finishTransaction(transaction as! SKPaymentTransaction)
+                    break;
+                case .Failed:
+                    println("Purchased Failed");
+                    SKPaymentQueue.defaultQueue().finishTransaction(transaction as! SKPaymentTransaction)
+                    break;
+                    // case .Restored:
+                    //[self restoreTransaction:transaction];
+                default:
+                    break;
+                }
+            }
+        }
+        
     }
     
     
