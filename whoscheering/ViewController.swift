@@ -20,7 +20,7 @@ var oldBrightness: CGFloat = 0.5
 var flashAble = false
 
 
-class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
+class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SKProductsRequestDelegate, SKPaymentTransactionObserver {
 
     @IBOutlet weak var actionButton: UIButton!
     @IBOutlet weak var browseButton: UIButton!
@@ -163,13 +163,6 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
             } else {
                 println("select failed: \(database.lastErrorMessage())")
             }
-        }
-        
-        if (SKPaymentQueue.canMakePayments()){
-            println("can make payments")
-        }
-        else {
-            println("no payment support")
         }
 
         ///////////////////////////   flash button logic
@@ -334,7 +327,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
                 self.presentViewController(alert, animated: true, completion: nil)
             case "buy":
                 var alert = UIAlertController(title: "Buy Flash !!!NOT DONE YET!!!", message: "Buy this flash for $\(selectedPrice)?", preferredStyle: UIAlertControllerStyle.Alert)
-                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+                alert.addAction(UIAlertAction(title: "Buy", style: UIAlertActionStyle.Default, handler: buyNonConsumable()))
                 alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
                 self.presentViewController(alert, animated: true, completion: nil)
             default:
@@ -493,5 +486,48 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate {
         self.actionButton.setTitle("Start Flash", forState: UIControlState.Normal)
         actionButtonStatus = "flash"
     }
+    
+    func buyNonConsumable(){
+        println("About to fetch the products");
+        // We check that we are allow to make the purchase.
+        if (SKPaymentQueue.canMakePayments())
+        {
+            var productID:NSSet = NSSet(object: selectedId);
+            var productsRequest:SKProductsRequest = SKProductsRequest(productIdentifiers: selectedId);
+            productsRequest.delegate = self;
+            productsRequest.start();
+            println("Fething Products");
+        }else{
+            println("can't make purchases");
+        }
+    }
+    
+    func buyProduct(product: SKProduct){
+        println("Sending the Payment Request to Apple");
+        var payment = SKPayment(product: product)
+        SKPaymentQueue.defaultQueue().addPayment(payment);
+        
+    }
+    
+    func productsRequest (request: SKProductsRequest, didReceiveResponse response: SKProductsResponse) {
+        println("got the request from Apple")
+        var count : Int = response.products.count
+        if (count>0) {
+            var validProducts = response.products
+            var validProduct: SKProduct = response.products[0] as SKProduct
+            if (validProduct.productIdentifier == self.product_id) {
+                println(validProduct.localizedTitle)
+                println(validProduct.localizedDescription)
+                println(validProduct.price)
+                buyProduct(validProduct);
+            } else {
+                println(validProduct.productIdentifier)
+            }
+        } else {
+            println("nothing")
+        }
+    }
+    
+    
     
 }
