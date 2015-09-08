@@ -231,7 +231,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
             
         }
         
-        ///////////////////////////   code to load the database with data
+        ///////////////////////////   code to load the database with data on first bootup
         if (ffdbLoaded==false){
             database.executeUpdate("DROP TABLE cheers", withArgumentsInArray: nil)
             //database.executeUpdate("DROP TABLE offsets", withArgumentsInArray: nil)
@@ -260,7 +260,6 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
             if reachability.isReachable() {
                 
                 database.executeUpdate("DROP TABLE offsets", withArgumentsInArray: nil)
-                
                 
                 if !database.executeUpdate("create table offsets(id integer primary key autoincrement, offset real)", withArgumentsInArray: nil) {
                     println("create table failed: \(database.lastErrorMessage()), probably already created")
