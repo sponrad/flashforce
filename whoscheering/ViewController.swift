@@ -84,7 +84,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         boxView.image = image
         
         //there is a team selected (will never fire on first boot)
-        if (selectedId != 9999999){
+        if (self.team == ""){
             //teambutton underline
             boxSize = CGSize(width: width, height: 10)
             boxView = UIImageView(frame: CGRect(origin: CGPoint(x: offset, y: screenSize.height - 240), size: boxSize))
