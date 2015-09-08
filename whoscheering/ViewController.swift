@@ -183,6 +183,17 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                 }
             }
             
+            //check in apple store to see if owned
+            for transaction:SKPaymentTransaction in SKPaymentQueue.defaultQueue().transactions as! [SKPaymentTransaction] {
+                
+                if transaction.payment.productIdentifier == selectedStoreId
+                {
+                    println("Consumable Product Purchased")
+                    // Unlock Feature
+                    owned = true
+                }
+            }
+            
             //if owned: display the start flash button
             if (owned == true){
                 self.actionButton.enabled = true
@@ -497,7 +508,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
             var productsRequest:SKProductsRequest = SKProductsRequest(productIdentifiers: productID as Set<NSObject>);
             productsRequest.delegate = self;
             productsRequest.start();
-            println("Fething Products");
+            println("Fetching Products");
         }else{
             println("can't make purchases");
         }
