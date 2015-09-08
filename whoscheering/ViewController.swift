@@ -165,7 +165,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
             }
         }
 
-        ///////////////////////////   flash button logic
+        ///////////////////////////   flash button logic, also should never fire on first boot
         if (self.team == ""){
             self.actionButton.enabled = false
             self.actionButton.alpha = 0.3
@@ -176,7 +176,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
             //check if they own the product or not
             var owned = false  //check against app store
                       
-            //check against keychain
+            //check ownership against keychain
             if (TegKeychain.get("freecheer") != nil){
                 if TegKeychain.get("freecheer")! == selectedStoreId {
                     owned = true
@@ -184,7 +184,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
             }
             else {
                 //TODO add a check for local db before the apple check
-                //check in apple store to see if owned
+                //check ownership in apple store to see if owned
                 if (SKPaymentQueue.canMakePayments()){
                     for transaction:SKPaymentTransaction in SKPaymentQueue.defaultQueue().transactions as! [SKPaymentTransaction] {
                         if transaction.payment.productIdentifier == String(selectedStoreId)
@@ -522,7 +522,6 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         println("Sending the Payment Request to Apple");
         var payment = SKPayment(product: product)
         SKPaymentQueue.defaultQueue().addPayment(payment);
-        
     }
     
     func productsRequest (request: SKProductsRequest, didReceiveResponse response: SKProductsResponse) {
@@ -565,9 +564,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                 }
             }
         }
-        
     }
     
-    
-    
+
 }
