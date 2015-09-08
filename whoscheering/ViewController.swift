@@ -182,15 +182,19 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                     owned = true
                 }
             }
-            
-            //check in apple store to see if owned
-            for transaction:SKPaymentTransaction in SKPaymentQueue.defaultQueue().transactions as! [SKPaymentTransaction] {
-                
-                if transaction.payment.productIdentifier == selectedStoreId
-                {
-                    println("Consumable Product Purchased")
-                    // Unlock Feature
-                    owned = true
+            else {
+                //TODO add a check for local db before the apple check
+                //check in apple store to see if owned
+                if (SKPaymentQueue.canMakePayments()){
+                    for transaction:SKPaymentTransaction in SKPaymentQueue.defaultQueue().transactions as! [SKPaymentTransaction] {
+                        if transaction.payment.productIdentifier == String(selectedStoreId)
+                        {
+                            println("Non consumable Product is Purchased")
+                            // Unlock Feature
+                            owned = true
+                            //TODO: add this to a local table in the database of owned products
+                        }
+                    }
                 }
             }
             
