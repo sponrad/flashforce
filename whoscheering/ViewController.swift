@@ -47,6 +47,8 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         self.outfitButton.enabled = false
         self.outfitButton.hidden = true
         self.teamButton.setTitle("", forState: UIControlState.Normal)
+        //self.teamButton.titleLabel?.minimumScaleFactor = 0.01
+        //self.teamButton.titleLabel?.adjustsFontSizeToFitWidth = true
         self.tapButton.setTitle("", forState: UIControlState.Normal)
         self.labelBottomArrow.hidden = true
         self.labelMiddleArrow.hidden = true
