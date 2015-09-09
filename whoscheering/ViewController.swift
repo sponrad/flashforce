@@ -241,6 +241,11 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         
         // TODO add check for ffdbloaded, only load if there is a change in the db, compare rows of cheers maybe
         // should improve load time a lot
+        if let rscheck = database.intForQuery("SELECT COUNT(id) FROM cheers") {
+            if (UInt32(rscheck) == UInt32(StoreData.initialData.count)) {
+                ffdbLoaded = true
+            }
+        }
         
         ///////////////////////////   code to load the database with data on first bootup
         if (ffdbLoaded==false){
