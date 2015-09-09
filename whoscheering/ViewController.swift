@@ -233,6 +233,10 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
             
         }
         
+        
+        // TODO add check for ffdbloaded, only load if there is a change in the db, compare rows of cheers maybe
+        // should improve load time a lot
+        
         ///////////////////////////   code to load the database with data on first bootup
         if (ffdbLoaded==false){
             database.executeUpdate("DROP TABLE cheers", withArgumentsInArray: nil)
