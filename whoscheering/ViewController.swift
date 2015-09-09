@@ -46,6 +46,8 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         self.navigationItem.hidesBackButton = false;
         self.outfitButton.enabled = false
         self.outfitButton.hidden = true
+        self.teamButton.enabled = false
+        self.teamButton.hidden = true
         self.teamButton.setTitle("", forState: UIControlState.Normal)
         //self.teamButton.titleLabel?.minimumScaleFactor = 0.01
         //self.teamButton.titleLabel?.adjustsFontSizeToFitWidth = true
@@ -87,6 +89,9 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         
         //there is a team selected (will never fire on first boot)
         if (self.team != ""){
+            self.teamButton.hidden = false
+            self.teamButton.enabled = true
+            
             //teambutton underline
             boxSize = CGSize(width: width, height: 10)
             boxView = UIImageView(frame: CGRect(origin: CGPoint(x: offset, y: screenSize.height - 240), size: boxSize))
