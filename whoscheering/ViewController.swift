@@ -298,22 +298,22 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
             NSNotificationCenter.defaultCenter().addObserver(self, selector: "reachabilityChanged:", name: ReachabilityChangedNotification, object: reachability)
             reachability.startNotifier()
             
-            //average all of the stored offsets
-            var offsets:[Double] = []
-            if let rs = database.executeQuery("SELECT * FROM offsets LIMIT 50", withArgumentsInArray: nil) {
-                while rs.next() {
-                    var nRows = rs.intForColumnIndex(0)
-                    if (nRows > 0){
-                        flashAble = true   //allow flash if there is at least one offset stored
-                    }
-                    var offset = rs.doubleForColumn("offset")
-                    offsets.append(offset)
-                }
-                avgOffset = offsets.reduce(0) { $0 + $1 } / Double(offsets.count)
-                println(avgOffset)
-            }
-            
             ffdbLoaded = true
+        }
+        
+        //average all of the stored offsets
+        var offsets:[Double] = []
+        if let rs = database.executeQuery("SELECT * FROM offsets LIMIT 50", withArgumentsInArray: nil) {
+            while rs.next() {
+                var nRows = rs.intForColumnIndex(0)
+                if (nRows > 0){
+                    flashAble = true   //allow flash if there is at least one offset stored
+                }
+                var offset = rs.doubleForColumn("offset")
+                offsets.append(offset)
+            }
+            avgOffset = offsets.reduce(0) { $0 + $1 } / Double(offsets.count)
+            println(avgOffset)
         }
         
     }
