@@ -322,7 +322,7 @@
                             <constraint firstItem="xQq-hb-VP3" firstAttribute="top" secondItem="83O-3k-Lif" secondAttribute="bottom" constant="-30" id="AHI-MC-2N6"/>
                             <constraint firstAttribute="trailing" secondItem="uSn-uI-Ptt" secondAttribute="trailing" id="AKF-eD-dpV"/>
                             <constraint firstItem="v2D-Mr-0u7" firstAttribute="leading" secondItem="Z39-rz-1uV" secondAttribute="leading" id="By9-bY-xkD"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="xQq-hb-VP3" secondAttribute="bottom" constant="180" id="CdQ-gw-eMm"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="xQq-hb-VP3" secondAttribute="bottom" constant="140" id="CdQ-gw-eMm"/>
                             <constraint firstItem="tgJ-lS-oK9" firstAttribute="leading" secondItem="83O-3k-Lif" secondAttribute="trailing" constant="8" symbolic="YES" id="ClQ-zw-19O"/>
                             <constraint firstItem="v2D-Mr-0u7" firstAttribute="trailing" secondItem="uSn-uI-Ptt" secondAttribute="trailing" id="Evp-i6-zo9"/>
                             <constraint firstItem="tgJ-lS-oK9" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="GBm-Ze-E4l"/>
@@ -361,20 +361,76 @@
                                 <exclude reference="eBf-el-MOc"/>
                                 <exclude reference="AHI-MC-2N6"/>
                                 <exclude reference="Y5w-7V-eOx"/>
-                                <exclude reference="bAL-CX-Ce0"/>
                                 <exclude reference="ClQ-zw-19O"/>
                                 <exclude reference="Hps-Jl-g7Y"/>
                                 <exclude reference="Zxv-D4-oqt"/>
                                 <exclude reference="PD6-78-liS"/>
                                 <exclude reference="hBN-xU-5Ly"/>
-                                <exclude reference="CdQ-gw-eMm"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=compact">
+                            <mask key="constraints">
+                                <include reference="7mT-ib-xrh"/>
+                                <include reference="HZo-WK-U0g"/>
+                                <include reference="bAL-CX-Ce0"/>
+                                <include reference="CdQ-gw-eMm"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular">
                             <mask key="constraints">
                                 <include reference="eBf-el-MOc"/>
+                                <include reference="7mT-ib-xrh"/>
+                                <exclude reference="HZo-WK-U0g"/>
                                 <include reference="bAL-CX-Ce0"/>
                                 <exclude reference="WSd-jT-ae0"/>
+                                <include reference="CdQ-gw-eMm"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="constraints">
+                                <include reference="7mT-ib-xrh"/>
+                                <include reference="HZo-WK-U0g"/>
+                                <include reference="bAL-CX-Ce0"/>
+                                <include reference="CdQ-gw-eMm"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=regular">
+                            <mask key="constraints">
+                                <include reference="7mT-ib-xrh"/>
+                                <include reference="HZo-WK-U0g"/>
+                                <include reference="bAL-CX-Ce0"/>
+                                <include reference="CdQ-gw-eMm"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=compact-widthClass=compact">
+                            <mask key="constraints">
+                                <include reference="7mT-ib-xrh"/>
+                                <include reference="HZo-WK-U0g"/>
+                                <include reference="bAL-CX-Ce0"/>
+                                <include reference="CdQ-gw-eMm"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=compact-widthClass=regular">
+                            <mask key="constraints">
+                                <include reference="7mT-ib-xrh"/>
+                                <include reference="HZo-WK-U0g"/>
+                                <include reference="bAL-CX-Ce0"/>
+                                <include reference="CdQ-gw-eMm"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="constraints">
+                                <include reference="7mT-ib-xrh"/>
+                                <include reference="HZo-WK-U0g"/>
+                                <include reference="bAL-CX-Ce0"/>
+                                <include reference="CdQ-gw-eMm"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=regular">
+                            <mask key="constraints">
+                                <include reference="7mT-ib-xrh"/>
+                                <include reference="HZo-WK-U0g"/>
+                                <include reference="bAL-CX-Ce0"/>
                                 <include reference="CdQ-gw-eMm"/>
                             </mask>
                         </variation>

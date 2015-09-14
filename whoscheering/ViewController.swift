@@ -76,14 +76,14 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         let offset : CGFloat = 0   //offset from sides of screen
         let width = screenSize.width - (2 * offset)
         var boxSize = CGSize(width: width, height: 10)
-        var boxView = UIImageView(frame: CGRect(origin: CGPoint(x: offset, y: screenSize.size.height - browseButton.center.y - 247), size: boxSize))
+        var boxView = UIImageView(frame: CGRect(origin: CGPoint(x: offset, y: browseButton.frame.maxY), size: boxSize))
         self.view.addSubview(boxView)
         var image = drawRect(boxSize, color: colorWithHexString("EEEEEE"))
         boxView.image = image
         
         //browse button overline
         boxSize = CGSize(width: width, height: 10)
-        boxView = UIImageView(frame: CGRect(origin: CGPoint(x: offset, y: screenSize.height - browseButton.center.y - 162), size: boxSize))
+        boxView = UIImageView(frame: CGRect(origin: CGPoint(x: offset, y: screenSize.height - browseButton.frame.maxY - 10), size: boxSize))
         self.view.addSubview(boxView)
         image = drawRect(boxSize, color: colorWithHexString("EEEEEE"))
         boxView.image = image
@@ -95,7 +95,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
             
             //teambutton underline
             boxSize = CGSize(width: width, height: 10)
-            boxView = UIImageView(frame: CGRect(origin: CGPoint(x: offset, y: screenSize.height - teamButton.center.y + 30), size: boxSize))
+            boxView = UIImageView(frame: CGRect(origin: CGPoint(x: offset, y: screenSize.height - teamButton.frame.maxY - 10), size: boxSize))
             self.view.addSubview(boxView)
             image = drawRect(boxSize, color: colorWithHexString("EEEEEE"))
             boxView.image = image
