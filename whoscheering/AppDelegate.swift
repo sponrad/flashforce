@@ -37,6 +37,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillEnterForeground(application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+        if (!cheering){
+            // sync if internet
+            let reachability = Reachability.reachabilityForInternetConnection()
+            if reachability.isReachable() {
+                ///////////////////////////   connect to the database
+                let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
+                let path = documentsFolder.stringByAppendingPathComponent("ff.db")
+                let database = FMDatabase(path: path)
+                if !database.open() {
+                    println("Unable to open database")
+                    return
+                }
+                
+                database.executeUpdate("DROP TABLE offsets", withArgumentsInArray: nil)
+                
+                if !database.executeUpdate("create table offsets(id integer primary key autoincrement, offset real)", withArgumentsInArray: nil) {
+                    println("create table failed: \(database.lastErrorMessage()), probably already created")
+                }
+                
+                //load offsets
+                var averageOffset:[Double] = []
+                getOffset()
+                averageOffset.append(getOffset())
+                averageOffset.append(getOffset())
+                averageOffset.append(getOffset())
+                let average = averageOffset.reduce(0) { $0 + $1 } / Double(averageOffset.count)
+                println( average )
+                database.executeUpdate("insert into offsets values (NULL, '\(String(stringInterpolationSegment: average))')", withArgumentsInArray: nil)
+                flashAble = true
+                println("synced to enter foreground")
+            }
+            else {
+                println("not reachable")
+            }
+        }
     }
 
     func applicationDidBecomeActive(application: UIApplication) {
@@ -53,6 +88,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let fetchView = FetchViewController()
         fetchView.fetch{ completionHandler(.NewData) }
         
+    }
+    
+    func getOffset() -> Double {
+        var offset : Double = 0
+        let ct = NSDate().timeIntervalSince1970
+        let serverEpochStr: String = parseJSON( getJSON("http://alignthebeat.appspot.com") )["epoch"] as! String
+        let serverEpoch = (serverEpochStr as NSString).doubleValue
+        let nct = NSDate().timeIntervalSince1970
+        let ping = nct - ct
+        println("ping \(ping)")
+        offset = serverEpoch - nct + ping
+        return offset
+    }
+    
+    func getJSON(urlToRequest: String) -> NSData{
+        return NSData(contentsOfURL: NSURL(string: urlToRequest)!)!
+    }
+    
+    func parseJSON(inputData: NSData) -> NSDictionary{
+        var error: NSError?
+        var boardsDictionary: NSDictionary = NSJSONSerialization.JSONObjectWithData(inputData, options: NSJSONReadingOptions.MutableContainers, error: &error) as! NSDictionary
+        
+        return boardsDictionary
     }
 
 
