@@ -120,8 +120,11 @@ class CheerViewController: UIViewController {
             UIScreen.mainScreen().brightness = CGFloat( self.brightnessArray[self.color])
         }
         
+        if (cheering == true){
+            println("ok cheer loaded")
+        }
         cheering = true
-        println("ok cheer loaded")
+
         
     }
     
@@ -194,6 +197,7 @@ class CheerViewController: UIViewController {
         if (self.isMovingFromParentViewController()==true){
             // Your code...
             UIScreen.mainScreen().brightness = oldBrightness
+            cheering = false
         }
     }
     

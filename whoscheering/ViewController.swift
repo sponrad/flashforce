@@ -42,6 +42,8 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
     @IBOutlet weak var grayUnderTeam: UILabel!
     @IBOutlet weak var grayOverFlash: UILabel!
     
+    @IBOutlet weak var testButton: UIButton!
+    
     var team = String()   // set from the secondbrowseviewcontroller
 
     override func viewDidLoad() {
@@ -59,7 +61,8 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         self.tapButton.setTitle("", forState: UIControlState.Normal)
         self.labelBottomArrow.hidden = true
         self.labelMiddleArrow.hidden = true
-        
+        testButton.hidden = true
+
         grayOverFlash.hidden = true
         grayUnderTeam.hidden = true
         
@@ -80,6 +83,8 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         if (self.team != ""){
             self.teamButton.hidden = false
             self.teamButton.enabled = true
+            
+            testButton.hidden = false
             
             //teambutton underline
             grayUnderTeam.hidden = false

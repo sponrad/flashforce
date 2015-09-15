@@ -844,6 +844,7 @@
                         <outlet property="outfitButton" destination="xQq-hb-VP3" id="Fdf-Tj-2gg"/>
                         <outlet property="tapButton" destination="uSn-uI-Ptt" id="I7I-ee-IIP"/>
                         <outlet property="teamButton" destination="83O-3k-Lif" id="i8t-iW-SUB"/>
+                        <outlet property="testButton" destination="99C-zS-bbP" id="20X-yf-eAl"/>
                         <outlet property="testCheerButton" destination="lwr-gf-ptC" id="Egj-Mx-Ln1"/>
                     </connections>
                 </viewController>
