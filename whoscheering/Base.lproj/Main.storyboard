@@ -251,23 +251,6 @@
                                     <segue destination="MbV-DC-qNN" kind="show" id="3YA-HQ-nKk"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="▼" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tgJ-lS-oK9">
-                                <rect key="frame" x="555" y="168" width="29" height="103"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="KPq-Uy-ObJ"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="29"/>
-                                <color key="textColor" red="1" green="0.80000001190000003" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="KPq-Uy-ObJ"/>
-                                    </mask>
-                                </variation>
-                                <variation key="heightClass=compact-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="355" y="143" width="29" height="88"/>
-                                </variation>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xQq-hb-VP3">
                                 <rect key="frame" x="16" y="360" width="531" height="89"/>
                                 <constraints>
@@ -432,6 +415,23 @@
                                     <rect key="frame" x="0.0" y="72" width="400" height="63"/>
                                 </variation>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="▼" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tgJ-lS-oK9">
+                                <rect key="frame" x="555" y="168" width="29" height="103"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="KPq-Uy-ObJ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="29"/>
+                                <color key="textColor" red="1" green="0.80000001190000003" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="KPq-Uy-ObJ"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=compact-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="355" y="143" width="29" height="88"/>
+                                </variation>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -468,7 +468,7 @@
                             <constraint firstItem="v2D-Mr-0u7" firstAttribute="trailing" secondItem="uSn-uI-Ptt" secondAttribute="trailing" id="Evp-i6-zo9"/>
                             <constraint firstItem="5WP-KU-8aB" firstAttribute="leading" secondItem="xQq-hb-VP3" secondAttribute="trailing" constant="8" symbolic="YES" id="Eys-8a-yYG"/>
                             <constraint firstItem="1jw-HA-hhU" firstAttribute="top" secondItem="tgJ-lS-oK9" secondAttribute="bottom" constant="24" id="FOs-XR-zBZ">
-                                <variation key="heightClass=regular" constant="-3"/>
+                                <variation key="heightClass=regular" constant="2"/>
                             </constraint>
                             <constraint firstItem="tgJ-lS-oK9" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="GBm-Ze-E4l"/>
                             <constraint firstItem="5WP-KU-8aB" firstAttribute="leading" secondItem="1jw-HA-hhU" secondAttribute="leading" id="HMF-6W-z8X"/>
@@ -553,7 +553,7 @@
                             <constraint firstItem="uSn-uI-Ptt" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" symbolic="YES" id="p8S-Hs-7JX"/>
                             <constraint firstItem="tgJ-lS-oK9" firstAttribute="leading" secondItem="1jw-HA-hhU" secondAttribute="leading" id="qwj-Wg-cpP"/>
                             <constraint firstItem="q8d-dG-Aws" firstAttribute="firstBaseline" secondItem="tgJ-lS-oK9" secondAttribute="firstBaseline" id="skp-93-Q5R">
-                                <variation key="heightClass=regular" constant="-12"/>
+                                <variation key="heightClass=regular" constant="-7"/>
                             </constraint>
                             <constraint firstItem="1jw-HA-hhU" firstAttribute="top" secondItem="srH-We-LJX" secondAttribute="bottom" constant="27" id="tPe-lh-5ab">
                                 <variation key="heightClass=regular" constant="12"/>
@@ -834,6 +834,7 @@
                     <connections>
                         <outlet property="actionButton" destination="Z39-rz-1uV" id="D4e-qj-Zwa"/>
                         <outlet property="browseButton" destination="RyF-4m-Ac3" id="xRE-0V-EEW"/>
+                        <outlet property="flashForwardBoxes" destination="v2D-Mr-0u7" id="5Sy-Df-aIH"/>
                         <outlet property="grayOverBrowse" destination="q8d-dG-Aws" id="UDm-Zw-tZW"/>
                         <outlet property="grayOverFlash" destination="8jM-5R-dqr" id="AEh-O1-U8X"/>
                         <outlet property="grayUnderBrowse" destination="srH-We-LJX" id="qzc-uz-V1V"/>
