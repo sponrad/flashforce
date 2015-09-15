@@ -218,12 +218,6 @@
                                     <action selector="tapButtonTapped:" destination="BYZ-38-t0r" eventType="touchDownRepeat" id="KTe-X1-8Zi"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="flash-forward-three-boxes.png" translatesAutoresizingMaskIntoConstraints="NO" id="v2D-Mr-0u7">
-                                <rect key="frame" x="0.0" y="72" width="600" height="88"/>
-                                <variation key="heightClass=compact-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="72" width="400" height="63"/>
-                                </variation>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RyF-4m-Ac3">
                                 <rect key="frame" x="16" y="159" width="531" height="121"/>
                                 <constraints>
@@ -432,6 +426,12 @@
                                     </mask>
                                 </variation>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="flash-forward-three-boxes.png" translatesAutoresizingMaskIntoConstraints="NO" id="v2D-Mr-0u7">
+                                <rect key="frame" x="0.0" y="72" width="600" height="88"/>
+                                <variation key="heightClass=compact-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="0.0" y="72" width="400" height="63"/>
+                                </variation>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -584,13 +584,13 @@
                                 <exclude reference="8jM-5R-dqr"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="HbA-HJ-VR9"/>
-                                <exclude reference="gcT-rH-AIo"/>
-                                <exclude reference="mCd-3P-eUv"/>
                                 <exclude reference="0ya-IX-Wru"/>
                                 <exclude reference="V9H-bu-ACF"/>
                                 <exclude reference="ZP8-wY-l3q"/>
                                 <exclude reference="vJz-eM-cVL"/>
+                                <exclude reference="HbA-HJ-VR9"/>
+                                <exclude reference="gcT-rH-AIo"/>
+                                <exclude reference="mCd-3P-eUv"/>
                                 <exclude reference="6ie-3g-zjW"/>
                                 <exclude reference="MN5-Wc-hnI"/>
                                 <exclude reference="k2s-gK-w0V"/>
@@ -667,6 +667,12 @@
                                 <include reference="8jM-5R-dqr"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="0ya-IX-Wru"/>
+                                <exclude reference="AKF-eD-dpV"/>
+                                <include reference="V9H-bu-ACF"/>
+                                <include reference="ZP8-wY-l3q"/>
+                                <exclude reference="p8S-Hs-7JX"/>
+                                <include reference="vJz-eM-cVL"/>
                                 <exclude reference="06a-Ns-5pM"/>
                                 <exclude reference="24d-TW-1Tk"/>
                                 <exclude reference="By9-bY-xkD"/>
@@ -676,12 +682,6 @@
                                 <include reference="gcT-rH-AIo"/>
                                 <exclude reference="lcS-i8-c1e"/>
                                 <include reference="mCd-3P-eUv"/>
-                                <include reference="0ya-IX-Wru"/>
-                                <exclude reference="AKF-eD-dpV"/>
-                                <include reference="V9H-bu-ACF"/>
-                                <include reference="ZP8-wY-l3q"/>
-                                <exclude reference="p8S-Hs-7JX"/>
-                                <include reference="vJz-eM-cVL"/>
                                 <include reference="6ie-3g-zjW"/>
                                 <include reference="MN5-Wc-hnI"/>
                                 <include reference="k2s-gK-w0V"/>

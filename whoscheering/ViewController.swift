@@ -71,7 +71,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         //self.color1Label.backgroundColor = UIColor.whiteColor()
 
         ///////////////////////////   connect to the database
-        let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
+        //let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
         let path = documentsFolder.stringByAppendingPathComponent("ff.db")
         let database = FMDatabase(path: path)
         if !database.open() {
@@ -79,7 +79,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
             return
         }
         
-        //there is a team selected (will never fire on first boot)
+        there is a team selected (will never fire on first boot)
         if (self.team != ""){
             self.teamButton.hidden = false
             self.teamButton.enabled = true
