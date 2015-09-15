@@ -37,6 +37,11 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
     @IBOutlet weak var labelBottomArrow: UILabel!
     @IBOutlet weak var labelMiddleArrow: UILabel!
     
+    @IBOutlet weak var grayOverBrowse: UILabel!
+    @IBOutlet weak var grayUnderBrowse: UILabel!
+    @IBOutlet weak var grayUnderTeam: UILabel!
+    @IBOutlet weak var grayOverFlash: UILabel!
+    
     var team = String()   // set from the secondbrowseviewcontroller
 
     override func viewDidLoad() {
@@ -55,6 +60,9 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         self.labelBottomArrow.hidden = true
         self.labelMiddleArrow.hidden = true
         
+        grayOverFlash.hidden = true
+        grayUnderTeam.hidden = true
+        
         UIScreen.mainScreen().brightness = oldBrightness
         
         //self.color1Label.backgroundColor = UIColor.whiteColor()
@@ -68,44 +76,16 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
             return
         }
         
-        //draw design gray rectangles
-        let screenSize = self.view.bounds
-        //let screenSize = UIScreen.mainScreen().bounds
-        
-        //browse button underline
-        let offset : CGFloat = 0   //offset from sides of screen
-        let width = screenSize.width - (2 * offset)
-        var boxSize = CGSize(width: width, height: 10)
-        var boxView = UIImageView(frame: CGRect(origin: CGPoint(x: offset, y: browseButton.frame.maxY), size: boxSize))
-        self.view.addSubview(boxView)
-        var image = drawRect(boxSize, color: colorWithHexString("EEEEEE"))
-        boxView.image = image
-        
-        //browse button overline
-        boxSize = CGSize(width: width, height: 10)
-        boxView = UIImageView(frame: CGRect(origin: CGPoint(x: offset, y: screenSize.height - browseButton.frame.maxY - 10), size: boxSize))
-        self.view.addSubview(boxView)
-        image = drawRect(boxSize, color: colorWithHexString("EEEEEE"))
-        boxView.image = image
-        
         //there is a team selected (will never fire on first boot)
         if (self.team != ""){
             self.teamButton.hidden = false
             self.teamButton.enabled = true
             
             //teambutton underline
-            boxSize = CGSize(width: width, height: 10)
-            boxView = UIImageView(frame: CGRect(origin: CGPoint(x: offset, y: screenSize.height - teamButton.frame.maxY - 10), size: boxSize))
-            self.view.addSubview(boxView)
-            image = drawRect(boxSize, color: colorWithHexString("EEEEEE"))
-            boxView.image = image
+            grayUnderTeam.hidden = false
             
             //draw the rect over the flash button
-            boxSize = CGSize(width: screenSize.width, height: 10)
-            boxView = UIImageView(frame: CGRect(origin: CGPoint(x: 0, y: screenSize.height - 78), size: boxSize))
-            self.view.addSubview(boxView)
-            var imagef = drawRect(boxSize, color: colorWithHexString("EEEEEE"))
-            boxView.image = imagef
+            grayOverFlash.hidden = false
             self.labelMiddleArrow.hidden = false
             
             //check if there are alternates for the selected team (depends of flash name being somewhat unique)
@@ -155,6 +135,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                     if (rs.stringForColumn("pattern5") != ""){
                         colors.append(rs.stringForColumn("pattern5"))
                     }
+                    let screenSize = self.view.bounds
                     let boxSize = 38.0
                     //let startingX = (Double(screenSize.width) / 2.0) - (boxSize * Double(colors.count)) + 10.0
                     let startingX = 20.0
