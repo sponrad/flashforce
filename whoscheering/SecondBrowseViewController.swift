@@ -159,7 +159,19 @@ class SecondBrowseViewController: UITableViewController, UISearchResultsUpdating
         
         searchController.active = false
         
+        
         if let homeVC = segue.destinationViewController as? ViewController{
+            if sender as! UITableView == searchController.searchDisplayController!.searchResultsTableView {
+                println("yeah this is firing")
+                homeVC.team = String(stringInterpolationSegment: searchController.searchDisplayController!.searchResultsTableView.indexPathForSelectedRow()![0])
+                selectedId = (self.filteredDetails[selectedCheer!][1] as? Int32)!
+            } else {
+                println("NO THIS ONE IS FIRING")
+                homeVC.team = String(stringInterpolationSegment: self.details[selectedCheer!][0])
+                selectedId = (self.filteredDetails[selectedCheer!][1] as? Int32)!
+            }
+            
+            /*
             if searchController.active {
                 println("yeah this is firing")
                 homeVC.team = String(stringInterpolationSegment: self.filteredDetails[selectedCheer!][0])
@@ -170,6 +182,7 @@ class SecondBrowseViewController: UITableViewController, UISearchResultsUpdating
                 homeVC.team = String(stringInterpolationSegment: self.details[selectedCheer!][0])
                 selectedId = (self.filteredDetails[selectedCheer!][1] as? Int32)!
             }
+            */
             
         }
     }
