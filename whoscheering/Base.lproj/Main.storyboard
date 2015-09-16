@@ -283,7 +283,7 @@
                                 <rect key="frame" x="16" y="360" width="531" height="89"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="65" id="ILI-dh-Jgk">
-                                        <variation key="heightClass=regular" constant="177"/>
+                                        <variation key="heightClass=regular" constant="65"/>
                                     </constraint>
                                     <constraint firstAttribute="height" constant="65" id="oyH-GV-AKg"/>
                                     <constraint firstAttribute="height" constant="65" id="xRc-lT-vfA"/>
@@ -420,19 +420,6 @@
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="flash-forward-three-boxes.png" translatesAutoresizingMaskIntoConstraints="NO" id="v2D-Mr-0u7">
                                 <rect key="frame" x="0.0" y="72" width="600" height="88"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="364" id="jax-Ez-PWu"/>
-                                </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="jax-Ez-PWu"/>
-                                    </mask>
-                                </variation>
-                                <variation key="heightClass=regular">
-                                    <mask key="constraints">
-                                        <include reference="jax-Ez-PWu"/>
-                                    </mask>
-                                </variation>
                                 <variation key="heightClass=compact-widthClass=compact" misplaced="YES">
                                     <rect key="frame" x="0.0" y="72" width="400" height="63"/>
                                 </variation>
@@ -477,6 +464,7 @@
                             <constraint firstItem="uSn-uI-Ptt" firstAttribute="trailing" secondItem="v2D-Mr-0u7" secondAttribute="trailing" id="A7L-Zm-BSd"/>
                             <constraint firstItem="xQq-hb-VP3" firstAttribute="top" secondItem="83O-3k-Lif" secondAttribute="bottom" constant="-30" id="AHI-MC-2N6"/>
                             <constraint firstAttribute="trailing" secondItem="uSn-uI-Ptt" secondAttribute="trailing" id="AKF-eD-dpV"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="xQq-hb-VP3" secondAttribute="bottom" constant="140" id="BZl-w9-314"/>
                             <constraint firstItem="v2D-Mr-0u7" firstAttribute="leading" secondItem="Z39-rz-1uV" secondAttribute="leading" id="By9-bY-xkD"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="xQq-hb-VP3" secondAttribute="bottom" constant="140" id="CdQ-gw-eMm"/>
                             <constraint firstItem="tgJ-lS-oK9" firstAttribute="leading" secondItem="83O-3k-Lif" secondAttribute="trailing" constant="8" symbolic="YES" id="ClQ-zw-19O"/>
@@ -610,6 +598,7 @@
                                 <exclude reference="oRC-BO-8wc"/>
                                 <exclude reference="r13-IX-s7o"/>
                                 <exclude reference="AHI-MC-2N6"/>
+                                <exclude reference="BZl-w9-314"/>
                                 <exclude reference="J1L-1v-bgF"/>
                                 <exclude reference="QIB-jM-EEk"/>
                                 <exclude reference="Uff-iw-385"/>
@@ -698,6 +687,7 @@
                                 <include reference="oRC-BO-8wc"/>
                                 <include reference="r13-IX-s7o"/>
                                 <exclude reference="7mT-ib-xrh"/>
+                                <include reference="BZl-w9-314"/>
                                 <exclude reference="HZo-WK-U0g"/>
                                 <include reference="J1L-1v-bgF"/>
                                 <exclude reference="Jyl-ow-J82"/>
