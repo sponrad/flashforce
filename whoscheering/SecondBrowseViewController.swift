@@ -157,14 +157,15 @@ class SecondBrowseViewController: UITableViewController, UISearchResultsUpdating
         // Pass the selected object to the new view
         var selectedCheer = self.drillTable.indexPathForSelectedRow()?.row
         
-        searchController.active = false
+        //searchController.active = false
         
         
         if let homeVC = segue.destinationViewController as? ViewController{
-            if searchController.active {
+            if self.searchController.active {
                 println("yeah this is firing")
                 homeVC.team = String(stringInterpolationSegment: self.filteredDetails[selectedCheer!][0])
                 selectedId = (self.filteredDetails[selectedCheer!][1] as? Int32)!
+                searchController.active = false
             }
             else{
                 println("NO THIS ONE IS FIRING")
