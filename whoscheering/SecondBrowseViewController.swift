@@ -159,7 +159,6 @@ class SecondBrowseViewController: UITableViewController, UISearchResultsUpdating
         
         //searchController.active = false
         
-        
         if let homeVC = segue.destinationViewController as? ViewController{
             if self.searchController.active {
                 println("yeah this is firing")
