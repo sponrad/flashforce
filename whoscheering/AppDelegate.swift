@@ -50,14 +50,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let path = documentsFolder.stringByAppendingPathComponent("ff.db")
                 let database = FMDatabase(path: path)
                 if !database.open() {
-                    println("Unable to open database")
+                    print("Unable to open database")
                     return
                 }
                 
                 database.executeUpdate("DROP TABLE offsets", withArgumentsInArray: nil)
                 
                 if !database.executeUpdate("create table offsets(id integer primary key autoincrement, offset real)", withArgumentsInArray: nil) {
-                    println("create table failed: \(database.lastErrorMessage()), probably already created")
+                    print("create table failed: \(database.lastErrorMessage()), probably already created")
                 }
                 
                 //load offsets
@@ -67,13 +67,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 averageOffset.append(getOffset())
                 averageOffset.append(getOffset())
                 let average = averageOffset.reduce(0) { $0 + $1 } / Double(averageOffset.count)
-                println( average )
+                print( average )
                 database.executeUpdate("insert into offsets values (NULL, '\(String(stringInterpolationSegment: average))')", withArgumentsInArray: nil)
                 flashAble = true
-                println("synced to enter foreground")
+                print("synced to enter foreground")
             }
             else {
-                println("not reachable")
+                print("not reachable")
             }
         }
     }
@@ -97,7 +97,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let serverEpoch = (serverEpochStr as NSString).doubleValue
         let nct = NSDate().timeIntervalSince1970
         let ping = nct - ct
-        println("ping \(ping)")
+        print("ping \(ping)")
         offset = serverEpoch - nct + ping
         return offset
     }

@@ -22,7 +22,7 @@ class CheerViewController: UIViewController {
     
     @IBAction func clickStopCheeringButton(sender: AnyObject) {
         let mainStoryboard = UIStoryboard(name: "Storyboard", bundle: NSBundle.mainBundle())
-        let vc : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("ViewController") as! UIViewController
+        let vc : UIViewController = mainStoryboard.instantiateViewControllerWithIdentifier("ViewController")
         self.presentViewController(vc, animated: true, completion: nil)
     }
     
@@ -47,52 +47,52 @@ class CheerViewController: UIViewController {
         }
         
         // // // GET INFO FROM DATABASE // // //
-        let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
+        let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
         let path = documentsFolder.stringByAppendingPathComponent("ff.db")
         let database = FMDatabase(path: path)
         if !database.open() {
-            println("Unable to open database")
+            print("Unable to open database")
             return
         }
         
         if let rs = database.executeQuery("SELECT * FROM cheers WHERE id=\(String(selectedId))", withArgumentsInArray: nil) {
             while rs.next() {
-                var timing = split(rs.stringForColumn("timing")) {$0 == "_"}
-                //println("Here come the codes")
+                var timing = rs.stringForColumn("timing").componentsSeparatedByString("_")
+                //print("Here come the codes")
                 colors = [String]()
                 if (rs.stringForColumn("pattern1") != ""){
-                    for var i = 0.0; i < ( Double(timing[0].toInt()!)); i++ {
+                    for var i = 0.0; i < ( Double(timing[0])); i++ {
                         colors.append(rs.stringForColumn("pattern1"))
                         brightnessArray.append(relativeBrightness(rs.stringForColumn("pattern1")))
                     }
                 }
                 if (rs.stringForColumn("pattern2") != ""){
-                    for var i = 0.0; i < ( Double(timing[1].toInt()!)); i++ {
+                    for var i = 0.0; i < ( Double(timing[1])); i++ {
                         colors.append(rs.stringForColumn("pattern2"))
                         brightnessArray.append(relativeBrightness(rs.stringForColumn("pattern2")))
                     }
                 }
                 if (rs.stringForColumn("pattern3") != ""){
-                    for var i = 0.0; i < ( Double(timing[2].toInt()!)); i++ {
+                    for var i = 0.0; i < ( Double(timing[2])); i++ {
                         colors.append(rs.stringForColumn("pattern3"))
                         brightnessArray.append(relativeBrightness(rs.stringForColumn("pattern3")))
                     }
                 }
                 if (rs.stringForColumn("pattern4") != ""){
-                    for var i = 0.0; i < ( Double(timing[3].toInt()!)); i++ {
+                    for var i = 0.0; i < ( Double(timing[3])); i++ {
                         colors.append(rs.stringForColumn("pattern4"))
                         brightnessArray.append(relativeBrightness(rs.stringForColumn("pattern4")))
                     }
                 }
                 if (rs.stringForColumn("pattern5") != ""){
-                    for var i = 0.0; i < ( Double(timing[4].toInt()!) ); i++ {
+                    for var i = 0.0; i < ( Double(timing[4])); i++ {
                         colors.append(rs.stringForColumn("pattern5"))
                         brightnessArray.append(relativeBrightness(rs.stringForColumn("pattern5")))
                     }
                 }
             }
         } else {
-            println("select failed: \(database.lastErrorMessage())")
+            print("select failed: \(database.lastErrorMessage())")
         }
         // // // END GET INFO FROM DATABASE // // //
         
@@ -121,7 +121,7 @@ class CheerViewController: UIViewController {
         }
         
         if (cheering == true){
-            println("ok cheer loaded")
+            print("cheer loaded")
         }
         cheering = true
 
@@ -143,13 +143,13 @@ class CheerViewController: UIViewController {
             cString = (cString as NSString).substringFromIndex(1)
         }
         
-        if (count(cString) != 6) {
+        if (cString.characters.count != 6) {
             return UIColor.grayColor()
         }
         
-        var rString = (cString as NSString).substringToIndex(2)
-        var gString = ((cString as NSString).substringFromIndex(2) as NSString).substringToIndex(2)
-        var bString = ((cString as NSString).substringFromIndex(4) as NSString).substringToIndex(2)
+        let rString = (cString as NSString).substringToIndex(2)
+        let gString = ((cString as NSString).substringFromIndex(2) as NSString).substringToIndex(2)
+        let bString = ((cString as NSString).substringFromIndex(4) as NSString).substringToIndex(2)
         
         var r:CUnsignedInt = 0, g:CUnsignedInt = 0, b:CUnsignedInt = 0;
         NSScanner(string: rString).scanHexInt(&r)
@@ -208,29 +208,29 @@ class CheerViewController: UIViewController {
             cString = (cString as NSString).substringFromIndex(1)
         }
         
-        var rString = (cString as NSString).substringToIndex(2)
-        var gString = ((cString as NSString).substringFromIndex(2) as NSString).substringToIndex(2)
-        var bString = ((cString as NSString).substringFromIndex(4) as NSString).substringToIndex(2)
+        let rString = (cString as NSString).substringToIndex(2)
+        let gString = ((cString as NSString).substringFromIndex(2) as NSString).substringToIndex(2)
+        let bString = ((cString as NSString).substringFromIndex(4) as NSString).substringToIndex(2)
         
         var r:CUnsignedInt = 0, g:CUnsignedInt = 0, b:CUnsignedInt = 0;
         NSScanner(string: rString).scanHexInt(&r)
         NSScanner(string: gString).scanHexInt(&g)
         NSScanner(string: bString).scanHexInt(&b)
         
-        //println(r)
-        //println(g)
-        //println(b)
+        //print(r)
+        //print(g)
+        //print(b)
         
         var brightness : Double = (Double(r) * Double(r) * 0.241)
         brightness = brightness + (Double(g) * Double(g) * 0.691)
         brightness = brightness + (Double(b) * Double(b) * 0.068)
         brightness = sqrt( brightness )
         
-        //println(brightness)
+        //print(brightness)
         //need a scale from 80 to 100
         //brightness of 255 returns 80 or low point, 0 returns 100 or full value
-        var modified = (90.0 + (10.0 * (255.0 - Double(brightness) ) / 255.0 ))
-        //println(modified)
+        let modified = (90.0 + (10.0 * (255.0 - Double(brightness) ) / 255.0 ))
+        //print(modified)
         return modified
     }
     

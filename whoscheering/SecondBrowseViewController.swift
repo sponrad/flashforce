@@ -38,7 +38,7 @@ class SecondBrowseViewController: UITableViewController, UISearchResultsUpdating
         }
         
         if (self.category == ""){  //this fires if use is changing team after selecting one previously
-            //println("Not set")
+            //print("Not set")
             if let rs1 = database.executeQuery("SELECT category FROM cheers WHERE id='\(selectedId)'", withArgumentsInArray: nil) {
                 while rs1.next() {
                     self.category = rs1.stringForColumn("category")

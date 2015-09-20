@@ -72,11 +72,11 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         //self.color1Label.backgroundColor = UIColor.whiteColor()
 
         ///////////////////////////   connect to the database
-        let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
+        let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
         let path = documentsFolder.stringByAppendingPathComponent("ff.db")
         let database = FMDatabase(path: path)
         if !database.open() {
-            println("Unable to open database")
+            print("Unable to open database")
             return
         }
         
@@ -107,7 +107,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                     self.outfitButton.hidden = true
                 }
             } else {
-                println("select failed: \(database.lastErrorMessage())")
+                print("select failed: \(database.lastErrorMessage())")
             }
             
             //display correct information
@@ -145,18 +145,18 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                     let boxSize = 38.0
                     //let startingX = (Double(screenSize.width) / 2.0) - (boxSize * Double(colors.count)) + 10.0
                     let startingX = 20.0
-                    for (index, color) in enumerate(colors) {
-                        var imageSize = CGSize(width: boxSize, height: boxSize)
+                    for (index, color) in colors.enumerate() {
+                        let imageSize = CGSize(width: boxSize, height: boxSize)
                         let xCoord = CGFloat((1.5 * Double(index) * boxSize) + startingX)
-                        var imageView = UIImageView(frame: CGRect(origin: CGPoint(x: xCoord, y: CGFloat(screenSize.height - 130)), size: imageSize))
+                        let imageView = UIImageView(frame: CGRect(origin: CGPoint(x: xCoord, y: CGFloat(screenSize.height - 130)), size: imageSize))
                         self.view.addSubview(imageView)
-                        var image = drawBordered(imageSize, color: colorWithHexString(color))
+                        let image = drawBordered(imageSize, color: colorWithHexString(color))
                         imageView.image = image
                     }
 
                 }
             } else {
-                println("select failed: \(database.lastErrorMessage())")
+                print("select failed: \(database.lastErrorMessage())")
             }
         }
 
@@ -181,10 +181,10 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                 //TODO add a check for local db before the apple check
                 //check ownership in apple store to see if owned
                 if (SKPaymentQueue.canMakePayments()){
-                    for transaction:SKPaymentTransaction in SKPaymentQueue.defaultQueue().transactions as! [SKPaymentTransaction] {
+                    for transaction:SKPaymentTransaction in SKPaymentQueue.defaultQueue().transactions {
                         if transaction.payment.productIdentifier == String(selectedStoreId)
                         {
-                            println("Non consumable Product is Purchased")
+                            print("Non consumable Product is Purchased")
                             // Unlock Feature
                             owned = true
                             //TODO: add this to a local table in the database of owned products
@@ -205,8 +205,8 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
             if (owned == false) {
                 
                 //check Keychain for if first theme has been purchased
-                if var result = TegKeychain.get("freecheer") {   //this is set when the flash button is tapped
-                    println("In Keychain: \(result)")
+                if let result = TegKeychain.get("freecheer") {   //this is set when the flash button is tapped
+                    print("In Keychain: \(result)")
                     //if yes, display the normal IAP button
                     actionButtonStatus = "buy"
                     self.actionButton.enabled = true
@@ -241,32 +241,32 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
             //database.executeUpdate("DROP TABLE offsets", withArgumentsInArray: nil)
             
             if !database.executeUpdate("create table cheers(id integer primary key autoincrement, storecode text, name text, category text, pattern text, timing text, price real, pattern1 text, pattern2 text, pattern3 text, pattern4 text, pattern5 text, alt1 text)", withArgumentsInArray: nil) {
-                println("create table failed: \(database.lastErrorMessage())")
+                print("create table failed: \(database.lastErrorMessage())")
             }
             if !database.executeUpdate("create table offsets(id integer primary key autoincrement, offset real)", withArgumentsInArray: nil) {
-                println("create table failed: \(database.lastErrorMessage()), probably already created")
+                print("create table failed: \(database.lastErrorMessage()), probably already created")
             }
             database.executeUpdate("DELETE FROM cheers", withArgumentsInArray: nil)
             //loop through initialData to build the database
             for record in StoreData.initialData {
-                var pattern = record[5]  //stored in [5] through [9]...but may be empty
-                var pattern1 = record[5]
-                var pattern2 = record[6]
-                var pattern3 = record[7]
-                var pattern4 = record[8]
-                var pattern5 = record[9]
+                let pattern = record[5]  //stored in [5] through [9]...but may be empty
+                let pattern1 = record[5]
+                let pattern2 = record[6]
+                let pattern3 = record[7]
+                let pattern4 = record[8]
+                let pattern5 = record[9]
                 let timing = record[18]
                 let price = record[4]
                 database.executeUpdate("insert into cheers values (NULL, '\(record[0])', '\(record[2])', '\(record[1])', '\(pattern)', '\(timing)', \(price), '\(pattern1)', '\(pattern2)', '\(pattern3)', '\(pattern4)', '\(pattern5)', '\(record[3])')", withArgumentsInArray: nil)
             }
             
             let reachability = Reachability.reachabilityForInternetConnection()
-            if reachability.isReachable() {
+            if reachability!.isReachable() {
                 
                 database.executeUpdate("DROP TABLE offsets", withArgumentsInArray: nil)
                 
                 if !database.executeUpdate("create table offsets(id integer primary key autoincrement, offset real)", withArgumentsInArray: nil) {
-                    println("create table failed: \(database.lastErrorMessage()), probably already created")
+                    print("create table failed: \(database.lastErrorMessage()), probably already created")
                 }
                 
                 //load offsets
@@ -276,15 +276,15 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                 averageOffset.append(getOffset())
                 averageOffset.append(getOffset())
                 let average = averageOffset.reduce(0) { $0 + $1 } / Double(averageOffset.count)
-                println( average )
+                print( average )
                 database.executeUpdate("insert into offsets values (NULL, '\(String(stringInterpolationSegment: average))')", withArgumentsInArray: nil)
                 flashAble = true
             }
             else {
-                println("not reachable")
+                print("not reachable")
             }
             NSNotificationCenter.defaultCenter().addObserver(self, selector: "reachabilityChanged:", name: ReachabilityChangedNotification, object: reachability)
-            reachability.startNotifier()
+            reachability!.startNotifier()
             
             ffdbLoaded = true
         }
@@ -293,15 +293,15 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         var offsets:[Double] = []
         if let rs = database.executeQuery("SELECT * FROM offsets LIMIT 50", withArgumentsInArray: nil) {
             while rs.next() {
-                var nRows = rs.intForColumnIndex(0)
+                let nRows = rs.intForColumnIndex(0)
                 if (nRows > 0){
                     flashAble = true   //allow flash if there is at least one offset stored
                 }
-                var offset = rs.doubleForColumn("offset")
+                let offset = rs.doubleForColumn("offset")
                 offsets.append(offset)
             }
             avgOffset = offsets.reduce(0) { $0 + $1 } / Double(offsets.count)
-            println(avgOffset)
+            print(avgOffset)
         }
         
         
@@ -329,18 +329,18 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
             case "flash":
                 if flashAble {
                     let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                    var setViewController = mainStoryboard.instantiateViewControllerWithIdentifier("cheer") as! UIViewController
+                    let setViewController = mainStoryboard.instantiateViewControllerWithIdentifier("cheer")
                     navigationController?.pushViewController(setViewController, animated: true)
                 }
                 else {
-                    println("do not flash if no offsets stored")
-                    var alert = UIAlertController(title: "Unable to Flash", message: "Please connect to the internet and restart Flash Force", preferredStyle: UIAlertControllerStyle.Alert)
+                    print("do not flash if no offsets stored")
+                    let alert = UIAlertController(title: "Unable to Flash", message: "Please connect to the internet and restart Flash Force", preferredStyle: UIAlertControllerStyle.Alert)
                     
                     alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: purchaseFreeFlash ))
                     self.presentViewController(alert, animated: true, completion: nil)
                 }
             case "getfree":
-                var alert = UIAlertController(title: "Free Flash", message: "Do you want to use your one free flash for this product?", preferredStyle: UIAlertControllerStyle.Alert)
+                let alert = UIAlertController(title: "Free Flash", message: "Do you want to use your one free flash for this product?", preferredStyle: UIAlertControllerStyle.Alert)
                 alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: purchaseFreeFlash ))
                 alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
                 self.presentViewController(alert, animated: true, completion: nil)
@@ -351,32 +351,32 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                 alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
                 self.presentViewController(alert, animated: true, completion: nil)*/
             default:
-                println("do nothing")
+                print("do nothing")
         }
     }
     
     @IBAction func tapButtonTapped(sender: AnyObject) {
         //reset the keychain
         //TegKeychain.delete("freecheer")
-        println("resetting the offsets database")
+        print("resetting the offsets database")
         // reset the offsets database.
         ///////////////////////////   connect to the database
         let reachability = Reachability.reachabilityForInternetConnection()
-        if reachability.isReachable() {
+        if reachability!.isReachable() {
             flashAble = true
             
-            let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
+            let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
             let path = documentsFolder.stringByAppendingPathComponent("ff.db")
             let database = FMDatabase(path: path)
             if !database.open() {
-                println("Unable to open database")
+                print("Unable to open database")
                 return
             }
             database.executeUpdate("DROP TABLE offsets", withArgumentsInArray: nil)
             
             
             if !database.executeUpdate("create table offsets(id integer primary key autoincrement, offset real)", withArgumentsInArray: nil) {
-                println("create table failed: \(database.lastErrorMessage()), probably already created")
+                print("create table failed: \(database.lastErrorMessage()), probably already created")
             }
             
             //load offsets
@@ -386,29 +386,29 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
             averageOffset.append(getOffset())
             averageOffset.append(getOffset())
             let average = averageOffset.reduce(0) { $0 + $1 } / Double(averageOffset.count)
-            println( average )
+            print( average )
             database.executeUpdate("insert into offsets values (NULL, '\(String(stringInterpolationSegment: average))')", withArgumentsInArray: nil)
             
             //average all of the stored offsets
             var offsets:[Double] = []
             if let rs = database.executeQuery("SELECT * FROM offsets LIMIT 50", withArgumentsInArray: nil) {
                 while rs.next() {
-                    var offset = rs.doubleForColumn("offset")
+                    let offset = rs.doubleForColumn("offset")
                     offsets.append(offset)
                 }
                 avgOffset = offsets.reduce(0) { $0 + $1 } / Double(offsets.count)
-                println(avgOffset)
+                print(avgOffset)
             }
         }
         else {
-            println("not reachable")
+            print("not reachable")
         }
         
     }
     
     func reachabilityChanged(notification: NSNotification){
-        println("reachability changed")
-        println(notification.description)
+        print("reachability changed")
+        print(notification.description)
     }
     
     func getOffset() -> Double {
@@ -418,7 +418,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         let serverEpoch = (serverEpochStr as NSString).doubleValue
         let nct = NSDate().timeIntervalSince1970
         let ping = nct - ct
-        println("ping \(ping)")
+        print("ping \(ping)")
         offset = serverEpoch - nct + ping
         return offset
     }
@@ -436,7 +436,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
     
     func drawRect(size: CGSize, color: UIColor) -> UIImage {
         // Setup our context
-        let bounds = CGRect(origin: CGPoint.zeroPoint, size: size)
+        let bounds = CGRect(origin: CGPoint.zero, size: size)
         let opaque = false
         let scale: CGFloat = 0
         UIGraphicsBeginImageContextWithOptions(size, opaque, scale)
@@ -454,7 +454,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
     
     func drawBordered(size: CGSize, color: UIColor) -> UIImage {
         // Setup our context
-        let bounds = CGRect(origin: CGPoint.zeroPoint, size: size)
+        let bounds = CGRect(origin: CGPoint.zero, size: size)
         let opaque = false
         let scale: CGFloat = 0
         UIGraphicsBeginImageContextWithOptions(size, opaque, scale)
@@ -482,13 +482,13 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
             cString = (cString as NSString).substringFromIndex(1)
         }
         
-        if (count(cString) != 6) {
+        if (cString.characters.count != 6) {
             return UIColor.grayColor()
         }
         
-        var rString = (cString as NSString).substringToIndex(2)
-        var gString = ((cString as NSString).substringFromIndex(2) as NSString).substringToIndex(2)
-        var bString = ((cString as NSString).substringFromIndex(4) as NSString).substringToIndex(2)
+        let rString = (cString as NSString).substringToIndex(2)
+        let gString = ((cString as NSString).substringFromIndex(2) as NSString).substringToIndex(2)
+        let bString = ((cString as NSString).substringFromIndex(4) as NSString).substringToIndex(2)
         
         var r:CUnsignedInt = 0, g:CUnsignedInt = 0, b:CUnsignedInt = 0;
         NSScanner(string: rString).scanHexInt(&r)
@@ -508,57 +508,57 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
     }
     
     func buyNonConsumable(){
-        println("About to fetch the products");
+        print("About to fetch the products");
         // We check that we are allow to make the purchase.
         if (SKPaymentQueue.canMakePayments())
         {
-            var productID:NSSet = NSSet(object: String(selectedStoreId));
-            var productsRequest:SKProductsRequest = SKProductsRequest(productIdentifiers: productID as Set<NSObject>);
+            let productID:NSSet = NSSet(object: String(selectedStoreId));
+            let productsRequest:SKProductsRequest = SKProductsRequest(productIdentifiers: productID as Set<NSObject>);
             productsRequest.delegate = self;
             productsRequest.start();
-            println("Fetching Products");
+            print("Fetching Products");
         }else{
-            println("can't make purchases");
+            print("can't make purchases");
         }
     }
     
     func buyProduct(product: SKProduct){
-        println("Sending the Payment Request to Apple");
-        var payment = SKPayment(product: product)
+        print("Sending the Payment Request to Apple");
+        let payment = SKPayment(product: product)
         SKPaymentQueue.defaultQueue().addPayment(payment);
     }
     
     func productsRequest (request: SKProductsRequest, didReceiveResponse response: SKProductsResponse) {
-        println("got the request from Apple")
-        var count : Int = response.products.count
+        print("got the request from Apple")
+        let count : Int = response.products.count
         if (count>0) {
-            var validProducts = response.products
-            var validProduct: SKProduct = response.products[0] as! SKProduct
+            //var validProducts = response.products
+            let validProduct: SKProduct = response.products[0]
             if (validProduct.productIdentifier == String(selectedStoreId)) {
-                println(validProduct.localizedTitle)
-                println(validProduct.localizedDescription)
-                println(validProduct.price)
+                print(validProduct.localizedTitle)
+                print(validProduct.localizedDescription)
+                print(validProduct.price)
                 buyProduct(validProduct);
             } else {
-                println(validProduct.productIdentifier)
+                print(validProduct.productIdentifier)
             }
         } else {
-            println("nothing")
+            print("nothing")
         }
     }
     
     func paymentQueue(queue: SKPaymentQueue!, updatedTransactions transactions: [AnyObject]!)    {
-        println("Received Payment Transaction Response from Apple");
+        print("Received Payment Transaction Response from Apple");
         
         for transaction:AnyObject in transactions {
             if let trans:SKPaymentTransaction = transaction as? SKPaymentTransaction{
                 switch trans.transactionState {
                 case .Purchased:
-                    println("Product Purchased");
+                    print("Product Purchased");
                     SKPaymentQueue.defaultQueue().finishTransaction(transaction as! SKPaymentTransaction)
                     break;
                 case .Failed:
-                    println("Purchased Failed");
+                    print("Purchased Failed");
                     SKPaymentQueue.defaultQueue().finishTransaction(transaction as! SKPaymentTransaction)
                     break;
                     // case .Restored:
