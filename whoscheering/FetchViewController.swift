@@ -13,14 +13,14 @@ import UIKit
 class FetchViewController: UIViewController {
     
     func fetch(completion: () -> Void) {
-        println("Background task firing")
+        print("Background task firing")
         
         ///////////////////////////   connect to the database
-        let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
+        let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
         let path = documentsFolder.stringByAppendingPathComponent("ff.db")
         let database = FMDatabase(path: path)
         if !database.open() {
-            println("Unable to open database")
+            print("Unable to open database")
             return
         }
         
@@ -28,13 +28,13 @@ class FetchViewController: UIViewController {
         
         
         if !database.executeUpdate("create table offsets(id integer primary key autoincrement, offset real)", withArgumentsInArray: nil) {
-            println("create table failed: \(database.lastErrorMessage()), probably already created")
+            print("create table failed: \(database.lastErrorMessage()), probably already created")
         }
         
         //load offsets
         var averageOffset:[Double] = []
         let reachability = Reachability.reachabilityForInternetConnection()
-        if reachability.isReachable() {
+        if reachability!.isReachable() {
             
             getOffset()
             averageOffset.append(getOffset())
@@ -48,11 +48,11 @@ class FetchViewController: UIViewController {
             var offsets:[Double] = []
             if let rs = database.executeQuery("SELECT * FROM offsets LIMIT 50", withArgumentsInArray: nil) {
                 while rs.next() {
-                    var offset = rs.doubleForColumn("offset")
+                    let offset = rs.doubleForColumn("offset")
                     offsets.append(offset)
                 }
                 avgOffset = offsets.reduce(0) { $0 + $1 } / Double(offsets.count)
-                println(avgOffset)
+                print(avgOffset)
             }
         }
         

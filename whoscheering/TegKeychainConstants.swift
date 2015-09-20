@@ -10,6 +10,6 @@ struct TegKeychainConstants {
   static var matchLimit: String { return toString(kSecMatchLimit) }
 
   private static func toString(value: CFStringRef) -> String {
-    return (value as? String) ?? ""
+    return (value as String) ?? ""
   }
 }

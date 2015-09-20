@@ -19,11 +19,11 @@ class AlternateViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
+        let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
         let path = documentsFolder.stringByAppendingPathComponent("ff.db")
         let database = FMDatabase(path: path)
         if !database.open() {
-            println("Unable to open database")
+            print("Unable to open database")
             return
         }
         
@@ -32,7 +32,7 @@ class AlternateViewController: UITableViewController {
                 self.name = rs2.stringForColumn("name")
             }
         } else {
-            println("select failed: \(database.lastErrorMessage())")
+            print("select failed: \(database.lastErrorMessage())")
         }
         
         
@@ -48,7 +48,7 @@ class AlternateViewController: UITableViewController {
                 self.details.append([text, rs.intForColumn("id")])
             }
         } else {
-            println("select failed: \(database.lastErrorMessage())")
+            print("select failed: \(database.lastErrorMessage())")
         }
     }
     
@@ -73,7 +73,7 @@ class AlternateViewController: UITableViewController {
     
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("drillCell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("drillCell", forIndexPath: indexPath)
         
         // Configure the cell...
         cell.textLabel!.text = String(stringInterpolationSegment: self.details[indexPath.row][0])
@@ -124,11 +124,11 @@ class AlternateViewController: UITableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view
-        var selectedCheer = self.drillTable.indexPathForSelectedRow()?.row
+        let selectedCheer = self.drillTable.indexPathForSelectedRow!.row
         
         if let homeVC = segue.destinationViewController as? ViewController{
             homeVC.team = self.name
-            selectedId = (self.details[selectedCheer!][1] as? Int32)!
+            selectedId = (self.details[selectedCheer][1] as? Int32)!
         }
     }
     

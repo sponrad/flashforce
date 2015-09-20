@@ -29,11 +29,11 @@ class SecondBrowseViewController: UITableViewController, UISearchResultsUpdating
         searchController.searchBar.sizeToFit()
         self.tableView.tableHeaderView = searchController.searchBar
         
-        let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
+        let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
         let path = documentsFolder.stringByAppendingPathComponent("ff.db")
         let database = FMDatabase(path: path)
         if !database.open() {
-            println("Unable to open database")
+            print("Unable to open database")
             return
         }
         
@@ -44,7 +44,7 @@ class SecondBrowseViewController: UITableViewController, UISearchResultsUpdating
                     self.category = rs1.stringForColumn("category")
                 }
             } else {
-                println("select failed: \(database.lastErrorMessage())")
+                print("select failed: \(database.lastErrorMessage())")
             }
         }
         
@@ -53,7 +53,7 @@ class SecondBrowseViewController: UITableViewController, UISearchResultsUpdating
                 self.details.append([rs.stringForColumn("name"), rs.intForColumn("id")])
             }
         } else {
-            println("select failed: \(database.lastErrorMessage())")
+            print("select failed: \(database.lastErrorMessage())")
         }
         
         self.filteredDetails = self.details
@@ -69,7 +69,7 @@ class SecondBrowseViewController: UITableViewController, UISearchResultsUpdating
             self.filteredDetails = self.details.filter {
                 s in
                 let options = NSStringCompareOptions.CaseInsensitiveSearch
-                let found = String(stringInterpolationSegment: s[0]).rangeOfString(target, options: options)
+                let found = String(stringInterpolationSegment: s[0]).rangeOfString(target!, options: options)
                 return (found != nil)
             }
         }
@@ -100,7 +100,7 @@ class SecondBrowseViewController: UITableViewController, UISearchResultsUpdating
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("drillCell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("drillCell", forIndexPath: indexPath)
 
         if searchController.active{
             cell.textLabel!.text = String(stringInterpolationSegment: self.filteredDetails[indexPath.row][0])
@@ -155,19 +155,19 @@ class SecondBrowseViewController: UITableViewController, UISearchResultsUpdating
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view
-        var selectedCheer = self.drillTable.indexPathForSelectedRow()?.row
+        let selectedCheer = self.drillTable.indexPathForSelectedRow?.row
         
         //searchController.active = false
         
         if let homeVC = segue.destinationViewController as? ViewController{
             if self.searchController.active {
-                println("yeah this is firing")
+                print("yeah this is firing")
                 homeVC.team = String(stringInterpolationSegment: self.filteredDetails[selectedCheer!][0])
                 selectedId = (self.filteredDetails[selectedCheer!][1] as? Int32)!
                 searchController.active = false
             }
             else{
-                println("NO THIS ONE IS FIRING")
+                print("NO THIS ONE IS FIRING")
                 homeVC.team = String(stringInterpolationSegment: self.details[selectedCheer!][0])
                 selectedId = (self.filteredDetails[selectedCheer!][1] as? Int32)!
             }

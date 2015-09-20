@@ -26,11 +26,11 @@ class BrowseViewController: UITableViewController {
         //searchController.searchBar.sizeToFit()
         //self.tableView.tableHeaderView = searchController.searchBar
         
-        let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
+        let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
         let path = documentsFolder.stringByAppendingPathComponent("ff.db")
         let database = FMDatabase(path: path)
         if !database.open() {
-            println("Unable to open database")
+            print("Unable to open database")
             return
         }
         
@@ -39,7 +39,7 @@ class BrowseViewController: UITableViewController {
                 self.categories.append(rs.stringForColumn("category"))
             }
         } else {
-            println("select failed: \(database.lastErrorMessage())")
+            print("select failed: \(database.lastErrorMessage())")
         }
         
         browseTable.delegate = self
@@ -96,7 +96,7 @@ class BrowseViewController: UITableViewController {
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("categoryCell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("categoryCell", forIndexPath: indexPath) 
         
         //if searchController.active {
         //    cell.textLabel!.text = self.filteredCategories[indexPath.row]
@@ -116,7 +116,7 @@ class BrowseViewController: UITableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
-        var i = self.browseTable.indexPathForSelectedRow()?.row
+        let i = self.browseTable.indexPathForSelectedRow?.row
         
         //searchController.active = false
         
