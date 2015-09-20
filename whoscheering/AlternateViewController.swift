@@ -20,7 +20,7 @@ class AlternateViewController: UITableViewController {
         super.viewDidLoad()
         
         let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
-        let path = documentsFolder.stringByAppendingPathComponent("ff.db")
+        let path = NSString(string: documentsFolder).stringByAppendingPathComponent("ff.db")
         let database = FMDatabase(path: path)
         if !database.open() {
             print("Unable to open database")

@@ -44,10 +44,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if (!cheering){
             // sync if internet
             let reachability = Reachability.reachabilityForInternetConnection()
-            if reachability.isReachable() {
+            if reachability!.isReachable() {
                 ///////////////////////////   connect to the database
-                let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
-                let path = documentsFolder.stringByAppendingPathComponent("ff.db")
+                let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
+                let path = NSString(string: documentsFolder).stringByAppendingPathComponent("ff.db")
                 let database = FMDatabase(path: path)
                 if !database.open() {
                     print("Unable to open database")
@@ -107,10 +107,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func parseJSON(inputData: NSData) -> NSDictionary{
-        var error: NSError?
-        var boardsDictionary: NSDictionary = NSJSONSerialization.JSONObjectWithData(inputData, options: NSJSONReadingOptions.MutableContainers, error: &error) as! NSDictionary
-        
-        return boardsDictionary
+        do{
+           let boardsDictionary: NSDictionary = try NSJSONSerialization.JSONObjectWithData(inputData, options: NSJSONReadingOptions.MutableContainers) as! NSDictionary
+            return boardsDictionary
+        }
+        catch{
+            print("error")
+            return NSDictionary()
+        }
     }
 
 

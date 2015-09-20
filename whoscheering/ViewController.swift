@@ -20,7 +20,9 @@ var oldBrightness: CGFloat = 0.5
 var flashAble = false
 
 
-class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SKProductsRequestDelegate, SKPaymentTransactionObserver {
+//class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SKProductsRequestDelegate, SKPaymentTransactionObserver {
+class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SKProductsRequestDelegate {
+
 
     @IBOutlet weak var actionButton: UIButton!
     @IBOutlet weak var browseButton: UIButton!
@@ -73,7 +75,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
 
         ///////////////////////////   connect to the database
         let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
-        let path = documentsFolder.stringByAppendingPathComponent("ff.db")
+        let path = NSString(string: documentsFolder).stringByAppendingPathComponent("ff.db")
         let database = FMDatabase(path: path)
         if !database.open() {
             print("Unable to open database")
@@ -366,7 +368,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
             flashAble = true
             
             let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
-            let path = documentsFolder.stringByAppendingPathComponent("ff.db")
+            let path = NSString(string: documentsFolder).stringByAppendingPathComponent("ff.db")
             let database = FMDatabase(path: path)
             if !database.open() {
                 print("Unable to open database")
@@ -428,10 +430,14 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
     }
     
     func parseJSON(inputData: NSData) -> NSDictionary{
-        var error: NSError?
-        var boardsDictionary: NSDictionary = NSJSONSerialization.JSONObjectWithData(inputData, options: NSJSONReadingOptions.MutableContainers, error: &error) as! NSDictionary
-        
-        return boardsDictionary
+        do {
+            let boardsDictionary: NSDictionary = try NSJSONSerialization.JSONObjectWithData(inputData, options: NSJSONReadingOptions.MutableContainers) as! NSDictionary
+            return boardsDictionary
+        }
+        catch{
+            print("error")
+            return NSDictionary()
+        }
     }
     
     func drawRect(size: CGSize, color: UIColor) -> UIImage {
@@ -513,7 +519,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         if (SKPaymentQueue.canMakePayments())
         {
             let productID:NSSet = NSSet(object: String(selectedStoreId));
-            let productsRequest:SKProductsRequest = SKProductsRequest(productIdentifiers: productID as Set<NSObject>);
+            let productsRequest:SKProductsRequest = SKProductsRequest(productIdentifiers: productID as! Set<String>);
             productsRequest.delegate = self;
             productsRequest.start();
             print("Fetching Products");

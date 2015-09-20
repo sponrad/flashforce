@@ -48,7 +48,7 @@ class CheerViewController: UIViewController {
         
         // // // GET INFO FROM DATABASE // // //
         let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
-        let path = documentsFolder.stringByAppendingPathComponent("ff.db")
+        let path = NSString(string: documentsFolder).stringByAppendingPathComponent("ff.db")
         let database = FMDatabase(path: path)
         if !database.open() {
             print("Unable to open database")
@@ -174,20 +174,19 @@ class CheerViewController: UIViewController {
     }
     
     func parseJSON(inputData: NSData) -> NSDictionary{
-        var error: NSError?
-        var boardsDictionary: NSDictionary = NSJSONSerialization.JSONObjectWithData(inputData, options: NSJSONReadingOptions.MutableContainers, error: &error) as! NSDictionary
-        
-        return boardsDictionary
+        do{
+            let boardsDictionary: NSDictionary = try NSJSONSerialization.JSONObjectWithData(inputData, options: NSJSONReadingOptions.MutableContainers) as! NSDictionary
+            
+            return boardsDictionary
+        }
+        catch{
+            print("error")
+            return NSDictionary()
+        }
     }
     
     override func canBecomeFirstResponder() -> Bool {
         return true
-    }
-    
-    override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent) {
-        if motion == .MotionShake {
-            //self.shakeLabel.text = "★"
-        }
     }
     
     //revert brightness

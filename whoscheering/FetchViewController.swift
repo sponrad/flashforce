@@ -17,7 +17,7 @@ class FetchViewController: UIViewController {
         
         ///////////////////////////   connect to the database
         let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
-        let path = documentsFolder.stringByAppendingPathComponent("ff.db")
+        let path = NSString(string: documentsFolder).stringByAppendingPathComponent("ff.db")
         let database = FMDatabase(path: path)
         if !database.open() {
             print("Unable to open database")
@@ -75,10 +75,16 @@ class FetchViewController: UIViewController {
     }
     
     func parseJSON(inputData: NSData) -> NSDictionary{
-        var error: NSError?
-        var boardsDictionary: NSDictionary = NSJSONSerialization.JSONObjectWithData(inputData, options: NSJSONReadingOptions.MutableContainers, error: &error) as! NSDictionary
+        do {
+            let boardsDictionary: NSDictionary = try NSJSONSerialization.JSONObjectWithData(inputData, options: NSJSONReadingOptions.MutableContainers) as! NSDictionary
+            return boardsDictionary
+
+        }
+        catch{
+            print("error")
+            return NSDictionary()
+        }
         
-        return boardsDictionary
     }
     
 }
