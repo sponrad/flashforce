@@ -416,7 +416,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
     func getOffset() -> Double {
         var offset : Double = 0
         let ct = NSDate().timeIntervalSince1970
-        let serverEpochStr: String = parseJSON( getJSON("http://alignthebeat.appspot.com") )["epoch"] as! String
+        let serverEpochStr: String = parseJSON( getJSON("https://alignthebeat.appspot.com") )["epoch"] as! String
         let serverEpoch = (serverEpochStr as NSString).doubleValue
         let nct = NSDate().timeIntervalSince1970
         let ping = nct - ct
