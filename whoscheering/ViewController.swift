@@ -263,28 +263,6 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
             }
             
             let reachability = Reachability.reachabilityForInternetConnection()
-            if reachability!.isReachable() {
-                
-                database.executeUpdate("DROP TABLE offsets", withArgumentsInArray: nil)
-                
-                if !database.executeUpdate("create table offsets(id integer primary key autoincrement, offset real)", withArgumentsInArray: nil) {
-                    print("create table failed: \(database.lastErrorMessage()), probably already created")
-                }
-                
-                //load offsets
-                var averageOffset:[Double] = []
-                getOffset()
-                averageOffset.append(getOffset())
-                averageOffset.append(getOffset())
-                averageOffset.append(getOffset())
-                let average = averageOffset.reduce(0) { $0 + $1 } / Double(averageOffset.count)
-                print( average )
-                database.executeUpdate("insert into offsets values (NULL, '\(String(stringInterpolationSegment: average))')", withArgumentsInArray: nil)
-                flashAble = true
-            }
-            else {
-                print("not reachable")
-            }
             NSNotificationCenter.defaultCenter().addObserver(self, selector: "reachabilityChanged:", name: ReachabilityChangedNotification, object: reachability)
             reachability!.startNotifier()
             
