@@ -55,7 +55,7 @@ class CheerViewController: UIViewController {
             return
         }
         
-        if let rs = database.executeQuery("SELECT * FROM cheers WHERE id=\(String(selectedId))", withArgumentsInArray: nil) {
+        if let rs = database.executeQuery("SELECT * FROM patterns WHERE id=\(String(selectedId))", withArgumentsInArray: nil) {
             while rs.next() {
                 var timing = rs.stringForColumn("timing").componentsSeparatedByString("_")
                 //print("Here come the codes")

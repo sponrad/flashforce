@@ -34,7 +34,7 @@ class BrowseViewController: UITableViewController {
             return
         }
         
-        if let rs = database.executeQuery("SELECT DISTINCT category FROM cheers ORDER BY category", withArgumentsInArray: nil) {
+        if let rs = database.executeQuery("SELECT DISTINCT category FROM patterns ORDER BY category", withArgumentsInArray: nil) {
             while rs.next() {
                 self.categories.append(rs.stringForColumn("category"))
             }

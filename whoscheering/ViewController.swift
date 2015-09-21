@@ -97,7 +97,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
             self.labelMiddleArrow.hidden = false
             
             //check if there are alternates for the selected team (depends of flash name being somewhat unique)
-            if let count = database.intForQuery("SELECT COUNT(name) FROM cheers WHERE name='\(self.team)'") {
+            if let count = database.intForQuery("SELECT COUNT(name) FROM patterns WHERE name='\(self.team)'") {
                 if (count > 1){
                     self.outfitButton.enabled = true
                     self.outfitButton.hidden = false
@@ -113,7 +113,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
             }
             
             //display correct information
-            if let rs = database.executeQuery("SELECT * FROM cheers WHERE id=\(String(selectedId))", withArgumentsInArray: nil) {
+            if let rs = database.executeQuery("SELECT * FROM patterns WHERE id=\(String(selectedId))", withArgumentsInArray: nil) {
                 while rs.next() {
                     self.browseButton.setTitle(rs.stringForColumn("category"), forState: UIControlState.Normal)
                     self.teamButton.setTitle(rs.stringForColumn("name"), forState: UIControlState.Normal)
@@ -229,9 +229,9 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         }
         
         
-        // TODO add check for ffdbloaded, only load if there is a change in the db, compare rows of cheers maybe
+        // TODO add check for ffdbloaded, only load if there is a change in the db, compare rows of patterns maybe
         // should improve load time a lot
-        if let rscheck = database.intForQuery("SELECT COUNT(id) FROM cheers") {
+        if let rscheck = database.intForQuery("SELECT COUNT(id) FROM patterns") {
             if (UInt32(rscheck) == UInt32(StoreData.initialData.count)) {
                 ffdbLoaded = true
             }
@@ -239,10 +239,10 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         
         ///////////////////////////   code to load the database with data on first bootup
         if (ffdbLoaded==false){
-            database.executeUpdate("DROP TABLE cheers", withArgumentsInArray: nil)
+            database.executeUpdate("DROP TABLE patterns", withArgumentsInArray: nil)
             //database.executeUpdate("DROP TABLE offsets", withArgumentsInArray: nil)
             
-            if !database.executeUpdate("create table cheers(id integer primary key autoincrement, storecode text, name text, category text, pattern text, timing text, price real, pattern1 text, pattern2 text, pattern3 text, pattern4 text, pattern5 text, alt1 text)", withArgumentsInArray: nil) {
+            if !database.executeUpdate("create table patterns(id integer primary key autoincrement, storecode text, name text, category text, pattern text, timing text, price real, pattern1 text, pattern2 text, pattern3 text, pattern4 text, pattern5 text, alt1 text)", withArgumentsInArray: nil) {
                 print("create table failed: \(database.lastErrorMessage())")
             }
             if !database.executeUpdate("create table offsets(id integer primary key autoincrement, offset real)", withArgumentsInArray: nil) {
@@ -252,7 +252,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
             if !database.executeUpdate("create table ownedpatterns(id integer primary key autoincrement, storecode text)", withArgumentsInArray: nil) {
                 print("create table failed: \(database.lastErrorMessage()), probably already created")
             }
-            database.executeUpdate("DELETE FROM cheers", withArgumentsInArray: nil)
+            database.executeUpdate("DELETE FROM patterns", withArgumentsInArray: nil)
             //loop through initialData to build the database
             for record in StoreData.initialData {
                 let pattern = record[5]  //stored in [5] through [9]...but may be empty
@@ -263,7 +263,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                 let pattern5 = record[9]
                 let timing = record[18]
                 let price = record[4]
-                database.executeUpdate("insert into cheers values (NULL, '\(record[0])', '\(record[2])', '\(record[1])', '\(pattern)', '\(timing)', \(price), '\(pattern1)', '\(pattern2)', '\(pattern3)', '\(pattern4)', '\(pattern5)', '\(record[3])')", withArgumentsInArray: nil)
+                database.executeUpdate("insert into patterns values (NULL, '\(record[0])', '\(record[2])', '\(record[1])', '\(pattern)', '\(timing)', \(price), '\(pattern1)', '\(pattern2)', '\(pattern3)', '\(pattern4)', '\(pattern5)', '\(record[3])')", withArgumentsInArray: nil)
             }
             
             let reachability = Reachability.reachabilityForInternetConnection()

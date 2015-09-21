@@ -27,7 +27,7 @@ class AlternateViewController: UITableViewController {
             return
         }
         
-        if let rs2 = database.executeQuery("SELECT name FROM cheers WHERE id='\(selectedId)'", withArgumentsInArray: nil) {
+        if let rs2 = database.executeQuery("SELECT name FROM patterns WHERE id='\(selectedId)'", withArgumentsInArray: nil) {
             while rs2.next() {
                 self.name = rs2.stringForColumn("name")
             }
@@ -37,7 +37,7 @@ class AlternateViewController: UITableViewController {
         
         
         
-        if let rs = database.executeQuery("SELECT alt1, id FROM cheers WHERE name='\(self.name)' ORDER BY alt1", withArgumentsInArray: nil) {
+        if let rs = database.executeQuery("SELECT alt1, id FROM patterns WHERE name='\(self.name)' ORDER BY alt1", withArgumentsInArray: nil) {
             while rs.next() {
                 var text: String = ""
                 if rs.stringForColumn("alt1").isEmpty{
