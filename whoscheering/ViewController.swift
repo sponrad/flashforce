@@ -180,7 +180,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                 }
             }
             else {
-                //TODO add a check for local db before the apple check
+                //TODO: add a check for local db before the apple check
                 //check ownership in apple store to see if owned
                 if (SKPaymentQueue.canMakePayments()){
                     for transaction:SKPaymentTransaction in SKPaymentQueue.defaultQueue().transactions {
@@ -246,6 +246,10 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                 print("create table failed: \(database.lastErrorMessage())")
             }
             if !database.executeUpdate("create table offsets(id integer primary key autoincrement, offset real)", withArgumentsInArray: nil) {
+                print("create table failed: \(database.lastErrorMessage()), probably already created")
+            }
+            //TODO: create owned flash tabble
+            if !database.executeUpdate("create table ownedpatterns(id integer primary key autoincrement, storecode text)", withArgumentsInArray: nil) {
                 print("create table failed: \(database.lastErrorMessage()), probably already created")
             }
             database.executeUpdate("DELETE FROM cheers", withArgumentsInArray: nil)
@@ -489,6 +493,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         self.actionButton.hidden = false
         self.actionButton.setTitle("Start Flash", forState: UIControlState.Normal)
         actionButtonStatus = "flash"
+        //TODO: add to owned flash table
     }
     
     func buyNonConsumable(){
