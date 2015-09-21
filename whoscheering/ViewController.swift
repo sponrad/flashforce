@@ -248,7 +248,6 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
             if !database.executeUpdate("create table offsets(id integer primary key autoincrement, offset real)", withArgumentsInArray: nil) {
                 print("create table failed: \(database.lastErrorMessage()), probably already created")
             }
-            //TODO: create owned flash tabble
             if !database.executeUpdate("create table ownedpatterns(id integer primary key autoincrement, storecode text)", withArgumentsInArray: nil) {
                 print("create table failed: \(database.lastErrorMessage()), probably already created")
             }
@@ -493,7 +492,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         self.actionButton.hidden = false
         self.actionButton.setTitle("Start Flash", forState: UIControlState.Normal)
         actionButtonStatus = "flash"
-        //TODO: add to owned flash table
+        //TODO: add to owned pattern table
     }
     
     func buyNonConsumable(){
@@ -546,6 +545,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                     print("Product Purchased");
                     SKPaymentQueue.defaultQueue().finishTransaction(transaction as! SKPaymentTransaction)
                     break;
+                    //TODO: add to owned pattern table
                 case .Failed:
                     print("Purchased Failed");
                     SKPaymentQueue.defaultQueue().finishTransaction(transaction as! SKPaymentTransaction)
@@ -557,6 +557,10 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                 }
             }
         }
+    }
+    
+    func addOwnedPattern(){
+        //TODO: finish ownedpattern add function
     }
     
 
