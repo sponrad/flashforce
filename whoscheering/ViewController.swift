@@ -19,6 +19,8 @@ var selectedPrice: String = ""
 var oldBrightness: CGFloat = 0.5
 var flashAble = false
 
+let firstTimeBootString = "ftb016"
+
 
 //class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SKProductsRequestDelegate, SKPaymentTransactionObserver {
 class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SKProductsRequestDelegate {
@@ -71,11 +73,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         
         UIScreen.mainScreen().brightness = oldBrightness
         
-        //self.color1Label.backgroundColor 
-        
-        if (TegKeychain.get("firstboot") != nil){
-            firstTimeBoot()
-        }
+        //self.color1Label.backgroundColor
         
         ///////////////////////////   connect to the database
         let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
@@ -296,6 +294,10 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         }
         
         database.close()
+        
+        if (TegKeychain.get(String(firstTimeBootString)) == nil){
+            firstTimeBoot()
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -570,6 +572,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
     }
     
     func addOwnedPattern(storeId: String, patternId: String){
+        print("addOwnedPattern")
         ///////////////////////////   connect to the database
         let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
         let path = NSString(string: documentsFolder).stringByAppendingPathComponent("ff.db")
@@ -580,7 +583,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         }
         
         var name = ""
-        if let rs = database.executeQuery("SELECT * FROM patterns WHERE id=\(String(patternId))", withArgumentsInArray: nil) {
+        if let rs = database.executeQuery("SELECT * FROM patterns WHERE id='\(String(patternId))'", withArgumentsInArray: nil) {
             while rs.next() {
                 name = rs.stringForColumn("name")
             }
@@ -617,6 +620,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
     }
     
     func firstTimeBoot(){
+        print("performing first boot")
         ///////////////////////////   connect to the database
         let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
         let path = NSString(string: documentsFolder).stringByAppendingPathComponent("ff.db")
@@ -638,14 +642,14 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                     }
                 }
             }
-            addOwnedPattern(result, patternId: cheerId)
+            addOwnedPattern(String(result), patternId: cheerId)
+            print("this fired")
+            
         }
         
         
         //TODO: get any owned flashes from apple
         
-        TegKeychain.set("firstboot", value:  "success")
+        TegKeychain.set(String(firstTimeBootString), value:  "success")
     }
-    
-
 }
