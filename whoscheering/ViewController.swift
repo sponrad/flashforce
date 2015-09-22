@@ -291,7 +291,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
             print(avgOffset)
         }
         
-        
+        database.close()
     }
 
     override func didReceiveMemoryWarning() {
@@ -386,11 +386,12 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                 avgOffset = offsets.reduce(0) { $0 + $1 } / Double(offsets.count)
                 print(avgOffset)
             }
+            database.close()
         }
         else {
             print("not reachable")
         }
-        
+
     }
     
     func reachabilityChanged(notification: NSNotification){
@@ -576,7 +577,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         
         //ownedpatterns rows (id integer primary key autoincrement, storecode text)
         database.executeUpdate("insert into ownedpatterns values (NULL, '\(storeCode)')", withArgumentsInArray: nil)
-
+        database.close()
     }
     
     func listOfOwnedPatterns() -> Array<String> {
@@ -597,6 +598,8 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                 }
             }
         }
+        
+        database.close()
         
         return ownedPatterns
     }

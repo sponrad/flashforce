@@ -94,6 +94,7 @@ class CheerViewController: UIViewController {
         } else {
             print("select failed: \(database.lastErrorMessage())")
         }
+        database.close()
         // // // END GET INFO FROM DATABASE // // //
         
         self.view.backgroundColor = colorWithHexString(colors[0])

@@ -56,6 +56,8 @@ class FetchViewController: UIViewController {
             }
         }
         
+        database.close()
+        
         completion()
     }
     

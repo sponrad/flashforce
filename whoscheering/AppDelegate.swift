@@ -71,6 +71,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 database.executeUpdate("insert into offsets values (NULL, '\(String(stringInterpolationSegment: average))')", withArgumentsInArray: nil)
                 flashAble = true
                 print("synced to enter foreground")
+                database.close()
             }
             else {
                 print("not reachable")

@@ -50,6 +50,7 @@ class AlternateViewController: UITableViewController {
         } else {
             print("select failed: \(database.lastErrorMessage())")
         }
+        database.close()
     }
     
     override func didReceiveMemoryWarning() {

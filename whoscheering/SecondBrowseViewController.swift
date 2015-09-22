@@ -57,6 +57,7 @@ class SecondBrowseViewController: UITableViewController, UISearchResultsUpdating
         }
         
         self.filteredDetails = self.details
+        database.close()
     }
     
     func updateSearchResultsForSearchController(searchController: UISearchController) {
