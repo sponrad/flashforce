@@ -71,8 +71,12 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         
         UIScreen.mainScreen().brightness = oldBrightness
         
-        //self.color1Label.backgroundColor = UIColor.whiteColor()
-
+        //self.color1Label.backgroundColor 
+        
+        if (TegKeychain.get("firstboot") != nil){
+            firstTimeBoot()
+        }
+        
         ///////////////////////////   connect to the database
         let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
         let path = NSString(string: documentsFolder).stringByAppendingPathComponent("ff.db")
@@ -610,6 +614,14 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         database.close()
         
         return ownedPatterns
+    }
+    
+    func firstTimeBoot(){
+        //TODO: show the tutorial images
+        //TODO: get any owned flashes from keychain
+        //TODO: get any owned flashes from apple
+        
+        TegKeychain.set("firstboot", value:  "success")
     }
     
 
