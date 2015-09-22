@@ -196,7 +196,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                                 print("Non consumable Product is Purchased")
                                 // Unlock Feature
                                 owned = true
-                                addOwnedPattern()
+                                addOwnedPattern(String(selectedStoreId), patternId: String(selectedId))
                             }
                         }
                     }
@@ -502,7 +502,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         self.actionButton.setTitle("Start Flash", forState: UIControlState.Normal)
         actionButtonStatus = "flash"
         
-        addOwnedPattern()
+        addOwnedPattern(String(selectedStoreId), patternId: String(selectedId))
     }
     
     func buyNonConsumable(){
@@ -554,7 +554,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                 case .Purchased:
                     print("Product Purchased");
                     SKPaymentQueue.defaultQueue().finishTransaction(transaction as! SKPaymentTransaction)
-                    addOwnedPattern()
+                    addOwnedPattern(String(selectedStoreId), patternId: String(selectedId))
                     break;
                 case .Failed:
                     print("Purchased Failed");
@@ -569,7 +569,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         }
     }
     
-    func addOwnedPattern(){
+    func addOwnedPattern(storeId: String, patternId: String){
         ///////////////////////////   connect to the database
         let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
         let path = NSString(string: documentsFolder).stringByAppendingPathComponent("ff.db")
@@ -580,7 +580,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         }
         
         var name = ""
-        if let rs = database.executeQuery("SELECT * FROM patterns WHERE id=\(String(selectedId))", withArgumentsInArray: nil) {
+        if let rs = database.executeQuery("SELECT * FROM patterns WHERE id=\(String(patternId))", withArgumentsInArray: nil) {
             while rs.next() {
                 name = rs.stringForColumn("name")
             }
@@ -617,8 +617,31 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
     }
     
     func firstTimeBoot(){
+        ///////////////////////////   connect to the database
+        let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
+        let path = NSString(string: documentsFolder).stringByAppendingPathComponent("ff.db")
+        let database = FMDatabase(path: path)
+        if !database.open() {
+            print("Unable to open database")
+        }
+        
         //TODO: show the tutorial images
-        //TODO: get any owned flashes from keychain
+        
+        if let result = TegKeychain.get("freecheer") {
+            print(result)
+            var cheerId = ""
+            //get the database code
+            if let rs = database.executeQuery("SELECT * FROM patterns WHERE id='\(result)'", withArgumentsInArray: nil) {
+                while rs.next() {
+                    if (rs.stringForColumn("id") != ""){
+                        cheerId = rs.stringForColumn("id")
+                    }
+                }
+            }
+            addOwnedPattern(result, patternId: cheerId)
+        }
+        
+        
         //TODO: get any owned flashes from apple
         
         TegKeychain.set("firstboot", value:  "success")
