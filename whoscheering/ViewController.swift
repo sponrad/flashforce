@@ -192,7 +192,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                                 print("Non consumable Product is Purchased")
                                 // Unlock Feature
                                 owned = true
-                                //TODO: add this to a local table in the database of owned products
+                                addOwnedPattern(String(selectedStoreId))
                             }
                         }
                     }
