@@ -561,6 +561,31 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
     
     func addOwnedPattern(){
         //TODO: finish ownedpattern add function
+        ///////////////////////////   connect to the database
+        let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
+        let path = NSString(string: documentsFolder).stringByAppendingPathComponent("ff.db")
+        let database = FMDatabase(path: path)
+        if !database.open() {
+            print("Unable to open database")
+            return
+        }
+        
+        //ownedpatterns rows (id integer primary key autoincrement, storecode text)
+        
+        database.executeUpdate("insert into ownedpatterns values (NULL, '\(storeCode)')", withArgumentsInArray: nil)
+
+    }
+    
+    func listOfOwnedPatterns(){
+        //TODO: add a function that returns a list of owned patterns
+        ///////////////////////////   connect to the database
+        let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
+        let path = NSString(string: documentsFolder).stringByAppendingPathComponent("ff.db")
+        let database = FMDatabase(path: path)
+        if !database.open() {
+            print("Unable to open database")
+            return
+        }
     }
     
 
