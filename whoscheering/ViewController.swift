@@ -496,7 +496,8 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         self.actionButton.hidden = false
         self.actionButton.setTitle("Start Flash", forState: UIControlState.Normal)
         actionButtonStatus = "flash"
-        //TODO: add to owned pattern table
+        
+        addOwnedPattern(String(selectedStoreId))
     }
     
     func buyNonConsumable(){
@@ -548,8 +549,8 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                 case .Purchased:
                     print("Product Purchased");
                     SKPaymentQueue.defaultQueue().finishTransaction(transaction as! SKPaymentTransaction)
+                    addOwnedPattern( String(selectedStoreId) )
                     break;
-                    //TODO: add to owned pattern table
                 case .Failed:
                     print("Purchased Failed");
                     SKPaymentQueue.defaultQueue().finishTransaction(transaction as! SKPaymentTransaction)
