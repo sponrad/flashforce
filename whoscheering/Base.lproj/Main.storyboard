@@ -874,7 +874,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="syncing..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cGw-zc-5Wk">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="syncing..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cGw-zc-5Wk">
                                 <rect key="frame" x="257" y="108" width="86" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="86" id="jiX-pN-zPW"/>
@@ -883,7 +883,7 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pji-IL-V4t">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pji-IL-V4t">
                                 <rect key="frame" x="0.0" y="116" width="600" height="484"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="300"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -892,10 +892,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="cGw-zc-5Wk" firstAttribute="top" secondItem="Z6X-de-Ovi" secondAttribute="bottom" constant="44" id="G3m-YO-Hrw"/>
+                            <constraint firstItem="cGw-zc-5Wk" firstAttribute="top" secondItem="Z6X-de-Ovi" secondAttribute="bottom" constant="88" id="G3m-YO-Hrw"/>
                             <constraint firstAttribute="trailing" secondItem="pji-IL-V4t" secondAttribute="trailing" id="JJb-LM-7SQ"/>
                             <constraint firstAttribute="bottom" secondItem="pji-IL-V4t" secondAttribute="bottom" id="QaG-ar-RQf"/>
-                            <constraint firstItem="pji-IL-V4t" firstAttribute="top" secondItem="Z6X-de-Ovi" secondAttribute="bottom" constant="52" id="RvV-Dn-wuh"/>
+                            <constraint firstItem="pji-IL-V4t" firstAttribute="top" secondItem="Z6X-de-Ovi" secondAttribute="bottom" constant="96" id="RvV-Dn-wuh"/>
                             <constraint firstItem="cGw-zc-5Wk" firstAttribute="centerX" secondItem="pji-IL-V4t" secondAttribute="centerX" id="n3j-zW-Iiz"/>
                             <constraint firstItem="pji-IL-V4t" firstAttribute="leading" secondItem="eld-kE-Br7" secondAttribute="leading" id="uSc-qf-iao"/>
                         </constraints>

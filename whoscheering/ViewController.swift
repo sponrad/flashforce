@@ -559,7 +559,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         }
     }
     
-    func addOwnedPattern(){
+    func addOwnedPattern(storeCode: String){
         //TODO: finish ownedpattern add function
         ///////////////////////////   connect to the database
         let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
