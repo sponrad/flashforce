@@ -576,7 +576,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
 
     }
     
-    func listOfOwnedPatterns(){
+    func listOfOwnedPatterns() -> Array<String> {
         //TODO: add a function that returns a list of owned patterns
         ///////////////////////////   connect to the database
         let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
@@ -584,8 +584,19 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         let database = FMDatabase(path: path)
         if !database.open() {
             print("Unable to open database")
-            return
         }
+        
+        var ownedPatterns = [String]()
+        
+        if let rs = database.executeQuery("SELECT * FROM ownedpatterns", withArgumentsInArray: nil) {
+            while rs.next() {
+                if (rs.stringForColumn("storecode") != ""){
+                    ownedPatterns.append(rs.stringForColumn("storecode"))
+                }
+            }
+        }
+        
+        return ownedPatterns
     }
     
 
