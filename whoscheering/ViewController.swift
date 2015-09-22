@@ -180,16 +180,20 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                 }
             }
             else {
-                //TODO: add a check for local db before the apple check
-                //check ownership in apple store to see if owned
-                if (SKPaymentQueue.canMakePayments()){
-                    for transaction:SKPaymentTransaction in SKPaymentQueue.defaultQueue().transactions {
-                        if transaction.payment.productIdentifier == String(selectedStoreId)
-                        {
-                            print("Non consumable Product is Purchased")
-                            // Unlock Feature
-                            owned = true
-                            //TODO: add this to a local table in the database of owned products
+                if listOfOwnedPatterns().contains( String(selectedStoreId) ) {
+                    owned = true
+                }
+                else {
+                    //check ownership in apple store to see if owned
+                    if (SKPaymentQueue.canMakePayments()){
+                        for transaction:SKPaymentTransaction in SKPaymentQueue.defaultQueue().transactions {
+                            if transaction.payment.productIdentifier == String(selectedStoreId)
+                            {
+                                print("Non consumable Product is Purchased")
+                                // Unlock Feature
+                                owned = true
+                                //TODO: add this to a local table in the database of owned products
+                            }
                         }
                     }
                 }
@@ -560,7 +564,6 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
     }
     
     func addOwnedPattern(storeCode: String){
-        //TODO: finish ownedpattern add function
         ///////////////////////////   connect to the database
         let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
         let path = NSString(string: documentsFolder).stringByAppendingPathComponent("ff.db")
@@ -571,13 +574,11 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         }
         
         //ownedpatterns rows (id integer primary key autoincrement, storecode text)
-        
         database.executeUpdate("insert into ownedpatterns values (NULL, '\(storeCode)')", withArgumentsInArray: nil)
 
     }
     
     func listOfOwnedPatterns() -> Array<String> {
-        //TODO: add a function that returns a list of owned patterns
         ///////////////////////////   connect to the database
         let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
         let path = NSString(string: documentsFolder).stringByAppendingPathComponent("ff.db")
