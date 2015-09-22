@@ -13,7 +13,7 @@ class BrowseViewController: UITableViewController {
     @IBOutlet var browseTable: UITableView!
     
     //let searchController = UISearchController(searchResultsController: nil)
-    var categories: [String] = []
+    var categories: [String] = ["My Flashes"]
     var filteredCategories: [String] = []
 
     

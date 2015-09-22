@@ -192,7 +192,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                                 print("Non consumable Product is Purchased")
                                 // Unlock Feature
                                 owned = true
-                                addOwnedPattern(String(selectedStoreId))
+                                addOwnedPattern()
                             }
                         }
                     }
@@ -252,7 +252,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
             if !database.executeUpdate("create table offsets(id integer primary key autoincrement, offset real)", withArgumentsInArray: nil) {
                 print("create table failed: \(database.lastErrorMessage()), probably already created")
             }
-            if !database.executeUpdate("create table ownedpatterns(id integer primary key autoincrement, storecode text)", withArgumentsInArray: nil) {
+            if !database.executeUpdate("create table ownedpatterns(id integer primary key autoincrement, storecode text, name text, patternid integer)", withArgumentsInArray: nil) {
                 print("create table failed: \(database.lastErrorMessage()), probably already created")
             }
             database.executeUpdate("DELETE FROM patterns", withArgumentsInArray: nil)
@@ -498,7 +498,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         self.actionButton.setTitle("Start Flash", forState: UIControlState.Normal)
         actionButtonStatus = "flash"
         
-        addOwnedPattern(String(selectedStoreId))
+        addOwnedPattern()
     }
     
     func buyNonConsumable(){
@@ -550,7 +550,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                 case .Purchased:
                     print("Product Purchased");
                     SKPaymentQueue.defaultQueue().finishTransaction(transaction as! SKPaymentTransaction)
-                    addOwnedPattern( String(selectedStoreId) )
+                    addOwnedPattern()
                     break;
                 case .Failed:
                     print("Purchased Failed");
@@ -565,7 +565,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         }
     }
     
-    func addOwnedPattern(storeCode: String){
+    func addOwnedPattern(){
         ///////////////////////////   connect to the database
         let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
         let path = NSString(string: documentsFolder).stringByAppendingPathComponent("ff.db")
@@ -575,9 +575,17 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
             return
         }
         
-        //ownedpatterns rows (id integer primary key autoincrement, storecode text)
-        database.executeUpdate("insert into ownedpatterns values (NULL, '\(storeCode)')", withArgumentsInArray: nil)
+        var name = ""
+        if let rs = database.executeQuery("SELECT * FROM patterns WHERE id=\(String(selectedId))", withArgumentsInArray: nil) {
+            while rs.next() {
+                name = rs.stringForColumn("name")
+            }
+        }
+        
+        //ownedpatterns rows ("create table ownedpatterns(id integer primary key autoincrement, storecode text, name text, patternid integer)
+        database.executeUpdate("insert into ownedpatterns values (NULL, '\(selectedStoreId)', '\(name)', '\(selectedId)' )", withArgumentsInArray: nil)
         database.close()
+        
     }
     
     func listOfOwnedPatterns() -> Array<String> {

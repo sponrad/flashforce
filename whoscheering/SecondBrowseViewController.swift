@@ -37,7 +37,7 @@ class SecondBrowseViewController: UITableViewController, UISearchResultsUpdating
             return
         }
         
-        if (self.category == ""){  //this fires if use is changing team after selecting one previously
+        if (self.category == ""){  //this fires if user is changing team after selecting one previously
             //print("Not set")
             if let rs1 = database.executeQuery("SELECT category FROM patterns WHERE id='\(selectedId)'", withArgumentsInArray: nil) {
                 while rs1.next() {
@@ -48,12 +48,24 @@ class SecondBrowseViewController: UITableViewController, UISearchResultsUpdating
             }
         }
         
-        if let rs = database.executeQuery("SELECT name, id FROM patterns WHERE category='\(self.category)' GROUP BY name ORDER BY name", withArgumentsInArray: nil) {
-            while rs.next() {
-                self.details.append([rs.stringForColumn("name"), rs.intForColumn("id")])
+        if (self.category == "My Flashes"){
+            if let rs = database.executeQuery("SELECT name, patternid FROM ownedPatterns GROUP BY name ORDER BY name", withArgumentsInArray: nil) {
+                while rs.next() {
+                    self.details.append([rs.stringForColumn("name"), rs.intForColumn("patternid")])
+                }
+            } else {
+                print("select failed: \(database.lastErrorMessage())")
             }
-        } else {
-            print("select failed: \(database.lastErrorMessage())")
+
+        }
+        else {
+            if let rs = database.executeQuery("SELECT name, id FROM patterns WHERE category='\(self.category)' GROUP BY name ORDER BY name", withArgumentsInArray: nil) {
+                while rs.next() {
+                    self.details.append([rs.stringForColumn("name"), rs.intForColumn("id")])
+                }
+            } else {
+                print("select failed: \(database.lastErrorMessage())")
+            }
         }
         
         self.filteredDetails = self.details
