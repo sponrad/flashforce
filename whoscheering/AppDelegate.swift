@@ -41,42 +41,56 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-        if (!cheering){
-            // sync if internet
-            let reachability = Reachability.reachabilityForInternetConnection()
-            if reachability!.isReachable() {
-                ///////////////////////////   connect to the database
-                let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
-                let path = NSString(string: documentsFolder).stringByAppendingPathComponent("ff.db")
-                let database = FMDatabase(path: path)
-                if !database.open() {
-                    print("Unable to open database")
-                    return
+        let qualityOfServiceClass = QOS_CLASS_BACKGROUND
+        let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
+        dispatch_async(backgroundQueue, {
+            print("This is run on the background queue")
+            
+            
+            if (!cheering){
+                // sync if internet
+                let reachability = Reachability.reachabilityForInternetConnection()
+                if reachability!.isReachable() {
+                    ///////////////////////////   connect to the database
+                    let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
+                    let path = NSString(string: documentsFolder).stringByAppendingPathComponent("ff.db")
+                    let database = FMDatabase(path: path)
+                    if !database.open() {
+                        print("Unable to open database")
+                        return
+                    }
+                    
+                    database.executeUpdate("DROP TABLE offsets", withArgumentsInArray: nil)
+                    
+                    if !database.executeUpdate("create table offsets(id integer primary key autoincrement, offset real)", withArgumentsInArray: nil) {
+                        print("create table failed: \(database.lastErrorMessage()), probably already created")
+                    }
+                    
+                    //load offsets
+                    var averageOffset:[Double] = []
+                    self.getOffset()
+                    averageOffset.append(self.getOffset())
+                    averageOffset.append(self.getOffset())
+                    averageOffset.append(self.getOffset())
+                    let average = averageOffset.reduce(0) { $0 + $1 } / Double(averageOffset.count)
+                    print( average )
+                    database.executeUpdate("insert into offsets values (NULL, '\(String(stringInterpolationSegment: average))')", withArgumentsInArray: nil)
+                    flashAble = true
+                    print("synced to enter foreground")
+                    database.close()
                 }
-                
-                database.executeUpdate("DROP TABLE offsets", withArgumentsInArray: nil)
-                
-                if !database.executeUpdate("create table offsets(id integer primary key autoincrement, offset real)", withArgumentsInArray: nil) {
-                    print("create table failed: \(database.lastErrorMessage()), probably already created")
+                else {
+                    print("not reachable")
                 }
-                
-                //load offsets
-                var averageOffset:[Double] = []
-                getOffset()
-                averageOffset.append(getOffset())
-                averageOffset.append(getOffset())
-                averageOffset.append(getOffset())
-                let average = averageOffset.reduce(0) { $0 + $1 } / Double(averageOffset.count)
-                print( average )
-                database.executeUpdate("insert into offsets values (NULL, '\(String(stringInterpolationSegment: average))')", withArgumentsInArray: nil)
-                flashAble = true
-                print("synced to enter foreground")
-                database.close()
             }
-            else {
-                print("not reachable")
-            }
-        }
+
+            
+            
+            
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                print("This is run on the main queue, after the previous code in outer block")
+            })
+        })
     }
 
     func applicationWillTerminate(application: UIApplication) {
