@@ -19,7 +19,7 @@ var selectedPrice: String = ""
 var oldBrightness: CGFloat = 0.5
 var flashAble = false
 
-let firstTimeBootString = "ftb026"   //keychain reference
+let firstTimeBootString = "ftb027"   //keychain reference
 let freeFlashString = "ffb001"       //keychain reference
 
 
