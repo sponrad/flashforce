@@ -266,9 +266,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                     self.actionButton.hidden = false
                     self.actionButton.setTitle("Get for Free", forState: UIControlState.Normal)
                 }
-       
             }
-            
         }
         
         //average all of the stored offsets
