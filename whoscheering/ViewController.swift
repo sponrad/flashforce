@@ -20,6 +20,7 @@ var oldBrightness: CGFloat = 0.5
 var flashAble = false
 
 let firstTimeBootString = "ftb016"
+let freeFlashString = "ffb001"
 
 
 //class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SKProductsRequestDelegate, SKPaymentTransactionObserver {
@@ -176,8 +177,8 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
             var owned = false  //check against app store
                       
             //check ownership against keychain
-            if (TegKeychain.get("freecheer") != nil){
-                if TegKeychain.get("freecheer")! == selectedStoreId {
+            if (TegKeychain.get(String(freeFlashString)) != nil){
+                if TegKeychain.get(String(freeFlashString))! == selectedStoreId {
                     owned = true
                 }
             }
@@ -213,7 +214,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
             if (owned == false) {
                 
                 //check Keychain for if first theme has been purchased
-                if let result = TegKeychain.get("freecheer") {   //this is set when the flash button is tapped
+                if let result = TegKeychain.get(String(freeFlashString)) {   //this is set when the flash button is tapped
                     print("In Keychain: \(result)")
                     //if yes, display the normal IAP button
                     actionButtonStatus = "buy"
@@ -350,7 +351,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
     
     @IBAction func tapButtonTapped(sender: AnyObject) {
         //reset the keychain
-        //TegKeychain.delete("freecheer")
+        //TegKeychain.delete(String(freeFlashString))
         print("resetting the offsets database")
         // reset the offsets database.
         ///////////////////////////   connect to the database
@@ -498,7 +499,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
     
     //purchase a flash for free, set the token, and change the action button
     func purchaseFreeFlash (alert: UIAlertAction!){
-        TegKeychain.set("freecheer", value: selectedStoreId)
+        TegKeychain.set(String(freeFlashString), value: selectedStoreId)
         self.actionButton.enabled = true
         self.actionButton.hidden = false
         self.actionButton.setTitle("Start Flash", forState: UIControlState.Normal)
@@ -631,7 +632,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         
         //TODO: show the tutorial images
         
-        if let result = TegKeychain.get("freecheer") {
+        if let result = TegKeychain.get(String(freeFlashString)) {
             print(result)
             var cheerId = ""
             //get the database code
