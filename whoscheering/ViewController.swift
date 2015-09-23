@@ -62,8 +62,6 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         self.teamButton.enabled = false
         self.teamButton.hidden = true
         self.teamButton.setTitle("", forState: UIControlState.Normal)
-        //self.teamButton.titleLabel?.minimumScaleFactor = 0.01
-        //self.teamButton.titleLabel?.adjustsFontSizeToFitWidth = true
         self.tapButton.setTitle("", forState: UIControlState.Normal)
         self.labelBottomArrow.hidden = true
         self.labelMiddleArrow.hidden = true
@@ -74,8 +72,6 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         
         UIScreen.mainScreen().brightness = oldBrightness
         
-        //self.color1Label.backgroundColor
-        
         ///////////////////////////   connect to the database
         let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
         let path = NSString(string: documentsFolder).stringByAppendingPathComponent("ff.db")
@@ -85,9 +81,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
             return
         }
         
-        
         // TODO add check for ffdbloaded, only load if there is a change in the db, compare rows of patterns maybe
-        // should improve load time a lot
         if let rscheck = database.intForQuery("SELECT COUNT(id) FROM patterns") {
             if (UInt32(rscheck) == UInt32(StoreData.initialData.count)) {
                 ffdbLoaded = true
@@ -97,7 +91,6 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         ///////////////////////////   code to load the database with data on first bootup
         if (ffdbLoaded==false){
             database.executeUpdate("DROP TABLE patterns", withArgumentsInArray: nil)
-            //database.executeUpdate("DROP TABLE offsets", withArgumentsInArray: nil)
             
             if !database.executeUpdate("create table patterns(id integer primary key autoincrement, storecode text, name text, category text, pattern text, timing text, price real, pattern1 text, pattern2 text, pattern3 text, pattern4 text, pattern5 text, alt1 text)", withArgumentsInArray: nil) {
                 print("create table failed: \(database.lastErrorMessage())")
@@ -202,7 +195,6 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                         let image = drawBordered(imageSize, color: colorWithHexString(color))
                         imageView.image = image
                     }
-
                 }
             } else {
                 print("select failed: \(database.lastErrorMessage())")
@@ -297,10 +289,13 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         database.close()
         
         //do very first launch tasks
-        if (TegKeychain.get(String(firstTimeBootString)) == nil && ffdbLoaded == true){
+        //if (TegKeychain.get(String(firstTimeBootString)) == nil && ffdbLoaded == true){
+        //    firstTimeBoot()
+        //}
+        //replace that with isAppAlreadyLaunchedOnce check
+        if (isAppAlreadyLaunchedOnce() == false){
             firstTimeBoot()
         }
-        //TODO: replace that with isAppAlreadyLaunchedOnce check
     }
 
     override func didReceiveMemoryWarning() {
@@ -342,10 +337,6 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                 self.presentViewController(alert, animated: true, completion: nil)
             case "buy":
                 buyNonConsumable()
-                /*var alert = UIAlertController(title: "Buy Flash !!!NOT DONE YET!!!", message: "Buy this flash for $\(selectedPrice)?", preferredStyle: UIAlertControllerStyle.Alert)
-                alert.addAction(UIAlertAction(title: "Buy", style: UIAlertActionStyle.Default, handler: buyNonConsumable ))
-                alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
-                self.presentViewController(alert, animated: true, completion: nil)*/
             default:
                 print("do nothing")
         }
@@ -355,7 +346,6 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         //reset the keychain
         //TegKeychain.delete(String(freeFlashString))
         print("resetting the offsets database")
-        // reset the offsets database.
         ///////////////////////////   connect to the database
         let reachability = Reachability.reachabilityForInternetConnection()
         if reachability!.isReachable() {
@@ -592,7 +582,6 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
             }
         }
         
-        //ownedpatterns rows ("create table ownedpatterns(id integer primary key autoincrement, storecode text, name text, patternid integer)
         database.executeUpdate("insert into ownedpatterns values (NULL, '\(storeId)', '\(name)', '\(patternId)' )", withArgumentsInArray: nil)
         database.close()
         

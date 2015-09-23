@@ -84,9 +84,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
             }
 
-            
-            
-            
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 print("This is run on the main queue, after the previous code in outer block")
             })
@@ -102,7 +99,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let fetchView = FetchViewController()
         fetchView.fetch{ completionHandler(.NewData) }
-        
     }
     
     func getOffset() -> Double {
@@ -131,7 +127,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return NSDictionary()
         }
     }
-
-
 }
 

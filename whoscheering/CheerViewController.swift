@@ -227,7 +227,7 @@ class CheerViewController: UIViewController {
         brightness = sqrt( brightness )
         
         //print(brightness)
-        //need a scale from 80 to 100
+        //need a scale from 90 to 100
         //brightness of 255 returns 80 or low point, 0 returns 100 or full value
         let modified = (90.0 + (10.0 * (255.0 - Double(brightness) ) / 255.0 ))
         //print(modified)

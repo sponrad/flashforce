@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 struct StoreData{
     
     static let initialData: [[String]] = [
