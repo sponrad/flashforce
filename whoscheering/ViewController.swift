@@ -19,8 +19,8 @@ var selectedPrice: String = ""
 var oldBrightness: CGFloat = 0.5
 var flashAble = false
 
-let firstTimeBootString = "ftb018"
-let freeFlashString = "ffb001"
+let firstTimeBootString = "ftb026"   //keychain reference
+let freeFlashString = "ffb001"       //keychain reference
 
 
 //class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SKProductsRequestDelegate, SKPaymentTransactionObserver {
@@ -83,6 +83,50 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         if !database.open() {
             print("Unable to open database")
             return
+        }
+        
+        
+        // TODO add check for ffdbloaded, only load if there is a change in the db, compare rows of patterns maybe
+        // should improve load time a lot
+        if let rscheck = database.intForQuery("SELECT COUNT(id) FROM patterns") {
+            if (UInt32(rscheck) == UInt32(StoreData.initialData.count)) {
+                ffdbLoaded = true
+            }
+        }
+        
+        ///////////////////////////   code to load the database with data on first bootup
+        if (ffdbLoaded==false){
+            database.executeUpdate("DROP TABLE patterns", withArgumentsInArray: nil)
+            //database.executeUpdate("DROP TABLE offsets", withArgumentsInArray: nil)
+            
+            if !database.executeUpdate("create table patterns(id integer primary key autoincrement, storecode text, name text, category text, pattern text, timing text, price real, pattern1 text, pattern2 text, pattern3 text, pattern4 text, pattern5 text, alt1 text)", withArgumentsInArray: nil) {
+                print("create table failed: \(database.lastErrorMessage())")
+            }
+            if !database.executeUpdate("create table offsets(id integer primary key autoincrement, offset real)", withArgumentsInArray: nil) {
+                print("create table failed: \(database.lastErrorMessage()), probably already created")
+            }
+            if !database.executeUpdate("create table ownedpatterns(id integer primary key autoincrement, storecode text, name text, patternid integer)", withArgumentsInArray: nil) {
+                print("create table failed: \(database.lastErrorMessage()), probably already created")
+            }
+            database.executeUpdate("DELETE FROM patterns", withArgumentsInArray: nil)
+            //loop through initialData to build the database
+            for record in StoreData.initialData {
+                let pattern = record[5]  //stored in [5] through [9]...but may be empty
+                let pattern1 = record[5]
+                let pattern2 = record[6]
+                let pattern3 = record[7]
+                let pattern4 = record[8]
+                let pattern5 = record[9]
+                let timing = record[18]
+                let price = record[4]
+                database.executeUpdate("insert into patterns values (NULL, '\(record[0])', '\(record[2])', '\(record[1])', '\(pattern)', '\(timing)', \(price), '\(pattern1)', '\(pattern2)', '\(pattern3)', '\(pattern4)', '\(pattern5)', '\(record[3])')", withArgumentsInArray: nil)
+            }
+            
+            let reachability = Reachability.reachabilityForInternetConnection()
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "reachabilityChanged:", name: ReachabilityChangedNotification, object: reachability)
+            reachability!.startNotifier()
+            
+            ffdbLoaded = true
         }
         
         //there is a team selected (will never fire on first boot)
@@ -235,50 +279,6 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
             
         }
         
-        
-        // TODO add check for ffdbloaded, only load if there is a change in the db, compare rows of patterns maybe
-        // should improve load time a lot
-        if let rscheck = database.intForQuery("SELECT COUNT(id) FROM patterns") {
-            if (UInt32(rscheck) == UInt32(StoreData.initialData.count)) {
-                ffdbLoaded = true
-            }
-        }
-        
-        ///////////////////////////   code to load the database with data on first bootup
-        if (ffdbLoaded==false){
-            database.executeUpdate("DROP TABLE patterns", withArgumentsInArray: nil)
-            //database.executeUpdate("DROP TABLE offsets", withArgumentsInArray: nil)
-            
-            if !database.executeUpdate("create table patterns(id integer primary key autoincrement, storecode text, name text, category text, pattern text, timing text, price real, pattern1 text, pattern2 text, pattern3 text, pattern4 text, pattern5 text, alt1 text)", withArgumentsInArray: nil) {
-                print("create table failed: \(database.lastErrorMessage())")
-            }
-            if !database.executeUpdate("create table offsets(id integer primary key autoincrement, offset real)", withArgumentsInArray: nil) {
-                print("create table failed: \(database.lastErrorMessage()), probably already created")
-            }
-            if !database.executeUpdate("create table ownedpatterns(id integer primary key autoincrement, storecode text, name text, patternid integer)", withArgumentsInArray: nil) {
-                print("create table failed: \(database.lastErrorMessage()), probably already created")
-            }
-            database.executeUpdate("DELETE FROM patterns", withArgumentsInArray: nil)
-            //loop through initialData to build the database
-            for record in StoreData.initialData {
-                let pattern = record[5]  //stored in [5] through [9]...but may be empty
-                let pattern1 = record[5]
-                let pattern2 = record[6]
-                let pattern3 = record[7]
-                let pattern4 = record[8]
-                let pattern5 = record[9]
-                let timing = record[18]
-                let price = record[4]
-                database.executeUpdate("insert into patterns values (NULL, '\(record[0])', '\(record[2])', '\(record[1])', '\(pattern)', '\(timing)', \(price), '\(pattern1)', '\(pattern2)', '\(pattern3)', '\(pattern4)', '\(pattern5)', '\(record[3])')", withArgumentsInArray: nil)
-            }
-            
-            let reachability = Reachability.reachabilityForInternetConnection()
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: "reachabilityChanged:", name: ReachabilityChangedNotification, object: reachability)
-            reachability!.startNotifier()
-            
-            ffdbLoaded = true
-        }
-        
         //average all of the stored offsets
         var offsets:[Double] = []
         if let rs = database.executeQuery("SELECT * FROM offsets LIMIT 50", withArgumentsInArray: nil) {
@@ -296,7 +296,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         
         database.close()
         
-        if (TegKeychain.get(String(firstTimeBootString)) == nil){
+        if (TegKeychain.get(String(firstTimeBootString)) == nil && ffdbLoaded == true){
             firstTimeBoot()
         }
     }
@@ -591,7 +591,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         }
         
         //ownedpatterns rows ("create table ownedpatterns(id integer primary key autoincrement, storecode text, name text, patternid integer)
-        database.executeUpdate("insert into ownedpatterns values (NULL, '\(selectedStoreId)', '\(name)', '\(selectedId)' )", withArgumentsInArray: nil)
+        database.executeUpdate("insert into ownedpatterns values (NULL, '\(storeId)', '\(name)', '\(patternId)' )", withArgumentsInArray: nil)
         database.close()
         
     }
@@ -636,7 +636,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
             print(result)
             var cheerId = ""
             //get the database code
-            if let rs = database.executeQuery("SELECT * FROM patterns WHERE id='\(result)'", withArgumentsInArray: nil) {
+            if let rs = database.executeQuery("SELECT * FROM patterns WHERE storecode='\(result)'", withArgumentsInArray: nil) {
                 while rs.next() {
                     if (rs.stringForColumn("id") != ""){
                         cheerId = rs.stringForColumn("id")
