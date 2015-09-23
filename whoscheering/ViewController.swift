@@ -296,9 +296,11 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         
         database.close()
         
+        //do very first launch tasks
         if (TegKeychain.get(String(firstTimeBootString)) == nil && ffdbLoaded == true){
             firstTimeBoot()
         }
+        //TODO: replace that with isAppAlreadyLaunchedOnce check
     }
 
     override func didReceiveMemoryWarning() {
@@ -630,8 +632,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
             print("Unable to open database")
         }
         
-        //TODO: show the tutorial images
-        
+        ////////////////get any keychain flashes
         if let result = TegKeychain.get(String(freeFlashString)) {
             print(result)
             var cheerId = ""
@@ -645,12 +646,26 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
             }
             addOwnedPattern(String(result), patternId: cheerId)
             print("this fired")
-            
         }
-        
         
         //TODO: get any owned flashes from apple
         
+        
+        //TODO: show the tutorial images
+
         TegKeychain.set(String(firstTimeBootString), value:  "success")
+    }
+    
+    func isAppAlreadyLaunchedOnce()->Bool{
+        let defaults = NSUserDefaults.standardUserDefaults()
+        
+        if let _ = defaults.stringForKey("isAppAlreadyLaunchedOnce"){
+            print("App already launched")
+            return true
+        }else{
+            defaults.setBool(true, forKey: "isAppAlreadyLaunchedOnce")
+            print("App launched first time")
+            return false
+        }
     }
 }
