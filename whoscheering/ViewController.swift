@@ -19,7 +19,7 @@ var selectedPrice: String = ""
 var oldBrightness: CGFloat = 0.5
 var flashAble = false
 
-let firstTimeBootString = "ftb016"
+let firstTimeBootString = "ftb018"
 let freeFlashString = "ffb001"
 
 
