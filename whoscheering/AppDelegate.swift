@@ -75,6 +75,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     flashAble = true
                     print("synced to enter foreground")
                     database.close()
+                    
                 }
                 else {
                     print("not reachable")
