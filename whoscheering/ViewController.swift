@@ -127,9 +127,12 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         
         //TODO: see if the offset is old
         if let rs = database.executeQuery("SELECT * FROM offsets LIMIT 1", withArgumentsInArray: nil) {
+            print("Here is the check for staleness of a sync")
             while rs.next() {
                 let current = Double(NSDate().timeIntervalSince1970)
-                if ( (current - rs.doubleForColumn("timestamp")) > 60.0){
+                print(current)
+                print(rs.doubleForColumn("timestamp"))
+                if ( (current - rs.doubleForColumn("timestamp")) < 60.0){
                     flashForwardBoxes.image = UIImage(named: "flash-forward-three-boxes-grayscale.png")
                 }
                 else{
