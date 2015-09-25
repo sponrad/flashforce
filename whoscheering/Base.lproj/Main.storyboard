@@ -926,7 +926,7 @@
         <!--Tutorial1-->
         <scene sceneID="2pU-gC-HIH">
             <objects>
-                <viewController id="X3v-3V-smP" userLabel="Tutorial1" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="tutorial1" useStoryboardIdentifierAsRestorationIdentifier="YES" id="X3v-3V-smP" userLabel="Tutorial1" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="E8w-Vu-CZb"/>
                         <viewControllerLayoutGuide type="bottom" id="Xka-np-CC2"/>
@@ -1061,7 +1061,7 @@
         <image name="flash-forward-three-boxes.png" width="1024" height="1024"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Z1D-5j-CId"/>
+        <segue reference="5Cp-Xi-F5S"/>
         <segue reference="arI-hI-wEo"/>
     </inferredMetricsTieBreakers>
 </document>

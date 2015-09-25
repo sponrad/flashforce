@@ -640,6 +640,10 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         
         
         //TODO: show the tutorial images
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        
+        let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("tutorial1") as UIViewController
+        self.navigationController?.pushViewController(nextViewController, animated: true)
 
         TegKeychain.set(String(firstTimeBootString), value:  "success")
     }
