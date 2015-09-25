@@ -62,7 +62,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     
                     database.executeUpdate("DROP TABLE offsets", withArgumentsInArray: nil)
                     
-                    if !database.executeUpdate("create table offsets(id integer primary key autoincrement, offset real)", withArgumentsInArray: nil) {
+                    if !database.executeUpdate("create table offsets(id integer primary key autoincrement, offset real, timestamp real)", withArgumentsInArray: nil) {
                         print("create table failed: \(database.lastErrorMessage()), probably already created")
                     }
                     
@@ -75,7 +75,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     let average = averageOffset.reduce(0) { $0 + $1 } / Double(averageOffset.count)
                     print( average )
                     avgOffset = average
-                    database.executeUpdate("insert into offsets values (NULL, '\(String(stringInterpolationSegment: average))')", withArgumentsInArray: nil)
+                    database.executeUpdate("insert into offsets values (NULL, '\(String(stringInterpolationSegment: average))','\(String(stringInterpolationSegment: NSDate().timeIntervalSince1970))')", withArgumentsInArray: nil)
                     flashAble = true
                     print("synced to enter foreground")
                     database.close()

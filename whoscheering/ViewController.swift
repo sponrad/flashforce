@@ -95,7 +95,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
             if !database.executeUpdate("create table patterns(id integer primary key autoincrement, storecode text, name text, category text, pattern text, timing text, price real, pattern1 text, pattern2 text, pattern3 text, pattern4 text, pattern5 text, alt1 text)", withArgumentsInArray: nil) {
                 print("create table failed: \(database.lastErrorMessage())")
             }
-            if !database.executeUpdate("create table offsets(id integer primary key autoincrement, offset real)", withArgumentsInArray: nil) {
+            if !database.executeUpdate("create table offsets(id integer primary key autoincrement, offset real, timestamp real)", withArgumentsInArray: nil) {
                 print("create table failed: \(database.lastErrorMessage()), probably already created")
             }
             if !database.executeUpdate("create table ownedpatterns(id integer primary key autoincrement, storecode text, name text, patternid integer)", withArgumentsInArray: nil) {
@@ -113,6 +113,16 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                 let timing = record[18]
                 let price = record[4]
                 database.executeUpdate("insert into patterns values (NULL, '\(record[0])', '\(record[2])', '\(record[1])', '\(pattern)', '\(timing)', \(price), '\(pattern1)', '\(pattern2)', '\(pattern3)', '\(pattern4)', '\(pattern5)', '\(record[3])')", withArgumentsInArray: nil)
+            }
+            
+            //see if the offset is old
+            if let rs = database.executeQuery("SELECT * FROM offsets LIMIT 1", withArgumentsInArray: nil) {
+                while rs.next() {
+                    let current = Double(NSDate().timeIntervalSince1970)
+                    if (current - rs.doubleForColumn("timestamp") > 60){
+                        flashForwardBoxes.image = UIImage(contentsOfFile: "flash-forward-three-boxes-grayscale.png")
+                    }
+                }
             }
             
             let reachability = Reachability.reachabilityForInternetConnection()
@@ -364,7 +374,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                 database.executeUpdate("DROP TABLE offsets", withArgumentsInArray: nil)
                 
                 
-                if !database.executeUpdate("create table offsets(id integer primary key autoincrement, offset real)", withArgumentsInArray: nil) {
+                if !database.executeUpdate("create table offsets(id integer primary key autoincrement, offset real, timestamp real)", withArgumentsInArray: nil) {
                     print("create table failed: \(database.lastErrorMessage()), probably already created")
                 }
                 
@@ -377,7 +387,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                 let average = averageOffset.reduce(0) { $0 + $1 } / Double(averageOffset.count)
                 print( average )
                 avgOffset = average
-                database.executeUpdate("insert into offsets values (NULL, '\(String(stringInterpolationSegment: average))')", withArgumentsInArray: nil)
+                database.executeUpdate("insert into offsets values (NULL, '\(String(stringInterpolationSegment: average))','\(String(stringInterpolationSegment: NSDate().timeIntervalSince1970))')", withArgumentsInArray: nil)
                 
                 database.close()
             }
