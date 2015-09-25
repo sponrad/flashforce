@@ -74,6 +74,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     averageOffset.append(self.getOffset())
                     let average = averageOffset.reduce(0) { $0 + $1 } / Double(averageOffset.count)
                     print( average )
+                    avgOffset = average
                     database.executeUpdate("insert into offsets values (NULL, '\(String(stringInterpolationSegment: average))')", withArgumentsInArray: nil)
                     flashAble = true
                     print("synced to enter foreground")
@@ -85,7 +86,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
 
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                print("This is run on the main queue, after the previous code in outer block")
+                //print("This is run on the main queue, after the previous code in outer block")
             })
         })
     }
