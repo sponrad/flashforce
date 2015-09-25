@@ -132,11 +132,11 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                 let current = Double(NSDate().timeIntervalSince1970)
                 print(current)
                 print(rs.doubleForColumn("timestamp"))
-                if ( (current - rs.doubleForColumn("timestamp")) < 60.0){
-                    flashForwardBoxes.image = UIImage(named: "flash-forward-three-boxes-grayscale.png")
+                if ( (current - rs.doubleForColumn("timestamp")) < 3600.0){  //anything one hour or more recent
+                    self.changeFlashImage()
                 }
                 else{
-                    self.changeFlashImage()
+                    flashForwardBoxes.image = UIImage(named: "flash-forward-three-boxes-grayscale.png")
                 }
             }
         }
@@ -365,6 +365,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         print("resetting the offsets database")
         let qualityOfServiceClass = QOS_CLASS_BACKGROUND
         let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
+        var synced = false
         dispatch_async(backgroundQueue, {
             print("This is run on the background queue")
             
@@ -399,8 +400,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                 database.executeUpdate("insert into offsets values (NULL, '\(String(stringInterpolationSegment: average))','\(String(stringInterpolationSegment: NSDate().timeIntervalSince1970))')", withArgumentsInArray: nil)
                 
                 database.close()
-                
-                self.changeFlashImage()
+                synced = true
 
             }
             else {
@@ -409,6 +409,10 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
             
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 //print("This is run on the main queue, after the previous code in outer block")
+                if (synced){
+                    self.changeFlashImage()
+                }
+
             })
         })
         
