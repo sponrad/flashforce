@@ -72,6 +72,8 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         
         UIScreen.mainScreen().brightness = oldBrightness
         
+        flashForwardBoxes.image = UIImage(named: "flash-forward-three-boxes-grayscale.png")
+        
         ///////////////////////////   connect to the database
         let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
         let path = NSString(string: documentsFolder).stringByAppendingPathComponent("ff.db")
@@ -115,21 +117,25 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                 database.executeUpdate("insert into patterns values (NULL, '\(record[0])', '\(record[2])', '\(record[1])', '\(pattern)', '\(timing)', \(price), '\(pattern1)', '\(pattern2)', '\(pattern3)', '\(pattern4)', '\(pattern5)', '\(record[3])')", withArgumentsInArray: nil)
             }
             
-            //see if the offset is old
-            if let rs = database.executeQuery("SELECT * FROM offsets LIMIT 1", withArgumentsInArray: nil) {
-                while rs.next() {
-                    let current = Double(NSDate().timeIntervalSince1970)
-                    if (current - rs.doubleForColumn("timestamp") > 60){
-                        flashForwardBoxes.image = UIImage(contentsOfFile: "flash-forward-three-boxes-grayscale.png")
-                    }
-                }
-            }
-            
+           
             let reachability = Reachability.reachabilityForInternetConnection()
             NSNotificationCenter.defaultCenter().addObserver(self, selector: "reachabilityChanged:", name: ReachabilityChangedNotification, object: reachability)
             reachability!.startNotifier()
             
             ffdbLoaded = true
+        }
+        
+        //TODO: see if the offset is old
+        if let rs = database.executeQuery("SELECT * FROM offsets LIMIT 1", withArgumentsInArray: nil) {
+            while rs.next() {
+                let current = Double(NSDate().timeIntervalSince1970)
+                if ( (current - rs.doubleForColumn("timestamp")) > 60.0){
+                    flashForwardBoxes.image = UIImage(named: "flash-forward-three-boxes-grayscale.png")
+                }
+                else{
+                    self.changeFlashImage()
+                }
+            }
         }
         
         //there is a team selected (will never fire on first boot)
@@ -390,6 +396,9 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                 database.executeUpdate("insert into offsets values (NULL, '\(String(stringInterpolationSegment: average))','\(String(stringInterpolationSegment: NSDate().timeIntervalSince1970))')", withArgumentsInArray: nil)
                 
                 database.close()
+                
+                self.changeFlashImage()
+
             }
             else {
                 print("not reachable")
@@ -405,6 +414,10 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
     func reachabilityChanged(notification: NSNotification){
         print("reachability changed")
         print(notification.description)
+    }
+    
+    func changeFlashImage(){
+        self.flashForwardBoxes.image = UIImage(named: "flash-forward-three-boxes.png")
     }
     
     func getOffset() -> Double {
