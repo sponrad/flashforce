@@ -53,11 +53,12 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         initialStates()
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector:"performSync", name:UIApplicationDidBecomeActiveNotification, object: nil) // adding observer for syncing
     
         checkOffsetAge() //change appearance of flash force icon based on offset age
-        //performSync()
         
         databaseCheck() // check database and load data if needed
         
@@ -66,7 +67,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         setAverageOffset() //set the offset used while flashing
         
         if (isAppAlreadyLaunchedOnce() == false){
-            firstTimeBoot()
+            firstTimeBoot()  //get owned IAPs and show tutorial images
         }
     }
 
@@ -120,8 +121,6 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
     
     func performSync(){
         //TODO: Add animation code
-        //reset the keychain
-        //TegKeychain.delete(String(freeFlashString))
         print("PERFORM SYNC resetting the offsets database")
         let qualityOfServiceClass = QOS_CLASS_BACKGROUND
         let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
