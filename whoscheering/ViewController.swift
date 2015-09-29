@@ -19,7 +19,6 @@ var selectedPrice: String = ""
 var oldBrightness: CGFloat = 0.5
 var flashAble = false
 
-let firstTimeBootString = "ftb028"   //keychain reference
 let freeFlashString = "ffb001"       //keychain reference
 
 
@@ -435,8 +434,6 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         
         let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("tutorial1") as UIViewController
         self.navigationController?.pushViewController(nextViewController, animated: true)
-
-        TegKeychain.set(String(firstTimeBootString), value:  "success")
     }
     
     func isAppAlreadyLaunchedOnce()->Bool{
