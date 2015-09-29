@@ -154,7 +154,8 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                         imageView.image = image
                     }
                 }
-            } else {
+            }
+            else {
                 print("select failed: \(database.lastErrorMessage())")
             }
         }
@@ -167,64 +168,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
             self.actionButton.enabled = false
         }
         else {
-            //check if they own the product or not
-            var owned = false  //check against app store
-                      
-            //check ownership against keychain
-            if (TegKeychain.get(String(freeFlashString)) != nil){
-                if TegKeychain.get(String(freeFlashString))! == selectedStoreId {
-                    owned = true
-                }
-            }
-            else {
-                if listOfOwnedPatterns().contains( String(selectedStoreId) ) {
-                    owned = true
-                }
-                else {
-                    //check ownership in apple store to see if owned
-                    if (SKPaymentQueue.canMakePayments()){
-                        for transaction:SKPaymentTransaction in SKPaymentQueue.defaultQueue().transactions {
-                            if transaction.payment.productIdentifier == String(selectedStoreId)
-                            {
-                                print("Non consumable Product is Purchased")
-                                // Unlock Feature
-                                owned = true
-                                addOwnedPattern(String(selectedStoreId), patternId: String(selectedId))
-                            }
-                        }
-                    }
-                }
-            }
-            
-            //if owned: display the start flash button
-            if (owned == true){
-                self.actionButton.enabled = true
-                self.actionButton.hidden = false
-                self.actionButton.setTitle("Start Flash", forState: UIControlState.Normal)
-                actionButtonStatus = "flash"
-            }
-            
-            //if not owned:
-            if (owned == false) {
-                
-                //check Keychain for if first theme has been purchased
-                if let result = TegKeychain.get(String(freeFlashString)) {   //this is set when the flash button is tapped
-                    print("In Keychain: \(result)")
-                    //if yes, display the normal IAP button
-                    actionButtonStatus = "buy"
-                    self.actionButton.enabled = true
-                    self.testCheerButton.enabled = true
-                    self.actionButton.hidden = false
-                    self.actionButton.setTitle("Buy $\(selectedPrice)", forState: UIControlState.Normal)
-                } else {
-                    //if no, give option to grant this theme for free, with confirmation
-                    actionButtonStatus = "getfree"
-                    self.actionButton.enabled = true
-                    self.testCheerButton.enabled = true
-                    self.actionButton.hidden = false
-                    self.actionButton.setTitle("Get for Free", forState: UIControlState.Normal)
-                }
-            }
+            doOwnershipChecks()
         }
         
         setAverageOffset()
@@ -714,6 +658,67 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
             }
             avgOffset = offsets.reduce(0) { $0 + $1 } / Double(offsets.count)
             print(avgOffset)
+        }
+    }
+    
+    func doOwnershipChecks(){
+        //check if they own the product or not
+        var owned = false  //check against app store
+        
+        //check ownership against keychain
+        if (TegKeychain.get(String(freeFlashString)) != nil){
+            if TegKeychain.get(String(freeFlashString))! == selectedStoreId {
+                owned = true
+            }
+        }
+        else {
+            if listOfOwnedPatterns().contains( String(selectedStoreId) ) {
+                owned = true
+            }
+            else {
+                //check ownership in apple store to see if owned
+                if (SKPaymentQueue.canMakePayments()){
+                    for transaction:SKPaymentTransaction in SKPaymentQueue.defaultQueue().transactions {
+                        if transaction.payment.productIdentifier == String(selectedStoreId)
+                        {
+                            print("Non consumable Product is Purchased")
+                            // Unlock Feature
+                            owned = true
+                            addOwnedPattern(String(selectedStoreId), patternId: String(selectedId))
+                        }
+                    }
+                }
+            }
+        }
+        
+        //if owned: display the start flash button
+        if (owned == true){
+            self.actionButton.enabled = true
+            self.actionButton.hidden = false
+            self.actionButton.setTitle("Start Flash", forState: UIControlState.Normal)
+            actionButtonStatus = "flash"
+        }
+        
+        //if not owned:
+        if (owned == false) {
+            
+            //check Keychain for if first theme has been purchased
+            if let result = TegKeychain.get(String(freeFlashString)) {   //this is set when the flash button is tapped
+                print("In Keychain: \(result)")
+                //if yes, display the normal IAP button
+                actionButtonStatus = "buy"
+                self.actionButton.enabled = true
+                self.testCheerButton.enabled = true
+                self.actionButton.hidden = false
+                self.actionButton.setTitle("Buy $\(selectedPrice)", forState: UIControlState.Normal)
+            } else {
+                //if no, give option to grant this theme for free, with confirmation
+                actionButtonStatus = "getfree"
+                self.actionButton.enabled = true
+                self.testCheerButton.enabled = true
+                self.actionButton.hidden = false
+                self.actionButton.setTitle("Get for Free", forState: UIControlState.Normal)
+            }
         }
     }
     
