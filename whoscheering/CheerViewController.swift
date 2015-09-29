@@ -30,6 +30,7 @@ class CheerViewController: UIViewController {
         super.viewDidLoad()
         NSNotificationCenter.defaultCenter().addObserver(self, selector:"mainFlash", name:UIApplicationDidBecomeActiveNotification, object: nil)
         mainFlash()
+        
     }
     
     override func didReceiveMemoryWarning() {

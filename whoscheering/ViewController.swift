@@ -54,6 +54,8 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:"performSync", name:UIApplicationDidBecomeActiveNotification, object: nil) // adding observer for syncing
+        
         // Do any additional setup after loading the view, typically from a nib.
         initialStates()
         
@@ -115,6 +117,10 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
     }
     
     @IBAction func tapButtonTapped(sender: AnyObject) {
+        performSync()
+    }
+    
+    func performSync(){
         //reset the keychain
         //TegKeychain.delete(String(freeFlashString))
         print("resetting the offsets database")
@@ -124,42 +130,44 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         dispatch_async(backgroundQueue, {
             print("This is run on the background queue")
             
-            ///////////////////////////   connect to the database
-            let reachability = Reachability.reachabilityForInternetConnection()
-            if reachability!.isReachable() {
-                flashAble = true
-                
-                let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
-                let path = NSString(string: documentsFolder).stringByAppendingPathComponent("ff.db")
-                let database = FMDatabase(path: path)
-                if !database.open() {
-                    print("Unable to open database")
-                    return
+            if (!cheering){
+                ///////////////////////////   connect to the database
+                let reachability = Reachability.reachabilityForInternetConnection()
+                if reachability!.isReachable() {
+                    flashAble = true
+                    
+                    let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
+                    let path = NSString(string: documentsFolder).stringByAppendingPathComponent("ff.db")
+                    let database = FMDatabase(path: path)
+                    if !database.open() {
+                        print("Unable to open database")
+                        return
+                    }
+                    database.executeUpdate("DROP TABLE offsets", withArgumentsInArray: nil)
+                    
+                    
+                    if !database.executeUpdate("create table offsets(id integer primary key autoincrement, offset real, timestamp real)", withArgumentsInArray: nil) {
+                        print("create table failed: \(database.lastErrorMessage()), probably already created")
+                    }
+                    
+                    //load offsets
+                    var averageOffset:[Double] = []
+                    self.getOffset()
+                    averageOffset.append(self.getOffset())
+                    averageOffset.append(self.getOffset())
+                    averageOffset.append(self.getOffset())
+                    let average = averageOffset.reduce(0) { $0 + $1 } / Double(averageOffset.count)
+                    print( average )
+                    avgOffset = average
+                    database.executeUpdate("insert into offsets values (NULL, '\(String(stringInterpolationSegment: average))','\(String(stringInterpolationSegment: NSDate().timeIntervalSince1970))')", withArgumentsInArray: nil)
+                    
+                    database.close()
+                    synced = true
+                    
                 }
-                database.executeUpdate("DROP TABLE offsets", withArgumentsInArray: nil)
-                
-                
-                if !database.executeUpdate("create table offsets(id integer primary key autoincrement, offset real, timestamp real)", withArgumentsInArray: nil) {
-                    print("create table failed: \(database.lastErrorMessage()), probably already created")
+                else {
+                    print("not reachable")
                 }
-                
-                //load offsets
-                var averageOffset:[Double] = []
-                self.getOffset()
-                averageOffset.append(self.getOffset())
-                averageOffset.append(self.getOffset())
-                averageOffset.append(self.getOffset())
-                let average = averageOffset.reduce(0) { $0 + $1 } / Double(averageOffset.count)
-                print( average )
-                avgOffset = average
-                database.executeUpdate("insert into offsets values (NULL, '\(String(stringInterpolationSegment: average))','\(String(stringInterpolationSegment: NSDate().timeIntervalSince1970))')", withArgumentsInArray: nil)
-                
-                database.close()
-                synced = true
-
-            }
-            else {
-                print("not reachable")
             }
             
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
@@ -167,10 +175,9 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                 if (synced){
                     self.changeFlashImage()
                 }
-
+                
             })
         })
-        
     }
     
     func reachabilityChanged(notification: NSNotification){
