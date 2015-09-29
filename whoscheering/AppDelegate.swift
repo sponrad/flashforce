@@ -55,32 +55,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let fetchView = FetchViewController()
         fetchView.fetch{ completionHandler(.NewData) }
     }
-    
-    func getOffset() -> Double {
-        var offset : Double = 0
-        let ct = NSDate().timeIntervalSince1970
-        let serverEpochStr: String = parseJSON( getJSON("https://alignthebeat.appspot.com") )["epoch"] as! String
-        let serverEpoch = (serverEpochStr as NSString).doubleValue
-        let nct = NSDate().timeIntervalSince1970
-        let ping = nct - ct
-        print("ping \(ping)")
-        offset = serverEpoch - nct + ping
-        return offset
-    }
-    
-    func getJSON(urlToRequest: String) -> NSData{
-        return NSData(contentsOfURL: NSURL(string: urlToRequest)!)!
-    }
-    
-    func parseJSON(inputData: NSData) -> NSDictionary{
-        do{
-           let boardsDictionary: NSDictionary = try NSJSONSerialization.JSONObjectWithData(inputData, options: NSJSONReadingOptions.MutableContainers) as! NSDictionary
-            return boardsDictionary
-        }
-        catch{
-            print("error")
-            return NSDictionary()
-        }
-    }
 }
 
