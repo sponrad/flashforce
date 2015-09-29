@@ -539,6 +539,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                 else{
                     self.flashForwardBoxes.image = UIImage(named: "flash-forward-three-boxes-grayscale.png")
                     performSync()
+                    flashAble = true  //temporary... should allow a flash even with a gray/no connection
                 }
             }
         }
