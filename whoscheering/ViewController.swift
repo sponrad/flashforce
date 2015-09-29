@@ -54,25 +54,8 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        cheering = false
         // Do any additional setup after loading the view, typically from a nib.
-        self.navigationItem.hidesBackButton = false;
-        self.outfitButton.enabled = false
-        self.outfitButton.hidden = true
-        self.teamButton.enabled = false
-        self.teamButton.hidden = true
-        self.teamButton.setTitle("", forState: UIControlState.Normal)
-        self.tapButton.setTitle("", forState: UIControlState.Normal)
-        self.labelBottomArrow.hidden = true
-        self.labelMiddleArrow.hidden = true
-        testButton.hidden = true
-
-        grayOverFlash.hidden = true
-        grayUnderTeam.hidden = true
-        
-        UIScreen.mainScreen().brightness = oldBrightness
-        
-        flashForwardBoxes.image = UIImage(named: "flash-forward-three-boxes-grayscale.png")
+        initialStates()
         
         ///////////////////////////   connect to the database
         let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
@@ -699,4 +682,27 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         
         ffdbLoaded = true
     }
+    
+    func initialStates(){
+        cheering = false
+        self.navigationItem.hidesBackButton = false;
+        self.outfitButton.enabled = false
+        self.outfitButton.hidden = true
+        self.teamButton.enabled = false
+        self.teamButton.hidden = true
+        self.teamButton.setTitle("", forState: UIControlState.Normal)
+        self.tapButton.setTitle("", forState: UIControlState.Normal)
+        self.labelBottomArrow.hidden = true
+        self.labelMiddleArrow.hidden = true
+        testButton.hidden = true
+        
+        grayOverFlash.hidden = true
+        grayUnderTeam.hidden = true
+        
+        UIScreen.mainScreen().brightness = oldBrightness
+        
+        flashForwardBoxes.image = UIImage(named: "flash-forward-three-boxes-grayscale.png")
+    }
+    
+    
 }
