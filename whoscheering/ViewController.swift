@@ -54,14 +54,13 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:"performSync", name:UIApplicationDidBecomeActiveNotification, object: nil) // adding observer for syncing
-        
-        // Do any additional setup after loading the view, typically from a nib.
         initialStates()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:"performSync", name:UIApplicationDidBecomeActiveNotification, object: nil) // adding observer for syncing
+    
+        checkOffsetAge() //changes appearance of flash force icon based on offset age
+        //performSync()
         
         databaseCheck() // checks database and loads data if needed
-        
-        checkOffsetAge() //changes appearance of flash force icon based on offset age
         
         updateDisplay()  //updates screen based on pattern and ownership
         
@@ -123,7 +122,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
     func performSync(){
         //reset the keychain
         //TegKeychain.delete(String(freeFlashString))
-        print("resetting the offsets database")
+        print("PERFORM SYNC resetting the offsets database")
         let qualityOfServiceClass = QOS_CLASS_BACKGROUND
         let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
         var synced = false
@@ -458,6 +457,10 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
         let path = NSString(string: documentsFolder).stringByAppendingPathComponent("ff.db")
         let database = FMDatabase(path: path)
+        if !database.open() {
+            print("Unable to open database")
+            return
+        }
         
         database.executeUpdate("DROP TABLE patterns", withArgumentsInArray: nil)
         
@@ -519,6 +522,10 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
         let path = NSString(string: documentsFolder).stringByAppendingPathComponent("ff.db")
         let database = FMDatabase(path: path)
+        if !database.open() {
+            print("Unable to open database")
+            return
+        }
         
         if let rs = database.executeQuery("SELECT * FROM offsets LIMIT 1", withArgumentsInArray: nil) {
             print("Here is the check for staleness of a sync")
@@ -530,7 +537,8 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                     self.changeFlashImage()
                 }
                 else{
-                    flashForwardBoxes.image = UIImage(named: "flash-forward-three-boxes-grayscale.png")
+                    self.flashForwardBoxes.image = UIImage(named: "flash-forward-three-boxes-grayscale.png")
+                    performSync()
                 }
             }
         }
@@ -541,6 +549,10 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
         let path = NSString(string: documentsFolder).stringByAppendingPathComponent("ff.db")
         let database = FMDatabase(path: path)
+        if !database.open() {
+            print("Unable to open database")
+            return
+        }
         
         //average all of the stored offsets
         var offsets:[Double] = []
@@ -621,14 +633,18 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
         let path = NSString(string: documentsFolder).stringByAppendingPathComponent("ff.db")
         let database = FMDatabase(path: path)
+        if !database.open() {
+            print("Unable to open database")
+            return
+        }
         
         self.teamButton.hidden = false
         self.teamButton.enabled = true
         
-        testButton.hidden = false
+        self.testButton.hidden = false
         
         //teambutton underline
-        grayUnderTeam.hidden = false
+        self.grayUnderTeam.hidden = false
         
         //draw the rect over the flash button
         grayOverFlash.hidden = false
