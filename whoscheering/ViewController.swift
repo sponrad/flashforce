@@ -57,123 +57,13 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         // Do any additional setup after loading the view, typically from a nib.
         initialStates()
         
-        ///////////////////////////   connect to the database
-        let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
-        let path = NSString(string: documentsFolder).stringByAppendingPathComponent("ff.db")
-        let database = FMDatabase(path: path)
-        if !database.open() {
-            print("Unable to open database")
-            return
-        }
-        
-        // TODO add check for ffdbloaded, only load if there is a change in the db, compare rows of patterns maybe
-        if let rscheck = database.intForQuery("SELECT COUNT(id) FROM patterns") {
-            if (UInt32(rscheck) == UInt32(StoreData.initialData.count)) {
-                ffdbLoaded = true
-            }
-        }
-        
-        ///////////////////////////   code to load the database with data on first bootup or change
-        if (ffdbLoaded==false){
-            loadDatabase()
-        }
+        databaseCheck() // checks database and loads data if needed
         
         checkOffsetAge() //changes appearance of flash force icon based on offset age
         
-        //there is a team selected (will never fire on first boot)
-        if (self.team != ""){
-            self.teamButton.hidden = false
-            self.teamButton.enabled = true
-            
-            testButton.hidden = false
-            
-            //teambutton underline
-            grayUnderTeam.hidden = false
-            
-            //draw the rect over the flash button
-            grayOverFlash.hidden = false
-            self.labelMiddleArrow.hidden = false
-            
-            //check if there are alternates for the selected team (depends of flash name being somewhat unique)
-            if let count = database.intForQuery("SELECT COUNT(name) FROM patterns WHERE name='\(self.team)'") {
-                if (count > 1){
-                    self.outfitButton.enabled = true
-                    self.outfitButton.hidden = false
-                    self.outfitButton.setTitle("Choose Alternate", forState: UIControlState.Normal)
-                    self.labelBottomArrow.hidden = false
-                }
-                else {
-                    self.outfitButton.enabled = false
-                    self.outfitButton.hidden = true
-                }
-            } else {
-                print("select failed: \(database.lastErrorMessage())")
-            }
-            
-            //display correct information
-            if let rs = database.executeQuery("SELECT * FROM patterns WHERE id=\(String(selectedId))", withArgumentsInArray: nil) {
-                while rs.next() {
-                    self.browseButton.setTitle(rs.stringForColumn("category"), forState: UIControlState.Normal)
-                    self.teamButton.setTitle(rs.stringForColumn("name"), forState: UIControlState.Normal)
-                    self.team = rs.stringForColumn("name")
-                    self.outfitButton.setTitle(rs.stringForColumn("alt1"), forState: UIControlState.Normal)
-                    if rs.stringForColumn("alt1").isEmpty {
-                        self.outfitButton.setTitle("Home", forState: UIControlState.Normal)
-                    }
-                    
-                    selectedStoreId = rs.stringForColumn("storecode")
-                    selectedPrice = rs.stringForColumn("price")
-                    
-                    ///////////draw color boxes for selected flash
-                    var colors = [String]()
-                    if (rs.stringForColumn("pattern1") != ""){
-                        colors.append(rs.stringForColumn("pattern1"))
-                    }
-                    if (rs.stringForColumn("pattern2") != ""){
-                        colors.append(rs.stringForColumn("pattern2"))
-                    }
-                    if (rs.stringForColumn("pattern3") != ""){
-                        colors.append(rs.stringForColumn("pattern3"))
-                    }
-                    if (rs.stringForColumn("pattern4") != ""){
-                        colors.append(rs.stringForColumn("pattern4"))
-                    }
-                    if (rs.stringForColumn("pattern5") != ""){
-                        colors.append(rs.stringForColumn("pattern5"))
-                    }
-                    let screenSize = self.view.bounds
-                    let boxSize = 38.0
-                    //let startingX = (Double(screenSize.width) / 2.0) - (boxSize * Double(colors.count)) + 10.0
-                    let startingX = 20.0
-                    for (index, color) in colors.enumerate() {
-                        let imageSize = CGSize(width: boxSize, height: boxSize)
-                        let xCoord = CGFloat((1.5 * Double(index) * boxSize) + startingX)
-                        let imageView = UIImageView(frame: CGRect(origin: CGPoint(x: xCoord, y: CGFloat(screenSize.height - 130)), size: imageSize))
-                        self.view.addSubview(imageView)
-                        let image = drawBordered(imageSize, color: colorWithHexString(color))
-                        imageView.image = image
-                    }
-                }
-            }
-            else {
-                print("select failed: \(database.lastErrorMessage())")
-            }
-        }
-
-        ///////////////////////////   flash button logic, also should never fire on first boot
-        if (self.team == ""){
-            self.actionButton.enabled = false
-            self.actionButton.alpha = 0.3
-            self.actionButton.hidden = true
-            self.actionButton.enabled = false
-        }
-        else {
-            doOwnershipChecks()
-        }
+        updateDisplay()  //updates screen based on pattern and ownership
         
-        setAverageOffset()
-        
-        database.close()
+        setAverageOffset() //sets the offset used for while flashing
         
         if (isAppAlreadyLaunchedOnce() == false){
             firstTimeBoot()
@@ -690,7 +580,6 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                 }
             }
         }
-        
         //if owned: display the start flash button
         if (owned == true){
             self.actionButton.enabled = true
@@ -698,10 +587,8 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
             self.actionButton.setTitle("Start Flash", forState: UIControlState.Normal)
             actionButtonStatus = "flash"
         }
-        
         //if not owned:
         if (owned == false) {
-            
             //check Keychain for if first theme has been purchased
             if let result = TegKeychain.get(String(freeFlashString)) {   //this is set when the flash button is tapped
                 print("In Keychain: \(result)")
@@ -719,6 +606,124 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                 self.actionButton.hidden = false
                 self.actionButton.setTitle("Get for Free", forState: UIControlState.Normal)
             }
+        }
+    }
+    
+    func getPatternInformation(){
+        ///////////////////////////   connect to the database
+        let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
+        let path = NSString(string: documentsFolder).stringByAppendingPathComponent("ff.db")
+        let database = FMDatabase(path: path)
+        
+        self.teamButton.hidden = false
+        self.teamButton.enabled = true
+        
+        testButton.hidden = false
+        
+        //teambutton underline
+        grayUnderTeam.hidden = false
+        
+        //draw the rect over the flash button
+        grayOverFlash.hidden = false
+        self.labelMiddleArrow.hidden = false
+        
+        //check if there are alternates for the selected team (depends of flash name being somewhat unique)
+        if let count = database.intForQuery("SELECT COUNT(name) FROM patterns WHERE name='\(self.team)'") {
+            if (count > 1){
+                self.outfitButton.enabled = true
+                self.outfitButton.hidden = false
+                self.outfitButton.setTitle("Choose Alternate", forState: UIControlState.Normal)
+                self.labelBottomArrow.hidden = false
+            }
+            else {
+                self.outfitButton.enabled = false
+                self.outfitButton.hidden = true
+            }
+        } else {
+            print("select failed: \(database.lastErrorMessage())")
+        }
+        
+        //display correct information
+        if let rs = database.executeQuery("SELECT * FROM patterns WHERE id=\(String(selectedId))", withArgumentsInArray: nil) {
+            while rs.next() {
+                self.browseButton.setTitle(rs.stringForColumn("category"), forState: UIControlState.Normal)
+                self.teamButton.setTitle(rs.stringForColumn("name"), forState: UIControlState.Normal)
+                self.team = rs.stringForColumn("name")
+                self.outfitButton.setTitle(rs.stringForColumn("alt1"), forState: UIControlState.Normal)
+                if rs.stringForColumn("alt1").isEmpty {
+                    self.outfitButton.setTitle("Home", forState: UIControlState.Normal)
+                }
+                
+                selectedStoreId = rs.stringForColumn("storecode")
+                selectedPrice = rs.stringForColumn("price")
+                
+                ///////////draw color boxes for selected flash
+                var colors = [String]()
+                if (rs.stringForColumn("pattern1") != ""){
+                    colors.append(rs.stringForColumn("pattern1"))
+                }
+                if (rs.stringForColumn("pattern2") != ""){
+                    colors.append(rs.stringForColumn("pattern2"))
+                }
+                if (rs.stringForColumn("pattern3") != ""){
+                    colors.append(rs.stringForColumn("pattern3"))
+                }
+                if (rs.stringForColumn("pattern4") != ""){
+                    colors.append(rs.stringForColumn("pattern4"))
+                }
+                if (rs.stringForColumn("pattern5") != ""){
+                    colors.append(rs.stringForColumn("pattern5"))
+                }
+                let screenSize = self.view.bounds
+                let boxSize = 38.0
+                //let startingX = (Double(screenSize.width) / 2.0) - (boxSize * Double(colors.count)) + 10.0
+                let startingX = 20.0
+                for (index, color) in colors.enumerate() {
+                    let imageSize = CGSize(width: boxSize, height: boxSize)
+                    let xCoord = CGFloat((1.5 * Double(index) * boxSize) + startingX)
+                    let imageView = UIImageView(frame: CGRect(origin: CGPoint(x: xCoord, y: CGFloat(screenSize.height - 130)), size: imageSize))
+                    self.view.addSubview(imageView)
+                    let image = drawBordered(imageSize, color: colorWithHexString(color))
+                    imageView.image = image
+                }
+            }
+        }
+        else {
+            print("select failed: \(database.lastErrorMessage())")
+        }
+    }
+    
+    func updateDisplay(){
+        if (self.team == ""){
+            self.actionButton.enabled = false
+            self.actionButton.alpha = 0.3
+            self.actionButton.hidden = true
+            self.actionButton.enabled = false
+        }
+        else {
+            getPatternInformation() //gets pattern info and does screen updates
+            doOwnershipChecks() //updates display based on ownership
+        }
+    }
+    
+    func databaseCheck(){
+        ///////////////////////////   connect to the database
+        let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
+        let path = NSString(string: documentsFolder).stringByAppendingPathComponent("ff.db")
+        let database = FMDatabase(path: path)
+        if !database.open() {
+            print("Unable to open database")
+            return
+        }
+        // TODO add check for ffdbloaded, only load if there is a change in the db, compare rows of patterns maybe
+        if let rscheck = database.intForQuery("SELECT COUNT(id) FROM patterns") {
+            if (UInt32(rscheck) == UInt32(StoreData.initialData.count)) {
+                ffdbLoaded = true
+            }
+        }
+        ///////////////////////////   code to load the database with data on first bootup or change
+        if (ffdbLoaded==false){
+            loadDatabase()
         }
     }
     
