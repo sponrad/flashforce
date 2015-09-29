@@ -56,14 +56,14 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         initialStates()
         NSNotificationCenter.defaultCenter().addObserver(self, selector:"performSync", name:UIApplicationDidBecomeActiveNotification, object: nil) // adding observer for syncing
     
-        checkOffsetAge() //changes appearance of flash force icon based on offset age
+        checkOffsetAge() //change appearance of flash force icon based on offset age
         //performSync()
         
-        databaseCheck() // checks database and loads data if needed
+        databaseCheck() // check database and load data if needed
         
-        updateDisplay()  //updates screen based on pattern and ownership
+        updateDisplay()  //update screen based on pattern and ownership
         
-        setAverageOffset() //sets the offset used for while flashing
+        setAverageOffset() //set the offset used while flashing
         
         if (isAppAlreadyLaunchedOnce() == false){
             firstTimeBoot()
@@ -119,6 +119,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
     }
     
     func performSync(){
+        //TODO: Add animation code
         //reset the keychain
         //TegKeychain.delete(String(freeFlashString))
         print("PERFORM SYNC resetting the offsets database")
@@ -428,8 +429,6 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         
         //TODO: get any owned flashes from apple
         
-        
-        //TODO: show the tutorial images
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         
         let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("tutorial1") as UIViewController
