@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		218BC19A1BBB20A600FF6A9E /* Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 218BC1991BBB20A600FF6A9E /* Gif.swift */; settings = {ASSET_TAGS = (); }; };
 		21AC4C5B1BB24CD300375999 /* circle-second-page.png in Resources */ = {isa = PBXBuildFile; fileRef = 21AC4C591BB24CD200375999 /* circle-second-page.png */; settings = {ASSET_TAGS = (); }; };
 		21AC4C5C1BB24CD300375999 /* circle.png in Resources */ = {isa = PBXBuildFile; fileRef = 21AC4C5A1BB24CD200375999 /* circle.png */; settings = {ASSET_TAGS = (); }; };
 		21AC4C5E1BB500FF00375999 /* flash-forward-three-boxes-grayscale.png in Resources */ = {isa = PBXBuildFile; fileRef = 21AC4C5D1BB500FF00375999 /* flash-forward-three-boxes-grayscale.png */; settings = {ASSET_TAGS = (); }; };
@@ -48,6 +49,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		218BC1991BBB20A600FF6A9E /* Gif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gif.swift; sourceTree = "<group>"; };
 		21AC4C591BB24CD200375999 /* circle-second-page.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circle-second-page.png"; sourceTree = "<group>"; };
 		21AC4C5A1BB24CD200375999 /* circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = circle.png; sourceTree = "<group>"; };
 		21AC4C5D1BB500FF00375999 /* flash-forward-three-boxes-grayscale.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flash-forward-three-boxes-grayscale.png"; sourceTree = "<group>"; };
@@ -176,6 +178,7 @@
 				7990D35B1B520D0D00936D5F /* flash-forward-three-boxes.png */,
 				21AC4C5D1BB500FF00375999 /* flash-forward-three-boxes-grayscale.png */,
 				79700A9A1B0F03A50060E81D /* Info.plist */,
+				218BC1991BBB20A600FF6A9E /* Gif.swift */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -317,6 +320,7 @@
 				799935521B4B757800575085 /* FMResultSet.m in Sources */,
 				796C35701B142CB200ABE2FE /* SecondBrowseViewController.swift in Sources */,
 				79914B8C1B64197F00CCE6C2 /* FetchViewController.swift in Sources */,
+				218BC19A1BBB20A600FF6A9E /* Gif.swift in Sources */,
 				796C35721B14328000ABE2FE /* StoreData.swift in Sources */,
 				79914B8A1B60C3FE00CCE6C2 /* AlternateViewController.swift in Sources */,
 				799935511B4B757800575085 /* FMDatabaseQueue.m in Sources */,
