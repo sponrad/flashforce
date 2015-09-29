@@ -121,6 +121,12 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
     
     func performSync(){
         //TODO: Add animation code
+        let url = NSBundle.mainBundle().URLForResource("longeranimated", withExtension: "gif")
+        let imageData = NSData(contentsOfURL: url!)
+        
+        // Returns an animated UIImage
+        self.flashForwardBoxes.image = UIImage.animatedImageWithData(imageData!)
+        
         print("PERFORM SYNC resetting the offsets database")
         let qualityOfServiceClass = QOS_CLASS_BACKGROUND
         let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
