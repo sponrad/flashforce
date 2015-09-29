@@ -73,13 +73,12 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
             }
         }
         
-        ///////////////////////////   code to load the database with data on first bootup
+        ///////////////////////////   code to load the database with data on first bootup or change
         if (ffdbLoaded==false){
             loadDatabase()
         }
         
-        
-        checkOffsetAge()
+        checkOffsetAge() //changes appearance of flash force icon based on offset age
         
         //there is a team selected (will never fire on first boot)
         if (self.team != ""){
@@ -228,28 +227,10 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
             }
         }
         
-        //average all of the stored offsets
-        var offsets:[Double] = []
-        if let rs = database.executeQuery("SELECT * FROM offsets LIMIT 50", withArgumentsInArray: nil) {
-            while rs.next() {
-                let nRows = rs.intForColumnIndex(0)
-                if (nRows > 0){
-                    flashAble = true   //allow flash if there is at least one offset stored
-                }
-                let offset = rs.doubleForColumn("offset")
-                offsets.append(offset)
-            }
-            avgOffset = offsets.reduce(0) { $0 + $1 } / Double(offsets.count)
-            print(avgOffset)
-        }
+        setAverageOffset()
         
         database.close()
         
-        //do very first launch tasks
-        //if (TegKeychain.get(String(firstTimeBootString)) == nil && ffdbLoaded == true){
-        //    firstTimeBoot()
-        //}
-        //replace that with isAppAlreadyLaunchedOnce check
         if (isAppAlreadyLaunchedOnce() == false){
             firstTimeBoot()
         }
@@ -711,6 +692,28 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                     flashForwardBoxes.image = UIImage(named: "flash-forward-three-boxes-grayscale.png")
                 }
             }
+        }
+    }
+    
+    func setAverageOffset(){
+        ///////////////////////////   connect to the database
+        let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
+        let path = NSString(string: documentsFolder).stringByAppendingPathComponent("ff.db")
+        let database = FMDatabase(path: path)
+        
+        //average all of the stored offsets
+        var offsets:[Double] = []
+        if let rs = database.executeQuery("SELECT * FROM offsets LIMIT 50", withArgumentsInArray: nil) {
+            while rs.next() {
+                let nRows = rs.intForColumnIndex(0)
+                if (nRows > 0){
+                    flashAble = true   //allow flash if there is at least one offset stored
+                }
+                let offset = rs.doubleForColumn("offset")
+                offsets.append(offset)
+            }
+            avgOffset = offsets.reduce(0) { $0 + $1 } / Double(offsets.count)
+            print(avgOffset)
         }
     }
     
