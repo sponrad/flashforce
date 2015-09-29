@@ -78,21 +78,8 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
             loadDatabase()
         }
         
-        //TODO: see if the offset is old
-        if let rs = database.executeQuery("SELECT * FROM offsets LIMIT 1", withArgumentsInArray: nil) {
-            print("Here is the check for staleness of a sync")
-            while rs.next() {
-                let current = Double(NSDate().timeIntervalSince1970)
-                print(current)
-                print(rs.doubleForColumn("timestamp"))
-                if ( (current - rs.doubleForColumn("timestamp")) < 3600.0){  //anything one hour or more recent
-                    self.changeFlashImage()
-                }
-                else{
-                    flashForwardBoxes.image = UIImage(named: "flash-forward-three-boxes-grayscale.png")
-                }
-            }
-        }
+        
+        checkOffsetAge()
         
         //there is a team selected (will never fire on first boot)
         if (self.team != ""){
@@ -704,5 +691,27 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         flashForwardBoxes.image = UIImage(named: "flash-forward-three-boxes-grayscale.png")
     }
     
+    
+    func checkOffsetAge(){
+        ///////////////////////////   connect to the database
+        let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
+        let path = NSString(string: documentsFolder).stringByAppendingPathComponent("ff.db")
+        let database = FMDatabase(path: path)
+        
+        if let rs = database.executeQuery("SELECT * FROM offsets LIMIT 1", withArgumentsInArray: nil) {
+            print("Here is the check for staleness of a sync")
+            while rs.next() {
+                let current = Double(NSDate().timeIntervalSince1970)
+                print(current)
+                print(rs.doubleForColumn("timestamp"))
+                if ( (current - rs.doubleForColumn("timestamp")) < 3600.0){  //anything one hour or more recent
+                    self.changeFlashImage()
+                }
+                else{
+                    flashForwardBoxes.image = UIImage(named: "flash-forward-three-boxes-grayscale.png")
+                }
+            }
+        }
+    }
     
 }
