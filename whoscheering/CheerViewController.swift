@@ -28,6 +28,7 @@ class CheerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        cheering = true
         NSNotificationCenter.defaultCenter().addObserver(self, selector:"mainFlash", name:UIApplicationDidBecomeActiveNotification, object: nil)
         mainFlash()
         
@@ -45,6 +46,8 @@ class CheerViewController: UIViewController {
             self.timer?.invalidate()
         }
         else {
+            //do nothing somehow
+            return
         }
         
         // // // GET INFO FROM DATABASE // // //
@@ -125,8 +128,6 @@ class CheerViewController: UIViewController {
         if (cheering == true){
             print("cheer loaded")
         }
-        cheering = true
-
         
     }
     
