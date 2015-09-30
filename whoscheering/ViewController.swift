@@ -128,7 +128,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         self.flashForwardBoxes.image = UIImage.animatedImageWithData(imageData!)
         
         print("PERFORM SYNC resetting the offsets database")
-        let qualityOfServiceClass = QOS_CLASS_BACKGROUND
+        let qualityOfServiceClass = QOS_CLASS_USER_INTERACTIVE
         let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
         var synced = false
         dispatch_async(backgroundQueue, {
@@ -178,6 +178,9 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                 //print("This is run on the main queue, after the previous code in outer block")
                 if (synced){
                     self.changeFlashImage()
+                }
+                else {
+                    self.flashForwardBoxes.image = UIImage(named: "flash-forward-three-boxes-grayscale.png")
                 }
                 
             })
