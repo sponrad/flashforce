@@ -516,6 +516,9 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         UIScreen.mainScreen().brightness = oldBrightness
         
         flashForwardBoxes.image = UIImage(named: "flash-forward-three-boxes-grayscale.png")
+        
+        UIApplication.sharedApplication().idleTimerDisabled = false   //screen will dim while not cheering
+
     }
     
     
