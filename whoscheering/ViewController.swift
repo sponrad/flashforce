@@ -120,7 +120,6 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
     }
     
     func performSync(){
-        //TODO: Add animation code, also need to add grayscale and color animations, or just not show the animatino when the sync is not old yet
         
         let url = NSBundle.mainBundle().URLForResource("longeranimated", withExtension: "gif")
         let imageData = NSData(contentsOfURL: url!)
@@ -156,6 +155,9 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                 //load offsets
                 var averageOffset:[Double] = []
                 self.getOffset()
+                averageOffset.append(self.getOffset())
+                averageOffset.append(self.getOffset())
+                averageOffset.append(self.getOffset())
                 averageOffset.append(self.getOffset())
                 averageOffset.append(self.getOffset())
                 averageOffset.append(self.getOffset())

@@ -84,7 +84,12 @@ class BrowseViewController: UITableViewController {
    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let i = self.browseTable.indexPathForSelectedRow?.row
-        
+        //getting the category name
+        //check if any team in that category has a category2
+        // this would be a loop through the query, and a check of contents of the category2 column, any content on any row is a yes
+        //if yes show the category2 browser
+        //if not show the secondbrowseview (BAD NAME NOW)
+        //in second view controller would need to have a different variable for
         if let destinationVC = segue.destinationViewController as? SecondBrowseViewController{
             destinationVC.title = self.categories[i!]
             destinationVC.category = self.categories[i!]

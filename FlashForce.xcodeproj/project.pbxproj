@@ -253,7 +253,7 @@
 				TargetAttributes = {
 					79700A951B0F03A50060E81D = {
 						CreatedOnToolsVersion = 6.3.2;
-						DevelopmentTeam = M37WE7YJ9Y;
+						DevelopmentTeam = 436GFV8Y5W;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -473,7 +473,7 @@
 				INFOPLIST_FILE = whoscheering/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.smarterapps.flashforce$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.cheersoft.Flash-Force";
 				PRODUCT_NAME = "Flash Force";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "whoscheering/whoscheering-Bridging-Header.h";
@@ -493,7 +493,7 @@
 				INFOPLIST_FILE = whoscheering/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.smarterapps.flashforce$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.cheersoft.Flash-Force";
 				PRODUCT_NAME = "Flash Force";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "whoscheering/whoscheering-Bridging-Header.h";
