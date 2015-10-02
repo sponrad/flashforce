@@ -203,13 +203,19 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         let serverEpoch = (serverEpochStr as NSString).doubleValue
         let nct = NSDate().timeIntervalSince1970
         let ping = nct - ct
-        print("ping \(ping)")
+        //print("ping \(ping)")
         offset = serverEpoch - nct + ping
         return offset
     }
     
     func getJSON(urlToRequest: String) -> NSData{
-        return NSData(contentsOfURL: NSURL(string: urlToRequest)!)!
+        var data = NSData()
+        if let url = NSURL(string: urlToRequest){
+            if let tempData = NSData(contentsOfURL: url){
+                data = tempData
+            }
+        }
+        return data
     }
     
     func parseJSON(inputData: NSData) -> NSDictionary{
