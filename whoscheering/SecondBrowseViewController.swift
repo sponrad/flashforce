@@ -59,7 +59,7 @@ class SecondBrowseViewController: UITableViewController, UISearchResultsUpdating
 
         }
         else {
-            if let rs = database.executeQuery("SELECT name, id FROM patterns WHERE category='\(self.category)' GROUP BY name ORDER BY name", withArgumentsInArray: nil) {
+            if let rs = database.executeQuery("SELECT name, id FROM patterns WHERE category='\(self.category)' AND alt1='Home' ORDER BY name", withArgumentsInArray: nil) {
                 while rs.next() {
                     self.details.append([rs.stringForColumn("name"), rs.intForColumn("id")])
                 }
