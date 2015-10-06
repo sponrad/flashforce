@@ -154,7 +154,6 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                 
                 //load offsets
                 var offsets:[Double] = []
-                self.getOffset()
                 for var index = 0; index < 6; index++ {
                     offsets.append(self.getOffset())
                 }
