@@ -131,7 +131,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
         var synced = false
         dispatch_async(backgroundQueue, {
-            print("This is run on the background queue")
+            print("This is run on the other queue")
             
             ///////////////////////////   connect to the database
             let reachability = Reachability.reachabilityForInternetConnection()
@@ -153,17 +153,28 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                 }
                 
                 //load offsets
-                var averageOffset:[Double] = []
+                var offsets:[Double] = []
                 self.getOffset()
-                averageOffset.append(self.getOffset())
-                averageOffset.append(self.getOffset())
-                averageOffset.append(self.getOffset())
-                averageOffset.append(self.getOffset())
-                averageOffset.append(self.getOffset())
-                averageOffset.append(self.getOffset())
-                let average = averageOffset.reduce(0) { $0 + $1 } / Double(averageOffset.count)
-                print( average )
-                avgOffset = average
+                for var index = 0; index < 6; index++ {
+                    offsets.append(self.getOffset())
+                }
+
+                let average = offsets.reduce(0) { $0 + $1 } / Double(offsets.count)
+                print("average \(average)")
+                print("standard deviation \(self.standardDeviation(offsets))")
+                
+                var cleanedOffsets:[Double] = []
+                
+                for offset in offsets {
+                    if ( abs(offset - average) < self.standardDeviation(offsets) ){  //this removes values above and below std
+                        cleanedOffsets.append(offset)
+                    }
+                }
+                
+                let cleanedAverage = cleanedOffsets.reduce(0) { $0 + $1 } / Double(cleanedOffsets.count)
+                avgOffset = cleanedAverage
+                print("cleaned average: \(avgOffset)")
+                
                 database.executeUpdate("insert into offsets values (NULL, '\(String(stringInterpolationSegment: average))','\(String(stringInterpolationSegment: NSDate().timeIntervalSince1970))')", withArgumentsInArray: nil)
                 
                 database.close()
@@ -187,6 +198,14 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         })
     }
     
+    func standardDeviation(arr : [Double]) -> Double
+    {
+        let length = Double(arr.count)
+        let avg = arr.reduce(0, combine: {$0 + $1}) / length
+        let sumOfSquaredAvgDiff = arr.map { pow($0 - avg, 2.0)}.reduce(0, combine: {$0 + $1})
+        return sqrt(sumOfSquaredAvgDiff / length)
+    }
+    
     func reachabilityChanged(notification: NSNotification){
         print("reachability changed")
         print(notification.description)
@@ -198,13 +217,20 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
     
     func getOffset() -> Double {
         var offset : Double = 0
-        let ct = NSDate().timeIntervalSince1970
-        let serverEpochStr: String = parseJSON( getJSON("https://alignthebeat.appspot.com") )["epoch"] as! String
-        let serverEpoch = (serverEpochStr as NSString).doubleValue
-        let nct = NSDate().timeIntervalSince1970
-        let ping = nct - ct
-        //print("ping \(ping)")
-        offset = serverEpoch - nct + ping
+        var ping = 100.0 // any value larger than the test
+        
+        while (ping > 0.5){
+            let ct = NSDate().timeIntervalSince1970
+            let serverEpochStr: String = parseJSON( getJSON("https://alignthebeat.appspot.com") )["epoch"] as! String
+            let serverEpoch = (serverEpochStr as NSString).doubleValue
+            let nct = NSDate().timeIntervalSince1970
+            ping = nct - ct
+            print("ping \(ping)")
+            offset = serverEpoch - nct + ping
+        }
+        
+        //offset = serverEpoch - nct
+        print("offset \(offset)")
         return offset
     }
     
