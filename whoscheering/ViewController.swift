@@ -57,10 +57,10 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         initialStates()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector:"performSync", name:UIApplicationDidBecomeActiveNotification, object: nil) // adding observer for syncing
-    
-        checkOffsetAge() //change appearance of flash force icon based on offset age
         
         databaseCheck() // check database and load data if needed
+        
+        checkOffsetAge() //change appearance of flash force icon based on offset age
         
         updateDisplay()  //update screen based on pattern and ownership
         
