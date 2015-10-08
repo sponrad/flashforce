@@ -120,6 +120,9 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
     }
     
     func performSync(){
+        if (cheering){
+            return
+        }
         
         let url = NSBundle.mainBundle().URLForResource("longeranimated", withExtension: "gif")
         let imageData = NSData(contentsOfURL: url!)

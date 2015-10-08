@@ -43,6 +43,7 @@ class CheerViewController: UIViewController {
         UIScreen.mainScreen().brightness = CGFloat(1.0)
         
         if (cheering == true){
+            checkOffsetAge()
             self.timer?.invalidate()
         }
         else {
@@ -234,6 +235,36 @@ class CheerViewController: UIViewController {
         let modified = (90.0 + (10.0 * (255.0 - Double(brightness) ) / 255.0 ))
         //print(modified)
         return modified
+    }
+    
+    func checkOffsetAge(){
+        ///////////////////////////   connect to the database
+        let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
+        let path = NSString(string: documentsFolder).stringByAppendingPathComponent("ff.db")
+        let database = FMDatabase(path: path)
+        if !database.open() {
+            print("Unable to open database")
+            return
+        }
+        
+        if let rs = database.executeQuery("SELECT * FROM offsets LIMIT 1", withArgumentsInArray: nil) {
+            print("Here is the check for staleness of a sync")
+            while rs.next() {
+                let current = Double(NSDate().timeIntervalSince1970)
+                print(current)
+                print(rs.doubleForColumn("timestamp"))
+                if ( (current - rs.doubleForColumn("timestamp")) < 3600.0){  //anything one hour or more recent
+                    //do nothing
+                }
+                else{
+                    cheering = false
+                    //redirect to viewcontroller
+                    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                    let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("ViewController") as UIViewController
+                    self.navigationController?.pushViewController(nextViewController, animated: true)
+                }
+            }
+        }
     }
     
 }
