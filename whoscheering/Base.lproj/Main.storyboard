@@ -781,27 +781,6 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="FlashForce" id="c7R-9K-f7h">
                         <barButtonItem key="backBarButtonItem" title="Back" id="MTr-hB-fv5"/>
-                        <barButtonItem key="rightBarButtonItem" style="done" id="lwr-gf-ptC">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="99C-zS-bbP">
-                                <rect key="frame" x="511" y="7" width="69" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal">
-                                    <attributedString key="attributedTitle">
-                                        <fragment content="Test">
-                                            <attributes>
-                                                <font key="NSFont" size="15" name="HelveticaNeue"/>
-                                            </attributes>
-                                        </fragment>
-                                    </attributedString>
-                                </state>
-                                <variation key="widthClass=regular" ambiguous="YES" misplaced="YES">
-                                    <rect key="frame" x="366" y="550" width="69" height="30"/>
-                                </variation>
-                                <connections>
-                                    <segue destination="YJg-Mg-Wnw" kind="show" id="GRu-mb-esV"/>
-                                </connections>
-                            </button>
-                        </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <nil key="simulatedBottomBarMetrics"/>
@@ -819,8 +798,6 @@
                         <outlet property="outfitButton" destination="xQq-hb-VP3" id="Fdf-Tj-2gg"/>
                         <outlet property="tapButton" destination="uSn-uI-Ptt" id="I7I-ee-IIP"/>
                         <outlet property="teamButton" destination="83O-3k-Lif" id="i8t-iW-SUB"/>
-                        <outlet property="testButton" destination="99C-zS-bbP" id="20X-yf-eAl"/>
-                        <outlet property="testCheerButton" destination="lwr-gf-ptC" id="Egj-Mx-Ln1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

@@ -28,14 +28,8 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
 
     @IBOutlet weak var actionButton: UIButton!
     @IBOutlet weak var browseButton: UIButton!
-    @IBOutlet weak var testCheerButton: UIBarButtonItem!
     @IBOutlet weak var outfitButton: UIButton!
     @IBOutlet weak var teamButton: UIButton!
-    @IBOutlet weak var color1Label: UILabel!
-    @IBOutlet weak var color2Label: UILabel!
-    @IBOutlet weak var color3Label: UILabel!
-    @IBOutlet weak var color4Label: UILabel!
-    @IBOutlet weak var color5Label: UILabel!
     @IBOutlet weak var tapButton: UIButton!
     @IBOutlet weak var labelTopArrow: UILabel!
     @IBOutlet weak var labelBottomArrow: UILabel!
@@ -46,7 +40,6 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
     @IBOutlet weak var grayUnderTeam: UILabel!
     @IBOutlet weak var grayOverFlash: UILabel!
     
-    @IBOutlet weak var testButton: UIButton!
     @IBOutlet weak var flashForwardBoxes: UIImageView!
     
     var team = String()   // set from the secondbrowseviewcontroller
@@ -544,7 +537,6 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         self.tapButton.setTitle("", forState: UIControlState.Normal)
         self.labelBottomArrow.hidden = true
         self.labelMiddleArrow.hidden = true
-        testButton.hidden = true
         
         grayOverFlash.hidden = true
         grayUnderTeam.hidden = true
@@ -656,14 +648,12 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                 //if yes, display the normal IAP button
                 actionButtonStatus = "buy"
                 self.actionButton.enabled = true
-                self.testCheerButton.enabled = true
                 self.actionButton.hidden = false
                 self.actionButton.setTitle("Buy $\(selectedPrice)", forState: UIControlState.Normal)
             } else {
                 //if no, give option to grant this theme for free, with confirmation
                 actionButtonStatus = "getfree"
                 self.actionButton.enabled = true
-                self.testCheerButton.enabled = true
                 self.actionButton.hidden = false
                 self.actionButton.setTitle("Get for Free", forState: UIControlState.Normal)
             }
@@ -682,8 +672,6 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         
         self.teamButton.hidden = false
         self.teamButton.enabled = true
-        
-        self.testButton.hidden = false
         
         //teambutton underline
         self.grayUnderTeam.hidden = false
