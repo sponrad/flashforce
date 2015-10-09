@@ -438,6 +438,8 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
     
     func firstTimeBoot(){
         print("performing first boot")
+        performSync()
+        
         ///////////////////////////   connect to the database
         let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
         let path = NSString(string: documentsFolder).stringByAppendingPathComponent("ff.db")
@@ -576,6 +578,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                 }
             }
         }
+
     }
     
     func setAverageOffset(){
