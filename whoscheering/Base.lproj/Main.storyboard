@@ -865,7 +865,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="cGw-zc-5Wk" firstAttribute="top" secondItem="Z6X-de-Ovi" secondAttribute="bottom" constant="44" id="G3m-YO-Hrw"/>
+                            <constraint firstItem="cGw-zc-5Wk" firstAttribute="top" secondItem="Z6X-de-Ovi" secondAttribute="bottom" constant="88" id="G3m-YO-Hrw"/>
                             <constraint firstItem="cGw-zc-5Wk" firstAttribute="centerX" secondItem="eld-kE-Br7" secondAttribute="centerX" id="yEu-fk-JWL"/>
                         </constraints>
                     </view>

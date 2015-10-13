@@ -43,8 +43,8 @@ class CheerViewController: UIViewController {
         UIScreen.mainScreen().brightness = CGFloat(1.0)
         
         if (cheering == true){
-            checkOffsetAge()
             self.timer?.invalidate()
+            checkOffsetAge()
         }
         else {
             //do nothing somehow
