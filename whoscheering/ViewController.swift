@@ -151,7 +151,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                     print("create table failed: \(database.lastErrorMessage()), probably already created")
                 }
                 
-                //load offsets
+                //load offsets  //TODO: add a timeout here
                 var offsets:[Double] = []
                 for var index = 0; index < 6; index++ {
                     offsets.append(self.getOffset())
