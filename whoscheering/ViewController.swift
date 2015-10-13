@@ -18,6 +18,7 @@ var selectedStoreId: String = ""
 var selectedPrice: String = ""
 var oldBrightness: CGFloat = 0.5
 var flashAble = false
+var offsetAgeForResync = 1800.0 // double seconds
 
 let freeFlashString = "ffb001"       //keychain reference
 
@@ -49,11 +50,11 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         
         initialStates()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:"performSync", name:UIApplicationDidBecomeActiveNotification, object: nil) // adding observer for syncing
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:"checkOffsetAge", name:UIApplicationDidBecomeActiveNotification, object: nil) // adding observer for syncing
         
         databaseCheck() // check database and load data if needed
         
-        checkOffsetAge() //change appearance of flash force icon based on offset age
+        checkOffsetAge() //change appearance of flash force icon based on offset age, and run performSync if needed
         
         updateDisplay()  //update screen based on pattern and ownership
         
@@ -571,7 +572,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                 let current = Double(NSDate().timeIntervalSince1970)
                 print(current)
                 print(rs.doubleForColumn("timestamp"))
-                if ( (current - rs.doubleForColumn("timestamp")) < 3600.0){  //anything one hour or more recent
+                if ( (current - rs.doubleForColumn("timestamp")) < offsetAgeForResync){  //anything one hour or more recent
                     self.changeFlashImage()
                 }
                 else{
