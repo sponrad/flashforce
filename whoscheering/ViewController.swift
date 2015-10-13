@@ -117,6 +117,8 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
             return
         }
         
+        self.actionButton.setTitle("Syncing...", forState: UIControlState.Normal)
+        
         let url = NSBundle.mainBundle().URLForResource("longeranimated", withExtension: "gif")
         let imageData = NSData(contentsOfURL: url!)
         // Returns an animated UIImage
@@ -188,6 +190,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                 else {
                     self.flashForwardBoxes.image = UIImage(named: "flash-forward-three-boxes-grayscale.png")
                 }
+                self.updateDisplay()
                 
             })
         })
