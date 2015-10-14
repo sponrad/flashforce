@@ -132,14 +132,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="83O-3k-Lif">
-                                <rect key="frame" x="16" y="345" width="248" height="90"/>
+                                <rect key="frame" x="16" y="345" width="238" height="90"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="90" id="4y6-Rk-mYN"/>
                                     <constraint firstAttribute="height" constant="65" id="5ns-yW-6eH"/>
                                     <constraint firstAttribute="height" constant="65" id="zum-mE-aVr"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="38"/>
-                                <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="40" maxY="0.0"/>
+                                <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="30" maxY="0.0"/>
                                 <state key="normal" title="Browseteam">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -187,12 +187,12 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RyF-4m-Ac3">
-                                <rect key="frame" x="16" y="239" width="164" height="121"/>
+                                <rect key="frame" x="16" y="239" width="154" height="121"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="65" id="qPD-MF-efE"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="38"/>
-                                <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="40" maxY="0.0"/>
+                                <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="30" maxY="0.0"/>
                                 <state key="normal" title="Browse">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -361,7 +361,7 @@
                                 </variation>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xQq-hb-VP3">
-                                <rect key="frame" x="16" y="440" width="134" height="89"/>
+                                <rect key="frame" x="16" y="440" width="124" height="89"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="65" id="ILI-dh-Jgk">
                                         <variation key="heightClass=regular" constant="65"/>
@@ -370,7 +370,7 @@
                                     <constraint firstAttribute="height" constant="65" id="xRc-lT-vfA"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="38"/>
-                                <inset key="contentEdgeInsets" minX="0.0" minY="10" maxX="40" maxY="0.0"/>
+                                <inset key="contentEdgeInsets" minX="0.0" minY="10" maxX="30" maxY="0.0"/>
                                 <state key="normal" title="Outfit">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
