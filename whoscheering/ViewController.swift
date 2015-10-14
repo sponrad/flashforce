@@ -105,15 +105,16 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
             case "buy":
                 buyNonConsumable()
             case "notFlashAble":
-                print("sd")
+                self.checkOffsetAge()
             default:
                 print("do nothing")
         }
     }
     
     @IBAction func tapButtonTapped(sender: AnyObject) {
-        performSync()
-        print("flashable \(flashAble)")
+        //performSync()
+        checkOffsetAge()
+        updateDisplay()
     }
     
     func performSync(){
