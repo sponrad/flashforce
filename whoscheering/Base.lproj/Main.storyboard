@@ -334,7 +334,7 @@
                                     </mask>
                                 </variation>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="flash-forward-three-boxes.png" translatesAutoresizingMaskIntoConstraints="NO" id="v2D-Mr-0u7">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="flash-forward-three-boxes.gif" translatesAutoresizingMaskIntoConstraints="NO" id="v2D-Mr-0u7">
                                 <rect key="frame" x="0.0" y="72" width="600" height="168"/>
                                 <variation key="heightClass=compact-widthClass=compact" misplaced="YES">
                                     <rect key="frame" x="0.0" y="72" width="400" height="63"/>
@@ -1022,7 +1022,7 @@
     <resources>
         <image name="circle-second-page.png" width="750" height="1334"/>
         <image name="circle.png" width="751" height="1334"/>
-        <image name="flash-forward-three-boxes.png" width="1024" height="1024"/>
+        <image name="flash-forward-three-boxes.gif" width="1024" height="1024"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="5Cp-Xi-F5S"/>

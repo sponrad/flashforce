@@ -215,7 +215,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
     }
     
     func changeFlashImage(){
-        self.flashForwardBoxes.image = UIImage(named: "flash-forward-three-boxes.png")
+        self.flashForwardBoxes.image = UIImage(named: "flash-forward-three-boxes.gif")
     }
     
     func getOffset() -> Double {
