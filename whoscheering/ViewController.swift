@@ -124,7 +124,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         
         self.actionButton.setTitle("Syncing...", forState: UIControlState.Normal)
         
-        let url = NSBundle.mainBundle().URLForResource("longeranimated", withExtension: "gif")
+        let url = NSBundle.mainBundle().URLForResource("animated-threeboxes-10-13", withExtension: "gif")
         let imageData = NSData(contentsOfURL: url!)
         // Returns an animated UIImage
         self.flashForwardBoxes.image = UIImage.animatedImageWithData(imageData!)
