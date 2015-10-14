@@ -743,7 +743,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                 let screenSize = self.view.bounds
                 let boxSize = 38.0
                 //let startingX = (Double(screenSize.width) / 2.0) - (boxSize * Double(colors.count)) + 10.0
-                let startingX = 20.0
+                let startingX = 15.0
                 for (index, color) in colors.enumerate() {
                     let imageSize = CGSize(width: boxSize, height: boxSize)
                     let xCoord = CGFloat((1.5 * Double(index) * boxSize) + startingX)
