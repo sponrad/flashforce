@@ -104,16 +104,16 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                 self.presentViewController(alert, animated: true, completion: nil)
             case "buy":
                 buyNonConsumable()
-            case "notFlashAble":
+            case "sync":
                 self.checkOffsetAge()
             default:
-                print("do nothing")
+                self.performSync()
         }
     }
     
     @IBAction func tapButtonTapped(sender: AnyObject) {
-        //performSync()
-        checkOffsetAge()
+        performSync()
+        //checkOffsetAge()
         updateDisplay()
     }
     
@@ -584,7 +584,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                     self.flashForwardBoxes.image = UIImage(named: "flash-forward-three-boxes-grayscale.png")
                     performSync()
                     flashAble = false  //temporary... should allow a flash even with a gray/no connection
-                    actionButtonStatus = "notFlashAble"
+                    actionButtonStatus = "sync"
                 }
             }
         }
