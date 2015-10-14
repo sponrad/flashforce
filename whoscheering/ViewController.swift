@@ -104,6 +104,8 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                 self.presentViewController(alert, animated: true, completion: nil)
             case "buy":
                 buyNonConsumable()
+            case "notFlashAble":
+                print("sd")
             default:
                 print("do nothing")
         }
@@ -111,6 +113,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
     
     @IBAction func tapButtonTapped(sender: AnyObject) {
         performSync()
+        print("flashable \(flashAble)")
     }
     
     func performSync(){
@@ -323,7 +326,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         TegKeychain.set(String(freeFlashString), value: selectedStoreId)
         self.actionButton.enabled = true
         self.actionButton.hidden = false
-        self.actionButton.setTitle("Start Flash", forState: UIControlState.Normal)
+        self.actionButton.setTitle("Flash", forState: UIControlState.Normal)
         actionButtonStatus = "flash"
         
         addOwnedPattern(String(selectedStoreId), patternId: String(selectedId))
@@ -574,11 +577,13 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                 print(rs.doubleForColumn("timestamp"))
                 if ( (current - rs.doubleForColumn("timestamp")) < offsetAgeForResync){  //anything one hour or more recent
                     self.changeFlashImage()
+                    flashAble = true
                 }
                 else{
                     self.flashForwardBoxes.image = UIImage(named: "flash-forward-three-boxes-grayscale.png")
                     performSync()
-                    flashAble = true  //temporary... should allow a flash even with a gray/no connection
+                    flashAble = false  //temporary... should allow a flash even with a gray/no connection
+                    actionButtonStatus = "notFlashAble"
                 }
             }
         }
@@ -601,7 +606,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
             while rs.next() {
                 let nRows = rs.intForColumnIndex(0)
                 if (nRows > 0){
-                    flashAble = true   //allow flash if there is at least one offset stored
+                    //flashAble = true   //allow flash if there is at least one offset stored
                 }
                 let offset = rs.doubleForColumn("offset")
                 offsets.append(offset)
@@ -644,7 +649,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         if (owned == true){
             self.actionButton.enabled = true
             self.actionButton.hidden = false
-            self.actionButton.setTitle("Start Flash", forState: UIControlState.Normal)
+            self.actionButton.setTitle("Flash", forState: UIControlState.Normal)
             actionButtonStatus = "flash"
         }
         //if not owned:
@@ -762,7 +767,12 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         }
         else {
             getPatternInformation() //gets pattern info and does screen updates
-            doOwnershipChecks() //updates display based on ownership
+            if (flashAble){
+                doOwnershipChecks() //updates action button based on ownership
+            }
+            else {
+                self.actionButton.setTitle("Sync", forState: UIControlState.Normal)
+            }
         }
     }
     
