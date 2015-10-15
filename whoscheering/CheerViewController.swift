@@ -44,7 +44,7 @@ class CheerViewController: UIViewController {
         
         if (cheering == true){
             self.timer?.invalidate()
-            checkOffsetAge()
+            //checkOffsetAge()
         }
         else {
             //do nothing somehow
@@ -253,7 +253,7 @@ class CheerViewController: UIViewController {
                 let current = Double(NSDate().timeIntervalSince1970)
                 print(current)
                 print(rs.doubleForColumn("timestamp"))
-                if ( (current - rs.doubleForColumn("timestamp")) < 3600.0){  //anything one hour or more recent
+                if ( (current - rs.doubleForColumn("timestamp")) < 1800.0){  //anything one hour or more recent
                     //do nothing
                 }
                 else{

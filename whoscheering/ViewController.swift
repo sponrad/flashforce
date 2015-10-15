@@ -11,7 +11,7 @@ import StoreKit
 
 var ffdbLoaded = false
 var selectedId: Int32 = 9999999
-var avgOffset: Double = 9999999
+var avgOffset: Double = 0.0
 var cheering = false
 var actionButtonStatus = "None"
 var selectedStoreId: String = ""
@@ -139,8 +139,6 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
             ///////////////////////////   connect to the database
             let reachability = Reachability.reachabilityForInternetConnection()
             if reachability!.isReachable() {
-                flashAble = true
-                
                 let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
                 let path = NSString(string: documentsFolder).stringByAppendingPathComponent("ff.db")
                 let database = FMDatabase(path: path)
@@ -191,6 +189,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                 //print("This is run on the main queue, after the previous code in outer block")
                 if (synced){
                     self.changeFlashImage()
+                    flashAble = true
                 }
                 else {
                     self.flashForwardBoxes.image = UIImage(named: "flash-forward-three-boxes-gray.gif")
@@ -528,6 +527,8 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
             database.executeUpdate("insert into patterns values (NULL, '\(record[0])', '\(record[2])', '\(record[1])', '\(pattern)', '\(timing)', \(price), '\(pattern1)', '\(pattern2)', '\(pattern3)', '\(pattern4)', '\(pattern5)', '\(record[3])')", withArgumentsInArray: nil)
         }
         
+        //add one offset at startup
+        database.executeUpdate("insert into offsets values (NULL, '0.0','0.0')", withArgumentsInArray: nil)
         
         let reachability = Reachability.reachabilityForInternetConnection()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "reachabilityChanged:", name: ReachabilityChangedNotification, object: reachability)
@@ -583,7 +584,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                 else{
                     self.flashForwardBoxes.image = UIImage(named: "flash-forward-three-boxes-gray.gif")
                     performSync()
-                    flashAble = false  //temporary... should allow a flash even with a gray/no connection
+                    //flashAble = false  //temporary... should allow a flash even with a gray/no connection
                     actionButtonStatus = "sync"
                 }
             }
@@ -607,7 +608,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
             while rs.next() {
                 let nRows = rs.intForColumnIndex(0)
                 if (nRows > 0){
-                    //flashAble = true   //allow flash if there is at least one offset stored
+                    flashAble = true   //allow flash if there is at least one offset stored
                 }
                 let offset = rs.doubleForColumn("offset")
                 offsets.append(offset)
