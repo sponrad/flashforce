@@ -253,7 +253,7 @@ class CheerViewController: UIViewController {
                 let current = Double(NSDate().timeIntervalSince1970)
                 print(current)
                 print(rs.doubleForColumn("timestamp"))
-                if ( (current - rs.doubleForColumn("timestamp")) < 1800.0){  //anything one hour or more recent
+                if ( (current - rs.doubleForColumn("timestamp")) < offsetAgeForResync){  //anything one hour or more recent
                     //do nothing
                 }
                 else{

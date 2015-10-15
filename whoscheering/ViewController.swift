@@ -18,7 +18,7 @@ var selectedStoreId: String = ""
 var selectedPrice: String = ""
 var oldBrightness: CGFloat = 0.5
 var flashAble = false
-var offsetAgeForResync = 1800.0 // double seconds
+var offsetAgeForResync = 600.0 // double seconds
 
 let freeFlashString = "ffb001"       //keychain reference
 
