@@ -193,7 +193,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                     self.changeFlashImage()
                 }
                 else {
-                    self.flashForwardBoxes.image = UIImage(named: "flash-forward-three-boxes-grayscale.png")
+                    self.flashForwardBoxes.image = UIImage(named: "flash-forward-three-boxes-gray.gif")
                 }
                 self.updateDisplay()
                 
@@ -553,7 +553,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         
         UIScreen.mainScreen().brightness = oldBrightness
         
-        flashForwardBoxes.image = UIImage(named: "flash-forward-three-boxes-grayscale.png")
+        flashForwardBoxes.image = UIImage(named: "flash-forward-three-boxes-gray.gif")
         
         UIApplication.sharedApplication().idleTimerDisabled = false   //screen will dim while not cheering
 
@@ -581,7 +581,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                     flashAble = true
                 }
                 else{
-                    self.flashForwardBoxes.image = UIImage(named: "flash-forward-three-boxes-grayscale.png")
+                    self.flashForwardBoxes.image = UIImage(named: "flash-forward-three-boxes-gray.gif")
                     performSync()
                     flashAble = false  //temporary... should allow a flash even with a gray/no connection
                     actionButtonStatus = "sync"
