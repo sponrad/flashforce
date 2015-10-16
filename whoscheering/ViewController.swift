@@ -627,21 +627,22 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
             if TegKeychain.get(String(freeFlashString))! == selectedStoreId {
                 owned = true
             }
-        }
-        else {
-            if listOfOwnedPatterns().contains( String(selectedStoreId) ) {
-                owned = true
-            }
-            else {
-                //check ownership in apple store to see if owned
-                if (SKPaymentQueue.canMakePayments()){
-                    for transaction:SKPaymentTransaction in SKPaymentQueue.defaultQueue().transactions {
-                        if transaction.payment.productIdentifier == String(selectedStoreId)
-                        {
-                            print("Non consumable Product is Purchased")
-                            // Unlock Feature
-                            owned = true
-                            addOwnedPattern(String(selectedStoreId), patternId: String(selectedId))
+                
+            else { //check ownership aginst premade list of owned
+                if listOfOwnedPatterns().contains( String(selectedStoreId) ) {
+                    owned = true
+                }
+                else {
+                    //check ownership in apple store to see if owned
+                    if (SKPaymentQueue.canMakePayments()){
+                        for transaction:SKPaymentTransaction in SKPaymentQueue.defaultQueue().transactions {
+                            if transaction.payment.productIdentifier == String(selectedStoreId)
+                            {
+                                print("Non consumable Product is Purchased")
+                                // Unlock Feature and add to list of owned so it is faster later.
+                                owned = true
+                                addOwnedPattern(String(selectedStoreId), patternId: String(selectedId))
+                            }
                         }
                     }
                 }
