@@ -220,8 +220,12 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
     func getOffset() -> Double {
         var offset : Double = 0
         var ping = 100.0 // any value larger than the test
+        var count = 0
         
         while (ping > 0.5){
+            if (count > 100){
+                return 1000.0
+            }
             let ct = NSDate().timeIntervalSince1970
             let serverEpochStr: String = parseJSON( getJSON("https://alignthebeat.appspot.com") )["epoch"] as! String
             let serverEpoch = (serverEpochStr as NSString).doubleValue
@@ -229,6 +233,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
             ping = nct - ct
             print("ping \(ping)")
             offset = serverEpoch - nct + ping
+            count += 1
         }
         
         //offset = serverEpoch - nct
