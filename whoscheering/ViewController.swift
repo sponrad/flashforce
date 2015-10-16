@@ -472,6 +472,15 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         }
         
         //TODO: get any owned flashes from apple
+        if (SKPaymentQueue.canMakePayments()){
+            for transaction:SKPaymentTransaction in SKPaymentQueue.defaultQueue().transactions {
+                if (transaction.payment.productIdentifier != "") {
+                    //add to list of owned cheers
+
+                    //addOwnedPattern(transaction.payment.productIdentifier, patternId)
+                }
+            }
+        }
         
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         
