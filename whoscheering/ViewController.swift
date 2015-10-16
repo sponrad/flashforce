@@ -329,7 +329,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         self.actionButton.setTitle("Flash", forState: UIControlState.Normal)
         actionButtonStatus = "flash"
         
-        addOwnedPattern(String(selectedStoreId), patternId: String(selectedId))
+        addOwnedPattern(String(selectedStoreId))
     }
     
     func buyNonConsumable(){
@@ -381,7 +381,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                 case .Purchased:
                     print("Product Purchased");
                     SKPaymentQueue.defaultQueue().finishTransaction(transaction as! SKPaymentTransaction)
-                    addOwnedPattern(String(selectedStoreId), patternId: String(selectedId))
+                    addOwnedPattern(String(selectedStoreId))
                     break;
                 case .Failed:
                     print("Purchased Failed");
@@ -396,7 +396,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         }
     }
     
-    func addOwnedPattern(storeId: String, patternId: String){
+    func addOwnedPattern(storeId: String, var patternId: String = ""){
         print("addOwnedPattern")
         ///////////////////////////   connect to the database
         let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
@@ -408,9 +408,10 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         }
         
         var name = ""
-        if let rs = database.executeQuery("SELECT * FROM patterns WHERE id='\(String(patternId))'", withArgumentsInArray: nil) {
+        if let rs = database.executeQuery("SELECT * FROM patterns WHERE storecode='\(String(storeId))'", withArgumentsInArray: nil) {
             while rs.next() {
                 name = rs.stringForColumn("name")
+                patternId = rs.stringForColumn("id")
             }
         }
         
@@ -458,17 +459,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         ////////////////get any keychain flashes
         if let result = TegKeychain.get(String(freeFlashString)) {
             print(result)
-            var cheerId = ""
-            //get the database code
-            if let rs = database.executeQuery("SELECT * FROM patterns WHERE storecode='\(result)'", withArgumentsInArray: nil) {
-                while rs.next() {
-                    if (rs.stringForColumn("id") != ""){
-                        cheerId = rs.stringForColumn("id")
-                    }
-                }
-            }
-            addOwnedPattern(String(result), patternId: cheerId)
-            print("this fired")
+            addOwnedPattern(String(result))
         }
         
         //TODO: get any owned flashes from apple
@@ -477,7 +468,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                 if (transaction.payment.productIdentifier != "") {
                     //add to list of owned cheers
 
-                    //addOwnedPattern(transaction.payment.productIdentifier, patternId)
+                    addOwnedPattern(transaction.payment.productIdentifier)
                 }
             }
         }
@@ -650,7 +641,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                                 print("Non consumable Product is Purchased")
                                 // Unlock Feature and add to list of owned so it is faster later.
                                 owned = true
-                                addOwnedPattern(String(selectedStoreId), patternId: String(selectedId))
+                                addOwnedPattern(String(selectedStoreId))
                             }
                         }
                     }
