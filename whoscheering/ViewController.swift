@@ -509,7 +509,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         
         database.executeUpdate("DROP TABLE patterns", withArgumentsInArray: nil)
         
-        if !database.executeUpdate("create table patterns(id integer primary key autoincrement, storecode text, name text, category text, pattern text, timing text, price real, pattern1 text, pattern2 text, pattern3 text, pattern4 text, pattern5 text, alt1 text)", withArgumentsInArray: nil) {
+        if !database.executeUpdate("create table patterns(id integer primary key autoincrement, storecode text, name text, subid text, category text, pattern text, timing text, price real, pattern1 text, pattern2 text, pattern3 text, pattern4 text, pattern5 text, alt1 text)", withArgumentsInArray: nil) {
             print("create table failed: \(database.lastErrorMessage())")
         }
         if !database.executeUpdate("create table offsets(id integer primary key autoincrement, offset real, timestamp real)", withArgumentsInArray: nil) {
@@ -521,15 +521,15 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         database.executeUpdate("DELETE FROM patterns", withArgumentsInArray: nil)
         //loop through initialData to build the database
         for record in StoreData.initialData {
-            let pattern = record[5]  //stored in [5] through [9]...but may be empty
-            let pattern1 = record[5]
-            let pattern2 = record[6]
-            let pattern3 = record[7]
-            let pattern4 = record[8]
-            let pattern5 = record[9]
-            let timing = record[18]
-            let price = record[4]
-            database.executeUpdate("insert into patterns values (NULL, '\(record[0])', '\(record[2])', '\(record[1])', '\(pattern)', '\(timing)', \(price), '\(pattern1)', '\(pattern2)', '\(pattern3)', '\(pattern4)', '\(pattern5)', '\(record[3])')", withArgumentsInArray: nil)
+            let pattern = record[3]  //stored in [5] through [9]...but may be empty
+            let pattern1 = record[4]
+            let pattern2 = record[7]
+            let pattern3 = record[8]
+            let pattern4 = record[9]
+            let pattern5 = record[10]
+            let timing = record[19]
+            let price = record[5]
+            database.executeUpdate("insert into patterns values (NULL, '\(record[0])', '\(record[3])', '\(record[2])', '\(record[1])', '\(pattern)', '\(timing)', \(price), '\(pattern1)', '\(pattern2)', '\(pattern3)', '\(pattern4)', '\(pattern5)', '\(record[4])')", withArgumentsInArray: nil)
         }
         
         //add one offset at startup
