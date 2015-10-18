@@ -521,8 +521,8 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         database.executeUpdate("DELETE FROM patterns", withArgumentsInArray: nil)
         //loop through initialData to build the database
         for record in StoreData.initialData {
-            let pattern = record[3]  //stored in [5] through [9]...but may be empty
-            let pattern1 = record[4]
+            let pattern = record[6]  //stored in [5] through [9]...but may be empty
+            let pattern1 = record[6]
             let pattern2 = record[7]
             let pattern3 = record[8]
             let pattern4 = record[9]
