@@ -13,6 +13,7 @@ class AlternateViewController: UITableViewController {
     @IBOutlet var drillTable: UITableView!
     
     var details = [[Any]]()
+    var groupid = ""
     var name = ""
     
     override func viewDidLoad() {
@@ -26,16 +27,17 @@ class AlternateViewController: UITableViewController {
             return
         }
         
-        if let rs2 = database.executeQuery("SELECT name FROM patterns WHERE id='\(selectedId)'", withArgumentsInArray: nil) {
+        if let rs2 = database.executeQuery("SELECT groupid FROM patterns WHERE id='\(selectedId)'", withArgumentsInArray: nil) {
             while rs2.next() {
-                self.name = rs2.stringForColumn("name")
+                self.groupid = rs2.stringForColumn("groupid")
             }
         } else {
             print("select failed: \(database.lastErrorMessage())")
         }
         
-        if let rs = database.executeQuery("SELECT alt1, id FROM patterns WHERE name='\(self.name)' ORDER BY alt1", withArgumentsInArray: nil) {
+        if let rs = database.executeQuery("SELECT alt1, id, name FROM patterns WHERE groupid='\(self.groupid)' ORDER BY alt1", withArgumentsInArray: nil) {
             while rs.next() {
+                self.name = rs.stringForColumn("name")
                 var text: String = ""
                 if rs.stringForColumn("alt1").isEmpty{
                     text = self.name+" Home"
