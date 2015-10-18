@@ -509,7 +509,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         
         database.executeUpdate("DROP TABLE patterns", withArgumentsInArray: nil)
         
-        if !database.executeUpdate("create table patterns(id integer primary key autoincrement, storecode text, name text, subid text, category text, pattern text, timing text, price real, pattern1 text, pattern2 text, pattern3 text, pattern4 text, pattern5 text, alt1 text)", withArgumentsInArray: nil) {
+        if !database.executeUpdate("create table patterns(id integer primary key autoincrement, storecode text, name text, groupid text, category text, pattern text, timing text, price real, pattern1 text, pattern2 text, pattern3 text, pattern4 text, pattern5 text, alt1 text)", withArgumentsInArray: nil) {
             print("create table failed: \(database.lastErrorMessage())")
         }
         if !database.executeUpdate("create table offsets(id integer primary key autoincrement, offset real, timestamp real)", withArgumentsInArray: nil) {
