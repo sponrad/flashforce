@@ -795,12 +795,16 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         }
         // TODO add check for ffdbloaded, only load if there is a change in the db, compare rows of patterns maybe
         if let rscheck = database.intForQuery("SELECT COUNT(id) FROM patterns") {
+            print("rscheck:\(rscheck)")
+            print("Store data count:\(StoreData.initialData.count)")
             if (UInt32(rscheck) == UInt32(StoreData.initialData.count)) {
                 ffdbLoaded = true
+                print("the ffdbloaded check is true")
             }
         }
         ///////////////////////////   code to load the database with data on first bootup or change
         if (ffdbLoaded==false){
+            print("loading the entire thing")
             loadDatabase()
         }
     }

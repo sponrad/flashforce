@@ -11,7 +11,6 @@ import Foundation
 struct StoreData{
     
     static let initialData: [[String]] = [
-        ["productid", "category", "groupid", "name", "alternate", "price", "color1", "color2", "color3", "color4", "color5", "image1", "image2", "image3", "image4", "image5", "country", "city", "state", "interval x0.25", "also_appears_in_category"],
         ["com.flashforceapp.whitesoxdefault", "US Pro Baseball", "1", "Chicago (South)", "Home", "0.99", "000000", "C0C0C0", "", "", "", "", "", "", "", "", "USA", "Chicago", "Illinois", "6_4", ""],
         ["com.flashforceapp.whitesoxaway", "US Pro Baseball", "1", "Chicago (South)", "Away", "0.99", "CCCCCC", "FFFFFF", "000000", "", "", "", "", "", "", "", "USA", "Chicago", "Illinois", "6_4_2", ""],
         ["com.flashforceapp.whitesoxbluered", "US Pro Baseball", "1", "Chicago (South)", "Blue/Red Alternate", "0.99", "003366", "CC3333", "FFFFFF", "", "", "", "", "", "", "", "USA", "Chicago", "Illinois", "6_4_2", ""],
