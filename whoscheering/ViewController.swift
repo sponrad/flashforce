@@ -103,7 +103,10 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                 alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
                 self.presentViewController(alert, animated: true, completion: nil)
             case "buy":
-                buyNonConsumable()
+                let alert = UIAlertController(title: "Purchase Flash", message: "Do you want to purchase this Flash?", preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "Yes", style: UIAlertActionStyle.Default, handler: buyNonConsumable ))
+                alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController(alert, animated: true, completion: nil)
             case "sync":
                 self.checkOffsetAge()
             default:
@@ -337,7 +340,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         addOwnedPattern(String(selectedStoreId))
     }
     
-    func buyNonConsumable(){
+    func buyNonConsumable (alert: UIAlertAction!){
         print("About to fetch the products");
         // We check that we are allow to make the purchase.
         if (SKPaymentQueue.canMakePayments())
