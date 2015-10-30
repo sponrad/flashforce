@@ -151,7 +151,7 @@ class SecondBrowseViewController: UITableViewController, UISearchResultsUpdating
         //redraw/restore the table
         self.drillTable.reloadData()
         
-        self.restoreButton.title = "Restore"
+        //self.restoreButton.title = "Restore"
     }
 
 }

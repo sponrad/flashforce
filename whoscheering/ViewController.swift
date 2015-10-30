@@ -106,10 +106,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                 alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
                 self.presentViewController(alert, animated: true, completion: nil)
             case "buy":
-                let alert = UIAlertController(title: "Purchase Flash", message: "Do you want to purchase this Flash?", preferredStyle: UIAlertControllerStyle.Alert)
-                alert.addAction(UIAlertAction(title: "Yes", style: UIAlertActionStyle.Default, handler: buyNonConsumable ))
-                alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
-                self.presentViewController(alert, animated: true, completion: nil)
+                buyNonConsumable()
             case "sync":
                 self.checkOffsetAge()
             default:
@@ -343,7 +340,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         addOwnedPattern(String(selectedStoreId))
     }
     
-    func buyNonConsumable (alert: UIAlertAction!){
+    func buyNonConsumable (){
         print("About to fetch the products");
         // We check that we are allow to make the purchase.
         if (SKPaymentQueue.canMakePayments())
@@ -389,10 +386,11 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         for transaction:AnyObject in transactions {
             if let trans:SKPaymentTransaction = transaction as? SKPaymentTransaction{
                 switch trans.transactionState {
-                case .Purchased:
-                    print("Product Purchased");
+                case .Purchased, .Restored:
+                    print("Product Purchased/Restored");
                     SKPaymentQueue.defaultQueue().finishTransaction(transaction as! SKPaymentTransaction)
-                    addOwnedPattern(String(selectedStoreId))
+                    addOwnedPattern(String(transaction.payment.productIdentifier))
+                    doOwnershipChecks()
                     break;
                 case .Failed:
                     print("Purchased Failed");
@@ -636,17 +634,9 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                 }
                 else {
                     //check ownership in apple store to see if owned
-                    if (SKPaymentQueue.canMakePayments()){
-                        for transaction:SKPaymentTransaction in SKPaymentQueue.defaultQueue().transactions {
-                            if transaction.payment.productIdentifier == String(selectedStoreId)
-                            {
-                                print("Non consumable Product is Purchased")
-                                // Unlock Feature and add to list of owned so it is faster later.
-                                owned = true
-                                addOwnedPattern(String(selectedStoreId))
-                            }
-                        }
-                    }
+                    //if (SKPaymentQueue.canMakePayments()){
+                    //    SKPaymentQueue.defaultQueue().restoreCompletedTransactions()
+                    //}
                 }
             }
         }
@@ -832,13 +822,8 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         
         //get the ones from apple
         if (SKPaymentQueue.canMakePayments()){
-            for transaction:SKPaymentTransaction in SKPaymentQueue.defaultQueue().transactions {
-                if (transaction.payment.productIdentifier != "") {
-                    //add to list of owned cheers
-                    
-                    addOwnedPattern(transaction.payment.productIdentifier)
-                }
-            }
+            print("payment queue check")
+            SKPaymentQueue.defaultQueue().restoreCompletedTransactions()
         }
     }
     

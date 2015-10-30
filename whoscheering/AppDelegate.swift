@@ -21,7 +21,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //UIApplication.sharedApplication().setMinimumBackgroundFetchInterval(43200)
         //UIApplication.sharedApplication().setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
         return true
-        
     }
 
     func applicationWillResignActive(application: UIApplication) {
