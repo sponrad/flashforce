@@ -24,7 +24,7 @@ let freeFlashString = "ffb001"       //keychain reference
 
 
 //class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SKProductsRequestDelegate, SKPaymentTransactionObserver {
-class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SKProductsRequestDelegate {
+class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SKProductsRequestDelegate, SKPaymentTransactionObserver {
 
 
     @IBOutlet weak var actionButton: UIButton!
@@ -63,6 +63,9 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         if (isAppAlreadyLaunchedOnce() == false){
             firstTimeBoot()  //get owned IAPs and show tutorial images
         }
+        
+        SKPaymentQueue.defaultQueue().addTransactionObserver(self)
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -355,12 +358,6 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         }
     }
     
-    func buyProduct(product: SKProduct){
-        print("Sending the Payment Request to Apple");
-        let payment = SKPayment(product: product)
-        SKPaymentQueue.defaultQueue().addPayment(payment);
-    }
-    
     func productsRequest (request: SKProductsRequest, didReceiveResponse response: SKProductsResponse) {
         print("got the request from Apple")
         let count : Int = response.products.count
@@ -380,7 +377,13 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         }
     }
     
-    func paymentQueue(queue: SKPaymentQueue!, updatedTransactions transactions: [AnyObject]!)    {
+    func buyProduct(product: SKProduct){
+        print("Sending the Payment Request to Apple");
+        let payment = SKPayment(product: product)
+        SKPaymentQueue.defaultQueue().addPayment(payment);
+    }
+    
+    func paymentQueue(queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction])    {
         print("Received Payment Transaction Response from Apple");
         
         for transaction:AnyObject in transactions {
