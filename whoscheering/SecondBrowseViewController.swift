@@ -9,8 +9,8 @@
 import UIKit
 
 class SecondBrowseViewController: UITableViewController, UISearchResultsUpdating {
-    
 
+    @IBOutlet weak var restoreButton: UIBarButtonItem!
     @IBOutlet var drillTable: UITableView!
     
     let searchController = UISearchController(searchResultsController: nil)
@@ -22,6 +22,8 @@ class SecondBrowseViewController: UITableViewController, UISearchResultsUpdating
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        self.restoreButton.enabled = false
 
         searchController.searchResultsUpdater = self
         searchController.hidesNavigationBarDuringPresentation = false
@@ -49,6 +51,7 @@ class SecondBrowseViewController: UITableViewController, UISearchResultsUpdating
         }
         
         if (self.category == "My Flashes"){
+            self.restoreButton.enabled = true
             if let rs = database.executeQuery("SELECT name, patternid FROM ownedPatterns GROUP BY name ORDER BY name", withArgumentsInArray: nil) {
                 while rs.next() {
                     self.details.append([rs.stringForColumn("name"), rs.intForColumn("patternid")])
@@ -140,4 +143,15 @@ class SecondBrowseViewController: UITableViewController, UISearchResultsUpdating
             }
         }
     }
+    @IBAction func restoreButtonTapped(sender: AnyObject) {
+        print("restore tapped")
+        ViewController().getOwnedFlashes()
+        self.restoreButton.title = "Restoring..."
+        
+        //redraw/restore the table
+        self.drillTable.reloadData()
+        
+        self.restoreButton.title = "Restore"
+    }
+
 }

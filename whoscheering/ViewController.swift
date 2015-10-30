@@ -473,16 +473,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
             addOwnedPattern(String(result))
         }
         
-        //TODO: get any owned flashes from apple
-        if (SKPaymentQueue.canMakePayments()){
-            for transaction:SKPaymentTransaction in SKPaymentQueue.defaultQueue().transactions {
-                if (transaction.payment.productIdentifier != "") {
-                    //add to list of owned cheers
-
-                    addOwnedPattern(transaction.payment.productIdentifier)
-                }
-            }
-        }
+        getOwnedFlashes()
         
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         
@@ -812,6 +803,42 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         if (ffdbLoaded==false){
             print("loading the entire thing")
             loadDatabase()
+        }
+    }
+    
+    func getOwnedFlashes(){
+        //get any owned flashes from apple
+        print("checking owned flashes with keychain and Apple")
+        ///////////////////////////   connect to the database
+        let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
+        let path = NSString(string: documentsFolder).stringByAppendingPathComponent("ff.db")
+        let database = FMDatabase(path: path)
+        if !database.open() {
+            print("Unable to open database")
+            return
+        }
+        
+        //re-create patterns table
+        database.executeUpdate("DROP TABLE ownedpatterns", withArgumentsInArray: nil)
+        if !database.executeUpdate("create table ownedpatterns(id integer primary key autoincrement, storecode text, name text, patternid integer)", withArgumentsInArray: nil) {
+            print("create table failed: \(database.lastErrorMessage()), probably already created")
+        }
+        
+        //get the flash from keychain if one is owned
+        if let result = TegKeychain.get(String(freeFlashString)) {
+            print(result)
+            addOwnedPattern(String(result))
+        }
+        
+        //get the ones from apple
+        if (SKPaymentQueue.canMakePayments()){
+            for transaction:SKPaymentTransaction in SKPaymentQueue.defaultQueue().transactions {
+                if (transaction.payment.productIdentifier != "") {
+                    //add to list of owned cheers
+                    
+                    addOwnedPattern(transaction.payment.productIdentifier)
+                }
+            }
         }
     }
     

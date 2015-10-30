@@ -100,9 +100,15 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Browsing" id="4IY-f3-IsY">
                         <barButtonItem key="backBarButtonItem" title="Browsing" id="u4s-Ri-XpX"/>
+                        <barButtonItem key="rightBarButtonItem" title="Restore" id="mtq-rh-grB">
+                            <connections>
+                                <action selector="restoreButtonTapped:" destination="2Hr-wa-PFf" id="CBq-9E-GF7"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="drillTable" destination="hDQ-X4-sQA" id="lIi-hM-BCM"/>
+                        <outlet property="restoreButton" destination="mtq-rh-grB" id="Mg4-l1-CK2"/>
                         <outlet property="searchDisplayController" destination="XWO-4c-X4r" id="FUJ-Qv-Q4f"/>
                     </connections>
                 </tableViewController>
@@ -1025,7 +1031,7 @@
         <image name="flash-forward-three-boxes.gif" width="1024" height="1024"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="5Cp-Xi-F5S"/>
+        <segue reference="bH8-89-pL4"/>
         <segue reference="arI-hI-wEo"/>
     </inferredMetricsTieBreakers>
 </document>
