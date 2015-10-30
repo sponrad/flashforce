@@ -22,7 +22,6 @@ var offsetAgeForResync = 600.0 // double seconds
 
 let freeFlashString = "ffb001"       //keychain reference
 
-
 //class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SKProductsRequestDelegate, SKPaymentTransactionObserver {
 class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SKProductsRequestDelegate, SKPaymentTransactionObserver {
 
@@ -83,6 +82,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
             navigationController?.navigationBarHidden = false
         }
         super.viewWillDisappear(animated)
+        SKPaymentQueue.defaultQueue().removeTransactionObserver(self)
     }
 
     @IBAction func actionButtonTapped(sender: AnyObject) {
@@ -381,16 +381,17 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
     }
     
     func paymentQueue(queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction])    {
-        print("Received Payment Transaction Response from Apple");
+        print("Received Payment Transaction Response from Apple Viewcontroller");
         
         for transaction:AnyObject in transactions {
             if let trans:SKPaymentTransaction = transaction as? SKPaymentTransaction{
                 switch trans.transactionState {
                 case .Purchased, .Restored:
                     print("Product Purchased/Restored");
-                    SKPaymentQueue.defaultQueue().finishTransaction(transaction as! SKPaymentTransaction)
                     addOwnedPattern(String(transaction.payment.productIdentifier))
                     doOwnershipChecks()
+                    
+                    SKPaymentQueue.defaultQueue().finishTransaction(transaction as! SKPaymentTransaction)
                     break;
                 case .Failed:
                     print("Purchased Failed");
@@ -419,7 +420,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         var name = ""
         if let rs = database.executeQuery("SELECT * FROM patterns WHERE storecode='\(String(storeId))'", withArgumentsInArray: nil) {
             while rs.next() {
-                name = rs.stringForColumn("name")
+                name = rs.stringForColumn("name") + " " + rs.stringForColumn("alt1")
                 patternId = rs.stringForColumn("id")
             }
         }

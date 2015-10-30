@@ -54,7 +54,7 @@ class SecondBrowseViewController: UITableViewController, UISearchResultsUpdating
         
         if (self.category == "My Flashes"){
             self.restoreButton.enabled = true
-            if let rs = database.executeQuery("SELECT name, patternid FROM ownedPatterns GROUP BY name ORDER BY name", withArgumentsInArray: nil) {
+            if let rs = database.executeQuery("SELECT name, patternid FROM ownedPatterns ORDER BY name", withArgumentsInArray: nil) {
                 while rs.next() {
                     self.details.append([rs.stringForColumn("name"), rs.intForColumn("patternid")])
                 }
@@ -75,6 +75,10 @@ class SecondBrowseViewController: UITableViewController, UISearchResultsUpdating
         
         self.filteredDetails = self.details
         database.close()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        SKPaymentQueue.defaultQueue().removeTransactionObserver(self)
     }
     
     func updateSearchResultsForSearchController(searchController: UISearchController) {
@@ -156,7 +160,7 @@ class SecondBrowseViewController: UITableViewController, UISearchResultsUpdating
     }
     
     func paymentQueue(queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction])    {
-        print("Received Payment Transaction Response from Apple");
+        print("Received Payment Transaction Response from Apple secondviewcontroller");
         
         for transaction:AnyObject in transactions {
             if let trans:SKPaymentTransaction = transaction as? SKPaymentTransaction{
