@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import StoreKit
 
-class SecondBrowseViewController: UITableViewController, UISearchResultsUpdating {
+class SecondBrowseViewController: UITableViewController, UISearchResultsUpdating, SKPaymentTransactionObserver {
 
     @IBOutlet weak var restoreButton: UIBarButtonItem!
     @IBOutlet var drillTable: UITableView!
@@ -22,7 +23,8 @@ class SecondBrowseViewController: UITableViewController, UISearchResultsUpdating
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        SKPaymentQueue.defaultQueue().addTransactionObserver(self)
+
         self.restoreButton.enabled = false
 
         searchController.searchResultsUpdater = self
@@ -145,13 +147,40 @@ class SecondBrowseViewController: UITableViewController, UISearchResultsUpdating
     }
     @IBAction func restoreButtonTapped(sender: AnyObject) {
         print("restore tapped")
-        ViewController().getOwnedFlashes()
+        //ViewController().getOwnedFlashes()
         self.restoreButton.title = "Restoring..."
         
-        //redraw/restore the table
-        self.drillTable.reloadData()
+        SKPaymentQueue.defaultQueue().restoreCompletedTransactions()
         
         //self.restoreButton.title = "Restore"
+    }
+    
+    func paymentQueue(queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction])    {
+        print("Received Payment Transaction Response from Apple");
+        
+        for transaction:AnyObject in transactions {
+            if let trans:SKPaymentTransaction = transaction as? SKPaymentTransaction{
+                switch trans.transactionState {
+                case .Purchased, .Restored:
+                    print("Product Purchased/Restored");
+                    SKPaymentQueue.defaultQueue().finishTransaction(transaction as! SKPaymentTransaction)
+                    ViewController().addOwnedPattern(String(transaction.payment.productIdentifier))
+                    //doOwnershipChecks()
+                    break;
+                case .Failed:
+                    print("Purchased Failed");
+                    SKPaymentQueue.defaultQueue().finishTransaction(transaction as! SKPaymentTransaction)
+                    break;
+                    // case .Restored:
+                    //[self restoreTransaction:transaction];
+                default:
+                    break;
+                }
+            }
+        }
+        self.restoreButton.title = "Restore"
+        //redraw/restore the table
+        self.drillTable.reloadData()
     }
 
 }
