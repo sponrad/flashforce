@@ -156,7 +156,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                     print("create table failed: \(database.lastErrorMessage()), probably already created")
                 }
                 
-                //load offsets  //TODO: add a timeout here
+                //load offsets
                 var offsets:[Double] = []
                 for var index = 0; index < 6; index++ {
                     offsets.append(self.getOffset())
@@ -181,12 +181,14 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                 database.executeUpdate("insert into offsets values (NULL, '\(String(stringInterpolationSegment: average))','\(String(stringInterpolationSegment: NSDate().timeIntervalSince1970))')", withArgumentsInArray: nil)
                 
                 database.close()
-                synced = true
                 
+                if (avgOffset < 200){ //make sure the 1000 return for bad connection has not taken over and skewed the offset
+                    synced = true
                 }
-                else {
-                    print("not reachable")
-                }
+            }
+            else {
+                print("not reachable")
+            }
             
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 //print("This is run on the main queue, after the previous code in outer block")
@@ -225,8 +227,8 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         var ping = 100.0 // any value larger than the test
         var count = 0
         
-        while (ping > 0.5){
-            if (count > 100){
+        while (ping > 0.7){
+            if (count > 20){
                 return 1000.0
             }
             let ct = NSDate().timeIntervalSince1970
