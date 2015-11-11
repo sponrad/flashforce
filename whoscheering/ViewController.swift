@@ -474,7 +474,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
             addOwnedPattern(String(result))
         }
         
-        getOwnedFlashes()
+        //getOwnedFlashes()
         
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         

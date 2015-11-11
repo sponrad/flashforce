@@ -182,9 +182,26 @@ class SecondBrowseViewController: UITableViewController, UISearchResultsUpdating
                 }
             }
         }
-        self.restoreButton.title = "Restore"
+        
+        let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
+        let path = NSString(string: documentsFolder).stringByAppendingPathComponent("ff.db")
+        let database = FMDatabase(path: path)
+        if !database.open() {
+            print("Unable to open database")
+            return
+        }
+        if let rs = database.executeQuery("SELECT name, patternid FROM ownedPatterns ORDER BY name", withArgumentsInArray: nil) {
+            while rs.next() {
+                self.details.append([rs.stringForColumn("name"), rs.intForColumn("patternid")])
+            }
+        } else {
+            print("select failed: \(database.lastErrorMessage())")
+        }
+        
         //redraw/restore the table
         self.drillTable.reloadData()
+        
+        self.restoreButton.title = "Restore"
     }
 
 }
