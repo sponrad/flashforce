@@ -106,12 +106,13 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                 alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
                 self.presentViewController(alert, animated: true, completion: nil)
             case "buy":
-                //
+                self.actionButton.setTitle("Purchasing", forState: UIControlState.Normal)
+                actionButtonStatus = "purchasing"
                 buyNonConsumable()
             case "sync":
                 self.checkOffsetAge()
             default:
-                self.performSync()
+                print("no action")
         }
     }
     
@@ -399,6 +400,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                 case .Failed:
                     print("Purchased Failed");
                     SKPaymentQueue.defaultQueue().finishTransaction(transaction as! SKPaymentTransaction)
+                    doOwnershipChecks()
                     break;
                     // case .Restored:
                     //[self restoreTransaction:transaction];
