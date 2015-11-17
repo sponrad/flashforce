@@ -106,6 +106,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                 alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
                 self.presentViewController(alert, animated: true, completion: nil)
             case "buy":
+                //
                 buyNonConsumable()
             case "sync":
                 self.checkOffsetAge()
