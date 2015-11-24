@@ -719,6 +719,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                 if rs.stringForColumn("alt1").isEmpty {
                     self.outfitButton.setTitle("Home", forState: UIControlState.Normal)
                 }
+                var timing = rs.stringForColumn("timing").componentsSeparatedByString("_")
                 
                 selectedStoreId = rs.stringForColumn("storecode")
                 selectedPrice = rs.stringForColumn("price")
@@ -726,30 +727,43 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                 ///////////draw color boxes for selected flash
                 var colors = [String]()
                 if (rs.stringForColumn("pattern1") != ""){
-                    colors.append(rs.stringForColumn("pattern1"))
+                    for var i = 0.0; i < ( Double(timing[0])); i++ {
+                        colors.append(rs.stringForColumn("pattern1"))
+                    }
                 }
                 if (rs.stringForColumn("pattern2") != ""){
-                    colors.append(rs.stringForColumn("pattern2"))
+                    for var i = 0.0; i < ( Double(timing[1])); i++ {
+                        colors.append(rs.stringForColumn("pattern2"))
+                    }
                 }
                 if (rs.stringForColumn("pattern3") != ""){
-                    colors.append(rs.stringForColumn("pattern3"))
+                    for var i = 0.0; i < ( Double(timing[2])); i++ {
+                        colors.append(rs.stringForColumn("pattern3"))
+                    }
                 }
                 if (rs.stringForColumn("pattern4") != ""){
-                    colors.append(rs.stringForColumn("pattern4"))
+                    for var i = 0.0; i < ( Double(timing[3])); i++ {
+                        colors.append(rs.stringForColumn("pattern4"))
+                    }
                 }
                 if (rs.stringForColumn("pattern5") != ""){
-                    colors.append(rs.stringForColumn("pattern5"))
+                    for var i = 0.0; i < ( Double(timing[4])); i++ {
+                        colors.append(rs.stringForColumn("pattern5"))
+                    }
                 }
+                
                 let screenSize = self.view.bounds
-                let boxSize = 38.0
+                let boxSize = (Double(screenSize.width) / Double(colors.count))
+                print("boxSize: \(boxSize)")
                 //let startingX = (Double(screenSize.width) / 2.0) - (boxSize * Double(colors.count)) + 10.0
-                let startingX = 15.0
+                let startingX = 0.0
                 for (index, color) in colors.enumerate() {
-                    let imageSize = CGSize(width: boxSize, height: boxSize)
-                    let xCoord = CGFloat((1.5 * Double(index) * boxSize) + startingX)
-                    let imageView = UIImageView(frame: CGRect(origin: CGPoint(x: xCoord, y: CGFloat(screenSize.height - 130)), size: imageSize))
+                    let imageSize = CGSize(width: (boxSize + 1), height: boxSize)   //adding one to cover the pixel fraction
+                    let xCoord = CGFloat((Double(index) * boxSize) + startingX)
+                    let imageView = UIImageView(frame: CGRect(origin: CGPoint(x: xCoord, y: CGFloat(screenSize.height - 105)), size: imageSize))
                     self.view.addSubview(imageView)
-                    let image = drawBordered(imageSize, color: colorWithHexString(color))
+                    //let image = drawBordered(imageSize, color: colorWithHexString(color))
+                    let image = drawRect(imageSize, color: colorWithHexString(color))
                     imageView.image = image
                 }
             }
