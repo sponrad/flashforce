@@ -666,3 +666,4 @@ struct StoreData{
         ["com.flashforceapp.velezsarfieldaway", "World ⚽ AR", "420", "Velez Sarfield", "Away", "0.99", "2b4e8b", "FFFFFF", "", "", "", "", "", "", "", "", "Argentina", "", "", "6_4", ""],
     ]
 }
+
