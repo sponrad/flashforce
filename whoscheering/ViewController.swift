@@ -758,9 +758,9 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
                 //let startingX = (Double(screenSize.width) / 2.0) - (boxSize * Double(colors.count)) + 10.0
                 let startingX = 0.0
                 for (index, color) in colors.enumerate() {
-                    let imageSize = CGSize(width: (boxSize + 1), height: boxSize)   //adding one to cover the pixel fraction
+                    let imageSize = CGSize(width: (boxSize + 1), height: 40)   //adding one to cover the pixel fraction
                     let xCoord = CGFloat((Double(index) * boxSize) + startingX)
-                    let imageView = UIImageView(frame: CGRect(origin: CGPoint(x: xCoord, y: CGFloat(screenSize.height - 105)), size: imageSize))
+                    let imageView = UIImageView(frame: CGRect(origin: CGPoint(x: xCoord, y: CGFloat(screenSize.height - 115)), size: imageSize))
                     self.view.addSubview(imageView)
                     //let image = drawBordered(imageSize, color: colorWithHexString(color))
                     let image = drawRect(imageSize, color: colorWithHexString(color))

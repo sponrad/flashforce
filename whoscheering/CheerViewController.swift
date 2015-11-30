@@ -43,7 +43,7 @@ class CheerViewController: UIViewController {
         UIScreen.mainScreen().brightness = CGFloat(1.0)
         
         if (cheering == true){
-            self.timer?.invalidate()
+            self.timer?.invalidate()  //this resets the cheer sequence but does not check for a new time
             //checkOffsetAge()
         }
         else {
