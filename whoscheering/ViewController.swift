@@ -522,17 +522,23 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
             print("create table failed: \(database.lastErrorMessage()), probably already created")
         }
         database.executeUpdate("DELETE FROM patterns", withArgumentsInArray: nil)
-        //loop through initialData to build the database
-        for record in StoreData.initialData {
-            let pattern = record[6]  //stored in [5] through [9]...but may be empty
-            let pattern1 = record[6]
-            let pattern2 = record[7]
-            let pattern3 = record[8]
-            let pattern4 = record[9]
-            let pattern5 = record[10]
-            let timing = record[19]
-            let price = record[5]
-            database.executeUpdate("insert into patterns values (NULL, '\(record[0])', '\(record[3])', '\(record[2])', '\(record[1])', '\(pattern)', '\(timing)', \(price), '\(pattern1)', '\(pattern2)', '\(pattern3)', '\(pattern4)', '\(pattern5)', '\(record[4])')", withArgumentsInArray: nil)
+        
+        
+        let fileLocation = NSBundle.mainBundle().pathForResource("ffinput", ofType: "csv")!
+        let error: NSErrorPointer = nil
+        if let csv = CSV(contentsOfFile: fileLocation, error: error) {
+            //loop through initialData to build the database
+            for record in csv.rows {
+                let pattern = record["color1"]
+                let pattern1 = record["color1"]
+                let pattern2 = record["color2"]
+                let pattern3 = record["color3"]
+                let pattern4 = record["color4"]
+                let pattern5 = record["color5"]
+                let timing = record["timing"]
+                let price = record["price"]
+                database.executeUpdate("insert into patterns values (NULL, '\(record["productid"])', '\(record["name"])', '\(record["groupid"])', '\(record["category"])', '\(pattern)', '\(timing)', \(price), '\(pattern1)', '\(pattern2)', '\(pattern3)', '\(pattern4)', '\(pattern5)', '\(record["alternate"])')", withArgumentsInArray: nil)
+            }
         }
         
         //add one offset at startup
