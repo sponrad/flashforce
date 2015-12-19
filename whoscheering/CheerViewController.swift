@@ -104,7 +104,7 @@ class CheerViewController: UIViewController {
         
         self.view.backgroundColor = colorWithHexString(colors[0])
         
-        self.syncingLabel.text = "syncing..."
+        self.syncingLabel.text = ""
         UIApplication.sharedApplication().idleTimerDisabled = true   //screen will not dim
         let modnumber = Double(colors.count) * interval
         
