@@ -20,7 +20,9 @@ var oldBrightness: CGFloat = 0.5
 var flashAble = false
 var offsetAgeForResync = 600.0 // double seconds
 
-let freeFlashString = "ffb001"       //keychain reference
+let freeFlashString = "ffb001"       //keychain reference, if you change this, everyones free flash resets
+let dbVersionString = "ffdb001"       //keychain reference, increment this to force database update of pattern data
+
 
 //class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SKProductsRequestDelegate, SKPaymentTransactionObserver {
 class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SKProductsRequestDelegate, SKPaymentTransactionObserver {
@@ -792,23 +794,13 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
     }
     
     func databaseCheck(){
-        ///////////////////////////   connect to the database
-        let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
-        let path = NSString(string: documentsFolder).stringByAppendingPathComponent("ff.db")
-        let database = FMDatabase(path: path)
-        if !database.open() {
-            print("Unable to open database")
-            return
+
+        
+        if (TegKeychain.get(String(dbVersionString)) == nil) {
+            ffdbLoaded = false
+            TegKeychain.set(String(dbVersionString), value: "yes")
         }
-        // TODO add check for ffdbloaded, only load if there is a change in the db, compare rows of patterns maybe
-        if let rscheck = database.intForQuery("SELECT COUNT(id) FROM patterns") {
-            print("rscheck:\(rscheck)")
-            print("Store data count:\(StoreData.initialData.count)")
-            if (UInt32(rscheck) == UInt32(StoreData.initialData.count)) {
-                ffdbLoaded = true
-                print("the ffdbloaded check is true")
-            }
-        }
+        
         ///////////////////////////   code to load the database with data on first bootup or change
         if (ffdbLoaded==false){
             print("loading the entire thing")
