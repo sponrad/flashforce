@@ -21,7 +21,7 @@ var flashAble = false
 var offsetAgeForResync = 600.0 // double seconds
 
 let freeFlashString = "ffb001"       //keychain reference, if you change this, everyones free flash resets
-let dbVersionString = "ffdb001"       //keychain reference, increment this to force database update of pattern data
+let dbVersionString = "ffdb003"       //keychain reference, increment this to force database update of pattern data
 
 
 //class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SKProductsRequestDelegate, SKPaymentTransactionObserver {
@@ -529,15 +529,15 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         if let csv = CSV(contentsOfFile: fileLocation, error: error) {
             //loop through initialData to build the database
             for record in csv.rows {
-                let pattern = record["color1"]
-                let pattern1 = record["color1"]
-                let pattern2 = record["color2"]
-                let pattern3 = record["color3"]
-                let pattern4 = record["color4"]
-                let pattern5 = record["color5"]
-                let timing = record["timing"]
-                let price = record["price"]
-                database.executeUpdate("insert into patterns values (NULL, '\(record["productid"])', '\(record["name"])', '\(record["groupid"])', '\(record["category"])', '\(pattern)', '\(timing)', \(price), '\(pattern1)', '\(pattern2)', '\(pattern3)', '\(pattern4)', '\(pattern5)', '\(record["alternate"])')", withArgumentsInArray: nil)
+                let pattern = record["color1"]!
+                let pattern1 = record["color1"]!
+                let pattern2 = record["color2"]!
+                let pattern3 = record["color3"]!
+                let pattern4 = record["color4"]!
+                let pattern5 = record["color5"]!
+                let timing = record["timing"]!
+                let price = record["price"]!
+                database.executeUpdate("insert into patterns values (NULL, '\(record["productid"]!)', '\(record["name"]!)', '\(record["groupid"]!)', '\(record["category"]!)', '\(pattern)', '\(timing)', \(price), '\(pattern1)', '\(pattern2)', '\(pattern3)', '\(pattern4)', '\(pattern5)', '\(record["alternate"]!)')", withArgumentsInArray: nil)
             }
         }
         
@@ -800,11 +800,34 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
     }
     
     func databaseCheck(){
-
-        
         if (TegKeychain.get(String(dbVersionString)) == nil) {
             ffdbLoaded = false
             TegKeychain.set(String(dbVersionString), value: "yes")
+        }
+        else {
+            ffdbLoaded = true
+        }
+        
+        ///////////////////////////   connect to the database
+        let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
+        let path = NSString(string: documentsFolder).stringByAppendingPathComponent("ff.db")
+        let database = FMDatabase(path: path)
+        if !database.open() {
+            print("Unable to open database")
+            ffdbLoaded = false
+            return
+        }
+        if let rscheck = database.intForQuery("SELECT COUNT(id) FROM patterns") {
+            print("rscheck:\(rscheck)")
+            if (UInt32(rscheck) > 0) {
+                ffdbLoaded = true
+            }
+            else {
+                ffdbLoaded = false
+            }
+        }
+        else {
+            ffdbLoaded = false
         }
         
         ///////////////////////////   code to load the database with data on first bootup or change
