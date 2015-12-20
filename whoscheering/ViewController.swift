@@ -655,7 +655,10 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
             }
         }
         //if owned: display the start flash button
-        if (owned == true){
+        if (selectedPrice == "0.0"){
+            owned = true
+        }
+        if (owned == true || selectedPrice == "0.0"){
             self.actionButton.enabled = true
             self.actionButton.hidden = false
             self.actionButton.setTitle("Flash", forState: UIControlState.Normal)
