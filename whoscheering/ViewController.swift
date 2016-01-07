@@ -21,7 +21,7 @@ var flashAble = false
 var offsetAgeForResync = 600.0 // double seconds
 
 let freeFlashString = "ffb001"       //keychain reference, if you change this, everyones free flash resets
-let dbVersionString = "ffdb004"       //keychain reference, increment this to force database update of pattern data
+let dbVersionString = "ffdb003"       //keychain reference, increment this to force database update of pattern data
 
 
 //class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SKProductsRequestDelegate, SKPaymentTransactionObserver {
@@ -803,34 +803,17 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
     }
     
     func databaseCheck(){
-        if (TegKeychain.get(String(dbVersionString)) == nil) {
-            ffdbLoaded = false
-            TegKeychain.set(String(dbVersionString), value: "yes")
-        }
-        else {
-            ffdbLoaded = true
-        }
-        
-        ///////////////////////////   connect to the database
-        let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
-        let path = NSString(string: documentsFolder).stringByAppendingPathComponent("ff.db")
-        let database = FMDatabase(path: path)
-        if !database.open() {
-            print("Unable to open database")
-            ffdbLoaded = false
-            return
-        }
-        if let rscheck = database.intForQuery("SELECT COUNT(id) FROM patterns") {
-            print("rscheck:\(rscheck)")
-            if (UInt32(rscheck) > 0) {
+        if let result = TegKeychain.get("ffdbversion") {
+            if (result == dbVersionString){
                 ffdbLoaded = true
             }
             else {
                 ffdbLoaded = false
+                TegKeychain.set("ffdbversion", value: dbVersionString)
             }
         }
         else {
-            ffdbLoaded = false
+            TegKeychain.set("ffdbversion", value: dbVersionString)
         }
         
         ///////////////////////////   code to load the database with data on first bootup or change
