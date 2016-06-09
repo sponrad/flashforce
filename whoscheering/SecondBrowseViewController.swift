@@ -54,9 +54,9 @@ class SecondBrowseViewController: UITableViewController, UISearchResultsUpdating
         
         if (self.category == "My Flashes"){
             self.restoreButton.enabled = true
-            if let rs = database.executeQuery("SELECT name, patternid FROM ownedPatterns GROUP BY name ORDER BY name", withArgumentsInArray: nil) {
+            if let rs = database.executeQuery("SELECT ownedpatterns.name, patterns.id FROM ownedpatterns INNER JOIN patterns ON ownedpatterns.storecode = patterns.storecode GROUP BY name ORDER BY name", withArgumentsInArray: nil) {
                 while rs.next() {
-                    self.details.append([rs.stringForColumn("name"), rs.intForColumn("patternid")])
+                    self.details.append([rs.stringForColumn("ownedpatterns.name"), rs.intForColumn("patterns.id")])
                 }
             } else {
                 print("select failed: \(database.lastErrorMessage())")
