@@ -54,8 +54,7 @@ class SecondBrowseViewController: UITableViewController, UISearchResultsUpdating
         
         if (self.category == "My Flashes"){
             self.restoreButton.enabled = true
-            //when the database is updated there is an issue where it whipes the free purchases... and then they do not appear in ownedpatterns, yet are still counted as redeemed... Need to have some code here that fixes that
-            //TODO: pull from keystore
+            //TODO: pull from keystore would be best...
             if let rs = database.executeQuery("SELECT name, id FROM patterns WHERE storecode IN (SELECT storecode FROM ownedpatterns) GROUP BY name ORDER BY name", withArgumentsInArray: nil) {
                 while rs.next() {
                     self.details.append([rs.stringForColumn("name"), rs.intForColumn("id")])
@@ -154,7 +153,23 @@ class SecondBrowseViewController: UITableViewController, UISearchResultsUpdating
     }
     @IBAction func restoreButtonTapped(sender: AnyObject) {
         print("restore tapped")
-        //ViewController().getOwnedFlashes()
+        
+        //re-create owned patterns table
+        let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
+        let path = NSString(string: documentsFolder).stringByAppendingPathComponent("ff.db")
+        let database = FMDatabase(path: path)
+        if !database.open() {
+            print("Unable to open database")
+            return
+        }
+        database.executeUpdate("DROP TABLE ownedpatterns", withArgumentsInArray: nil)
+        if !database.executeUpdate("create table ownedpatterns(id integer primary key autoincrement, storecode text, name text, patternid integer)", withArgumentsInArray: nil) {
+            print("create table failed: \(database.lastErrorMessage()), probably already created")
+        }
+        
+        ViewController().getFreeFlash()
+        self.drillTable.reloadData()
+        
         self.restoreButton.title = "Restoring..."
         
         SKPaymentQueue.defaultQueue().restoreCompletedTransactions()
@@ -193,9 +208,9 @@ class SecondBrowseViewController: UITableViewController, UISearchResultsUpdating
             print("Unable to open database")
             return
         }
-        if let rs = database.executeQuery("SELECT name, patternid FROM ownedPatterns ORDER BY name", withArgumentsInArray: nil) {
+        if let rs = database.executeQuery("SELECT name, id FROM patterns WHERE storecode IN (SELECT storecode FROM ownedpatterns) GROUP BY name ORDER BY name", withArgumentsInArray: nil) {
             while rs.next() {
-                self.details.append([rs.stringForColumn("name"), rs.intForColumn("patternid")])
+                self.details.append([rs.stringForColumn("name"), rs.intForColumn("id")])
             }
         } else {
             print("select failed: \(database.lastErrorMessage())")

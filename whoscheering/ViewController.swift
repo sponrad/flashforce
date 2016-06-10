@@ -20,8 +20,8 @@ var oldBrightness: CGFloat = 0.5
 var flashAble = false
 var offsetAgeForResync = 600.0 // double seconds
 
-let freeFlashString = "ffb002"       //keychain reference, if you change this, everyones free flash resets
-let dbVersionString = "ffdb004"       //keychain reference, increment this to force database update of pattern data
+let freeFlashString = "ffb001"       //keychain reference, if you change this, everyones free flash resets
+let dbVersionString = "ffdb005"       //keychain reference, increment this to force database update of pattern data
 
 
 //class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SKProductsRequestDelegate, SKPaymentTransactionObserver {
@@ -474,10 +474,7 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         }
         
         ////////////////get any keychain flashes
-        if let result = TegKeychain.get(String(freeFlashString)) {
-            print(result)
-            addOwnedPattern(String(result))
-        }
+        getFreeFlash()
         
         //getOwnedFlashes()
         
@@ -820,6 +817,8 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
         if (ffdbLoaded==false){
             print("loading the entire thing")
             loadDatabase()
+            getOwnedFlashes()
+            getFreeFlash()
         }
     }
     
@@ -835,16 +834,10 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
             return
         }
         
-        //re-create patterns table
+        //re-create owned patterns table
         database.executeUpdate("DROP TABLE ownedpatterns", withArgumentsInArray: nil)
         if !database.executeUpdate("create table ownedpatterns(id integer primary key autoincrement, storecode text, name text, patternid integer)", withArgumentsInArray: nil) {
             print("create table failed: \(database.lastErrorMessage()), probably already created")
-        }
-        
-        //get the flash from keychain if one is owned
-        if let result = TegKeychain.get(String(freeFlashString)) {
-            print(result)
-            addOwnedPattern(String(result))
         }
         
         //get the ones from apple
@@ -852,6 +845,15 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
             print("payment queue check")
             SKPaymentQueue.defaultQueue().restoreCompletedTransactions()
         }
+    }
+    
+    func getFreeFlash(){
+        //get the flash from keychain if one is owned
+        if let result = TegKeychain.get(String(freeFlashString)) {
+            print(result)
+            addOwnedPattern(String(result))
+        }
+
     }
     
 }
