@@ -20,7 +20,7 @@ var oldBrightness: CGFloat = 0.5
 var flashAble = false
 var offsetAgeForResync = 600.0 // double seconds
 
-let freeFlashString = "ffb001"       //keychain reference, if you change this, everyones free flash resets
+let freeFlashString = "ffb002"       //keychain reference, if you change this, everyones free flash resets
 let dbVersionString = "ffdb004"       //keychain reference, increment this to force database update of pattern data
 
 

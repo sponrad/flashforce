@@ -54,9 +54,11 @@ class SecondBrowseViewController: UITableViewController, UISearchResultsUpdating
         
         if (self.category == "My Flashes"){
             self.restoreButton.enabled = true
-            if let rs = database.executeQuery("SELECT ownedpatterns.name, patterns.id FROM ownedpatterns INNER JOIN patterns ON ownedpatterns.storecode = patterns.storecode GROUP BY name ORDER BY name", withArgumentsInArray: nil) {
+            //when the database is updated there is an issue where it whipes the free purchases... and then they do not appear in ownedpatterns, yet are still counted as redeemed... Need to have some code here that fixes that
+            //TODO: pull from keystore
+            if let rs = database.executeQuery("SELECT name, id FROM patterns WHERE storecode IN (SELECT storecode FROM ownedpatterns) GROUP BY name ORDER BY name", withArgumentsInArray: nil) {
                 while rs.next() {
-                    self.details.append([rs.stringForColumn("ownedpatterns.name"), rs.intForColumn("patterns.id")])
+                    self.details.append([rs.stringForColumn("name"), rs.intForColumn("id")])
                 }
             } else {
                 print("select failed: \(database.lastErrorMessage())")
