@@ -813,6 +813,26 @@ class ViewController: UIViewController, SKStoreProductViewControllerDelegate, SK
             TegKeychain.set("ffdbversion", value: dbVersionString)
         }
         
+        ///////////////////////////   connect to the database and check if it is loaded
+        // necessary for if someone uninstalls the app, and reinstalls it, which will not update ffdbVersion keychain value
+        let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
+        let path = NSString(string: documentsFolder).stringByAppendingPathComponent("ff.db")
+        let database = FMDatabase(path: path)
+        if !database.open() {
+            print("Unable to open database")
+            ffdbLoaded = false
+            return
+        }
+        if let rscheck = database.intForQuery("SELECT COUNT(id) FROM patterns") {
+            print("rscheck:\(rscheck)")
+            if (UInt32(rscheck) == 0) {
+                ffdbLoaded = false
+            }
+        }
+        else {
+            ffdbLoaded = false
+        }
+        
         ///////////////////////////   code to load the database with data on first bootup or change
         if (ffdbLoaded==false){
             print("loading the entire thing")
