@@ -27,6 +27,8 @@ class AlternateViewController: UITableViewController {
             return
         }
         
+        print("in alternates")
+        
         if let rs2 = database.executeQuery("SELECT groupid FROM patterns WHERE id='\(selectedId)'", withArgumentsInArray: nil) {
             while rs2.next() {
                 self.groupid = rs2.stringForColumn("groupid")

@@ -88,9 +88,6 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="BYZ-38-t0r" kind="show" identifier="arrayDetail" id="bH8-89-pL4"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -110,6 +107,8 @@
                         <outlet property="drillTable" destination="hDQ-X4-sQA" id="lIi-hM-BCM"/>
                         <outlet property="restoreButton" destination="mtq-rh-grB" id="Mg4-l1-CK2"/>
                         <outlet property="searchDisplayController" destination="XWO-4c-X4r" id="FUJ-Qv-Q4f"/>
+                        <segue destination="fhI-vs-ZaT" kind="show" identifier="browsetoalternate" id="6Lg-5H-NCK"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="browsetohome" id="dN4-qD-gqH"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h0X-6T-JvZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -123,7 +122,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="360" y="-458"/>
+            <point key="canvasLocation" x="312" y="-396"/>
         </scene>
         <!--Home-->
         <scene sceneID="tne-QT-ifu">
@@ -818,19 +817,19 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-618" y="684"/>
+            <point key="canvasLocation" x="-550" y="796"/>
         </scene>
         <!--Browsing Alternates-->
         <scene sceneID="0BD-b2-h2c">
             <objects>
-                <tableViewController id="fhI-vs-ZaT" customClass="AlternateViewController" customModule="Flash_Force" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="alternatesBrowse" id="fhI-vs-ZaT" customClass="AlternateViewController" customModule="Flash_Force" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="z6k-A8-TUm">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="drillCell" id="mCb-fZ-hi6">
-                                <rect key="frame" x="0.0" y="86" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="22" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mCb-fZ-hi6" id="Hc0-qe-uTO">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
@@ -1031,7 +1030,8 @@
         <image name="flash-forward-three-boxes.gif" width="1024" height="1024"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="bH8-89-pL4"/>
-        <segue reference="arI-hI-wEo"/>
+        <segue reference="4XV-1e-7we"/>
+        <segue reference="dN4-qD-gqH"/>
+        <segue reference="6Lg-5H-NCK"/>
     </inferredMetricsTieBreakers>
 </document>

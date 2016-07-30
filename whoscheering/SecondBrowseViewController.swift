@@ -19,7 +19,6 @@ class SecondBrowseViewController: UITableViewController, UISearchResultsUpdating
     var details = [[Any]]()
     var filteredDetails = [[Any]]()
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -109,13 +108,14 @@ class SecondBrowseViewController: UITableViewController, UISearchResultsUpdating
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {      
         if self.searchController.active{
             return filteredDetails.count
         }
         else {
             return details.count
         }
+
     }
 
     
@@ -131,26 +131,48 @@ class SecondBrowseViewController: UITableViewController, UISearchResultsUpdating
         
         return cell
     }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if self.category.rangeOfString("Schools") != nil {
+            performSegueWithIdentifier("browsetoalternate", sender: self)
+        }
+        else {
+            performSegueWithIdentifier("browsetohome", sender: self)
+        }
+    }
+
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let selectedCheer = self.drillTable.indexPathForSelectedRow?.row
-        
         //searchController.active = false
+        //TODO: if in the school category, direct to the alternate View einstead of ViewController.
         
-        if let homeVC = segue.destinationViewController as? ViewController{
-            if self.searchController.active {
-                print("yeah this is firing")
-                homeVC.team = String(stringInterpolationSegment: self.filteredDetails[selectedCheer!][0])
+        if self.category.rangeOfString("Schools") != nil {
+            print ("in school category check fired")
+            
+            if let svc = segue.destinationViewController as? AlternateViewController {
+                svc.name = ""
                 selectedId = (self.filteredDetails[selectedCheer!][1] as? Int32)!
-                searchController.active = false
             }
-            else{
-                print("NO THIS ONE IS FIRING")
-                homeVC.team = String(stringInterpolationSegment: self.details[selectedCheer!][0])
-                selectedId = (self.filteredDetails[selectedCheer!][1] as? Int32)!
+
+        }
+        else {
+            if let homeVC = segue.destinationViewController as? ViewController{
+                if self.searchController.active {
+                    print("yeah this is firing")
+                    homeVC.team = String(stringInterpolationSegment: self.filteredDetails[selectedCheer!][0])
+                    selectedId = (self.filteredDetails[selectedCheer!][1] as? Int32)!
+                    searchController.active = false
+                }
+                else{
+                    print("NO THIS ONE IS FIRING")
+                    homeVC.team = String(stringInterpolationSegment: self.details[selectedCheer!][0])
+                    selectedId = (self.filteredDetails[selectedCheer!][1] as? Int32)!
+                }
             }
         }
     }
+    
     @IBAction func restoreButtonTapped(sender: AnyObject) {
         print("restore tapped")
         
